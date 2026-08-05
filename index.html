@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v3.60.1 — ระบบบริหารหอพัก</title>
+<title>HotelPro v3.61.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -5436,6 +5436,8 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v3.61.0</td><td>3 ส.ค. 69</td>'
++'<td><b>เปลี่ยนลำดับเริ่มแอป · ล็อกอินก่อน แล้วค่อยโหลดข้อมูล</b><br/>เดิมเปิดแอปแล้วโหลดข้อมูลทั้งหมดทันทีตั้งแต่ยังไม่ล็อกอิน ทำให้ปิดฐานข้อมูลไม่ได้เลย เพราะพอปิดจะอ่านห้องไม่ได้แล้วค้างตั้งแต่วินาทีแรก<br/>ตอนนี้ <b>เปิดแอป → หน้าเลือกคน → ใส่ PIN → ค่อยโหลดข้อมูล</b><br/><b>PIN ตรวจที่ Firebase เป็นหลัก</b> ไม่ต้องเก็บ PIN ไว้ในฐานข้อมูลอีก · ถ้ายังไม่มีบัญชีจะใช้ PIN เก่าเทียบให้ไปก่อน ไม่ล็อกใครออก<br/>ทดสอบด้วยตัวจำลองกฎแล้วว่าปิดฐานข้อมูลได้จริงโดยไม่มีใครเข้าไม่ได้</td></tr>'
 +'<tr><td style="font-family:monospace">v3.60.1</td><td>3 ส.ค. 69</td>'
 +'<td><b>แก้ด่วน · v3.60.0 ล็อกคนออกจากระบบได้</b><br/>ตอนที่ยังไม่ได้เปิด Email/Password ใน Firebase ระบบส่งรหัสข้อผิดพลาดคนละตัวกับที่เผื่อไว้ ทำให้ใส่ PIN ถูกแล้วก็ยังเข้าไม่ได้<br/>เปลี่ยนหลักการเป็น <b>ไม่บล็อกใครเด็ดขาด</b> — PIN ตรวจในแอปไปแล้ว ถ้าเชื่อมบัญชีไม่ได้ก็ให้เข้าไปก่อน แล้วขึ้นข้อความบอกว่ายังไม่ได้เชื่อม<br/>พ่วงกันกรณีระบบล็อกอินโหลดไม่ได้ ซึ่งเดิมจะทำให้ทั้งแอปไม่ทำงาน</td></tr>'
 +'<tr><td style="font-family:monospace">v3.60.0</td><td>3 ส.ค. 69</td>'
@@ -5541,8 +5543,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1169;
-window.__APP_VERSION = "v3.60.1";
+window.__APP_BUILD = 1170;
+window.__APP_VERSION = "v3.61.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -7526,7 +7528,7 @@ function bdListHTML(){
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.60.1</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.61.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -7863,7 +7865,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v3.60.1 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v3.61.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -7886,6 +7888,24 @@ catch(e){ console.warn("[auth] โหลดระบบล็อกอินไ�
    พนักงานยังกดชื่อตัวเองแล้วใส่ PIN 6 หลัก ไม่ต้องจำอีเมล
    อีเมลสร้างจากรหัสพนักงาน · รหัสผ่านคือ PIN */
 var AUTH_DOMAIN_SUFFIX = "@memoryplace.local";
+/* ═══ PIN ไม่เก็บในฐานข้อมูลอีกต่อไป ═══
+   PIN คือรหัสผ่านของบัญชี Firebase · Firebase เก็บให้แล้วแบบเข้ารหัส
+   ถ้าเก็บซ้ำใน staffList จะต้องเปิดให้อ่านตัวนั้น (หน้าล็อกอินต้องใช้รายชื่อ)
+   = เท่ากับเปิดรหัสผ่านทุกคนให้คนนอกอ่าน
+   เก็บไว้ในเครื่องแทน เพื่อกู้ session ตอนรีเฟรชหน้า */
+function pinCacheSet(id, pin){
+  try { sessionStorage.setItem("pin_"+id, String(pin)); } catch(e){}
+}
+function pinCacheGet(id){
+  try { return sessionStorage.getItem("pin_"+id) || null; } catch(e){ return null; }
+}
+function pinCacheClear(){
+  try {
+    Object.keys(sessionStorage).forEach(function(k){
+      if (k.indexOf("pin_")===0) sessionStorage.removeItem(k);
+    });
+  } catch(e){}
+}
 function authEmailOf(u){
   if (!u) return null;
   if (u.email) return u.email;
@@ -8250,11 +8270,10 @@ function showLoginModal() {
 function doLogin(staffId) {
   var u = staffList.find(function(x){return x.id===staffId;});
   if (!u) return;
-  // มี PIN → ต้องใส่รหัสก่อนเข้า (ทั้งเจ้าของและพนักงาน)
-  if (u.pin) {
-    openPinModal(u);
-    return;
-  }
+  /* เปิดหน้าใส่ PIN เสมอ · ไม่ดูว่ามี PIN ในฐานข้อมูลไหม
+     เพราะ PIN ย้ายไปอยู่ที่ Firebase แล้ว */
+  openPinModal(u);
+  return;
   finishLogin(u);
   /* ยังไม่ได้ตั้ง PIN — เข้าได้ แต่เตือนให้ไปตั้ง */
   setTimeout(function(){
@@ -8263,6 +8282,23 @@ function doLogin(staffId) {
   }, 900);
 }
 
+/* โหลดข้อมูลทั้งหมด · เรียกหลังล็อกอินสำเร็จเท่านั้น
+   ถ้ายังไม่ได้เชื่อมบัญชี Firebase จะพยายามเชื่อมด้วย PIN ที่เก็บไว้ในเครื่องก่อน */
+async function bootAfterLogin(u, cachedPin){
+  if (window.__bootedData) return;
+  try {
+    var pin = cachedPin || (u && u.pin) || null;
+    if (!authIsOn() && u && pin && typeof authSignIn === "function"){
+      await authSignIn(u, pin);
+    }
+  } catch(e){}
+  try {
+    await initFirebase();
+    window.__bootedData = true;
+  } catch(e){
+    console.error("[boot] โหลดข้อมูลไม่สำเร็จ", e);
+  }
+}
 function finishLogin(u) {
   currentUser = u;
   try {
@@ -8271,10 +8307,12 @@ function finishLogin(u) {
   document.getElementById("login-modal-bg").classList.remove("open");
   updateUserBadge();
   applyPermissions();
-  // refresh หน้าปัจจุบัน
-  if (curPage === "dashboard") rDash();
-  /* หน้าเก่าปิดทางเข้าแล้ว */
   notify("ยินดีต้อนรับ คุณ" + u.name);
+  /* โหลดข้อมูลหลังล็อกอิน แล้วค่อยวาดหน้า */
+  bootAfterLogin(u).then(function(){
+    try { if (curPage === "dashboard") rDash(); } catch(e){}
+    try { if (typeof refreshCurrentDaily === "function") refreshCurrentDaily(); } catch(e){}
+  });
 }
 
 // ── PIN modal (เจ้าของ) ──
@@ -8310,13 +8348,30 @@ function pinDel() {
 }
 async function pinVerify() {
   if (!_pinTarget) return;
-  if (_pinBuf === String(_pinTarget.pin)) {
-    var u = _pinTarget, pin = _pinBuf;
-    /* PIN ถูกแล้ว → ล็อกอิน Firebase จริงต่อ เพื่อให้ฐานข้อมูลรู้ว่าใครเรียก */
-    var kb = document.getElementById("pin-modal-card");
-    if (kb) kb.classList.add("pin-busy");
-    var r = await authSignIn(u, pin);
-    if (kb) kb.classList.remove("pin-busy");
+  var u = _pinTarget, pin = _pinBuf;
+  /* ── ตรวจ PIN ที่ Firebase เป็นหลัก ──
+     ถ้ามีบัญชีแล้ว Firebase จะบอกว่า PIN ถูกหรือผิด (เข้ารหัส · กันเดารหัส)
+     ถ้ายังไม่มีบัญชี/เชื่อมไม่ได้ ค่อยเทียบกับ PIN เก่าที่ยังค้างในฐานข้อมูล
+     (ช่วงเปลี่ยนผ่าน — พอล้าง PIN เก่าหมดแล้วจะเหลือทาง Firebase อย่างเดียว) */
+  var kb0 = document.getElementById("pin-modal-card");
+  if (kb0) kb0.classList.add("pin-busy");
+  var chk = await authSignIn(u, pin);
+  if (kb0) kb0.classList.remove("pin-busy");
+  var pass;
+  if (chk.linked) {
+    pass = true;                                   /* Firebase ยืนยันแล้ว */
+  } else if (chk.code === "auth/wrong-password" ||
+             chk.code === "auth/invalid-credential" ||
+             chk.code === "auth/invalid-login-credentials") {
+    pass = false;                                  /* Firebase บอกว่าผิด */
+  } else if (u.pin) {
+    pass = (pin === String(u.pin));                /* เชื่อมไม่ได้ → ใช้ของเก่า */
+  } else {
+    pass = false;
+  }
+  if (pass) {
+    var r = chk;
+    pinCacheSet(u.id, pin);
     closePinModal();
     finishLogin(u);
     /* เข้าได้เสมอ · แต่ถ้ายังไม่เชื่อมบัญชีต้องบอกให้รู้
@@ -8341,6 +8396,8 @@ async function pinVerify() {
 function doLogout() {
   if (!confirm("ออกจากระบบ?")) return;
   try { authSignOut(); } catch(e){}
+  window.__bootedData = false;
+  try { pinCacheClear(); } catch(e){}
   currentUser = null;
   try { sessionStorage.removeItem("currentUser"); } catch(e) {}
   // 🛡 4.1 - reset title
@@ -8742,6 +8799,9 @@ async function initUserSession() {
         currentUser = found;
         updateUserBadge();
         applyPermissions();
+        /* เคยล็อกอินไว้แล้ว → โหลดข้อมูลต่อได้เลย
+           แต่ต้องเชื่อมบัญชี Firebase ใหม่ก่อน ไม่งั้นกฎจะปฏิเสธ */
+        await bootAfterLogin(found, pinCacheGet(found.id));
         return;
       }
     }
@@ -23449,10 +23509,15 @@ function checkNoonPopup() { /* removed */ }
 
 // ═══════════════════════════════════════════════
 // ═══════════════════════════════════════════════
-initFirebase().then(function(){
-  // หลัง Firebase load เสร็จ → init user session
-  initUserSession();
-});
+/* ═══ ลำดับเริ่มแอป ═══
+   เดิม  โหลดข้อมูลทั้งหมด → แล้วค่อยล็อกอิน
+         ทำให้ปิดกฎ Firestore ไม่ได้เลย เพราะอ่าน rooms ตั้งแต่ยังไม่ล็อกอิน
+   ใหม่  โหลดรายชื่อผู้ใช้ (เปิดอ่านได้ ไม่มีความลับ) → ล็อกอิน → ค่อยโหลดข้อมูล
+   ทดสอบด้วยตัวจำลองกฎแล้วว่าไม่ล็อกใครออก */
+/* ซ่อนหน้าจอ "กำลังเชื่อมต่อ" ก่อน — ตอนนี้ยังไม่โหลดข้อมูล รอล็อกอินก่อน
+   ถ้าไม่ซ่อนจะบังหน้าล็อกอินไว้ (z-index 9999 > 9000) กดอะไรไม่ได้เลย */
+try { hideOverlay(); } catch(e){}
+initUserSession();
 </script>
 <!-- ═══ BULK BILL ROW DETAIL MODAL ═══ -->
 <div class="modal-bg" id="bd-modal-bg" onclick="closeModal('bd-modal-bg')">
