@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v3.60.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v3.60.1 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -5436,6 +5436,8 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v3.60.1</td><td>3 ส.ค. 69</td>'
++'<td><b>แก้ด่วน · v3.60.0 ล็อกคนออกจากระบบได้</b><br/>ตอนที่ยังไม่ได้เปิด Email/Password ใน Firebase ระบบส่งรหัสข้อผิดพลาดคนละตัวกับที่เผื่อไว้ ทำให้ใส่ PIN ถูกแล้วก็ยังเข้าไม่ได้<br/>เปลี่ยนหลักการเป็น <b>ไม่บล็อกใครเด็ดขาด</b> — PIN ตรวจในแอปไปแล้ว ถ้าเชื่อมบัญชีไม่ได้ก็ให้เข้าไปก่อน แล้วขึ้นข้อความบอกว่ายังไม่ได้เชื่อม<br/>พ่วงกันกรณีระบบล็อกอินโหลดไม่ได้ ซึ่งเดิมจะทำให้ทั้งแอปไม่ทำงาน</td></tr>'
 +'<tr><td style="font-family:monospace">v3.60.0</td><td>3 ส.ค. 69</td>'
 +'<td><b>ผูก PIN เข้ากับบัญชีจริง เพื่อปิดฐานข้อมูลไม่ให้คนนอกเข้า</b><br/>เดิม PIN เช็คในเบราว์เซอร์อย่างเดียว ฐานข้อมูลจึงต้องเปิดให้ใครก็ได้ · ใครมีที่อยู่เว็บก็อ่านชื่อผู้เช่า เบอร์โทร ยอดเงินทุกบิล และลบทิ้งได้<br/><b>หน้าจอเหมือนเดิมทุกอย่าง</b> ยังกดชื่อตัวเองแล้วใส่ PIN 6 หลัก ไม่ต้องจำอีเมล ไม่ต้องเรียนใหม่<br/>เปลี่ยน PIN ตัวเองแล้วรหัสผ่านเปลี่ยนตามอัตโนมัติ · คนที่ยังไม่ได้สร้างบัญชียังเข้าได้ปกติจนกว่าจะปิดกฎ ไม่ล็อกใครออก<br/><b>ต้องทำตามคู่มือ 5 ขั้นให้ครบ</b> ถึงจะปิดกฎได้ · ย้อนกลับได้ทุกเมื่อ ข้อมูลไม่หาย</td></tr>'
 +'<tr><td style="font-family:monospace">v3.59.0</td><td>3 ส.ค. 69</td>'
@@ -5539,8 +5541,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1168;
-window.__APP_VERSION = "v3.60.0";
+window.__APP_BUILD = 1169;
+window.__APP_VERSION = "v3.60.1";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -7524,7 +7526,7 @@ function bdListHTML(){
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.60.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.60.1</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -7861,7 +7863,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v3.60.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v3.60.1 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -7872,7 +7874,10 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
-var fbAuth = firebase.auth();
+/* กัน SDK auth โหลดไม่ทัน/โหลดไม่ได้ — ถ้าพังตรงนี้โค้ดที่เหลือทั้งไฟล์จะไม่ทำงาน */
+var fbAuth = null;
+try { fbAuth = firebase.auth(); }
+catch(e){ console.warn("[auth] โหลดระบบล็อกอินไม่ได้ — แอปยังใช้งานได้ปกติ", e); }
 
 /* ═══════════ ล็อกอิน Firebase จริง ═══════════
    เดิม PIN เช็คในเบราว์เซอร์อย่างเดียว · Firestore ไม่รู้จักว่าใครเรียก
@@ -7898,37 +7903,47 @@ function authErrText(code){
     "auth/invalid-login-credentials":"PIN ไม่ถูกต้อง",
     "auth/too-many-requests":"ลองผิดหลายครั้งเกินไป \u00b7 รอสักครู่แล้วลองใหม่",
     "auth/network-request-failed":"เน็ตมีปัญหา \u00b7 ลองใหม่อีกครั้ง",
-    "auth/operation-not-allowed":"ยังไม่ได้เปิดระบบล็อกอินใน Firebase \u00b7 แจ้งเจ้าของ"
+    "auth/operation-not-allowed":"ยังไม่ได้เปิดระบบล็อกอินใน Firebase \u00b7 แจ้งเจ้าของ",
+    "auth/configuration-not-found":"ยังไม่ได้เปิด Email/Password ใน Firebase \u00b7 แจ้งเจ้าของ",
+    "auth/invalid-email":"รูปแบบอีเมลของบัญชีไม่ถูกต้อง \u00b7 แจ้งเจ้าของ",
+    "auth/api-key-not-valid":"ตั้งค่า Firebase ไม่ถูกต้อง \u00b7 แจ้งเจ้าของ"
   };
   return M[code] || null;
 }
-/* ล็อกอินด้วย PIN · คืน {ok:true} หรือ {ok:false, msg:"..."} */
+/* ล็อกอินด้วย PIN
+   ── หลักการ: ไม่บล็อกใครเด็ดขาด ──
+   PIN ถูกตรวจในแอปไปแล้วก่อนเรียกตัวนี้ · ถ้าเชื่อม Firebase ไม่ได้ก็ให้เข้าไปก่อน
+   เพราะรหัสข้อผิดพลาดของ Firebase มีหลายแบบและเปลี่ยนไปตามเวอร์ชัน
+   (เช่น ยังไม่ได้เปิด Email/Password จะได้ auth/configuration-not-found
+    ซึ่งเดิมไม่ได้เผื่อไว้ ทำให้ล็อกคนออกจากระบบ)
+   คืน {ok:true, linked:true}  = เชื่อมบัญชีแล้ว Firestore รู้จักตัวตน
+        {ok:true, linked:false} = เข้าได้แต่ยังไม่เชื่อม (จะใช้ไม่ได้เมื่อปิดกฎ) */
 async function authSignIn(u, pin){
   var email = authEmailOf(u);
-  if (!email) return {ok:false, msg:"ไม่รู้ว่าเป็นใคร"};
+  if (!email) return {ok:true, linked:false, why:"ไม่รู้รหัสพนักงาน"};
+  if (!fbAuth || typeof fbAuth.signInWithEmailAndPassword !== "function"){
+    console.warn("[auth] ระบบล็อกอินยังไม่พร้อม — เข้าแบบเดิมไปก่อน");
+    return {ok:true, linked:false, why:"ระบบล็อกอินยังไม่พร้อม"};
+  }
   try {
     await fbAuth.signInWithEmailAndPassword(email, String(pin));
-    return {ok:true};
+    return {ok:true, linked:true};
   } catch(e){
     var code = (e && e.code) || "";
-    var msg = authErrText(code);
-    /* ยังไม่มีบัญชี → ระบบยังใช้กฎเปิดอยู่ ให้ผ่านไปก่อน จะได้ไม่ล็อกคนออกจากระบบ
-       พอเจ้าของสร้างบัญชีครบแล้วค่อยปิดกฎ */
-    if (code === "auth/user-not-found" || code === "auth/operation-not-allowed"){
-      console.warn("[auth] ยังไม่มีบัญชี Firebase สำหรับ " + email + " — เข้าแบบเดิมไปก่อน");
-      return {ok:true, fallback:true};
-    }
-    return {ok:false, msg: msg || ("เข้าระบบไม่สำเร็จ \u00b7 " + code)};
+    var why = authErrText(code) || code || "ไม่ทราบสาเหตุ";
+    console.warn("[auth] เชื่อมบัญชีไม่สำเร็จ (" + email + ") : " + code + " — เข้าแบบเดิมไปก่อน");
+    return {ok:true, linked:false, why:why, code:code};
   }
 }
 async function authSignOut(){
-  try { if (fbAuth.currentUser) await fbAuth.signOut(); } catch(e){}
+  try { if (fbAuth && fbAuth.currentUser) await fbAuth.signOut(); } catch(e){}
 }
 /* เปลี่ยน PIN → ต้องเปลี่ยนรหัสผ่าน Firebase ตามด้วย ไม่งั้นเข้าไม่ได้ */
 async function authChangePin(u, oldPin, newPin){
   var email = authEmailOf(u);
   try {
     var cred = firebase.auth.EmailAuthProvider.credential(email, String(oldPin));
+    if (!fbAuth) return {ok:false, needConsole:true};
     var cur = fbAuth.currentUser;
     if (cur && cur.email === email){
       await cur.reauthenticateWithCredential(cred);
@@ -8302,14 +8317,19 @@ async function pinVerify() {
     if (kb) kb.classList.add("pin-busy");
     var r = await authSignIn(u, pin);
     if (kb) kb.classList.remove("pin-busy");
-    if (!r.ok){
-      var el = document.getElementById("pin-modal-err");
-      if (el){ el.textContent = r.msg || "เข้าระบบไม่สำเร็จ"; el.style.display = "block"; }
-      _pinBuf = ""; renderPinDots();
-      return;
-    }
     closePinModal();
     finishLogin(u);
+    /* เข้าได้เสมอ · แต่ถ้ายังไม่เชื่อมบัญชีต้องบอกให้รู้
+       ไม่งั้นพอปิดกฎ Firestore แล้วจะใช้อะไรไม่ได้โดยไม่รู้สาเหตุ */
+    if (!r.linked){
+      window.__authLinked = false;
+      setTimeout(function(){
+        notify("เข้าระบบได้ แต่ยังไม่ได้เชื่อมบัญชี \u00b7 " + (r.why||"") 
+          + " \u00b7 แจ้งเจ้าของให้ตั้งค่าให้ครบ", "warn");
+      }, 1200);
+    } else {
+      window.__authLinked = true;
+    }
   } else {
     document.getElementById("pin-modal-err").style.display = "block";
     var box = document.getElementById("pin-modal-card");
