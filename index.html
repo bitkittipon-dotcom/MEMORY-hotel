@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v3.61.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v3.73.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -63,6 +63,13 @@ body{font-family:'Sarabun',sans-serif;background:#d6e0ec;color:#1e293b;font-size
 .ico-tool{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z'/></svg>")}
 .ico-shield{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>")}
 .ico-filter{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'/></svg>")}
+/* ไอคอนทึบสำหรับป้ายค่าไฟ/ค่าน้ำ — ทึบอ่านง่ายกว่าตอนย่อเล็กในตาราง
+   แยกจาก .ico-bolt (แบบเส้น) ที่ใช้ในเมนูและหัวข้อ จะได้ไม่หลุดชุดกับไอคอนเมนูอื่น */
+.ico-elec{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M13 2 3 14h8l-1 8 10-12h-8l1-8z'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M13 2 3 14h8l-1 8 10-12h-8l1-8z'/></svg>")}
+.ico-water{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12 2.2c3.7 4.2 5.8 7.2 5.8 10.1a5.8 5.8 0 0 1-11.6 0c0-2.9 2.1-5.9 5.8-10.1z'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12 2.2c3.7 4.2 5.8 7.2 5.8 10.1a5.8 5.8 0 0 1-11.6 0c0-2.9 2.1-5.9 5.8-10.1z'/></svg>")}
+/* สีประจำ — ค่าไฟส้ม ค่าน้ำฟ้า · แยกด้วยสีไม่ใช่แค่รูป */
+.u-e{color:#f59e0b}
+.u-w{color:#0ea5e9}
 .ico-bolt{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>")}
 .ico-sparkle{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1'/></svg>")}
 .ico-star{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>")}
@@ -928,7 +935,11 @@ textarea.form-input{resize:vertical;min-height:72px}
 .modal-yellow .modal-head{background:linear-gradient(135deg,#fbbf24,#f59e0b);margin:-20px -20px 14px;padding:14px 20px;color:#fff;border-radius:14px 14px 0 0}
 .modal-yellow .modal-title{color:#fff!important}
 .modal-yellow .modal-head>div>div:nth-child(2){color:rgba(255,255,255,.9)!important}
-.modal-yellow .modal-close{color:#fff;background:rgba(255,255,255,.2)}
+/* .rm2 .modal-close ตั้งพื้นเป็น #fff ทับอยู่ ทำให้กากบาทขาวหายไปกับพื้น
+   ต้องระบุให้จำเพาะกว่าเพื่อทับกลับ */
+.modal-yellow .modal-close,
+.rm2.modal-yellow .modal-close{color:#fff;background:rgba(255,255,255,.22)}
+.rm2.modal-yellow .modal-close:hover{background:rgba(255,255,255,.34)}
 .modal-yellow .modal-close:hover{background:rgba(255,255,255,.35)}
 .modal-yellow .form-section-title{color:#92400e}
 .modal-yellow .form-input,.modal-yellow input,.modal-yellow textarea,.modal-yellow select{background:#fff;border-color:#fde68a!important}
@@ -1216,16 +1227,31 @@ textarea.form-input{resize:vertical;min-height:72px}
 .al-loaded.busy{color:#b45309;background:#fffbeb;border-color:#fde68a}
 .al-loaded.err{color:#b91c1c;background:#fef2f2;border-color:#fecaca}
 /* กล่องมิเตอร์ล่าสุดในหน้าต่างห้อง */
+/* .rm2 .info-item ถอดพื้น/ขอบ/padding ออกหมด กล่องนี้จึงต้องใส่กลับเอง
+   ไม่งั้นกรอบเหลืองจะแนบตัวหนังสือจนดูอึดอัด */
 .mt-box{cursor:pointer;background:#fffbeb;border:1.5px solid #fde68a;transition:all .15s}
+.rm2 .info-item.mt-box{background:#fffbeb;border-radius:9px;padding:6px 9px;margin:-6px -9px}
 .mt-box:hover{background:#fef3c7;transform:translateY(-1px)}
-.mt-box-l{color:#b45309;display:flex;align-items:center;justify-content:space-between;gap:4px}
-.mt-box-l .ico{font-size:.85em;color:#f59e0b}
-.mt-box-v{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:900;color:#0f172a;line-height:1.2}
+/* หัวข้อ: ไอคอนไฟฟ้าซ้าย · ลูกศรขวาสุด · ชื่ออยู่กลาง */
+.mt-box-l{color:#b45309;display:flex;align-items:center;gap:5px}
+.mt-box-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mt-box-ic{font-size:1em;color:#f59e0b;flex-shrink:0}
+.mt-box-ar{font-size:.85em;color:#f59e0b;flex-shrink:0;opacity:.7}
+/* เดิม 15px ใหญ่กว่าช่องอื่น (13.5px) ทำให้แถวสุดท้ายสูงไม่เท่ากัน */
+.mt-box-v{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:800;color:#0f172a;line-height:1.35}
 .mt-box-s{font-size:10px;font-weight:700;color:#b45309;margin-top:2px}
 .mt-box.neu{background:#f8fafc;border-color:#e2e8f0}
 .mt-box.neu .mt-box-l,.mt-box.neu .mt-box-s{color:#64748b}
 .mt-box.neu .mt-box-l .ico{color:#94a3b8}
-.info-grid.mt-solo{grid-template-columns:minmax(0,200px);margin:10px 0}
+/* เดิมบังคับกว้าง 200px ทำให้กล่องลอยชิดซ้าย เหลือที่ว่างข้างขวาเยอะ
+   ให้เต็มความกว้างเหมือนกล่องอื่นในหน้าต่างห้อง */
+/* .rm2 .info-grid ทับอยู่ (1fr 1fr) จึงต้องระบุให้จำเพาะกว่า
+   ไม่งั้นกล่องเดียวจะกินแค่ครึ่งเดียว เหลือที่ว่างข้างขวา */
+/* .rm2 .info-grid ทับอยู่ (1fr 1fr) จึงต้องระบุให้จำเพาะกว่า
+   ไม่งั้นกล่องเดียวจะกินแค่ครึ่งเดียว เหลือที่ว่างข้างขวา */
+.info-grid.mt-solo,.rm2 .info-grid.mt-solo{grid-template-columns:minmax(0,1fr)}
+.rm2 .info-grid.mt-solo .info-item.mt-box{margin:0;padding:11px 13px}
+.rm2 .info-grid.mt-solo .mt-box-v{font-size:16px}
 @media(max-width:640px){.mt-use{min-height:42px;padding:11px 16px}.mt-box{padding:9px 11px}}
 /* ── หน้าประวัติมิเตอร์ ── */
 .mt-tog{display:flex;gap:6px;background:#e2e8f0;border-radius:11px;padding:4px;width:fit-content;margin-bottom:12px}
@@ -1282,7 +1308,12 @@ textarea.form-input{resize:vertical;min-height:72px}
 @media(max-width:640px){.mt-tl .tl-row{flex-wrap:wrap}.mt-tl .tl-date{width:100%}.mt-tl .tl-rt{width:100%;justify-content:flex-start}}
 /* แถบเทียบเลขมิเตอร์ตอนเปลี่ยนผู้เช่า */
 .mt-hint{margin-top:7px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:9px;padding:8px 10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.mt-hint-l{flex:1;min-width:180px;font-size:11.5px;color:#92400e;font-weight:700;display:flex;align-items:center;gap:6px}
+/* เดิมใช้ display:flex ทำให้ข้อความแต่ละท่อนกลายเป็นกล่องแยก
+   พอกล่องแคบ (209px ในหน้าต่างเช็คอิน) จะแตกเป็นตั้งอ่านไม่ออก
+   เปลี่ยนเป็นข้อความธรรมดาให้ไหลต่อกันตามปกติ */
+.mt-hint-l{flex:1 1 100%;min-width:0;font-size:11.5px;color:#92400e;font-weight:700;line-height:1.7}
+.mt-hint-l .ico{vertical-align:-1px;margin-right:3px}
+.mt-hint-l b{white-space:nowrap}
 .mt-hint-l .ico{color:#f59e0b}
 .mt-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:#0f172a}
 .mt-dim{color:#a16207;font-weight:600}
@@ -2362,7 +2393,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
       <table>
         <thead><tr>
           <th>บิล#</th><th>ห้อง</th><th>ผู้เช่า</th><th>รอบเดือน</th>
-          <th>ค่าเช่า</th><th>ค่าไฟ</th><th>ค่าน้ำ</th><th>รวม</th><th>สถานะ</th><th>จัดการ</th>
+          <th>ค่าเช่า</th><th><i class="ico ico-elec u-e"></i> ค่าไฟ</th><th><i class="ico ico-water u-w"></i> ค่าน้ำ</th><th>รวม</th><th>สถานะ</th><th>จัดการ</th>
         </tr></thead>
         <tbody id="bills-tbody"></tbody>
       </table>
@@ -2918,16 +2949,21 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <div class="settings-header"><i class="ico ico-bolt"></i> อัตราค่าสาธารณูปโภค</div>
     <div class="settings-body">
       <div class="settings-row">
-        <div><div class="settings-label">ค่าไฟฟ้า (บาท/หน่วย)</div><div class="settings-sub">อัตราเริ่มต้นสำหรับทุกห้อง (แก้ไขได้ในบิล)</div></div>
+        <div><div class="settings-label"><i class="ico ico-elec u-e"></i> ค่าไฟฟ้า (บาท/หน่วย)</div><div class="settings-sub">อัตราเริ่มต้นสำหรับทุกห้อง (แก้ไขได้ในบิล)</div></div>
         <input class="form-input" type="number" id="s-e-rate" style="width:120px" value="7"/>
       </div>
       <div class="settings-row">
-        <div><div class="settings-label">ค่าน้ำ (บาท/คน/เดือน)</div><div class="settings-sub">คิดตามจำนวนผู้พักในห้อง</div></div>
+        <div><div class="settings-label"><i class="ico ico-water u-w"></i> ค่าน้ำ (บาท/คน/เดือน)</div><div class="settings-sub">คิดตามจำนวนผู้พักในห้อง</div></div>
         <input class="form-input" type="number" id="s-w-rate" style="width:120px" value="100"/>
       </div>
       <div class="settings-row">
-        <div><div class="settings-label">ค่าเช่าเริ่มต้น (บาท/เดือน)</div><div class="settings-sub">ค่าเริ่มต้นเมื่อเพิ่มห้องใหม่ (แก้ไขได้รายห้อง)</div></div>
+        <div><div class="settings-label">ค่าเช่าเริ่มต้น (บาท/เดือน)</div><div class="settings-sub">ใช้ตอนเพิ่มห้องใหม่เท่านั้น · ไม่กระทบห้องที่มีอยู่แล้ว</div></div>
         <input class="form-input" type="number" id="s-default-rent" style="width:120px" value="4500"/>
+      </div>
+      <div class="settings-row" id="rent-edit-row" style="display:none">
+        <div><div class="settings-label">ราคาห้องรายเดือน</div><div class="settings-sub" id="rent-edit-sub">ตั้งราคาแยกทีละห้อง</div></div>
+        <button class="btn btn-secondary" onclick="rentOpen()" style="white-space:nowrap">
+          <i class="ico ico-money"></i> ตั้งราคาทีละห้อง</button>
       </div>
     </div>
   </div>
@@ -3773,23 +3809,47 @@ window.shCleanAsk=function(id){
   document.body.appendChild(bg);
 };
 /* ถามเรื่องทำความสะอาดทันทีหลังเช็คเอาท์ — ต่างจาก shCleanAsk ตรงที่มีปุ่ม "ยังไม่ได้ทำ" */
-window.shCleanAskAfter=function(id, guest){
+/* ═══ เคลียร์ห้องหลังเช็คเอาท์ ═══ (ต้นแบบ Modal Pattern A)
+   ข้อมูล = ตัวหนังสือล้วน · ปุ่ม = ไอคอน + พื้น/กรอบ · แยกด้วยเส้นคั่น
+   เดิมปุ่ม "ยังไม่ได้ทำ" เป็นตัวหนังสือลอย ดูไม่ออกว่ากดได้
+   และคำอธิบายเป็นย่อหน้าเดียว ต้องอ่านทั้งก้อนถึงรู้ว่าปุ่มไหนทำอะไร */
+window.shCleanAskAfter=function(id, guest, outTs){
   if (!id) return;
   try { if (window.shClean && window.shClean[id]) return; } catch(e){}
   var old=document.getElementById('sh-clean-modal'); if(old) old.remove();
+  /* เวลาเช็คเอาท · เผื่อกดข้ามแล้วเปิดใหม่ทีหลัง จะได้รู้ว่าห้องว่างมานานแค่ไหน */
+  var when = "เมื่อสักครู่";
+  var clock = "";
+  try {
+    var t = outTs || Date.now();
+    var d = new Date(t);
+    clock = ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2);
+    var mins = Math.max(0, Math.round((Date.now()-t)/60000));
+    if (mins >= 60) when = "ผ่านมา " + Math.floor(mins/60) + " ชม. " + (mins%60) + " น.";
+    else if (mins >= 2) when = "ผ่านมา " + mins + " นาที";
+  } catch(e){}
   var bg=document.createElement('div');
   bg.className='modal-bg open'; bg.id='sh-clean-modal'; bg.style.zIndex=9200;
-  bg.onclick=function(){ bg.remove(); };
-  bg.innerHTML="<div class='modal sh-cleanpop' onclick='event.stopPropagation()'>"
-    +"<div class='shc-h'><div class='shc-ic'><i class='ico ico-sparkle'></i></div>"
-    +"<div><div class='shc-t'>เคลียร์ห้อง "+shEsc(id)+" เลยไหม</div>"
-    +"<div class='shc-s'>"+shEsc(guest||'-')+" เช็คเอาทแล้ว</div></div>"
-    +"<div class='shc-x' onclick=\"var m=document.getElementById('sh-clean-modal');if(m)m.remove();\"><i class='ico ico-x'></i></div></div>"
-    +"<div class='shc-body'>ถ้าทำความสะอาดเสร็จแล้ว กดยืนยันเพื่อให้ห้องกลับเป็น <b>ว่าง</b> ขายต่อได้ทันที<br/>"
-    +"<span style='color:#94a3b8;font-size:12px'>ถ้ายังไม่ได้ทำ กดข้ามได้ ห้องจะอยู่ในรายการรอทำความสะอาด</span></div>"
-    +"<div class='shc-btn' onclick=\"shCleanDo('"+id+"')\"><i class='ico ico-check'></i> เคลียร์แล้ว → ห้องว่าง</div>"
-    +"<div class='shc-skip' onclick=\"var m=document.getElementById('sh-clean-modal');if(m)m.remove();\">ยังไม่ได้ทำ · ไว้ก่อน</div>"
-    +"</div>";
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal shc-card' onclick='event.stopPropagation()'>"
+   +   "<div class='shc-hd'><div class='t'>เคลียร์ห้องเลยไหม</div>"
+   +     "<div class='s'>แขกเช็คเอาทแล้ว \u00b7 ห้องรอทำความสะอาด</div></div>"
+   +   "<div class='shc-info'>"
+   +     "<div class='shc-r'><span class='k'>ห้อง</span><span class='v rm'>"+shEsc(id)+"</span></div>"
+   +     "<div class='shc-r'><span class='k'>แขก</span><span class='v'>"+shEsc(guest||'-')+"</span></div>"
+   +     "<div class='shc-r'><span class='k'>เช็คเอาท</span><span class='v'>"
+   +       shEsc(when) + (clock ? " \u00b7 " + clock : "") + "</span></div>"
+   +   "</div>"
+   +   "<div class='shc-sep'></div>"
+   +   "<div class='shc-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='shc-b b1' onclick=\"shCleanDo('"+id+"')\">"
+   +       "<span class='ic'><i class='ico ico-check'></i></span><span class='tx'>เคลียร์แล้ว \u00b7 ห้องว่าง"
+   +       "<span class='sub'>ขายต่อได้ทันที</span></span></button>"
+   +     "<button class='shc-b b3' onclick=\"var m=document.getElementById('sh-clean-modal');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span><span class='tx'>ยังไม่ได้ทำ \u00b7 ไว้ก่อน"
+   +       "<span class='sub'>ห้องจะอยู่ในรายการรอทำความสะอาด</span></span></button>"
+   +   "</div></div>";
   document.body.appendChild(bg);
 };
 window.shCleanDo=function(id){
@@ -5436,6 +5496,30 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v3.73.0</td><td>6 ส.ค. 69</td>'
++'<td><b>ใส่สัญลักษณ์ค่าไฟและค่าน้ำทั่วทั้งแอป</b><br/>สร้างไอคอน<b>สายฟ้าทึบ (ค่าไฟ สีส้ม)</b> และ <b>หยดน้ำทึบ (ค่าน้ำ สีฟ้า)</b> แบบทึบอ่านง่ายกว่าตอนย่อเล็กในตาราง · แยกด้วยสีไม่ใช่แค่รูป กวาดตาหาช่องได้เร็ว<br/>แทรกครบ <b>9 จุด</b> — ตารางออกบิลรวม (หัวคอลัมน์) · ตารางบิล · หน้าต่างดูบิล · หน้าต่างรับค่าเช่า · ใบเสร็จรายเดือน · ใบเสร็จย้ายออก · สรุปย้ายออก · พิมพ์บิลชุด · หน้าตั้งค่า<br/>ไอคอนในเมนูและหัวข้อยังใช้แบบเส้นเหมือนเดิม ไม่หลุดชุดกับไอคอนเมนูอื่น</td></tr>'
++'<tr><td style="font-family:monospace">v3.72.0</td><td>6 ส.ค. 69</td>'
++'<td><b>กล่องมิเตอร์ล่าสุดให้เข้าชุดกัน + แก้ปุ่มปิดที่มองไม่เห็น</b><br/><b>1</b> เพิ่ม<b>สัญลักษณ์ไฟฟ้า</b>หน้าหัวข้อ · คงกรอบเหลืองไว้ตามเดิม · ปรับตัวเลขจาก 15px เป็น 13.5px ให้เท่าช่องอื่นในตาราง แถวจะได้ไม่สูงเบี้ยว · เพิ่มระยะขอบในกรอบ ไม่ให้ตัวหนังสือแนบเส้น<br/><b>2</b> ห้องว่าง กล่องนี้เดิมกว้างแค่ครึ่งเดียวลอยชิดซ้าย ตอนนี้<b>เต็มความกว้าง</b>และตัวเลขใหญ่ขึ้นเพราะเป็นกล่องเดี่ยว<br/><b>3</b> <b>ปุ่มปิดหน้าต่างจองห้องมองไม่เห็น</b> เพราะพื้นปุ่มขาวและกากบาทก็ขาว (CSS สองกฎชนกัน) · แก้เป็นพื้นโปร่งจาง กากบาทเห็นชัดบนหัวสีเหลือง · กระทบ 2 หน้าต่าง คือ <b>จองห้อง</b> และ <b>รับผู้จองเข้าพัก</b><br/>สแกนทั้งแอป 18 หน้า 5 หน้าต่างแล้ว ไม่พบจุดแสดงผลเพี้ยนที่อื่น</td></tr>'
++'<tr><td style="font-family:monospace">v3.71.0</td><td>6 ส.ค. 69</td>'
++'<td><b>ย้ายปุ่มตั้งราคาห้องเข้าหน้าตั้งค่า + แก้การแสดงผลเพี้ยน 2 จุด</b><br/><b>1</b> ย้ายปุ่มจากหน้าผังห้องพัก ไปอยู่ใน <b>ตั้งค่า → อัตราค่าสาธารณูปโภค</b> ต่อจากค่าไฟและค่าน้ำ · มีบรรทัดสรุปบอกว่าตอนนี้ราคาเท่ากันหมดหรือต่างกันกี่แบบ ช่วงเท่าไหร่<br/><b>2</b> กล่องเหลือง <b>ผู้เช่าเดิม...ออกที่...</b> ในหน้าเช็คอิน เดิมข้อความแตกเป็นตั้งอ่านไม่ออก เพราะจัดวางแบบกล่องทำให้แต่ละคำแยกกัน ตอนนี้ไหลต่อกันตามปกติ<br/><b>3</b> กล่อง <b>มิเตอร์ล่าสุด</b> ในหน้าห้องว่าง เดิมกว้างแค่ครึ่งเดียว เหลือที่ว่างข้างขวา ตอนนี้เต็มความกว้างเหมือนกล่องอื่น<br/><b>ค่าเช่าเริ่มต้น</b> ยังอยู่ที่เดิม แต่แก้คำอธิบายให้ชัดว่าใช้ตอนเพิ่มห้องใหม่เท่านั้น ไม่กระทบห้องที่มีอยู่แล้ว</td></tr>'
++'<tr><td style="font-family:monospace">v3.70.0</td><td>6 ส.ค. 69</td>'
++'<td><b>ตั้งราคาห้องรายเดือนแยกทีละห้อง</b><br/>เดิมทุกห้องใช้ราคาเดียวกัน จะแก้ต้องเปิดหน้าต่างห้องทีละห้อง<br/>ตอนนี้มีปุ่ม <b>ตั้งราคาห้อง</b> บนหน้าผังห้องพัก · กด<b>แก้ได้ทีละหลายห้องพร้อมกันในตารางเดียว</b> แบ่งตามตึก · ห้องที่แก้แล้วช่องขึ้นกรอบเขียวพร้อมบอกส่วนต่าง · ห้องที่มีผู้เช่าอยู่ขึ้นชื่อไว้ให้เห็น<br/><b>สิทธิ์ 2 ชั้น</b> — เพิ่มสิทธิ์ใหม่ <b>แก้ราคาห้องรายเดือน</b> ในหน้าตั้งค่า ปิดอยู่ = <b>พนักงานไม่เห็นปุ่มเลย</b> ไม่ใช่เห็นแล้วกดไม่ได้ · และต้องใส่ <b>PIN ยืนยันตัวตน</b> ก่อนเข้า ยืนยันครั้งเดียว<b>ใช้ได้ 24 ชั่วโมง</b> ออกจากระบบแล้วต้องยืนยันใหม่<br/>ก่อนบันทึกมีหน้าสรุปบอกทีละห้อง <b>เดิม ⟶ ใหม่ (ส่วนต่าง)</b> และรายได้ต่อเดือนที่เปลี่ยน · <b>ราคาใหม่มีผลทันที</b> ใช้กับห้องนั้นไปเรื่อยจนกว่าจะแก้อีกครั้ง <b>บิลที่ออกไปแล้วไม่เปลี่ยน</b> · จดลงบันทึกการทำงานว่าใครแก้เมื่อไหร่ จากเท่าไหร่เป็นเท่าไหร่</td></tr>'
++'<tr><td style="font-family:monospace">v3.69.0</td><td>6 ส.ค. 69</td>'
++'<td><b>ปฏิทินจอง · กดค้างแล้วลากเพื่อจองหลายคืน</b><br/>เดิมคลิกได้ทีละช่อง = จอง 1 คืนเสมอ ลูกค้าพัก 5 คืนต้องเปิดฟอร์มแล้วไปแก้วันออกเอง · และไม่เห็นว่าชนกับการจองอื่นไหมจนกว่าจะกดบันทึก<br/>ตอนนี้<b>กดค้างที่ช่องว่างแล้วลากแนวนอน</b> มีแถบเขียววิ่งตามนิ้วบอกจำนวนคืนสด ๆ · ป้ายลอยบอก <b>วันเข้า ⟶ คืนสุดท้าย · วันออก (สีแดง) · จำนวนคืน</b><br/><b>ลากทับช่วงที่มีคนอยู่แล้วแถบจะเป็นสีแดงทันที</b> พร้อมบอกว่าชนกับใคร ปล่อยแล้วไม่เปิดฟอร์ม ไม่ต้องกรอกไปเจอ error<br/>ลากย้อนทางซ้ายก็ได้ ระบบสลับต้น-ปลายให้เอง · คลิกช่องเดียวไม่ลาก ยังจอง 1 คืนเหมือนเดิม · ลากข้ามแถวไม่ได้ อยู่ในห้องเดียวเสมอ</td></tr>'
++'<tr><td style="font-family:monospace">v3.68.0</td><td>6 ส.ค. 69</td>'
++'<td><b>กันเลขมิเตอร์กรอกผิดทำให้บิลพุ่งเป็นหมื่น</b><br/>เดิมถ้าเลขใหม่น้อยกว่าเลขเก่า ระบบเดาว่า<b>มิเตอร์วนรอบ</b>เสมอ · กรอก 8000 เป็น 7000 จะคิดเป็น <b>9,000 หน่วย บิล 67,600 บาท</b> และกดบันทึกผ่านได้<br/>ตอนนี้แยกออกว่า<b>วนรอบจริง</b>หรือ<b>กรอกผิด</b> · มิเตอร์วนรอบจริงต้องได้หน่วยไม่เกิน 300 (ห้องเช่าใช้ไฟ 9,000 หน่วยในเดือนเดียวไม่ได้)<br/>ป้ายในแถวเปลี่ยนเป็น <b>น่าจะกรอกผิด</b> · ตอนกดบันทึกจะถามแยกต่างหาก บอกเจาะจงว่า<b>ห้องไหน เลขอะไร คิดได้กี่หน่วย บิลเท่าไหร่</b> พร้อมทางเลือกกลับไปแก้<br/>กรณีวนรอบจริง (เช่น 9990 → 50) ยังบอกว่าวนรอบเหมือนเดิม ไม่ถูกทักผิด</td></tr>'
++'<tr><td style="font-family:monospace">v3.67.0</td><td>6 ส.ค. 69</td>'
++'<td><b>หน้าต่างรับค่าเช่า · เพิ่มการแจกแจงที่มาของยอด</b> (อันที่ 8 — ครบทุกหน้าต่างแล้ว)<br/>เดิมบอกแค่ยอดรวม พอผู้เช่าถามว่าทำไมเดือนนี้แพง ต้องปิดหน้าต่างไปเปิดบิลอีกหน้า<br/>ตอนนี้แจกแจง <b>ค่าเช่า · ค่าไฟ (กี่หน่วย) · ค่าน้ำ (กี่คน)</b> ก่อนสรุปยอดรวม · รายการเพิ่มขึ้นสีแดง ส่วนลดสีเขียว · รายการที่ไม่มีจะไม่แสดงเลย ไม่รก<br/><b>โครงหน้าต่างเดิมไม่เปลี่ยนเลย</b> — หัว ปุ่มสลับวิธีจ่าย กล่องข้อความ ปุ่มล่าง เหมือนเดิมทุกอย่าง</td></tr>'
++'<tr><td style="font-family:monospace">v3.66.0</td><td>5 ส.ค. 69</td>'
++'<td><b>การจองชนกัน + ย้ายห้อง · ทำใหม่ทั้งคู่</b> (อันที่ 6 และ 7 จาก 7 — ครบแล้ว)<br/>เดิมข้อมูลเป็นย่อหน้ายาว ตัวเลขปนตัวหนังสือ · ปุ่ม <b>ย้ายห้อง</b> กดไปแล้วถึงรู้ว่าไม่มีห้องว่าง เจอทางตัน · ห้องที่เลือกสีฟ้าอ่อนดูไม่ออก · ไม่บอกว่าค่าเช่าห้องใหม่ต่างจากเดิมไหม<br/>ตอนนี้ข้อมูลแยกเป็นแถว · <b>ปุ่มบอกจำนวนห้องว่างตั้งแต่ยังไม่กด</b> ไม่มีห้องว่างปุ่มจะเป็นสีเทาทันที · ห้องที่เลือกขึ้นกรอบเขียวชัด · ปุ่มยืนยันเป็นสีเทาจนกว่าจะเลือกห้อง<br/><b>เตือนเมื่อค่าเช่าห้องใหม่ไม่เท่าเดิม</b> เช่น แพงกว่าเดิม 700 บาท/เดือน พร้อมบอกว่าลูกค้าตกลงราคาไว้แล้ว ควรแจ้งก่อนย้าย · สรุปก่อนกดยืนยันว่ามัดจำย้ายตามไปเท่าไหร่<br/>พ่วงปรับการแสดงระยะเวลาพัก จาก <b>120 วัน</b> เป็น <b>4 เดือน</b> ใช้ร่วมกันทั้งหน้าห้อง หน้าผู้เช่า และหน้านี้</td></tr>'
++'<tr><td style="font-family:monospace">v3.65.0</td><td>5 ส.ค. 69</td>'
++'<td><b>เช็คเอาทตอนค้างจ่าย + ตัดหนี้ · ทำใหม่ทั้งคู่</b> (อันที่ 4 และ 5 จาก 7)<br/>เดิมใช้กล่องของเบราว์เซอร์ บอกแค่ยอดค้าง ไม่บอกยอดรวมและที่จ่ายมาแล้ว · และเจ้าของต้องจำวิธีไปตัดหนี้เองอีก 3 ขั้น (ปิดกล่อง เปิดใบจอง หาปุ่มในการ์ดการเงิน)<br/>ตอนนี้บอก <b>ยอดรวม · จ่ายแล้ว · ยังค้าง</b> ครบ 3 บรรทัด · <b>เจ้าของกดตัดหนี้ได้จากหน้านั้นเลย</b> ไม่ต้องไปหาปุ่มที่อื่น · พนักงานเห็นปุ่มเป็นสีเทามีกุญแจ พร้อมข้อความบอกให้แจ้งเจ้าของ<br/>หน้ายืนยันตัดหนี้บอกว่า<b>ยอดขายเดิมไม่เปลี่ยน</b> · บังคับกรอกเหตุผล · กดยืนยันแล้ว<b>เช็คเอาทและตัดยอดพร้อมกันในครั้งเดียว</b> ไม่มีจังหวะที่ทำครึ่งๆ · ปุ่มยกเลิกพากลับหน้าก่อน ยังเช็คเอาทแบบปกติต่อได้<br/>ปุ่มเดิมในการ์ดการเงินยังอยู่ ใช้กรณีเช็คเอาทไปแล้วเพิ่งรู้ทีหลังว่าลูกค้าหนี</td></tr>'
++'<tr><td style="font-family:monospace">v3.64.0</td><td>5 ส.ค. 69</td>'
++'<td><b>หน้าต่างรับเงินหลายห้อง · ทำใหม่</b> (อันที่ 3 จาก 7)<br/>เดิมปุ่มปิดอยู่มุมขวาบน ไกลนิ้วโป้งบนมือถือ และไม่มีปุ่มยกเลิกคู่กับปุ่มยืนยัน · รายการห้องกินที่ ตอนรับ 32 ห้องต้องเลื่อนในกล่องเล็กและยอดรวมหลุดจอ · กล่องเตือนสีเหลืองคั่นระหว่างตัวเลือกวิธีจ่ายกับปุ่มยืนยัน<br/>ตอนนี้ <b>ยอดที่จะรับอยู่บนสุดตัวใหญ่</b> เห็นทันทีไม่ต้องเลื่อนหา · รายการห้อง<b>พับได้</b> กางไว้เป็นค่าเริ่มต้น 32 ห้องก็ไม่ทำให้หน้าต่างยาวเกิน · ย้ายคำเตือนขึ้นไปเป็นบรรทัดใต้หัวข้อ ไม่คั่นจังหวะ<br/><b>ปุ่มยกเลิกอยู่คู่ปุ่มยืนยันด้านล่าง</b> ใกล้นิ้วโป้ง ตัดปุ่มปิดมุมขวาออก · ปุ่มวิธีจ่ายสูงขึ้นกดง่าย · กดยกเลิกแล้วห้องที่เลือกไว้ยังอยู่</td></tr>'
++'<tr><td style="font-family:monospace">v3.63.0</td><td>5 ส.ค. 69</td>'
++'<td><b>หน้าต่างยืนยันส่งยอด · ทำใหม่</b> (อันที่ 2 จาก 7)<br/>เดิมใช้กล่องของเบราว์เซอร์ ตัวเลขปนตัวหนังสือ กวาดตาหายอดยาก · ที่สำคัญคือ<b>ไม่บอกยอดหัก</b> ทั้งที่หน้าส่งยอดมีโซนรายการหักอยู่ พนักงานจึงอาจยื่นเงินผิดจำนวน<br/>ตอนนี้ตัวเลขชิดขวาเรียงคอลัมน์เดียว บวกลบตามได้ · <b>เพิ่มแถวหักรายการ</b> แล้วสรุปเป็น <b>เงินสดที่ต้องยื่น</b> ตัวใหญ่ · แสดงหมายเหตุที่พิมพ์ไว้ให้เห็นก่อนส่ง<br/>ปุ่มบอกยอดสุทธิในตัวและเตือนว่ายกเลิกเองไม่ได้ · กดรัวก็ส่งครั้งเดียว · แถวที่ไม่มีข้อมูลจะไม่ขึ้นเลย ไม่แสดงเลข 0 ให้รก</td></tr>'
++'<tr><td style="font-family:monospace">v3.62.0</td><td>3 ส.ค. 69</td>'
++'<td><b>หน้าต่างเคลียร์ห้องหลังเช็คเอาท์ · ทำใหม่</b> (อันแรกจาก 7 อันที่จะทยอยเปลี่ยน)<br/>เดิมปุ่ม <b>ยังไม่ได้ทำ · ไว้ก่อน</b> เป็นตัวหนังสือลอย ไม่มีกรอบ ดูไม่ออกว่ากดได้ · คำอธิบายเป็นย่อหน้าเดียวต้องอ่านทั้งก้อนถึงรู้ว่าปุ่มไหนทำอะไร<br/>ตอนนี้ <b>ห้อง · แขก · เวลาเช็คเอาท</b> แยกเป็นแถวอ่านไล่ลงมาได้ · ปุ่มทั้ง 2 อันหน้าตาเท่ากัน มีไอคอนและกรอบ เห็นชัดว่ากดได้ทั้งคู่ · คำอธิบายย้ายเข้าไปอยู่ใต้ชื่อปุ่ม<br/>เพิ่มเวลาเช็คเอาท เช่น <b>ผ่านมา 1 ชม. 30 น.</b> จะได้รู้ว่าห้องรอทำความสะอาดมานานแค่ไหน · ตัดปุ่มกากบาทมุมขวาออก เหลือทางเดียวไม่ซ้ำหน้าที่</td></tr>'
 +'<tr><td style="font-family:monospace">v3.61.0</td><td>3 ส.ค. 69</td>'
 +'<td><b>เปลี่ยนลำดับเริ่มแอป · ล็อกอินก่อน แล้วค่อยโหลดข้อมูล</b><br/>เดิมเปิดแอปแล้วโหลดข้อมูลทั้งหมดทันทีตั้งแต่ยังไม่ล็อกอิน ทำให้ปิดฐานข้อมูลไม่ได้เลย เพราะพอปิดจะอ่านห้องไม่ได้แล้วค้างตั้งแต่วินาทีแรก<br/>ตอนนี้ <b>เปิดแอป → หน้าเลือกคน → ใส่ PIN → ค่อยโหลดข้อมูล</b><br/><b>PIN ตรวจที่ Firebase เป็นหลัก</b> ไม่ต้องเก็บ PIN ไว้ในฐานข้อมูลอีก · ถ้ายังไม่มีบัญชีจะใช้ PIN เก่าเทียบให้ไปก่อน ไม่ล็อกใครออก<br/>ทดสอบด้วยตัวจำลองกฎแล้วว่าปิดฐานข้อมูลได้จริงโดยไม่มีใครเข้าไม่ได้</td></tr>'
 +'<tr><td style="font-family:monospace">v3.60.1</td><td>3 ส.ค. 69</td>'
@@ -5543,8 +5627,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1170;
-window.__APP_VERSION = "v3.61.0";
+window.__APP_BUILD = 1182;
+window.__APP_VERSION = "v3.73.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -7520,6 +7604,433 @@ function bdListHTML(){
 /* กำลังล็อกอิน · กดปุ่มซ้ำไม่ได้ */
 .pin-busy{opacity:.6;pointer-events:none;transition:opacity .15s}
 </style>
+
+<style>
+/* ── เคลียร์ห้องหลังเช็คเอาท์ · Modal Pattern A ── */
+.shc-card{max-width:420px;width:100%;padding:0;overflow:hidden}
+.shc-hd{padding:16px 20px 14px}
+.shc-hd .t{font-size:16px;font-weight:800;color:#0f172a}
+.shc-hd .s{font-size:12px;color:#94a3b8;margin-top:3px}
+.shc-info{padding:0 20px 4px}
+.shc-r{display:flex;gap:12px;font-size:13px;padding:8px 0;border-bottom:1px solid #f4f7fa}
+.shc-r:last-child{border-bottom:none}
+.shc-r .k{color:#94a3b8;width:78px;flex-shrink:0}
+.shc-r .v{font-weight:700;flex:1;min-width:0;color:#0f172a;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shc-r .v.rm{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:900}
+.shc-sep{height:1px;background:#eef2f6;margin:14px 0 0}
+.shc-acts{padding:16px 20px 20px}
+.shc-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;margin-bottom:10px}
+.shc-b{display:flex;align-items:center;gap:11px;width:100%;border-radius:12px;padding:14px 16px;
+  font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.shc-b:last-child{margin-bottom:0}
+.shc-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0}
+.shc-b .tx{flex:1;min-width:0}
+.shc-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;margin-top:2px;line-height:1.5}
+.shc-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.shc-b.b1 .ic{background:rgba(255,255,255,.22)}
+.shc-b.b1:hover{filter:brightness(1.05)}
+.shc-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.shc-b.b3 .ic{background:#f1f5f9}
+.shc-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+@media(max-width:900px){
+  .shc-r{flex-wrap:wrap}
+  .shc-r .k{width:100%;font-size:11px}
+  .shc-b{padding:13px 14px}
+}
+</style>
+
+<style>
+/* ── ยืนยันส่งยอด · Modal Pattern A ── */
+.hoaq-card{max-width:430px;width:100%;padding:0;overflow:hidden}
+.hoaq-hd{padding:16px 20px 14px}
+.hoaq-hd .t{font-size:16px;font-weight:800;color:#0f172a}
+.hoaq-hd .s{font-size:12px;color:#94a3b8;margin-top:3px}
+.hoaq-info{padding:0 20px 4px}
+.hoaq-r{display:flex;gap:12px;font-size:13px;padding:8px 0;
+  border-bottom:1px solid #f4f7fa;align-items:baseline}
+.hoaq-r:last-child{border-bottom:none}
+.hoaq-r .k{color:#94a3b8;flex:1;min-width:0}
+.hoaq-r .sub2{color:#b6c0cc;font-size:11px;margin-left:5px;font-weight:600}
+.hoaq-r .v{font-weight:700;text-align:right;font-family:'JetBrains Mono',monospace;
+  color:#0f172a;flex-shrink:0}
+.hoaq-r.ded .v{color:#dc2626}
+.hoaq-r.big{padding:12px 0 10px;border-top:1.5px solid #e2e8f0;border-bottom:none;margin-top:4px}
+.hoaq-r.big .k{color:#0f172a;font-weight:800;font-size:13.5px}
+.hoaq-r.big .v{font-size:22px;font-weight:900;color:#15803d}
+.hoaq-r.note{border-top:1px solid #f4f7fa;padding-top:10px;align-items:flex-start}
+.hoaq-r.note .k{flex:0 0 74px}
+.hoaq-r.note .v{text-align:left;font-family:Sarabun,sans-serif;font-weight:600;
+  color:#5b6b7c;flex:1;min-width:0;word-break:break-word}
+.hoaq-sep{height:1px;background:#eef2f6;margin:14px 0 0}
+.hoaq-acts{padding:16px 20px 20px}
+.hoaq-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;margin-bottom:10px}
+.hoaq-b{display:flex;align-items:center;gap:11px;width:100%;border-radius:12px;padding:14px 16px;
+  font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.hoaq-b:last-child{margin-bottom:0}
+.hoaq-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0}
+.hoaq-b .tx{flex:1;min-width:0}
+.hoaq-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;margin-top:2px;line-height:1.5}
+.hoaq-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.hoaq-b.b1 .ic{background:rgba(255,255,255,.22)}
+.hoaq-b.b1:hover{filter:brightness(1.05)}
+.hoaq-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.hoaq-b.b3 .ic{background:#f1f5f9}
+.hoaq-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+@media(max-width:900px){
+  .hoaq-b{padding:13px 14px}
+  .hoaq-r.big .v{font-size:20px}
+}
+</style>
+
+<style>
+/* ── รับเงินหลายห้อง · Modal Pattern A ── */
+.bpn-card{max-width:430px;width:100%;padding:0;overflow:hidden}
+.bpn-hd{padding:16px 20px 14px}
+.bpn-hd .t{font-size:16px;font-weight:800;color:#0f172a}
+.bpn-hd .s{font-size:12px;color:#94a3b8;margin-top:3px;line-height:1.5}
+.bpn-info{padding:0 20px 4px}
+.bpn-r{display:flex;gap:12px;font-size:13px;padding:8px 0;
+  border-bottom:1px solid #f4f7fa;align-items:baseline}
+.bpn-r:last-child{border-bottom:none}
+.bpn-r .k{color:#94a3b8;flex:1;min-width:0}
+.bpn-r .sub2{color:#b6c0cc;font-size:11px;margin-left:5px;font-weight:600}
+.bpn-r .v{font-weight:700;text-align:right;font-family:'JetBrains Mono',monospace;
+  color:#0f172a;flex-shrink:0}
+.bpn-r.big{padding:12px 0 10px;border-top:1.5px solid #e2e8f0;border-bottom:none;margin-top:4px}
+.bpn-r.big .k{color:#0f172a;font-weight:800;font-size:13.5px}
+.bpn-r.big .v{font-size:22px;font-weight:900;color:#15803d}
+/* รายการห้อง · พับได้ */
+.bpn-fold{margin:2px 20px 0;border:1.5px solid #e2e8f0;border-radius:11px;overflow:hidden}
+.bpn-fh{display:flex;align-items:center;gap:9px;padding:11px 13px;background:#fafcfe;
+  font-size:12.5px;font-weight:800;color:#5b6b7c;cursor:pointer;user-select:none}
+.bpn-fh:hover{background:#f4f8fc}
+.bpn-fh .ar{margin-left:auto;font-size:11px;color:#b6c0cc;transition:transform .18s;
+  display:inline-flex;transform:rotate(90deg)}
+.bpn-fold:not(.open) .bpn-fh .ar{transform:rotate(0deg)}
+.bpn-fb{display:none;max-height:186px;overflow-y:auto;padding:2px 13px}
+.bpn-fold.open .bpn-fb{display:block}
+.bpn-li{display:flex;align-items:center;gap:9px;padding:9px 0;
+  border-bottom:1px solid #f6f8fa;font-size:12.5px}
+.bpn-li:last-child{border-bottom:none}
+.bpn-li .r{font-weight:800;width:48px;flex-shrink:0;font-family:'JetBrains Mono',monospace;color:#0f172a}
+.bpn-li .nm{flex:1;min-width:0;color:#5b6b7c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bpn-li .a{font-family:'JetBrains Mono',monospace;font-weight:800;flex-shrink:0;color:#0f172a}
+.bpn-ml{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;padding:16px 20px 8px}
+.bpn-m{display:flex;gap:9px;padding:0 20px}
+.bpn-mb{flex:1;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid #e2e8f0;background:#fff;border-radius:11px;padding:13px;
+  font-size:13.5px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  color:#64748b;min-height:48px}
+.bpn-mb.on{border-color:#10b981;background:#f0fdf4;color:#15803d;box-shadow:inset 0 0 0 1px #10b981}
+.bpn-sep{height:1px;background:#eef2f6;margin:16px 0 0}
+.bpn-acts{padding:16px 20px 20px}
+.bpn-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;margin-bottom:10px}
+.bpn-b{display:flex;align-items:center;gap:11px;width:100%;border-radius:12px;padding:14px 16px;
+  font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.bpn-b:last-child{margin-bottom:0}
+.bpn-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0}
+.bpn-b .tx{flex:1;min-width:0}
+.bpn-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;margin-top:2px;line-height:1.5}
+.bpn-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.bpn-b.b1 .ic{background:rgba(255,255,255,.22)}
+.bpn-b.b1:hover{filter:brightness(1.05)}
+.bpn-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.bpn-b.b3 .ic{background:#f1f5f9}
+.bpn-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+.bpn-b:disabled{opacity:.55;cursor:wait}
+@media(max-width:900px){
+  .bpn-b{padding:13px 14px}
+  .bpn-r.big .v{font-size:20px}
+  .bpn-fb{max-height:150px}
+}
+</style>
+
+<style>
+/* ── เช็คเอาทตอนค้างจ่าย + ตัดหนี้ · Modal Pattern A ── */
+.co-card,.bdn-card{max-width:430px;width:100%;padding:0;overflow:hidden}
+.co-hd,.bdn-hd{padding:16px 20px 14px}
+.co-hd .t,.bdn-hd .t{font-size:16px;font-weight:800;color:#0f172a}
+.bdn-hd .t{color:#c2410c}
+.co-hd .s,.bdn-hd .s{font-size:12px;color:#94a3b8;margin-top:3px}
+.co-info,.bdn-info{padding:0 20px 4px}
+.co-r,.bdn-r{display:flex;gap:12px;font-size:13px;padding:8px 0;
+  border-bottom:1px solid #f4f7fa;align-items:baseline}
+.co-r:last-child,.bdn-r:last-child{border-bottom:none}
+.co-r .k,.bdn-r .k{color:#94a3b8;flex:1;min-width:0}
+.co-r .sub2,.bdn-r .sub2{color:#b6c0cc;font-size:11px;margin-left:5px;font-weight:600}
+.co-r .v,.bdn-r .v{font-weight:700;text-align:right;color:#0f172a;flex-shrink:0;
+  font-family:'JetBrains Mono',monospace}
+.co-r.big{padding:12px 0 10px;border-top:1.5px solid #e2e8f0;border-bottom:none;margin-top:4px}
+.co-r.big .k{color:#0f172a;font-weight:800;font-size:13.5px}
+.co-r.big .v{font-size:22px;font-weight:900;color:#e11d48}
+.bdn-r .v.red{color:#e11d48;font-size:17px;font-weight:900}
+.bdn-r.note{align-items:flex-start;border-top:1px solid #f4f7fa;padding-top:10px}
+.bdn-r.note .k{flex:0 0 74px}
+.bdn-r.note .v{text-align:left;font-family:Sarabun,sans-serif;font-weight:600;
+  color:#5b6b7c;flex:1;min-width:0;line-height:1.65}
+.bdn-fl{font-size:11px;font-weight:800;color:#475569;padding:12px 20px 5px}
+.bdn-fl .req{color:#e11d48}
+.bdn-fw{padding:0 20px}
+.bdn-in{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:11px 13px;
+  font-size:14px;font-family:Sarabun,sans-serif;color:#0f172a;outline:none}
+.bdn-in:focus{border-color:#f59e0b}
+.bdn-in.err{border-color:#e11d48;background:#fff5f7}
+.bdn-warn{background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:11px 14px;
+  font-size:11.5px;color:#8a6d3b;line-height:1.7;margin:12px 20px 0}
+.bdn-warn b{color:#78350f}
+.co-sep,.bdn-sep{height:1px;background:#eef2f6;margin:14px 0 0}
+.co-acts,.bdn-acts{padding:16px 20px 20px}
+.co-acts .ah,.bdn-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;
+  letter-spacing:.06em;margin-bottom:10px}
+.co-b,.bdn-b{display:flex;align-items:flex-start;gap:11px;width:100%;border-radius:12px;
+  padding:14px 16px;font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.co-b:last-child,.bdn-b:last-child{margin-bottom:0}
+.co-b .ic,.bdn-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.co-b .tx,.bdn-b .tx{flex:1;min-width:0}
+.co-b .sub,.bdn-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;
+  margin-top:2px;line-height:1.5}
+.co-b .badge{border-radius:5px;padding:2px 8px;font-size:9.5px;font-weight:800;
+  margin-left:7px;white-space:nowrap;display:inline-block;vertical-align:1px}
+.co-b.b1,.bdn-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.co-b.b1 .ic{background:rgba(255,255,255,.22)}
+.co-b.b2{background:#fff;border-color:#fecaca;color:#dc2626}
+.co-b.b2 .ic{background:#fef2f2}
+.co-b.b2 .badge{background:#fef2f2;color:#dc2626}
+.co-b.b2:hover{background:#fffbfc;border-color:#fca5a5}
+.co-b.b3,.bdn-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.co-b.b3 .ic,.bdn-b.b3 .ic{background:#f1f5f9}
+.co-b.b3:hover,.bdn-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+.bdn-b.bR{background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff}
+.bdn-b.bR .ic{background:rgba(255,255,255,.22)}
+.bdn-b.bR:hover{filter:brightness(1.05)}
+.co-b.blk{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+.co-b.blk .ic{background:#e8edf3;color:#94a3b8}
+.co-b.blk .badge{background:#e2e8f0;color:#7c8899}
+.co-b:disabled,.bdn-b:disabled{opacity:.6;cursor:wait}
+@media(max-width:900px){
+  .co-b,.bdn-b{padding:13px 14px}
+  .co-r.big .v{font-size:20px}
+}
+</style>
+
+<style>
+/* ── จองชนกัน + ย้ายห้อง · Modal Pattern A ── */
+.cfn-info,.mvn-info{padding:0}
+.cfn-r,.mvn-r{display:flex;gap:12px;font-size:13px;padding:8px 0;
+  border-bottom:1px solid #f4f7fa;align-items:baseline}
+.cfn-r:last-child,.mvn-r:last-child{border-bottom:none}
+.cfn-r .k,.mvn-r .k{color:#94a3b8;flex:1;min-width:0}
+.cfn-r .sub2,.mvn-r .sub2{color:#b6c0cc;font-size:11px;margin-left:5px;font-weight:600}
+.cfn-r .v,.mvn-r .v{font-weight:700;text-align:right;color:#0f172a;flex-shrink:0;
+  max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cfn-r .v.mono,.mvn-r .v.mono{font-family:'JetBrains Mono',monospace}
+.cfn-r .v.warn,.mvn-r .v.warn{color:#b45309}
+.cfn-r.big{padding:12px 0 10px;border-top:1.5px solid #e2e8f0;border-bottom:none;margin-top:4px}
+.cfn-r.big .k{color:#0f172a;font-weight:800;font-size:13.5px}
+.cfn-r.big .v{font-size:20px;font-weight:900;color:#c2410c;font-family:'JetBrains Mono',monospace}
+.cfn-sep,.mvn-sep{height:1px;background:#eef2f6;margin:14px 0 0}
+.cfn-acts,.mvn-acts{padding:16px 0 4px}
+.cfn-acts .ah,.mvn-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;
+  letter-spacing:.06em;margin-bottom:10px}
+.cfn-b,.mvn-b{display:flex;align-items:flex-start;gap:11px;width:100%;border-radius:12px;
+  padding:14px 16px;font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.cfn-b:last-child,.mvn-b:last-child{margin-bottom:0}
+.cfn-b .ic,.mvn-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.cfn-b .tx,.mvn-b .tx{flex:1;min-width:0}
+.cfn-b .sub,.mvn-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;
+  margin-top:2px;line-height:1.5}
+.cfn-b.b1,.mvn-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.cfn-b.b1 .ic,.mvn-b.b1 .ic{background:rgba(255,255,255,.22)}
+.cfn-b.b1:hover,.mvn-b.b1:hover{filter:brightness(1.05)}
+.cfn-b.b2{background:#fff;border-color:#fecaca;color:#dc2626}
+.cfn-b.b2 .ic{background:#fef2f2}
+.cfn-b.b2:hover{background:#fffbfc;border-color:#fca5a5}
+.cfn-b.b3,.mvn-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.cfn-b.b3 .ic,.mvn-b.b3 .ic{background:#f1f5f9}
+.cfn-b.b3:hover,.mvn-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+.cfn-b.blk,.mvn-b.blk{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+.cfn-b.blk .ic,.mvn-b.blk .ic{background:#e8edf3;color:#94a3b8}
+/* เลือกห้อง */
+.mvn-rl{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;padding:0 0 8px}
+.mvn-rg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mvn-ro{border:1.5px solid #e2e8f0;background:#fff;border-radius:11px;padding:10px 4px;
+  text-align:center;cursor:pointer;min-height:60px;display:flex;flex-direction:column;justify-content:center}
+.mvn-ro:hover{border-color:#cbd5e1;background:#fafcfe}
+.mvn-ro.on{border-color:#10b981;background:#f0fdf4;box-shadow:inset 0 0 0 1px #10b981}
+.mvn-ro .n{font-size:15px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#0f172a}
+.mvn-ro.on .n{color:#15803d}
+.mvn-ro .m{font-size:10px;color:#94a3b8;margin-top:2px}
+.mvn-fw{padding:14px 0 0}
+.mvn-fl{font-size:11px;font-weight:800;color:#475569;margin-bottom:5px}
+.mvn-in{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:11px 13px;
+  font-size:14px;font-family:Sarabun,sans-serif;color:#0f172a;outline:none;box-sizing:border-box}
+.mvn-in:focus{border-color:#f59e0b}
+.mvn-sh{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;padding:16px 0 4px}
+.mvn-warn{background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:11px 14px;
+  font-size:11.5px;color:#8a6d3b;line-height:1.7;margin-top:10px}
+.mvn-warn b{color:#78350f}
+@media(max-width:900px){
+  .cfn-b,.mvn-b{padding:13px 14px}
+  .mvn-rg{grid-template-columns:repeat(3,1fr)}
+  .cfn-r.big .v{font-size:18px}
+}
+</style>
+
+<style>
+/* แจกแจงที่มาของยอดในหน้าต่างรับเงิน */
+.pmm-brk{margin:8px 18px 0;border-top:1px solid #f1f5f9;padding-top:8px}
+.pmm-brow{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:#7c8899;padding:4px 0;gap:10px}
+.pmm-brow > span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pmm-brow .sub{color:#b6c0cc;font-size:10.5px;margin-left:5px}
+.pmm-brow .n{font-family:'JetBrains Mono',monospace;font-weight:700;color:#5b6b7c;flex-shrink:0}
+.pmm-brow .n.up{color:#dc2626}
+.pmm-brow .n.dn{color:#15803d}
+@media(max-width:900px){ .pmm-brow{font-size:11.5px} }
+</style>
+
+<style>
+/* ── ลากเลือกช่วงวันในปฏิทิน ── */
+.tlg-cell.tlg-sel{background:#dbeafe !important;box-shadow:inset 0 0 0 1px #93c5fd}
+.tlg-dragbar{position:absolute;top:6px;height:calc(100% - 12px);border-radius:9px;
+  pointer-events:none;z-index:4;
+  background:linear-gradient(135deg,rgba(16,185,129,.92),rgba(5,150,105,.92));
+  border:2px solid #047857;box-shadow:0 3px 12px rgba(5,150,105,.35);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:13px;font-family:Sarabun,sans-serif;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);transition:left .04s linear,width .04s linear}
+.tlg-dragbar.bad{background:linear-gradient(135deg,rgba(244,63,94,.92),rgba(225,29,72,.92));
+  border-color:#9f1239;box-shadow:0 3px 12px rgba(225,29,72,.35)}
+/* ป้ายลอย · แบบการ์ดแบ่งช่อง */
+.tlg-tip{position:fixed;z-index:9999;pointer-events:none;background:#0f172a;color:#fff;
+  border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.42);white-space:nowrap;
+  display:inline-flex;align-items:stretch;overflow:hidden;font-family:Sarabun,sans-serif}
+.tlg-tip .seg{padding:9px 14px;text-align:center}
+.tlg-tip .seg .lb{font-size:9.5px;font-weight:800;color:#64748b;letter-spacing:.05em}
+.tlg-tip .seg .vl{font-size:15px;font-weight:800;font-family:'JetBrains Mono',monospace;margin-top:2px}
+.tlg-tip .ar{display:flex;align-items:center;padding:0 2px;color:#475569;font-size:16px}
+.tlg-tip .out{background:#3f1220;border-left:1px solid #7f1d1d}
+.tlg-tip .out .lb{color:#fb7185}
+.tlg-tip .out .vl{color:#fda4af}
+.tlg-tip .nite{background:#052e26;border-left:1px solid #065f46;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;padding:9px 13px}
+.tlg-tip .nite .vl{color:#6ee7b7;font-size:16px;font-family:'JetBrains Mono',monospace;font-weight:800}
+.tlg-tip .nite .lb{font-size:9.5px;font-weight:800;color:#34d399}
+.tlg-tip.bad{background:#3f1220;border:1px solid #7f1d1d}
+.tlg-tip.bad .seg .vl{color:#fda4af;font-family:Sarabun,sans-serif;font-size:13.5px}
+.tlg-tip.bad .seg .lb{color:#fb7185;margin-top:3px;font-weight:600}
+/* กันหน้าจอเลื่อนตอนลากบนมือถือ */
+#tl-body .tlg-cell{touch-action:pan-y}
+@media(max-width:900px){
+  .tlg-tip .seg{padding:8px 10px}
+  .tlg-tip .seg .vl{font-size:13px}
+  .tlg-tip .nite{padding:8px 10px}
+}
+</style>
+
+<style>
+/* ── ตั้งราคาห้องรายเดือน ── */
+.rnt-card{max-width:560px;width:100%;padding:0;overflow:hidden}
+.rnt-card.sm{max-width:430px}
+.rnt-hd{padding:16px 20px 14px}
+.rnt-hd .t{font-size:16px;font-weight:800;color:#0f172a}
+.rnt-hd .s{font-size:12px;color:#94a3b8;margin-top:3px;line-height:1.5}
+.rnt-info{padding:0 20px 4px}
+.rnt-r{display:flex;gap:12px;font-size:13px;padding:8px 0;
+  border-bottom:1px solid #f4f7fa;align-items:baseline}
+.rnt-r:last-child{border-bottom:none}
+.rnt-r .k{color:#94a3b8;flex:1;min-width:0}
+.rnt-r .sub2{color:#b6c0cc;font-size:11px;margin-left:5px;font-weight:600}
+.rnt-r .v{font-weight:700;text-align:right;flex-shrink:0;color:#0f172a}
+.rnt-r .v.mono{font-family:'JetBrains Mono',monospace}
+.rnt-r .v .up{color:#c2410c}
+.rnt-r .v .dn{color:#15803d}
+.rnt-r.big{padding:12px 0 10px;border-top:1.5px solid #e2e8f0;border-bottom:none;margin-top:4px}
+.rnt-r.big .k{color:#0f172a;font-weight:800;font-size:13.5px}
+.rnt-r.big .v{font-size:20px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#c2410c}
+/* ตารางห้อง */
+.rnt-tl{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;padding:14px 20px 8px}
+.rnt-tw{padding:0 20px;max-height:44vh;overflow-y:auto}
+.rnt-bl{font-size:11px;font-weight:800;color:#64748b;background:#f8fafc;padding:6px 10px;
+  border-radius:7px;margin:8px 0 6px;position:sticky;top:0;z-index:2}
+.rnt-rw{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f6f8fa}
+.rnt-rw .n{width:38px;flex-shrink:0;font-weight:900;font-family:'JetBrains Mono',monospace;font-size:14px;color:#0f172a}
+.rnt-rw .who{flex:1;min-width:0;font-size:11.5px;color:#94a3b8;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rnt-rw .who.has{color:#334155;font-weight:700}
+.rnt-rw input{width:92px;flex-shrink:0;border:1.5px solid #e2e8f0;border-radius:9px;padding:8px 10px;
+  font-size:14px;font-family:'JetBrains Mono',monospace;font-weight:800;text-align:right;
+  outline:none;color:#0f172a;background:#fff}
+.rnt-rw input:focus{border-color:#f59e0b}
+.rnt-rw input.chg{border-color:#10b981;background:#f0fdf4;color:#15803d}
+.rnt-rw .d{width:56px;flex-shrink:0;font-size:11px;font-weight:800;text-align:right;
+  font-family:'JetBrains Mono',monospace}
+.rnt-rw .d.up{color:#c2410c}
+.rnt-rw .d.dn{color:#15803d}
+/* PIN */
+.rnt-pw{padding:14px 20px 0}
+.rnt-pl{font-size:11px;font-weight:800;color:#475569;margin-bottom:5px}
+.rnt-pin{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px 14px;
+  font-size:20px;font-family:'JetBrains Mono',monospace;letter-spacing:8px;text-align:center;
+  outline:none;color:#0f172a;background:#fff}
+.rnt-pin:focus{border-color:#f59e0b}
+.rnt-pin.err{border-color:#e11d48;background:#fff5f7}
+.rnt-pmsg{font-size:11.5px;color:#e11d48;font-weight:700;margin-top:6px;min-height:16px}
+/* กล่องข้อความ */
+.rnt-warn{background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:11px 14px;
+  font-size:11.5px;color:#8a6d3b;line-height:1.7;margin:14px 20px 0}
+.rnt-warn b{color:#78350f}
+.rnt-ok{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:11px;padding:11px 14px;
+  font-size:11.5px;color:#15803d;line-height:1.7;margin:12px 20px 0}
+.rnt-ok b{color:#14532d}
+.rnt-sep{height:1px;background:#eef2f6;margin:14px 0 0}
+.rnt-acts{padding:16px 20px 20px}
+.rnt-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;margin-bottom:10px}
+.rnt-b{display:flex;align-items:flex-start;gap:11px;width:100%;border-radius:12px;padding:14px 16px;
+  font-size:14px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:9px;text-align:left;min-height:52px}
+.rnt-b:last-child{margin-bottom:0}
+.rnt-b .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.rnt-b .tx{flex:1;min-width:0}
+.rnt-b .sub{display:block;font-size:11px;font-weight:600;opacity:.78;margin-top:2px;line-height:1.5}
+.rnt-b.b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.rnt-b.b1 .ic{background:rgba(255,255,255,.22)}
+.rnt-b.b1:hover{filter:brightness(1.05)}
+.rnt-b.b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.rnt-b.b3 .ic{background:#f1f5f9}
+.rnt-b.b3:hover{background:#fafcfe;border-color:#cbd5e1}
+.rnt-b.blk{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+.rnt-b.blk .ic{background:#e8edf3;color:#94a3b8}
+.rnt-b:disabled{opacity:.6;cursor:wait}
+@media(max-width:900px){
+  .rnt-b{padding:13px 14px}
+  .rnt-tw{max-height:38vh}
+  .rnt-rw input{width:82px}
+  .rnt-rw .d{width:48px}
+  .rnt-r.big .v{font-size:18px}
+}
+</style>
+
+<style>
+/* ป้ายค่าไฟ/ค่าน้ำ · ไอคอนไม่ดันบรรทัดและไม่โดนตัดตอนคอลัมน์แคบ */
+.ico-elec,.ico-water{flex-shrink:0;vertical-align:-1px}
+th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
+.bp-row .ico-elec,.bp-row .ico-water,.mos-tab-item .ico-elec,.mos-tab-item .ico-water{font-size:.95em}
+.settings-label .ico-elec,.settings-label .ico-water{font-size:1em;vertical-align:-2px}
+@media print{ .ico-elec,.ico-water{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+</style>
 <div id="page-guide" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-file"></i> คู่มือระบบ</div>
@@ -7528,7 +8039,7 @@ function bdListHTML(){
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.61.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.73.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -7583,10 +8094,6 @@ function bdListHTML(){
       <button class="sa2-x" onclick="closeModal('conflict-modal-bg')"><i class="ico ico-x"></i></button>
     </div>
     <div class="sa2-body" id="conflict-body" style="max-height:60vh;overflow-y:auto"></div>
-    <div class="sa2-foot">
-      <button class="sa2-save" style="flex:1;background:#3b82f6" onclick="openMoveRoomFlow()"><i class="ico ico-move"></i> ย้ายห้อง</button>
-      <button class="sa2-cancel" style="flex:1;color:#dc2626" onclick="openRefundFlow()"><i class="ico ico-refund"></i> คืนเงิน</button>
-    </div>
   </div>
 </div>
 
@@ -7668,16 +8175,13 @@ function bdListHTML(){
     <div class="sa2-head">
       <div class="sa2-hic" style="background:linear-gradient(135deg,#3b82f6,#1e40af)"><i class="ico ico-move"></i></div>
       <div class="sa2-ht">
-        <div class="sa2-title">ย้ายห้องลูกค้าจอง</div>
+        <div class="sa2-title" id="move-title">ย้ายห้องลูกค้าจอง</div>
         <div class="sa2-sub" id="move-sub"></div>
       </div>
       <button class="sa2-x" onclick="closeModal('move-modal-bg')"><i class="ico ico-x"></i></button>
     </div>
     <div class="sa2-body" id="move-body" style="max-height:55vh;overflow-y:auto"></div>
-    <div class="sa2-foot">
-      <button class="sa2-cancel" onclick="closeModal('move-modal-bg')">ยกเลิก</button>
-      <button class="sa2-save" style="background:#3b82f6" id="move-confirm-btn" onclick="confirmMoveRoom()"><i class="ico ico-check"></i> ยืนยันย้ายห้อง</button>
-    </div>
+    
   </div>
 </div>
 
@@ -7865,7 +8369,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v3.61.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v3.73.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -8173,12 +8677,12 @@ function getDefaultStaffList() {
 }
 
 // ── สิทธิ์เข้าถึง 5 ส่วน ──
-var PERM_KEYS = ["settings","activityLog","reportsMonthly","reportsDaily","roomsCfg","backdateCheckin","editMeter"];
-var PERM_LABELS = { settings:"ตั้งค่า", activityLog:"บันทึกการทำงาน", reportsMonthly:"รายงาน (รายเดือน)", reportsDaily:"รายงาน (รายวัน)", roomsCfg:"จัดการห้องพัก", backdateCheckin:"เช็คอินย้อนหลัง", editMeter:"แก้เลขมิเตอร์" };
+var PERM_KEYS = ["settings","activityLog","reportsMonthly","reportsDaily","roomsCfg","backdateCheckin","editMeter","editRent"];
+var PERM_LABELS = { settings:"ตั้งค่า", activityLog:"บันทึกการทำงาน", reportsMonthly:"รายงาน (รายเดือน)", reportsDaily:"รายงาน (รายวัน)", roomsCfg:"จัดการห้องพัก", backdateCheckin:"เช็คอินย้อนหลัง", editMeter:"แก้เลขมิเตอร์", editRent:"แก้ราคาห้องรายเดือน" };
 // แต่ละสิทธิ์คุมหน้าไหนบ้าง (data-page)
-var PERM_PAGES = { settings:["settings"], activityLog:["activity-log"], reportsMonthly:["reports"], reportsDaily:["daily-reports"], roomsCfg:["daily-rooms-cfg"], backdateCheckin:[], editMeter:[] };
+var PERM_PAGES = { settings:["settings"], activityLog:["activity-log"], reportsMonthly:["reports"], reportsDaily:["daily-reports"], roomsCfg:["daily-rooms-cfg"], backdateCheckin:[], editMeter:[], editRent:[] };
 function defaultPerms() {
-  return { settings:false, activityLog:false, reportsMonthly:false, reportsDaily:false, roomsCfg:false, backdateCheckin:false, editMeter:false };
+  return { settings:false, activityLog:false, reportsMonthly:false, reportsDaily:false, roomsCfg:false, backdateCheckin:false, editMeter:false, editRent:false };
 }
 // เจ้าของเข้าได้ทุกส่วนเสมอ · พนักงานเช็คตาม perms
 function userCan(permKey) {
@@ -8398,6 +8902,7 @@ function doLogout() {
   try { authSignOut(); } catch(e){}
   window.__bootedData = false;
   try { pinCacheClear(); } catch(e){}
+  try { rentClearVerified(); } catch(e){}
   currentUser = null;
   try { sessionStorage.removeItem("currentUser"); } catch(e) {}
   // 🛡 4.1 - reset title
@@ -9112,7 +9617,17 @@ function calcAge(dob) {
 }
 function calcStay(checkin) {
   if (!checkin) return "-";
-  return Math.floor((new Date()-new Date(checkin))/(86400000))+" วัน";
+  var d = Math.floor((new Date()-new Date(checkin))/86400000);
+  if (isNaN(d) || d < 0) return "-";
+  /* เกิน 2 เดือนแล้วบอกเป็นเดือน อ่านง่ายกว่า "120 วัน"
+     ใช้ร่วมกัน 3 ที่: ห้องจองชนกัน · หน้าห้อง · หน้าผู้เช่า */
+  if (d < 60) return d + " วัน";
+  var mo = Math.floor(d / 30), rem = d % 30;
+  if (mo >= 12) {
+    var y = Math.floor(mo / 12), m2 = mo % 12;
+    return y + " ปี" + (m2 ? " " + m2 + " เดือน" : "");
+  }
+  return mo + " เดือน" + (rem >= 7 ? " " + Math.floor(rem/7) + " สัปดาห์" : "");
 }
 function formatDate(d) {
   if (!d) return "-";
@@ -9320,7 +9835,9 @@ function mtRoomBox(r) {
   var d = mtRoomBoxData(r);
   if (!d) return "";
   return "<div class='info-item mt-box " + d.cls + "' onclick=\"mtFromRoom('" + r.id + "')\" title='ดูประวัติมิเตอร์ห้องนี้'>"
-    + "<div class='info-label mt-box-l'>มิเตอร์ล่าสุด <i class='ico ico-chevron-right'></i></div>"
+    + "<div class='info-label mt-box-l'><i class='ico ico-bolt mt-box-ic'></i>"
+    +   "<span class='mt-box-t'>มิเตอร์ล่าสุด</span>"
+    +   "<i class='ico ico-chevron-right mt-box-ar'></i></div>"
     + "<div class='info-val mt-box-v'>" + (+d.me||0).toLocaleString() + "</div>"
     + "<div class='mt-box-s'>" + d.sub + "</div></div>";
 }
@@ -9592,6 +10109,16 @@ var METER_DIGITS = String(METER_MAX).length;
 function calcMeterUnits(oldMe, newMe) {
   if (newMe >= oldMe) return newMe - oldMe;
   return (METER_MAX - oldMe) + newMe + 1; // rollover
+}
+/* ═══ เลขใหม่น้อยกว่าเลขเก่า · วนรอบจริง หรือกรอกผิด ═══
+   มิเตอร์วนรอบจริงต่อเมื่อเลขเก่าใกล้เต็มจอ (9999) แล้ววนกลับ 0
+   ถ้าเลขเก่าเป็น 8000 แล้วกรอก 7000 การจะวนรอบได้ต้องใช้ไฟ 9,000 หน่วยในเดือนเดียว
+   ซึ่งเป็นไปไม่ได้สำหรับห้องเช่า — เกือบแน่นอนว่าจดผิดหรือกรอกสลับหลัก
+   ใช้เกณฑ์: วนรอบจริงต้องได้หน่วยไม่เกิน BB_WARN_UNITS_HIGH (300) */
+function meterRollLooksReal(oldMe, newMe){
+  if (newMe >= oldMe) return true;
+  var units = (METER_MAX - oldMe) + newMe + 1;
+  return units <= (typeof BB_WARN_UNITS_HIGH !== 'undefined' ? BB_WARN_UNITS_HIGH : 300);
 }
 
 /* อ่าน+ตรวจช่องมิเตอร์ · ใช้ร่วมกันทุกจุดที่กรอกเลขมิเตอร์ */
@@ -9885,6 +10412,273 @@ window.rmRenderChips = function(){
       + d[1] + " <b>" + cnt[d[0]] + "</b></button>";
   }).join('');
 };
+/* ═══════════ ตั้งราคาห้องรายเดือน ═══════════
+   ค่าเช่าแต่ละห้องไม่เท่ากันได้ · นานๆ แก้ที แต่ผลกระทบยาว
+   กติกาที่ตกลงไว้:
+     · เห็นปุ่มได้เฉพาะเจ้าของ หรือพนักงานที่เจ้าของเปิดสิทธิ์ให้ (ไม่ใช่เห็นแล้วกดไม่ได้)
+     · ต้องใส่ PIN ยืนยันตัวตน 1 ครั้ง ใช้ได้ 24 ชั่วโมง
+     · แก้ได้ทีละหลายห้องพร้อมกันในตารางเดียว
+     · ราคาใหม่มีผลทันที · บิลที่ออกไปแล้วไม่เปลี่ยน (บิลเก็บ rent ไว้ในตัวเอง)
+     · ใช้กับห้องนั้นไปเรื่อยจนกว่าจะถูกแก้อีกครั้ง */
+var RENT_VERIFY_KEY = 'rentVerifyUntil';
+var rentDraft = {};
+
+function rentCanSee(){ return typeof userCan==='function' && userCan('editRent'); }
+function rentVerifiedUntil(){
+  try { return parseInt(sessionStorage.getItem(RENT_VERIFY_KEY)||'0',10)||0; } catch(e){ return 0; }
+}
+function rentIsVerified(){ return Date.now() < rentVerifiedUntil(); }
+function rentSetVerified(){
+  try { sessionStorage.setItem(RENT_VERIFY_KEY, String(Date.now()+86400000)); } catch(e){}
+}
+function rentClearVerified(){
+  try { sessionStorage.removeItem(RENT_VERIFY_KEY); } catch(e){}
+}
+function rentLeftTxt(){
+  var ms = rentVerifiedUntil() - Date.now();
+  if (ms <= 0) return null;
+  var h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000);
+  return h>0 ? (h+' ชม. '+m+' น.') : (m+' นาที');
+}
+/* ปุ่มโผล่เฉพาะคนที่มีสิทธิ์ */
+function rentSyncBtn(){
+  var row = document.getElementById('rent-edit-row');
+  if (!row) return;
+  var can = rentCanSee();
+  row.style.display = can ? '' : 'none';
+  if (!can) return;
+  /* สรุปให้เห็นว่าตอนนี้ราคาเท่ากันหมดหรือไม่ จะได้รู้ว่าเคยตั้งไปแล้วหรือยัง */
+  var sub = document.getElementById('rent-edit-sub');
+  if (!sub) return;
+  var rs = (rooms||[]);
+  if (!rs.length){ sub.textContent = 'ตั้งราคาแยกทีละห้อง'; return; }
+  var vals = {};
+  rs.forEach(function(r){ vals[r.rent||0] = (vals[r.rent||0]||0) + 1; });
+  var keys = Object.keys(vals);
+  if (keys.length === 1)
+    sub.textContent = rs.length + ' ห้อง \u00b7 ตอนนี้เท่ากันหมด ' + (+keys[0]).toLocaleString() + ' บาท';
+  else {
+    var lo = Math.min.apply(null, keys.map(Number));
+    var hi = Math.max.apply(null, keys.map(Number));
+    sub.textContent = rs.length + ' ห้อง \u00b7 ราคาต่างกัน ' + keys.length + ' แบบ \u00b7 '
+      + lo.toLocaleString() + '\u2013' + hi.toLocaleString() + ' บาท';
+  }
+}
+window.rentOpen = function(){
+  if (!rentCanSee()){ notify('ไม่มีสิทธิ์แก้ราคาห้อง','error'); return; }
+  if (rentIsVerified()) rentShowTable();
+  else rentAskPin();
+};
+/* ── ใส่ PIN ── */
+function rentAskPin(){
+  var old=document.getElementById('rent-pin-bg'); if(old) old.remove();
+  var bg=document.createElement('div');
+  bg.className='modal-bg open'; bg.id='rent-pin-bg'; bg.style.zIndex=9450;
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal rnt-card sm' onclick='event.stopPropagation()'>"
+   +   "<div class='rnt-hd'><div class='t'>ยืนยันตัวตนก่อนแก้ราคา</div>"
+   +     "<div class='s'>ใส่ PIN ของคุณ \u00b7 ยืนยันครั้งเดียวใช้ได้ 24 ชั่วโมง</div></div>"
+   +   "<div class='rnt-pw'><div class='rnt-pl'>PIN 6 หลัก</div>"
+   +     "<input class='rnt-pin' id='rent-pin' inputmode='numeric' maxlength='6' "
+   +       "autocomplete='off' placeholder='------' oninput='rentPinType()'/>"
+   +     "<div class='rnt-pmsg' id='rent-pin-msg'></div></div>"
+   +   "<div class='rnt-ok'><b>ยืนยันครั้งเดียว ใช้ได้ 1 วัน</b><br/>"
+   +     "ไม่ต้องพิมพ์ซ้ำทุกครั้งที่เข้ามาแก้ \u00b7 ออกจากระบบแล้วต้องยืนยันใหม่</div>"
+   +   "<div class='rnt-sep'></div>"
+   +   "<div class='rnt-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='rnt-b b3' onclick=\"var m=document.getElementById('rent-pin-bg');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>ยกเลิก<span class='sub'>กลับไปหน้าผังห้องพัก</span></span></button>"
+   +   "</div></div>";
+  document.body.appendChild(bg);
+  setTimeout(function(){ var e=document.getElementById('rent-pin'); if(e) e.focus(); },60);
+}
+window.rentPinType = function(){
+  var el = document.getElementById('rent-pin'); if (!el) return;
+  var v = el.value.replace(/\D/g,'').slice(0,6);
+  el.value = v;
+  var msg = document.getElementById('rent-pin-msg');
+  el.classList.remove('err'); if (msg) msg.textContent='';
+  if (v.length < 6) return;
+  var me = currentUser || {};
+  var ok = String(me.pin||'') === v;
+  /* PIN ไม่ได้เก็บในฐานข้อมูลแล้ว (v3.61) → เทียบกับที่เก็บไว้ในเครื่องตอนล็อกอิน */
+  if (!ok && typeof pinCacheGet === 'function') ok = (String(pinCacheGet(me.id)||'') === v);
+  if (ok){
+    rentSetVerified();
+    var m=document.getElementById('rent-pin-bg'); if(m) m.remove();
+    rentShowTable();
+    notify('ยืนยันแล้ว \u00b7 ใช้ได้ 24 ชั่วโมง','success');
+  } else {
+    el.classList.add('err');
+    if (msg) msg.textContent = 'PIN ไม่ถูกต้อง';
+    setTimeout(function(){ el.value=''; el.classList.remove('err'); if(msg) msg.textContent=''; }, 800);
+  }
+};
+/* ── ตารางตั้งราคา ── */
+function rentShowTable(){
+  rentDraft = {};
+  var old=document.getElementById('rent-tb-bg'); if(old) old.remove();
+  var blds = {};
+  (rooms||[]).forEach(function(r){ (blds[r.bld] = blds[r.bld]||[]).push(r); });
+  var rows = '';
+  Object.keys(blds).sort(function(a,b){return a-b;}).forEach(function(b){
+    rows += "<div class='rnt-bl'>ตึก "+mtEsc(String(b))+"</div>";
+    blds[b].sort(function(a,c){ return String(a.id).localeCompare(String(c.id)); })
+      .forEach(function(r){
+        var who = (typeof fullName==='function' ? fullName(r) : '') || '';
+        var occ = (r.st === 'occupied') && who;
+        rows += "<div class='rnt-rw'>"
+          + "<span class='n'>"+mtEsc(String(r.id))+"</span>"
+          + "<span class='who"+(occ?' has':'')+"'>"+mtEsc(occ?who:'ว่าง')+"</span>"
+          + "<input id='rnt-in-"+r.id+"' type='number' inputmode='numeric' min='0' step='50' "
+          +   "value='"+(r.rent||0)+"' oninput=\"rentSet('"+r.id+"',this.value)\"/>"
+          + "<span class='d' id='rnt-d-"+r.id+"'></span></div>";
+      });
+  });
+  var bg=document.createElement('div');
+  bg.className='modal-bg open'; bg.id='rent-tb-bg'; bg.style.zIndex=9450;
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal rnt-card' onclick='event.stopPropagation()'>"
+   +   "<div class='rnt-hd'><div class='t'>ตั้งราคาห้องรายเดือน</div>"
+   +     "<div class='s'>แก้เฉพาะห้องที่ต้องการ \u00b7 ห้องที่ไม่แตะจะคงราคาเดิม</div></div>"
+   +   "<div class='rnt-tl'>"+(rooms||[]).length+" ห้อง \u00b7 ห้องที่มีผู้เช่าจะขึ้นชื่อไว้</div>"
+   +   "<div class='rnt-tw'>"+rows+"</div>"
+   +   "<div class='rnt-sep'></div>"
+   +   "<div class='rnt-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='rnt-b blk' id='rnt-go'>"
+   +       "<span class='ic'><i class='ico ico-check'></i></span>"
+   +       "<span class='tx'>ยังไม่ได้แก้ราคา<span class='sub'>เปลี่ยนตัวเลขในช่องด้านบนก่อน</span></span></button>"
+   +     "<button class='rnt-b b3' onclick=\"var m=document.getElementById('rent-tb-bg');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>ยกเลิก<span class='sub'>ทิ้งที่แก้ไว้ทั้งหมด</span></span></button>"
+   +   "</div></div>";
+  document.body.appendChild(bg);
+  var go=document.getElementById('rnt-go');
+  if (go) go.onclick = function(){
+    if (!Object.keys(rentDraft).length){ notify('ยังไม่ได้แก้ราคา','info'); return; }
+    rentShowSummary();
+  };
+}
+window.rentSet = function(id, v){
+  var r = (rooms||[]).find(function(x){return x.id===id;}); if (!r) return;
+  var nv = parseInt(v,10);
+  if (isNaN(nv) || nv < 0) nv = 0;
+  var diff = nv - (r.rent||0);
+  if (diff === 0) delete rentDraft[id]; else rentDraft[id] = nv;
+  var inp = document.getElementById('rnt-in-'+id);
+  var d   = document.getElementById('rnt-d-'+id);
+  if (inp) inp.classList.toggle('chg', diff !== 0);
+  if (d){
+    d.className = 'd' + (diff>0 ? ' up' : (diff<0 ? ' dn' : ''));
+    d.textContent = diff===0 ? '' : ((diff>0?'+':'\u2212') + Math.abs(diff).toLocaleString());
+  }
+  var n = Object.keys(rentDraft).length;
+  var go = document.getElementById('rnt-go');
+  if (go){
+    go.className = 'rnt-b ' + (n ? 'b1' : 'blk');
+    go.querySelector('.tx').innerHTML = n
+      ? "ดูสรุปก่อนบันทึก \u00b7 "+n+" ห้อง<span class='sub'>ตรวจอีกครั้งก่อนยืนยัน</span>"
+      : "ยังไม่ได้แก้ราคา<span class='sub'>เปลี่ยนตัวเลขในช่องด้านบนก่อน</span>";
+  }
+};
+/* ── สรุปก่อนบันทึก ── */
+function rentShowSummary(){
+  var ids = Object.keys(rentDraft);
+  if (!ids.length) return;
+  var lines='', sum=0, occN=0;
+  ids.sort().forEach(function(id){
+    var r = rooms.find(function(x){return x.id===id;}); if(!r) return;
+    var nv = rentDraft[id], ov = r.rent||0, d = nv-ov;
+    sum += d;
+    var who = (typeof fullName==='function' ? fullName(r) : '') || '';
+    var occ = (r.st==='occupied') && who;
+    if (occ) occN++;
+    lines += "<div class='rnt-r'><span class='k'>ห้อง "+mtEsc(String(id))
+      + "<span class='sub2'>"+mtEsc(occ?who:'ว่าง')+"</span></span>"
+      + "<span class='v mono'>"+ov.toLocaleString()+" \u27f6 "+nv.toLocaleString()
+      + " <span class='"+(d>0?'up':'dn')+"'>("+(d>0?'+':'\u2212')+Math.abs(d).toLocaleString()+")</span>"
+      + "</span></div>";
+  });
+  var old=document.getElementById('rent-sum-bg'); if(old) old.remove();
+  var bg=document.createElement('div');
+  bg.className='modal-bg open'; bg.id='rent-sum-bg'; bg.style.zIndex=9460;
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal rnt-card sm' onclick='event.stopPropagation()'>"
+   +   "<div class='rnt-hd'><div class='t'>ยืนยันเปลี่ยนราคา "+ids.length+" ห้อง</div>"
+   +     "<div class='s'>ตรวจอีกครั้ง \u00b7 ย้อนดูได้ที่บันทึกการทำงาน</div></div>"
+   +   "<div class='rnt-info'>" + lines
+   +     "<div class='rnt-r big'><span class='k'>รายได้ต่อเดือนเปลี่ยน</span>"
+   +       "<span class='v'>"+(sum>0?'+':'\u2212')+Math.abs(sum).toLocaleString()+"</span></div>"
+   +   "</div>"
+   +   (occN ? "<div class='rnt-warn'><b>มี "+occN+" ห้องที่มีผู้เช่าอยู่</b><br/>"
+   +     "ลูกค้าตกลงราคาเดิมไว้แล้ว \u00b7 ควรแจ้งก่อนขึ้นราคา</div>" : "")
+   +   "<div class='rnt-ok'><b>มีผลทันที</b> \u00b7 ใช้กับห้องนั้นไปเรื่อยจนกว่าจะแก้อีกครั้ง<br/>"
+   +     "บิลที่ออกไปแล้วไม่เปลี่ยน</div>"
+   +   "<div class='rnt-sep'></div>"
+   +   "<div class='rnt-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='rnt-b b1' id='rnt-save'>"
+   +       "<span class='ic'><i class='ico ico-check'></i></span>"
+   +       "<span class='tx'>บันทึกราคาใหม่ "+ids.length+" ห้อง"
+   +       "<span class='sub'>มีผลทันที \u00b7 จดลงบันทึกการทำงาน</span></span></button>"
+   +     "<button class='rnt-b b3' onclick=\"var m=document.getElementById('rent-sum-bg');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>กลับไปแก้<span class='sub'>ที่แก้ไว้ยังอยู่</span></span></button>"
+   +   "</div></div>";
+  document.body.appendChild(bg);
+  var sv=document.getElementById('rnt-save');
+  if (sv) sv.onclick = function(){ rentSave(); };
+}
+/* ── บันทึก ── */
+window.rentSave = async function(){
+  var ids = Object.keys(rentDraft);
+  if (!ids.length) return;
+  var btn = document.getElementById('rnt-save');
+  if (btn){
+    btn.disabled = true;
+    var tx = btn.querySelector('.tx');
+    if (tx && tx.childNodes[0]) tx.childNodes[0].textContent = 'กำลังบันทึก…';
+  }
+  var changed = [];
+  try {
+    var bt = db.batch();
+    ids.forEach(function(id){
+      var r = rooms.find(function(x){return x.id===id;}); if(!r) return;
+      var ov = r.rent||0, nv = rentDraft[id];
+      var upd = Object.assign({}, r, { rent: nv, rentUpdatedAt: Date.now(),
+        rentUpdatedBy: (currentUser&&currentUser.name)||null });
+      bt.set(db.collection('rooms').doc(id), upd);
+      changed.push({ id:id, old:ov, nw:nv, upd:upd });
+    });
+    await bt.commit();
+  } catch(e){
+    notify('บันทึกไม่สำเร็จ \u00b7 ยังไม่มีอะไรเปลี่ยน ลองใหม่อีกครั้ง','error');
+    if (btn){ btn.disabled=false;
+      var tx2=btn.querySelector('.tx'); if(tx2&&tx2.childNodes[0]) tx2.childNodes[0].textContent='ลองใหม่'; }
+    return;
+  }
+  changed.forEach(function(c){
+    rooms = rooms.map(function(x){ return x.id===c.id ? c.upd : x; });
+  });
+  var sum = changed.reduce(function(a,c){ return a + (c.nw - c.old); }, 0);
+  try {
+    logActivity('rent-edit', changed.length + ' ห้อง',
+      'เปลี่ยนราคาห้อง ' + changed.length + ' ห้อง \u00b7 '
+      + changed.map(function(c){ return 'M'+c.id+' '+c.old.toLocaleString()+'\u2192'+c.nw.toLocaleString(); }).join(', ')
+      + ' \u00b7 รายได้ต่อเดือน ' + (sum>0?'+':'\u2212') + Math.abs(sum).toLocaleString(),
+      { mode:'monthly', amount:sum });
+  } catch(e){}
+  rentDraft = {};
+  ['rent-sum-bg','rent-tb-bg'].forEach(function(id){
+    var m=document.getElementById(id); if(m) m.remove();
+  });
+  notify('บันทึกแล้ว ' + changed.length + ' ห้อง \u00b7 รายได้ต่อเดือน '
+    + (sum>0?'+':'\u2212') + Math.abs(sum).toLocaleString() + ' ฿','success');
+  try { rRooms(); } catch(e){}
+};
 function rRooms() {
   updateRepairBadge();
   rmRenderChips();
@@ -10173,162 +10967,184 @@ document.addEventListener("click", function(e){
 var conflictRoomId = null;
 
 // เปิด Conflict Resolution Modal
+/* ═══ ห้องมีคนจองซ้อน ═══ (ต้นแบบ Modal Pattern A)
+   เดิม: ข้อมูลเป็นย่อหน้ายาว ตัวเลขปนตัวหนังสือ
+         ปุ่ม "ย้ายห้อง" กดไปแล้วถึงรู้ว่าไม่มีห้องว่าง — เจอทางตัน
+   ใหม่: ข้อมูลแยกเป็นแถว · ปุ่มบอกจำนวนห้องว่างตั้งแต่ยังไม่กด */
 function openConflictResolution(roomId) {
   var r = rooms.find(function(x){return x.id===roomId;}); if (!r) return;
-  if (!r.reservation) { notify("ไม่มี reservation ค้าง","error"); return; }
-  /* วาดหน้าอย่างเดียว — คัดลอกแบบ escape */
-  r = mtSafe(r);
+  if (!r.reservation) { notify("ห้องนี้ไม่มีการจองล่วงหน้าค้างอยู่","info"); return; }
   conflictRoomId = roomId;
-
+  var sr = mtSafe(r);
   var res = r.reservation;
-  var resName = mtEsc((res.name||"")+(res.surname?" "+res.surname:""));
-  var resAvatar = (res.name?res.name[0]:"?")+(res.surname?res.surname[0]:"");
-  var resCheckin = res.checkin||"";
-  var daysLeft = resCheckin ? daysBetween(todayStr(), resCheckin) : null;
-  var dayTxt;
-  if (daysLeft === null) dayTxt = "-";
-  else if (daysLeft < 0) dayTxt = "เลย "+Math.abs(daysLeft)+" วัน";
-  else if (daysLeft === 0) dayTxt = "วันนี้";
-  else dayTxt = "อีก "+daysLeft+" วัน";
-
-  // ผู้เช่าเดิม
-  var tenantName = fullName(r);
-  var tenantAvatar = (r.name?r.name[0]:"?")+(r.surname?r.surname[0]:"");
+  var resName = ((res.name||"")+(res.surname?" "+res.surname:"")).trim() || "-";
+  var tenantName = fullName(r) || "-";
   var tenantStay = r.checkin ? calcStay(r.checkin) : "-";
-
-  // การเงิน
-  var rent = res.rent||0, deposit = res.deposit||0;
-  var total = rent + deposit;
-  var paid = res.paidAmount||0;
-  var remain = total - paid;
-  var paidDate = res.createdDate ? formatDate(res.createdDate) : "-";
-
-  // Update header
-  document.getElementById("conflict-title").innerHTML = "<i class='ico ico-alert'></i> ต้องจัดการ · ห้อง " + r.id;
-
-  // Build body
-  var html = ""
-    + "<div style='background:#fef2f2;border:1px solid #fca5a5;padding:10px 12px;border-radius:8px;font-size:12px;color:#7f1d1d;margin-bottom:14px;line-height:1.5'>"
-    +   "<i class='ico ico-alert'></i> <b style='color:#dc2626'>"+tenantName+"</b> ยกเลิกแจ้งย้ายออก → ห้องนี้ยังมีผู้เช่าอยู่<br/>"
-    +   "แต่ <b style='color:#dc2626'>"+resName+"</b> ได้จองห้องนี้ไว้แล้ว ต้องดำเนินการ"
-    + "</div>"
-
-    // ผู้เช่าปัจจุบัน
-    + "<div style='font-size:11px;color:#64748b;font-weight:600;margin-bottom:6px'><i class='ico ico-user'></i> ผู้เช่าปัจจุบัน</div>"
-    + "<div style='display:flex;align-items:center;gap:10px;background:#fafbfc;padding:12px;border-radius:10px;margin-bottom:10px;border:1px solid #e2e8f0'>"
-    +   "<div style='width:42px;height:42px;border-radius:50%;background:#dbeafe;color:#1e40af;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0'>"+tenantAvatar+"</div>"
-    +   "<div style='flex:1;min-width:0'>"
-    +     "<div style='font-size:14px;font-weight:700;color:#0f172a'>"+tenantName+"</div>"
-    +     "<div style='font-size:11px;color:#64748b;margin-top:1px'><i class='ico ico-phone'></i> "+(r.phone||"-")+" · เข้าพักมา "+tenantStay+"</div>"
-    +     "<div style='background:#dbeafe;color:#1e40af;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700;margin-top:3px;display:inline-block'>ผู้เช่าเดิม</div>"
-    +   "</div>"
-    + "</div>"
-
-    // ผู้จองล่วงหน้า
-    + "<div style='font-size:11px;color:#64748b;font-weight:600;margin-bottom:6px;margin-top:10px'><i class='ico ico-calendar'></i> ผู้จองล่วงหน้า</div>"
-    + "<div style='display:flex;align-items:center;gap:10px;background:#fafbfc;padding:12px;border-radius:10px;margin-bottom:10px;border:1px solid #e2e8f0'>"
-    +   "<div style='width:42px;height:42px;border-radius:50%;background:#fef3c7;color:#92400e;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0'>"+resAvatar+"</div>"
-    +   "<div style='flex:1;min-width:0'>"
-    +     "<div style='font-size:14px;font-weight:700;color:#0f172a'>"+resName+"</div>"
-    +     "<div style='font-size:11px;color:#64748b;margin-top:1px'><i class='ico ico-phone'></i> "+(res.phone||"-")+" · จะเข้าพัก "+(resCheckin?formatDate(resCheckin):"-")+" ("+dayTxt+")</div>"
-    +     "<div style='background:#fef3c7;color:#92400e;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700;margin-top:3px;display:inline-block'>จองล่วงหน้า</div>"
-    +   "</div>"
-    + "</div>"
-
-    // การเงิน
-    + "<div style='background:#fffbeb;border:1px solid #fde68a;padding:10px 12px;border-radius:8px;margin-top:10px'>"
-    +   "<div style='display:flex;justify-content:space-between;font-size:12px;color:#78350f;padding:3px 0'><span>ค่าเช่าล่วงหน้า</span><span>฿"+rent.toLocaleString()+"</span></div>"
-    +   "<div style='display:flex;justify-content:space-between;font-size:12px;color:#78350f;padding:3px 0'><span>มัดจำ</span><span>฿"+deposit.toLocaleString()+"</span></div>"
-    +   "<div style='display:flex;justify-content:space-between;font-size:12px;color:#78350f;padding:6px 0 3px;font-weight:800;border-top:1px dashed #fcd34d;margin-top:6px'><span>ยอดรวม</span><span>฿"+total.toLocaleString()+"</span></div>"
-    +   "<div style='display:flex;justify-content:space-between;font-size:12px;color:#15803d;padding:3px 0'><span>จ่ายมาแล้ว ("+paidDate+")</span><span>฿"+paid.toLocaleString()+"</span></div>"
-    +   "<div style='display:flex;justify-content:space-between;font-size:12px;color:"+(remain>0?"#dc2626":"#15803d")+";padding:3px 0;font-weight:700'><span>ยอดคงเหลือ</span><span>฿"+remain.toLocaleString()+"</span></div>"
-    + "</div>";
-
-  document.getElementById("conflict-body").innerHTML = html;
-  document.getElementById("conflict-modal-bg").classList.add("open");
+  var daysLeft = res.checkin ? daysBetween(todayStr(), res.checkin) : null;
+  var dayTxt = (daysLeft===null) ? "-"
+    : (daysLeft < 0) ? ("เลยมา "+Math.abs(daysLeft)+" วัน")
+    : (daysLeft === 0) ? "วันนี้" : ("อีก "+daysLeft+" วัน");
+  var rent = res.rent||0, deposit = res.deposit||0, paid = res.paidAmount||0;
+  /* ห้องว่างที่ย้ายไปได้ — นับตั้งแต่ตอนนี้ ไม่ต้องรอกดปุ่มถึงรู้ */
+  var avail = rooms.filter(function(x){
+    return x.id !== r.id && x.st === "vacant" && !x.reservation;
+  });
+  var moveBtn = avail.length
+    ? "<button class='cfn-b b1' onclick='openMoveRoomFlow()'>"
+      + "<span class='ic'><i class='ico ico-move'></i></span>"
+      + "<span class='tx'>ย้าย "+mtEsc(resName)+" ไปห้องอื่น"
+      + "<span class='sub'>มีห้องว่าง "+avail.length+" ห้อง"
+      + (paid>0 ? " \u00b7 มัดจำ "+paid.toLocaleString()+" ย้ายตามไปด้วย" : "")
+      + "</span></span></button>"
+    : "<button class='cfn-b blk' disabled>"
+      + "<span class='ic'><i class='ico ico-move'></i></span>"
+      + "<span class='tx'>ย้ายไปห้องอื่น"
+      + "<span class='sub'>ไม่มีห้องว่างเลย \u00b7 ต้องคืนเงินแทน</span></span></button>";
+  var el = document.getElementById('conflict-body');
+  if (!el) return;
+  document.getElementById('conflict-title').textContent = "ห้อง "+mtEsc(sr.id)+" มีคนจองซ้อน";
+  var sub = document.getElementById('conflict-sub');
+  if (sub) sub.textContent = "ผู้เช่าเดิมยังอยู่ แต่มีคนจองจะเข้า"+dayTxt;
+  el.innerHTML =
+     "<div class='cfn-info'>"
+   +   "<div class='cfn-r'><span class='k'>ผู้เช่าเดิม<span class='sub2'>อยู่มา "+mtEsc(tenantStay)+"</span></span>"
+   +     "<span class='v'>"+mtEsc(tenantName)+"</span></div>"
+   +   "<div class='cfn-r'><span class='k'>คนที่จองไว้"
+   +     (res.phone ? "<span class='sub2'>"+mtEsc(res.phone)+"</span>" : "")
+   +     "</span><span class='v'>"+mtEsc(resName)+"</span></div>"
+   +   "<div class='cfn-r'><span class='k'>จะเข้าพัก</span>"
+   +     "<span class='v warn'>"+mtEsc(dayTxt)+"</span></div>"
+   +   "<div class='cfn-r'><span class='k'>ค่าเช่า + มัดจำ</span>"
+   +     "<span class='v mono'>"+(rent+deposit).toLocaleString()+"</span></div>"
+   +   (paid>0
+      ? "<div class='cfn-r big'><span class='k'>จ่ายมาแล้ว</span>"
+        + "<span class='v'>฿"+paid.toLocaleString()+"</span></div>"
+      : "<div class='cfn-r'><span class='k'>จ่ายมาแล้ว</span>"
+        + "<span class='v' style='color:#94a3b8'>ยังไม่จ่าย</span></div>")
+   + "</div>"
+   + "<div class='cfn-sep'></div>"
+   + "<div class='cfn-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +   moveBtn
+   +   "<button class='cfn-b b2' onclick='openRefundFlow()'>"
+   +     "<span class='ic'><i class='ico ico-refund'></i></span>"
+   +     "<span class='tx'>ยกเลิกการจอง"
+   +     (paid>0 ? " \u00b7 คืนเงิน "+paid.toLocaleString() : "")
+   +     "<span class='sub'>ผู้เช่าเดิมอยู่ต่อ"
+   +     (paid>0 ? " \u00b7 ส่งคำขอคืนเงินให้เจ้าของ" : "")
+   +     "</span></span></button>"
+   +   "<button class='cfn-b b3' onclick=\"closeModal('conflict-modal-bg')\">"
+   +     "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +     "<span class='tx'>ไว้ก่อน<span class='sub'>ห้องจะยังขึ้นเตือนในผังห้องพัก</span></span></button>"
+   + "</div>";
+  document.getElementById('conflict-modal-bg').classList.add('open');
 }
 
 // State สำหรับ move
 var moveSelectedRoomId = null;
 
 // เปิด Move Room Modal
+/* ═══ ย้ายห้อง ═══ (ต้นแบบ Modal Pattern A)
+   เดิม: ห้องที่เลือกสีฟ้าอ่อนดูไม่ออก · ไม่บอกว่าค่าเช่าใหม่ต่างจากเดิมไหม
+         ปุ่มยืนยันกดได้ตลอดแล้วค่อยเตือน · ไม่มีปุ่มย้อนกลับ
+   ใหม่: กรอบเขียวชัด · เตือนเมื่อค่าเช่าต่างจากเดิม · ปุ่มเทาจนกว่าจะเลือก */
 function openMoveRoomFlow() {
-  var r = rooms.find(function(x){return x.id===conflictRoomId;}); if (!r||!r.reservation) return;
+  var r = rooms.find(function(x){return x.id===conflictRoomId;});
+  if (!r || !r.reservation) return;
   var res = r.reservation;
-  var resName = mtEsc((res.name||"")+(res.surname?" "+res.surname:""));
-
-  // หาห้องว่างที่ไม่มี reservation (eligible rooms)
+  var resName = ((res.name||"")+(res.surname?" "+res.surname:"")).trim() || "-";
+  var paid = res.paidAmount||0;
   var available = rooms.filter(function(x){
     return x.id !== r.id && x.st === "vacant" && !x.reservation;
   });
-
-  if (available.length === 0) {
-    notify("ไม่มีห้องว่างให้ย้าย กรุณาคืนเงินแทน","error");
-    return;
-  }
-
-  document.getElementById("move-sub").textContent = resName + " · ห้องเดิม " + r.id;
+  if (!available.length) { notify("ไม่มีห้องว่างให้ย้าย \u00b7 ต้องคืนเงินแทน","error"); return; }
   moveSelectedRoomId = null;
-
-  // Build body
-  var html = "<div style='font-size:11px;color:#64748b;font-weight:600;margin-bottom:6px'>เลือกห้องใหม่ <span style='color:#dc2626'>*</span></div>";
-  html += "<div style='display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px' id='move-rooms'>";
-  available.forEach(function(rm){
-    html += "<div class='move-room-opt' data-rid='"+rm.id+"' onclick='selectMoveRoom(\""+rm.id+"\")' style='background:#f8fafc;border:1.5px solid #e2e8f0;padding:8px 4px;border-radius:8px;text-align:center;cursor:pointer'>"
-      + "<div style='font-size:13px;font-weight:800;color:#1e40af'>"+rm.id+"</div>"
-      + "<div style='font-size:9px;color:#64748b;margin-top:2px'>ตึก "+rm.bld+"</div>"
-      + "<div style='font-size:9px;color:#64748b'>฿"+(rm.rent||0).toLocaleString()+"</div>"
-      + "</div>";
-  });
-  html += "</div>";
-
-  // วันเข้าพัก
-  html += "<div style='font-size:11px;color:#64748b;font-weight:600;margin-bottom:4px'>วันที่จะเข้าพัก</div>";
-  html += "<input type='date' id='move-checkin' value='"+(res.checkin||todayStr())+"' style='width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-family:Sarabun,sans-serif;font-size:13px;margin-bottom:10px;box-sizing:border-box'/>";
-
-  // หมายเหตุ
-  html += "<div style='font-size:11px;color:#64748b;font-weight:600;margin-bottom:4px'>หมายเหตุ (ไม่บังคับ)</div>";
-  html += "<input type='text' id='move-note' placeholder='เช่น ผู้เช่าเดิมยกเลิกย้าย...' style='width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-family:Sarabun,sans-serif;font-size:13px;margin-bottom:10px;box-sizing:border-box'/>";
-
-  // Summary placeholder
-  html += "<div id='move-summary' style='display:none;background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:8px;margin-top:10px'></div>";
-
+  var sub = document.getElementById("move-sub");
+  if (sub) sub.textContent = "ห้องเดิม "+r.id
+    + (paid>0 ? " \u00b7 มัดจำที่จ่ายมา "+paid.toLocaleString()+" ย้ายตามไปด้วย" : "");
+  var t = document.getElementById("move-title");
+  if (t) t.textContent = "ย้ายห้องให้ " + resName;
+  var html =
+     "<div class='mvn-rl'>เลือกห้องใหม่ \u00b7 ว่าง "+available.length+" ห้อง</div>"
+   + "<div class='mvn-rg'>"
+   + available.map(function(rm){
+       return "<div class='mvn-ro' data-rid='"+rm.id+"' onclick=\"selectMoveRoom('"+rm.id+"')\">"
+         + "<div class='n'>"+mtEsc(rm.id)+"</div>"
+         + "<div class='m'>ตึก "+mtEsc(String(rm.bld||'-'))+"</div>"
+         + "<div class='m'>฿"+(rm.rent||0).toLocaleString()+"</div></div>";
+     }).join('')
+   + "</div>"
+   + "<div class='mvn-fw'><div class='mvn-fl'>วันที่จะเข้าพัก</div>"
+   +   "<input type='date' id='move-checkin' class='mvn-in' value='"+(res.checkin||todayStr())+"' "
+   +     "onchange='updateMoveSummary()'/></div>"
+   + "<div class='mvn-fw'><div class='mvn-fl'>หมายเหตุ <span style='color:#b6c0cc;font-weight:600'>(ไม่บังคับ)</span></div>"
+   +   "<input type='text' id='move-note' class='mvn-in' maxlength='80' "
+   +     "placeholder='เช่น ผู้เช่าเดิมยังไม่ย้ายออก'/></div>"
+   + "<div class='mvn-sh'>สรุปหลังย้าย</div>"
+   + "<div id='move-summary' class='mvn-info'></div>"
+   + "<div class='mvn-sep'></div>"
+   + "<div class='mvn-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +   "<button class='mvn-b blk' id='move-confirm-btn' onclick='confirmMoveRoom()'>"
+   +     "<span class='ic'><i class='ico ico-check'></i></span>"
+   +     "<span class='tx'>เลือกห้องใหม่ก่อน<span class='sub'>แตะห้องที่ต้องการด้านบน</span></span></button>"
+   +   "<button class='mvn-b b3' onclick=\"closeModal('move-modal-bg')\">"
+   +     "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +     "<span class='tx'>ยกเลิก \u00b7 กลับไปหน้าก่อน<span class='sub'>ยังไม่ย้ายอะไร</span></span></button>"
+   + "</div>";
   document.getElementById("move-body").innerHTML = html;
+  updateMoveSummary();
   document.getElementById("move-modal-bg").classList.add("open");
-
-  // Hook checkin onchange
-  document.getElementById("move-checkin").oninput = updateMoveSummary;
 }
 
 // เลือกห้องใหม่
 function selectMoveRoom(rid) {
   moveSelectedRoomId = rid;
-  document.querySelectorAll(".move-room-opt").forEach(function(el){
-    var selected = el.dataset.rid === rid;
-    el.style.background = selected ? "#dbeafe" : "#f8fafc";
-    el.style.borderColor = selected ? "#3b82f6" : "#e2e8f0";
+  document.querySelectorAll(".mvn-ro").forEach(function(el){
+    el.classList.toggle("on", el.dataset.rid === rid);
   });
   updateMoveSummary();
 }
 
 // อัพเดท summary
 function updateMoveSummary() {
-  var summaryEl = document.getElementById("move-summary");
-  if (!moveSelectedRoomId) { summaryEl.style.display = "none"; return; }
+  var el = document.getElementById("move-summary");
+  var btn = document.getElementById("move-confirm-btn");
+  if (!el) return;
+  if (!moveSelectedRoomId) {
+    el.innerHTML = "<div class='mvn-r'><span class='k'>ห้องใหม่</span>"
+      + "<span class='v' style='color:#b6c0cc'>ยังไม่ได้เลือก</span></div>";
+    if (btn){
+      btn.className = "mvn-b blk";
+      btn.querySelector('.tx').innerHTML = "เลือกห้องใหม่ก่อน<span class='sub'>แตะห้องที่ต้องการด้านบน</span>";
+    }
+    return;
+  }
   var r = rooms.find(function(x){return x.id===conflictRoomId;}); if (!r) return;
   var res = r.reservation; if (!res) return;
-  var newRoom = rooms.find(function(x){return x.id===moveSelectedRoomId;}); if (!newRoom) return;
-  var checkin = document.getElementById("move-checkin").value || res.checkin;
-  var resName = mtEsc((res.name||"")+(res.surname?" "+res.surname:""));
-  var paid = res.paidAmount||0;
-
-  summaryEl.style.display = "block";
-  summaryEl.innerHTML = "<div style='font-size:11px;color:#3b82f6;font-weight:700;margin-bottom:6px'><i class='ico ico-file'></i> สรุปการย้าย</div>"
-    + "<div style='display:flex;justify-content:space-between;font-size:13px;color:#1e40af;padding:3px 0'><span>ลูกค้า</span><b>"+resName+"</b></div>"
-    + "<div style='display:flex;justify-content:space-between;font-size:13px;color:#1e40af;padding:3px 0'><span>ห้องเดิม</span><b>"+r.id+"</b></div>"
-    + "<div style='display:flex;justify-content:space-between;font-size:13px;color:#1e40af;padding:3px 0'><span>ห้องใหม่</span><b>"+newRoom.id+" (ตึก "+newRoom.bld+")</b></div>"
-    + "<div style='display:flex;justify-content:space-between;font-size:13px;color:#1e40af;padding:3px 0'><span>วันเข้าพัก</span><b>"+formatDate(checkin)+"</b></div>"
-    + (paid>0 ? "<div style='display:flex;justify-content:space-between;font-size:13px;color:#15803d;padding:3px 0'><span>เงินที่จ่ายมา</span><b>฿"+paid.toLocaleString()+" (ยกตาม)</b></div>" : "");
+  var nr = rooms.find(function(x){return x.id===moveSelectedRoomId;}); if (!nr) return;
+  var oldRent = res.rent || r.rent || 0;
+  var newRent = nr.rent || 0;
+  var diff = newRent - oldRent;
+  var paid = res.paidAmount || 0;
+  var h = "<div class='mvn-r'><span class='k'>ห้องใหม่</span>"
+        + "<span class='v mono'>"+mtEsc(nr.id)+"</span></div>"
+        + "<div class='mvn-r'><span class='k'>ค่าเช่าใหม่"
+        + (diff!==0 ? "<span class='sub2'>เดิม "+oldRent.toLocaleString()+"</span>" : "")
+        + "</span><span class='v mono"+(diff!==0?" warn":"")+"'>"+newRent.toLocaleString()+"</span></div>";
+  if (paid > 0)
+    h += "<div class='mvn-r'><span class='k'>มัดจำ</span>"
+       + "<span class='v mono'>ย้ายตามไป "+paid.toLocaleString()+"</span></div>";
+  /* ค่าเช่าไม่เท่าเดิม → ต้องบอกลูกค้าก่อน เพราะตกลงราคาไว้แล้ว */
+  if (diff !== 0)
+    h += "<div class='mvn-warn'><b>ค่าเช่า"+(diff>0?"แพงกว่า":"ถูกกว่า")+"เดิม "
+       + Math.abs(diff).toLocaleString()+" บาท/เดือน</b><br/>"
+       + "ลูกค้าตกลงราคาห้องเดิมไว้แล้ว \u00b7 ควรแจ้งก่อนย้าย</div>";
+  el.innerHTML = h;
+  if (btn){
+    btn.className = "mvn-b b1";
+    btn.querySelector('.tx').innerHTML = "ยืนยันย้ายไปห้อง "+mtEsc(nr.id)
+      + "<span class='sub'>ห้อง "+mtEsc(r.id)+" จะว่าง"
+      + (paid>0 ? " \u00b7 มัดจำย้ายตามไปด้วย" : "") + "</span>";
+  }
 }
 
 // ยืนยันย้ายห้อง
@@ -13626,8 +14442,14 @@ window.bpRefresh = function(){
   var boxes = document.querySelectorAll('.bp-cb');
   if (all && boxes.length) all.checked = (ids.length === boxes.length);
 };
+/* ═══ รับเงินหลายห้องพร้อมกัน ═══ (ต้นแบบ Modal Pattern A)
+   เดิม: ปุ่มปิดอยู่มุมขวาบน ไกลนิ้วโป้ง และไม่มีปุ่มยกเลิกคู่ปุ่มยืนยัน
+         รายการห้องกินที่ 32 ห้องต้องเลื่อนในกล่องเล็ก ยอดรวมหลุดจอ
+         กล่องเตือนสีเหลืองคั่นระหว่างตัวเลือกกับปุ่ม
+   ใหม่: ยอดที่จะรับอยู่บนสุดตัวใหญ่ · รายการพับได้ (กางไว้เป็นค่าเริ่มต้น)
+         คำเตือนย้ายขึ้นไปใต้หัวข้อ · ปุ่มยกเลิกอยู่คู่ปุ่มยืนยันด้านล่าง */
 window.bpOpen = function(){
-  var ids = Object.keys(window.bpSel);
+  var ids = Object.keys(window.bpSel || {});
   if (!ids.length) return;
   var rows = [], sum = 0;
   ids.forEach(function(id){
@@ -13641,33 +14463,50 @@ window.bpOpen = function(){
   var bg = document.createElement('div');
   bg.className='modal-bg open'; bg.id='bp-modal'; bg.style.zIndex=9300;
   bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
-  bg.innerHTML = "<div class='modal bp-pop' onclick='event.stopPropagation()'>"
-    + "<div class='bp-h'><div><div class='t'>รับเงิน "+rows.length+" ห้องพร้อมกัน</div>"
-    + "<div class='s'>ตรวจรายการให้ครบก่อนยืนยัน · รับเต็มจำนวนทุกห้อง</div></div>"
-    + "<button class='x' onclick=\"var m=document.getElementById('bp-modal');if(m)m.remove()\">ปิด</button></div>"
-    + "<div class='bp-list'>"
-    + rows.map(function(b){
-        var sb = mtSafe(b);
-        return "<div class='bp-i'><span class='r'>ห้อง "+mtEsc(sb.roomId)+"</span>"
-          + "<span class='nm'>"+mtEsc(sb.tenantName||'-')+"</span>"
-          + "<span class='a'>"+(b.total||0).toLocaleString()+" ฿</span></div>";
-      }).join('')
-    + "</div>"
-    + "<div class='bp-sum'><span>รวมทั้งหมด</span><b>"+sum.toLocaleString()+" ฿</b></div>"
-    + "<div class='bp-ml'>วิธีจ่าย · ใช้กับทุกห้องในชุดนี้</div>"
-    + "<div class='bp-m'>"
-    + "<button class='bp-mb on' data-m='cash' onclick=\"bpSetM('cash',this)\">เงินสด</button>"
-    + "<button class='bp-mb' data-m='transfer' onclick=\"bpSetM('transfer',this)\">โอน</button>"
-    + "</div>"
-    + "<div class='bp-warn'>ถ้ามีห้องไหนจ่ายไม่เต็มจำนวน ให้เอาออกจากชุดนี้แล้วรับเงินทีละห้องแทน</div>"
-    + "<button class='bp-ok' onclick='bpConfirm()'>ยืนยันรับเงิน "+rows.length+" ห้อง · "+sum.toLocaleString()+" ฿</button>"
-    + "</div>";
+  bg.innerHTML =
+     "<div class='modal bpn-card' onclick='event.stopPropagation()'>"
+   +   "<div class='bpn-hd'><div class='t'>รับเงินหลายห้องพร้อมกัน</div>"
+   +     "<div class='s'>รับเต็มจำนวนทุกห้อง \u00b7 จ่ายไม่ครบให้เอาออกจากชุด</div></div>"
+   +   "<div class='bpn-info'>"
+   +     "<div class='bpn-r'><span class='k'>จำนวนห้อง"
+   +       "<span class='sub2'>บิลค้างที่เลือกไว้</span></span>"
+   +       "<span class='v'>"+rows.length+"</span></div>"
+   +     "<div class='bpn-r big'><span class='k'>ยอดที่จะรับ</span>"
+   +       "<span class='v'>฿"+sum.toLocaleString()+"</span></div>"
+   +   "</div>"
+   +   "<div class='bpn-fold open' id='bp-fold'>"
+   +     "<div class='bpn-fh' onclick=\"this.parentNode.classList.toggle('open')\">"
+   +       "ดูรายการทั้ง "+rows.length+" ห้อง<span class='ar'><i class='ico ico-chevron-right'></i></span></div>"
+   +     "<div class='bpn-fb'>"
+   +       rows.map(function(b){
+           var sb = mtSafe(b);
+           return "<div class='bpn-li'><span class='r'>"+mtEsc(sb.roomId)+"</span>"
+             + "<span class='nm'>"+mtEsc(sb.tenantName||'-')+"</span>"
+             + "<span class='a'>"+(b.total||0).toLocaleString()+"</span></div>";
+         }).join('')
+   +     "</div></div>"
+   +   "<div class='bpn-ml'>วิธีจ่าย \u00b7 ใช้กับทุกห้องในชุดนี้</div>"
+   +   "<div class='bpn-m'>"
+   +     "<button class='bpn-mb on' data-m='cash' onclick=\"bpSetM('cash',this)\">เงินสด</button>"
+   +     "<button class='bpn-mb' data-m='transfer' onclick=\"bpSetM('transfer',this)\">เงินโอน</button>"
+   +   "</div>"
+   +   "<div class='bpn-sep'></div>"
+   +   "<div class='bpn-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='bpn-b b1 bp-ok' onclick='bpConfirm()'>"
+   +       "<span class='ic'><i class='ico ico-check'></i></span>"
+   +       "<span class='tx'>รับเงิน ฿"+sum.toLocaleString()
+   +       "<span class='sub'>"+rows.length+" ห้อง \u00b7 เต็มจำนวนทุกห้อง</span></span></button>"
+   +     "<button class='bpn-b b3' onclick=\"var m=document.getElementById('bp-modal');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>ยังไม่รับ \u00b7 กลับไปเลือกใหม่"
+   +       "<span class='sub'>ห้องที่เลือกไว้ยังอยู่</span></span></button>"
+   +   "</div></div>";
   document.body.appendChild(bg);
   window.bpMethod = 'cash';
 };
 window.bpSetM = function(m, el){
   window.bpMethod = m;
-  document.querySelectorAll('#bp-modal .bp-mb').forEach(function(b){ b.classList.remove('on'); });
+  document.querySelectorAll('#bp-modal .bpn-mb').forEach(function(b){ b.classList.remove('on'); });
   if (el) el.classList.add('on');
 };
 window.bpConfirm = async function(){
@@ -13680,7 +14519,12 @@ window.bpConfirm = async function(){
   });
   if (!rows.length) return;
   var btn = document.querySelector('#bp-modal .bp-ok');
-  if (btn){ btn.disabled = true; btn.textContent = 'กำลังบันทึก…'; }
+  if (btn){
+    btn.disabled = true;
+    var _tx = btn.querySelector('.tx');
+    if (_tx && _tx.childNodes[0]) _tx.childNodes[0].textContent = 'กำลังบันทึก…';
+    else btn.textContent = 'กำลังบันทึก…';
+  }
   var by = currentUser ? {id:currentUser.id, name:currentUser.name, role:currentUser.role} : null;
   var now = Date.now();
   var updates = rows.map(function(b){
@@ -13817,9 +14661,9 @@ function viewBill(id) {
   // มิเตอร์ไฟ - แสดงแบบ label ( ค่า ) หน่วย
   html+="<div style='padding:5px 0;border-bottom:1px solid #f8fafc;color:#64748b'>เลขมิเตอร์ครั้งก่อน ( "+b.meStart+" ) หน่วย</div>";
   html+="<div style='padding:5px 0;border-bottom:1px solid #f8fafc;color:#64748b'>เลขมิเตอร์ปัจจุบัน ( "+b.meEnd+" ) หน่วย</div>";
-  html+="<div class='flex justify-between' style='padding:5px 0;border-bottom:1px solid #f8fafc'><span style='color:#64748b'>จำนวนหน่วยที่ใช้ = "+b.eUnits+" หน่วย × "+b.eRate+" บาท</span><span class='fw-700'>"+b.eCost.toLocaleString()+" ฿</span></div>";
+  html+="<div class='flex justify-between' style='padding:5px 0;border-bottom:1px solid #f8fafc'><span style='color:#64748b'><i class='ico ico-elec u-e'></i> จำนวนหน่วยที่ใช้ = "+b.eUnits+" หน่วย × "+b.eRate+" บาท</span><span class='fw-700'>"+b.eCost.toLocaleString()+" ฿</span></div>";
   // ค่าน้ำ
-  html+="<div class='flex justify-between' style='padding:5px 0;border-bottom:1px solid #f8fafc'><span style='color:#64748b'>ค่าน้ำ ("+b.wPersons+" คน × "+b.wRate+" บ.)</span><span class='fw-700'>"+b.wCost.toLocaleString()+" ฿</span></div>";
+  html+="<div class='flex justify-between' style='padding:5px 0;border-bottom:1px solid #f8fafc'><span style='color:#64748b'><i class='ico ico-water u-w'></i> ค่าน้ำ ("+b.wPersons+" คน × "+b.wRate+" บ.)</span><span class='fw-700'>"+b.wCost.toLocaleString()+" ฿</span></div>";
   if(b.extras&&b.extras.length) b.extras.forEach(function(e){
     html+="<div class='flex justify-between' style='padding:5px 0;border-bottom:1px solid #f8fafc'><span style='color:#64748b'>"+e.name+"</span><span class='fw-700'>"+e.amount.toLocaleString()+" ฿</span></div>";
   });
@@ -13880,10 +14724,27 @@ function openPayMethodModal(billId) {
   };
 
   document.getElementById("pmm-title").innerHTML = "รับชำระเงิน";
+  /* แจกแจงที่มาของยอด — ตอนรับเงินผู้เช่ามักถามว่าทำไมเดือนนี้แพง
+     จะได้ตอบได้เลยไม่ต้องเปิดบิลอีกหน้า
+     รายการที่ไม่มีจะไม่ขึ้น (ค่าน้ำ 0 · ไม่มีรายการเพิ่ม · ไม่มีส่วนลด) */
+  function _pmRow(label, sub, amt, cls){
+    return "<div class='pmm-brow'><span>" + label
+      + (sub ? "<span class='sub'>" + sub + "</span>" : "") + "</span>"
+      + "<span class='n" + (cls ? " " + cls : "") + "'>" + amt + "</span></div>";
+  }
+  var _brk = "";
+  if (b.rent) _brk += _pmRow("ค่าเช่า", "", (b.rent||0).toLocaleString());
+  if (b.eCost) _brk += _pmRow("<i class='ico ico-elec u-e'></i> ค่าไฟ", (b.eUnits||0) + " หน่วย", (b.eCost||0).toLocaleString());
+  if (b.wCost) _brk += _pmRow("<i class='ico ico-water u-w'></i> ค่าน้ำ", (b.wPersons||0) + " คน", (b.wCost||0).toLocaleString());
+  if (b.extras && b.extras.length) b.extras.forEach(function(e){
+    _brk += _pmRow(mtEsc(e.name||"รายการเพิ่ม"), "", "+" + (+e.amount||0).toLocaleString(), "up");
+  });
+  if (b.discount) _brk += _pmRow("ส่วนลด", "", "\u2212" + (b.discount||0).toLocaleString(), "dn");
   document.getElementById("pmm-info").innerHTML = ""
     + "<div class='pmm-info-row'><span>บิล</span><b>" + b.id + " · M" + b.roomId + "</b></div>"
     + "<div class='pmm-info-row'><span>ผู้เช่า</span><b>" + (b.tenantName||"-") + "</b></div>"
     + "<div class='pmm-info-row'><span>เดือน</span><b>" + MONTHS_FULL[b.month] + " " + b.year + "</b></div>"
+    + (_brk ? "<div class='pmm-brk'>" + _brk + "</div>" : "")
     + "<div class='pmm-info-row total'><span style='font-weight:700;font-size:13px;color:#0f172a'>ยอดที่ต้องรับ</span><span class='amt'>" + b.total.toLocaleString() + " ฿</span></div>";
 
   // Reset toggle to cash
@@ -16062,6 +16923,7 @@ function rReports() {
 // ═══ STAFF MANAGEMENT (ใน Settings)
 // ════════════════════════════════════════════════
 function renderStaffList() {
+  try { rentSyncBtn(); } catch(e){}
   var el = document.getElementById("staff-list-container");
   if (!el) return;
   if (!staffList.length) {
@@ -16678,9 +17540,9 @@ function rBulkBill() {
     +       "<th style='width:105px'>มิเตอร์ก่อน<br><span style='font-weight:400;color:#94a3b8'>(วันที่จด)</span></th>"
     +       "<th style='width:120px'>มิเตอร์ปัจจุบัน<br><span style='font-weight:400;color:#94a3b8'>(วันที่จด)</span></th>"
     +       "<th style='width:50px'>หน่วย</th>"
-    +       "<th style='width:70px'>ค่าไฟ</th>"
+    +       "<th style='width:70px'><i class='ico ico-elec u-e'></i> ค่าไฟ</th>"
     +       "<th style='width:50px'>ผู้พัก</th>"
-    +       "<th style='width:70px'>ค่าน้ำ</th>"
+    +       "<th style='width:70px'><i class='ico ico-water u-w'></i> ค่าน้ำ</th>"
     +       "<th style='width:80px'>รวม</th>"
     +       "<th style='width:95px'>สถานะ</th>"
     +       "<th style='width:120px'>จัดการ</th>"
@@ -16909,8 +17771,8 @@ function renderBulkPrintModal() {
       + "</div>"
       + "<div class='bp-card-body'>"
       +   "<div class='bp-row'><span>ค่าเช่า</span><b>"+(b.rentAmount||0).toLocaleString()+"</b></div>"
-      +   "<div class='bp-row'><span>ค่าไฟ ("+(b.elecUnits||0)+"×"+(b.elecRate||0)+")</span><b>"+(b.elecAmount||0).toLocaleString()+"</b></div>"
-      +   "<div class='bp-row'><span>ค่าน้ำ</span><b>"+(b.waterAmount||0).toLocaleString()+"</b></div>"
+      +   "<div class='bp-row'><span><i class='ico ico-elec u-e'></i> ค่าไฟ ("+(b.elecUnits||0)+"×"+(b.elecRate||0)+")</span><b>"+(b.elecAmount||0).toLocaleString()+"</b></div>"
+      +   "<div class='bp-row'><span><i class='ico ico-water u-w'></i> ค่าน้ำ</span><b>"+(b.waterAmount||0).toLocaleString()+"</b></div>"
       +   "<div class='bp-row bp-total'><span>รวม</span><b>"+(b.total||0).toLocaleString()+"</b></div>"
       + "</div>"
       + "<div class='bp-card-foot'>"
@@ -16994,8 +17856,8 @@ function renderMosTables() {
   // ─── ฝั่งซ้าย: ค่าใช้จ่าย ───
   var exHtml = ""
     + "<div class='mos-tab-item'><span class='lbl'>ค่าเช่าห้องพัก</span><b>" + b.rent.toLocaleString() + "</b></div>"
-    + "<div class='mos-tab-item'><span class='lbl'>ค่าไฟ <span class='lbl-sub'>(" + b.eUnits + "×" + b.eRate + ")</span></span><b>" + b.eCost.toLocaleString() + "</b></div>"
-    + "<div class='mos-tab-item'><span class='lbl'>ค่าน้ำ <span class='lbl-sub'>(" + b.wPersons + "×" + b.wRate + ")</span></span><b>" + b.wCost.toLocaleString() + "</b></div>";
+    + "<div class='mos-tab-item'><span class='lbl'><i class='ico ico-elec u-e'></i> ค่าไฟ <span class='lbl-sub'>(" + b.eUnits + "×" + b.eRate + ")</span></span><b>" + b.eCost.toLocaleString() + "</b></div>"
+    + "<div class='mos-tab-item'><span class='lbl'><i class='ico ico-water u-w'></i> ค่าน้ำ <span class='lbl-sub'>(" + b.wPersons + "×" + b.wRate + ")</span></span><b>" + b.wCost.toLocaleString() + "</b></div>";
   // extras จากบิลเดิม
   if (b.extras && b.extras.length) {
     b.extras.forEach(function(e){
@@ -17347,8 +18209,8 @@ function _buildMoveOutBodyHtml(b, docTitle) {
   // ─── Items section ───
   var itemsHtml = ""
     + "<div class='items-row'><div><div class='name'>ค่าเช่าห้องพัก</div><div class='sub'>ห้องมาตรฐาน · 1 เดือน</div></div><div class='qty'>1 เดือน</div><div class='amt'>" + b.rent.toLocaleString() + "</div></div>"
-    + "<div class='items-row'><div><div class='name'>ค่าไฟฟ้า</div><div class='sub'>" + b.eUnits + " หน่วย × " + b.eRate + " บาท</div></div><div class='qty'>" + b.eUnits + " หน่วย</div><div class='amt'>" + b.eCost.toLocaleString() + "</div></div>"
-    + "<div class='items-row'><div><div class='name'>ค่าน้ำประปา</div><div class='sub'>" + b.wPersons + " คน × " + b.wRate + " บาท</div></div><div class='qty'>" + b.wPersons + " คน</div><div class='amt'>" + b.wCost.toLocaleString() + "</div></div>";
+    + "<div class='items-row'><div><div class='name'><i class='ico ico-elec u-e'></i> ค่าไฟฟ้า</div><div class='sub'>" + b.eUnits + " หน่วย × " + b.eRate + " บาท</div></div><div class='qty'>" + b.eUnits + " หน่วย</div><div class='amt'>" + b.eCost.toLocaleString() + "</div></div>"
+    + "<div class='items-row'><div><div class='name'><i class='ico ico-water u-w'></i> ค่าน้ำประปา</div><div class='sub'>" + b.wPersons + " คน × " + b.wRate + " บาท</div></div><div class='qty'>" + b.wPersons + " คน</div><div class='amt'>" + b.wCost.toLocaleString() + "</div></div>";
 
   // extras (รวมถึงรายการเสียหาย)
   if (b.extras && b.extras.length) {
@@ -17712,7 +18574,9 @@ function calcBulkRow(rid) {
     } else if (units > BB_WARN_UNITS_HIGH || (units > 0 && units < BB_WARN_UNITS_LOW) || newMe < oldMe) {
       tr.classList.add("bb-row-warn");
       chip.classList.add("bb-stat-warn");
-      if (newMe < oldMe) chip.innerHTML = "<i class='ico ico-alert'></i> วนรอบ · " + units + " หน่วย";
+      if (newMe < oldMe && !meterRollLooksReal(oldMe, newMe))
+        chip.innerHTML = "<i class='ico ico-alert'></i> น่าจะกรอกผิด";
+      else if (newMe < oldMe) chip.innerHTML = "<i class='ico ico-alert'></i> วนรอบ \u00b7 " + units + " หน่วย";
       else if (units > BB_WARN_UNITS_HIGH) chip.innerHTML = "<i class='ico ico-alert'></i> ใช้เยอะผิดปกติ";
       else chip.innerHTML = "<i class='ico ico-alert'></i> ใช้น้อยผิดปกติ";
     } else {
@@ -18099,12 +18963,44 @@ async function bulkSubmitAll() {
     return;
   }
 
-  // เช็คแถวที่มี warning
-  var warnCount = 0;
+  /* ── เช็คแถวที่มีค่าผิดปกติ ──
+     เดิมนับรวมเป็นตัวเลขเดียวว่า "มี N ห้องผิดปกติ" ไม่บอกว่าห้องไหน
+     ห้องที่น่าจะกรอกผิด (เลขใหม่น้อยกว่าเลขเก่ามากจนวนรอบไม่สมเหตุสมผล)
+     ทำให้บิลพุ่งเป็นหมื่น จึงต้องบอกเจาะจงและถามยืนยันแยกต่างหาก */
+  var warnCount = 0, badMeter = [];
   readyList.forEach(function(r){
     var tr = document.getElementById("brow-"+r.id);
     if (tr && tr.classList.contains("bb-row-warn")) warnCount++;
+    var oldEl = document.getElementById("bb-me-old-"+r.id);
+    var newEl = document.getElementById("bb-me-new-"+r.id);
+    if (!oldEl || !newEl) return;
+    var oldMe = parseFloat(oldEl.value)||0, newMe = parseFloat(newEl.value);
+    if (isNaN(newMe)) return;
+    if (newMe < oldMe && typeof meterRollLooksReal === "function" && !meterRollLooksReal(oldMe, newMe)){
+      var uEl = document.getElementById("bb-units-"+r.id);
+      var tEl2 = document.getElementById("bb-total-"+r.id);
+      badMeter.push({ id:r.id, oldMe:oldMe, newMe:newMe,
+        units:(uEl?parseInt(uEl.value)||0:0),
+        total:(tEl2?parseInt(String(tEl2.textContent).replace(/[^\d]/g,""))||0:0) });
+    }
   });
+
+  /* ถามแยกก่อน · เจาะจงว่าห้องไหน เลขอะไร บิลเท่าไหร่ */
+  if (badMeter.length){
+    var lines = badMeter.slice(0,6).map(function(x){
+      return "ห้อง " + x.id + " : " + x.oldMe + " \u2192 " + x.newMe
+        + "  (คิดเป็น " + x.units.toLocaleString() + " หน่วย \u00b7 บิล "
+        + x.total.toLocaleString() + " ฿)";
+    });
+    if (badMeter.length > 6) lines.push("และอีก " + (badMeter.length-6) + " ห้อง");
+    if (!confirm(
+        "\u26a0 เลขมิเตอร์น่าจะกรอกผิด " + badMeter.length + " ห้อง\n\n"
+      + lines.join("\n")
+      + "\n\nเลขใหม่น้อยกว่าเลขเก่ามาก ถ้าคิดแบบมิเตอร์วนรอบจะได้หน่วยสูงผิดปกติ\n"
+      + "มักเกิดจากจดเลขผิด หรือกรอกสลับหลัก\n\n"
+      + "กลับไปแก้เลขก่อนดีไหม?\n"
+      + "[ ตกลง ] = ออกบิลตามนี้เลย    [ ยกเลิก ] = กลับไปแก้")) return;
+  }
 
   var msg = "บันทึกบิล "+readyList.length+" ห้อง · รวม "+totalAmt.toLocaleString()+" ฿\n\nเดือน "+MONTHS_FULL[month]+" "+year;
   if (warnCount) msg += "\n\n[!] มี "+warnCount+" ห้องที่มีค่าผิดปกติ (มิเตอร์ใช้เยอะ/น้อย/วนรอบ) — ตรวจก่อนยืนยัน";
@@ -18530,8 +19426,8 @@ function _buildBillBodyHtml(b, isCash, docTitle) {
   // Items
   var itemsHtml = ""
     + "<div class='items-row'><div><div class='name'>" + rentLabel + "</div><div class='sub'>" + rentSub + "</div></div><div class='qty'>" + rentQty + "</div><div class='amt'>" + b.rent.toLocaleString() + "</div></div>"
-    + "<div class='items-row'><div><div class='name'>ค่าไฟฟ้า</div><div class='sub'>" + b.eUnits + " หน่วย × " + b.eRate + " บาท</div></div><div class='qty'>" + b.eUnits + " หน่วย</div><div class='amt'>" + b.eCost.toLocaleString() + "</div></div>"
-    + "<div class='items-row'><div><div class='name'>ค่าน้ำประปา</div><div class='sub'>" + b.wPersons + " คน × " + b.wRate + " บาท</div></div><div class='qty'>" + b.wPersons + " คน</div><div class='amt'>" + b.wCost.toLocaleString() + "</div></div>";
+    + "<div class='items-row'><div><div class='name'><i class='ico ico-elec u-e'></i> ค่าไฟฟ้า</div><div class='sub'>" + b.eUnits + " หน่วย × " + b.eRate + " บาท</div></div><div class='qty'>" + b.eUnits + " หน่วย</div><div class='amt'>" + b.eCost.toLocaleString() + "</div></div>"
+    + "<div class='items-row'><div><div class='name'><i class='ico ico-water u-w'></i> ค่าน้ำประปา</div><div class='sub'>" + b.wPersons + " คน × " + b.wRate + " บาท</div></div><div class='qty'>" + b.wPersons + " คน</div><div class='amt'>" + b.wCost.toLocaleString() + "</div></div>";
   if (b.extras && b.extras.length) {
     b.extras.forEach(function(e){
       itemsHtml += "<div class='items-row'><div><div class='name'>" + e.name + "</div></div><div class='qty'>-</div><div class='amt'>" + e.amount.toLocaleString() + "</div></div>";
@@ -19410,6 +20306,7 @@ function renderTimelineBars() {
 
   body.innerHTML = html;
   setupColumnHover();
+  tlgBindDrag();
 
   // Legend
   var legEl = document.getElementById("tl-legend");
@@ -19539,7 +20436,7 @@ function renderTimelineGrid() {
   // ── Rows per room ──
   dailyRooms.forEach(function(r){
     var closed = r.status!=="active";
-    html += "<div style='display:flex;min-width:max-content'>";
+    html += "<div class='tlg-row' data-room='"+r.id+"' style='display:flex;min-width:max-content;position:relative'>";
     var labelCls = "tl-room-label" + (closed?" closed":"");
     html += "<div class='"+labelCls+"' style='min-width:"+labelWidth+"px;width:"+labelWidth+"px'>"
       + "<div>"+r.number+"</div>"
@@ -19550,7 +20447,7 @@ function renderTimelineGrid() {
       var dj = addDays(start, j);
       var dsj = dateOnly(dj);
       if (closed) {
-        html += "<div class='tlg-cell closed' data-col-idx='"+j+"'><div class='tlg-status' style='color:#dc2626'><i class='ico ico-lock'></i> ปิด</div></div>";
+        html += "<div class='tlg-cell closed' data-col-idx='"+j+"' data-room='"+r.id+"' data-i='"+j+"'><div class='tlg-status' style='color:#dc2626'><i class='ico ico-lock'></i> ปิด</div></div>";
         continue;
       }
       var info = getCellInfo(r.id, dsj);
@@ -19561,6 +20458,7 @@ function renderTimelineGrid() {
 
   body.innerHTML = html;
   setupColumnHover();
+  tlgBindDrag();
 
   // Legend
   var legEl = document.getElementById("tl-legend");
@@ -19580,7 +20478,10 @@ function renderTimelineGrid() {
 function renderGridCell(room, dateStr, info, colIdx) {
   var today = todayStr();
   var isToday = dateStr===today;
+  /* ติดรหัสห้องและลำดับวันไว้ทุกช่อง เพื่อให้ลากเลือกช่วงวันได้ */
   var colAttr = (colIdx!=null) ? " data-col-idx='"+colIdx+"'" : "";
+  colAttr += " data-room='"+room.id+"' data-date='"+dateStr+"'"
+    + (colIdx!=null ? " data-i='"+colIdx+"'" : "");
 
   if (info.type === "vacant") {
     return "<div class='tlg-cell vacant'"+colAttr+" onclick='tlCellClick(\""+room.id+"\",\""+dateStr+"\")' title='คลิกเพื่อจอง'>"
@@ -19690,7 +20591,133 @@ function tlDateHeaderClick(dateStr) {
   openBookingModal(null, {checkIn:dateStr, checkOut:dateOnly(addDays(parseDate(dateStr),1))});
 }
 
+/* ═══════════ ลากเลือกช่วงวันในปฏิทิน ═══════════
+   เดิมคลิกได้ทีละช่อง = จอง 1 คืนเสมอ ลูกค้าพัก 5 คืนต้องไปแก้วันออกในฟอร์มเอง
+   และไม่เห็นว่าชนกับการจองอื่นไหมจนกว่าจะกดบันทึก
+   ตอนนี้กดค้างแล้วลากแนวนอนได้ · มีแถบวิ่งให้เห็น · ป้ายบอกวันเข้า-คืนสุดท้าย-วันออก
+   ลากทับช่วงที่มีคนอยู่แล้วจะเป็นสีแดงและปล่อยแล้วไม่จอง */
+var tlDrag = null;
+var TLG_CELL_W = 150;   /* ต้องตรงกับ .tlg-cell ใน CSS */
+var TLG_LABEL_W = 50;
+
+function tlgCellAt(x, y){
+  var el = document.elementFromPoint(x, y);
+  while (el && !(el.classList && el.classList.contains('tlg-cell'))) el = el.parentElement;
+  return el;
+}
+function tlgIsFree(el){
+  return !!el && el.classList.contains('vacant');
+}
+/* ชนกับใครในช่วงนี้ · คืนชื่อคนแรกที่ชน */
+function tlgClashName(roomId, lo, hi){
+  var row = document.querySelector(".tlg-row[data-room='"+roomId+"']");
+  if (!row) return null;
+  for (var i = lo; i <= hi; i++){
+    var c = row.querySelector(".tlg-cell[data-i='"+i+"']");
+    if (!c) continue;
+    if (c.classList.contains('closed')) return 'ห้องปิด';
+    if (!c.classList.contains('vacant')){
+      var g = c.querySelector('.tlg-guest');
+      return (g ? g.textContent.trim() : 'ที่จองไว้');
+    }
+  }
+  return null;
+}
+function tlgDayLabel(i){
+  try {
+    var d = addDays(new Date(tlStartDate), i);
+    return d.getDate() + " " + MONTHS[d.getMonth()+1];
+  } catch(e){ return "-"; }
+}
+function tlgClearSel(){
+  document.querySelectorAll('.tlg-cell.tlg-sel').forEach(function(e){ e.classList.remove('tlg-sel'); });
+}
+function tlgKill(){
+  ['tlg-dragbar','tlg-dragtip'].forEach(function(id){
+    var e = document.getElementById(id); if (e) e.remove();
+  });
+}
+function tlgPaint(ev){
+  if (!tlDrag) return;
+  var c = tlgCellAt(ev.clientX, ev.clientY);
+  if (c && c.dataset.room === tlDrag.room && c.dataset.i != null)
+    tlDrag.b = parseInt(c.dataset.i);
+  var lo = Math.min(tlDrag.a, tlDrag.b), hi = Math.max(tlDrag.a, tlDrag.b);
+  var who = tlgClashName(tlDrag.room, lo, hi);
+  tlDrag.bad = !!who;
+  tlgClearSel();
+  var row = document.querySelector(".tlg-row[data-room='"+tlDrag.room+"']");
+  if (!row) return;
+  for (var i = lo; i <= hi; i++){
+    var cc = row.querySelector(".tlg-cell[data-i='"+i+"']");
+    if (cc) cc.classList.add('tlg-sel');
+  }
+  var bar = document.getElementById('tlg-dragbar');
+  if (!bar){ bar = document.createElement('div'); bar.id = 'tlg-dragbar'; row.appendChild(bar); }
+  bar.className = 'tlg-dragbar' + (who ? ' bad' : '');
+  bar.style.left  = (TLG_LABEL_W + lo*TLG_CELL_W + 4) + 'px';
+  bar.style.width = ((hi-lo+1)*TLG_CELL_W - 8) + 'px';
+  bar.textContent = who ? '' : (hi-lo+1) + ' คืน';
+  var tip = document.getElementById('tlg-dragtip');
+  if (!tip){ tip = document.createElement('div'); tip.id = 'tlg-dragtip'; document.body.appendChild(tip); }
+  if (who){
+    tip.className = 'tlg-tip bad';
+    tip.innerHTML = "<div class='seg'><div class='vl'>\u26a0 ชนกับ " + mtEsc(who) + "</div>"
+      + "<div class='lb'>เลือกช่วงอื่น</div></div>";
+  } else {
+    tip.className = 'tlg-tip';
+    tip.innerHTML =
+       "<div class='seg'><div class='lb'>เข้า</div><div class='vl'>"+tlgDayLabel(lo)+"</div></div>"
+     + "<div class='ar'>\u27f6</div>"
+     + "<div class='seg'><div class='lb'>คืนสุดท้าย</div><div class='vl'>"+tlgDayLabel(hi)+"</div></div>"
+     + "<div class='seg out'><div class='lb'>ออก</div><div class='vl'>"+tlgDayLabel(hi+1)+"</div></div>"
+     + "<div class='nite'><div class='vl'>"+(hi-lo+1)+"</div><div class='lb'>คืน</div></div>";
+  }
+  var w = tip.offsetWidth || 340;
+  tip.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, ev.clientX + 18)) + 'px';
+  tip.style.top  = Math.max(8, ev.clientY - 78) + 'px';
+}
+function tlgDown(ev){
+  if (ev.button != null && ev.button !== 0) return;
+  var c = tlgCellAt(ev.clientX, ev.clientY);
+  if (!tlgIsFree(c) || c.dataset.i == null) return;
+  ev.preventDefault();
+  tlDrag = { room:c.dataset.room, a:parseInt(c.dataset.i), b:parseInt(c.dataset.i),
+             date:c.dataset.date, bad:false, moved:false };
+  tlgPaint(ev);
+}
+function tlgMove(ev){
+  if (!tlDrag) return;
+  tlDrag.moved = true;
+  ev.preventDefault();
+  tlgPaint(ev);
+}
+function tlgUp(ev){
+  if (!tlDrag) return;
+  var d = tlDrag; tlDrag = null;
+  tlgKill(); tlgClearSel();
+  var lo = Math.min(d.a, d.b), hi = Math.max(d.a, d.b);
+  if (d.bad){ notify('ช่วงนี้ชนกับที่จองไว้ \u00b7 เลือกช่วงอื่น','error'); return; }
+  try {
+    var start = dateOnly(addDays(new Date(tlStartDate), lo));
+    var end   = dateOnly(addDays(new Date(tlStartDate), hi+1));
+    openBookingModal(null, { roomId:d.room, checkIn:start, checkOut:end });
+  } catch(e){ console.error(e); }
+}
+function tlgBindDrag(){
+  var body = document.getElementById('tl-body');
+  if (!body || body.__tlgBound) return;
+  body.__tlgBound = true;
+  body.addEventListener('pointerdown', tlgDown);
+  document.addEventListener('pointermove', tlgMove);
+  document.addEventListener('pointerup', tlgUp);
+  document.addEventListener('pointercancel', function(){
+    if (tlDrag){ tlDrag = null; tlgKill(); tlgClearSel(); }
+  });
+}
 function tlCellClick(roomId, dateStr) {
+  /* ลากอยู่ → ไม่ต้องเปิดฟอร์มจากคลิก ปล่อยให้ tlgUp จัดการ */
+  if (tlDrag) return;
   // Click-to-book: เปิดฟอร์มด้วย room + date prefill
   openBookingModal(null, {roomId:roomId, checkIn:dateStr, checkOut:dateOnly(addDays(parseDate(dateStr),1))});
 }
@@ -20518,39 +21545,56 @@ function bdBadDebtBox(b){
     +   "ยังเก็บบันทึกไว้ดูได้ \u00b7 ทำแล้วย้อนกลับไม่ได้</div></div></div>";
 }
 /* หน้าต่างยืนยันขั้นสอง */
-window.bdBadDebtAsk = function(id){
+/* หน้ายืนยันตัดหนี้ · Modal Pattern A
+   alsoCheckout = มาจากหน้าเช็คเอาท → กดยืนยันแล้วเช็คเอาทและตัดยอดพร้อมกัน
+   เดิมต้องทำ 2 รอบแยกกัน (เช็คเอาทก่อน แล้วเปิดใบจองไปกดปุ่มในการ์ดการเงิน) */
+window.bdBadDebtAsk = function(id, alsoCheckout){
   if (!bdIsOwner()){ notify('เฉพาะเจ้าของเท่านั้น','error'); return; }
   var b = (bookings||[]).find(function(x){return x.id===id;});
   if (!b) return;
   var owe = (b.totalAmount||0) - (b.paidAmount||0);
   if (owe <= 0){ notify('ใบนี้จ่ายครบแล้ว','info'); return; }
   if (b.badDebt){ notify('ใบนี้ตัดเป็นเก็บเงินไม่ได้ไปแล้ว','info'); return; }
+  var sb = mtSafe(b);
   var old = document.getElementById('bd-bb-modal'); if (old) old.remove();
   var bg = document.createElement('div');
   bg.className = 'modal-bg open'; bg.id = 'bd-bb-modal'; bg.style.zIndex = 9400;
   bg.onclick = function(e){ if (e.target === bg) bg.remove(); };
-  bg.innerHTML = "<div class='modal bd-bbm' onclick='event.stopPropagation()'>"
-    + "<div class='h'><div class='t'>ลูกค้าไม่จ่ายเงิน " + owe.toLocaleString() + " ฿</div>"
-    +   "<div class='s'>ห้อง " + mtEsc(b.roomNumber||b.roomId) + " \u00b7 " + mtEsc(b.guestName||'-') + "</div></div>"
-    + "<div class='b'>"
-    +   "<div class='box'><div class='bt'>ทำแล้วจะเกิดอะไรขึ้น</div><ul>"
-    +     "<li>ยอด " + owe.toLocaleString() + " ฿ ออกจาก <b>ค้างรับ</b> ทันที ไม่ต้องตามอีก</li>"
-    +     "<li>ไปอยู่ในรายการ <b>เก็บเงินไม่ได้</b> ซึ่งเห็นเฉพาะเจ้าของ</li>"
-    +     "<li>ยอดขายเดิมไม่เปลี่ยน \u00b7 ยังดูย้อนหลังได้ว่าขายได้เท่าไหร่</li>"
-    +     "<li>บันทึกวันที่ \u00b7 ห้อง \u00b7 ชื่อ \u00b7 เหตุผล \u00b7 ใครเป็นคนตัด</li>"
-    +     "<li>ย้อนกลับไม่ได้</li>"
-    +   "</ul>"
-    +   "<input id='bd-bb-reason' class='in' maxlength='80' "
-    +     "placeholder='เหตุผล เช่น ลูกค้าหนี ติดต่อไม่ได้ (ต้องกรอก)'/>"
-    +   "</div>"
-    +   "<button class='ok' onclick=\"bdBadDebtDo('" + b.id + "')\">ยืนยัน \u00b7 เก็บเงินไม่ได้ "
-    +     owe.toLocaleString() + " ฿</button>"
-    +   "<button class='cc' onclick=\"var m=document.getElementById('bd-bb-modal');if(m)m.remove()\">ยกเลิก</button>"
-    + "</div></div>";
+  bg.innerHTML =
+     "<div class='modal bdn-card' onclick='event.stopPropagation()'>"
+   +   "<div class='bdn-hd'><div class='t'>ลูกค้าไม่จ่ายเงิน ฿"+owe.toLocaleString()+"</div>"
+   +     "<div class='s'>ห้อง "+mtEsc(sb.roomNumber||sb.roomId)+" \u00b7 "+mtEsc(sb.guestName||'-')+"</div></div>"
+   +   "<div class='bdn-info'>"
+   +     "<div class='bdn-r'><span class='k'>ยอดที่ตัดทิ้ง</span>"
+   +       "<span class='v red'>฿"+owe.toLocaleString()+"</span></div>"
+   +     "<div class='bdn-r'><span class='k'>ยอดขายเดิม<span class='sub2'>ไม่เปลี่ยน</span></span>"
+   +       "<span class='v'>"+(b.totalAmount||0).toLocaleString()+"</span></div>"
+   +     "<div class='bdn-r note'><span class='k'>ผลที่เกิด</span>"
+   +       "<span class='v'>ออกจากรายการค้างรับทันที \u00b7 ไปอยู่ในรายการเก็บเงินไม่ได้ ซึ่งเห็นเฉพาะเจ้าของ</span></div>"
+   +   "</div>"
+   +   "<div class='bdn-fl'>เหตุผล <span class='req'>*</span></div>"
+   +   "<div class='bdn-fw'><input id='bd-bb-reason' class='bdn-in' maxlength='80' "
+   +     "placeholder='เช่น ลูกค้าหนี ติดต่อไม่ได้'/></div>"
+   +   "<div class='bdn-warn'><b>ทำแล้วย้อนกลับไม่ได้</b><br/>"
+   +     "บันทึกวันที่ ห้อง ชื่อ เหตุผล และคนที่ตัดไว้ทั้งหมด</div>"
+   +   "<div class='bdn-sep'></div>"
+   +   "<div class='bdn-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='bdn-b bR' id='bd-bb-ok' onclick=\"bdBadDebtDo('"+b.id+"',"+(alsoCheckout?'true':'false')+")\">"
+   +       "<span class='ic'><i class='ico ico-x'></i></span>"
+   +       "<span class='tx'>ยืนยัน \u00b7 เก็บเงินไม่ได้ ฿"+owe.toLocaleString()
+   +       "<span class='sub'>"+(alsoCheckout?"เช็คเอาทและตัดยอดค้างพร้อมกัน":"ตัดยอดค้างออกจากรายการค้างรับ")+"</span></span></button>"
+   +     "<button class='bdn-b b3' onclick=\""
+   +       (alsoCheckout
+          ? "var m=document.getElementById('bd-bb-modal');if(m)m.remove();quickCheckOut('"+b.id+"');"
+          : "var m=document.getElementById('bd-bb-modal');if(m)m.remove();")
+   +       "\"><span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>"+(alsoCheckout?"ยกเลิก \u00b7 กลับไปหน้าก่อน":"ยกเลิก")
+   +       "<span class='sub'>ยังไม่ตัดอะไร</span></span></button>"
+   +   "</div></div>";
   document.body.appendChild(bg);
-  setTimeout(function(){ var i=document.getElementById('bd-bb-reason'); if(i) i.focus(); }, 60);
+  setTimeout(function(){ var i2=document.getElementById('bd-bb-reason'); if(i2) i2.focus(); }, 60);
 };
-window.bdBadDebtDo = async function(id){
+window.bdBadDebtDo = async function(id, alsoCheckout){
   if (!bdIsOwner()){ notify('เฉพาะเจ้าของเท่านั้น','error'); return; }
   var b = (bookings||[]).find(function(x){return x.id===id;});
   if (!b || b.badDebt) return;
@@ -20563,17 +21607,32 @@ window.bdBadDebtDo = async function(id){
     if (el){ el.classList.add('err'); el.focus(); }
     return;
   }
-  var btn = document.querySelector('#bd-bb-modal .ok');
-  if (btn){ btn.disabled = true; btn.textContent = 'กำลังบันทึก…'; }
-  var upd = Object.assign({}, b, {
+  var btn = document.getElementById('bd-bb-ok');
+  if (btn){
+    btn.disabled = true;
+    var _tx = btn.querySelector('.tx');
+    if (_tx && _tx.childNodes[0]) _tx.childNodes[0].textContent = 'กำลังบันทึก…';
+  }
+  var _extra = {};
+  /* มาจากหน้าเช็คเอาท → เช็คเอาทและตัดยอดพร้อมกันในการเขียนครั้งเดียว
+     จะได้ไม่มีจังหวะที่เช็คเอาทแล้วแต่ตัดยอดไม่สำเร็จ */
+  if (alsoCheckout && b.status !== 'checked-out'){
+    _extra.status = 'checked-out';
+    _extra.checkOutTime = Date.now();
+  }
+  var upd = Object.assign({}, b, _extra, {
     badDebt: { amount: owe, reason: reason, at: Date.now(),
                byId: (currentUser&&currentUser.id)||null,
                byName: (currentUser&&currentUser.name)||null },
     updatedAt: Date.now()
   });
   upd.history = (b.history||[]).slice();
-  try { upd.history.push(bkHistEntry('baddebt',
-    'เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' \u0e3f \u00b7 ' + reason, {})); } catch(e){}
+  try {
+    if (_extra.status === 'checked-out')
+      upd.history.push(bkHistEntry('checkout','เช็คเอาท์ \u00b7 เก็บเงินไม่ได้ ฿'+owe.toLocaleString(),{}));
+    upd.history.push(bkHistEntry('baddebt',
+      'เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' \u0e3f \u00b7 ' + reason, {}));
+  } catch(e){}
   try { await saveBooking(upd); }
   catch(e){ notify('บันทึกไม่สำเร็จ \u00b7 ยังไม่มีอะไรเปลี่ยน ลองใหม่อีกครั้ง','error');
             if(btn){btn.disabled=false;btn.textContent='ลองใหม่';} return; }
@@ -20581,8 +21640,19 @@ window.bdBadDebtDo = async function(id){
   try { logActivity('baddebt', (b.guestName||'-'),
     'เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' \u0e3f \u00b7 ' + reason,
     {mode:'daily', roomId:(b.roomNumber||b.roomId), amount:-owe, bookingId:b.id}); } catch(e){}
+  if (_extra.status === 'checked-out'){
+    try { logActivity('checkout', (b.guestName||'-'),
+      'เช็คเอาท์ \u00b7 เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' \u0e3f',
+      {mode:'daily', roomId:(b.roomNumber||b.roomId)}); } catch(e){}
+  }
   var m = document.getElementById('bd-bb-modal'); if (m) m.remove();
-  notify('บันทึกแล้ว \u00b7 เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' ฿','success');
+  notify((_extra.status==='checked-out' ? 'เช็คเอาทแล้ว \u00b7 ' : 'บันทึกแล้ว \u00b7 ')
+    + 'เก็บเงินไม่ได้ ' + owe.toLocaleString() + ' ฿','success');
+  try { closeModal('bk-detail-modal-bg'); } catch(e){}
+  if (_extra.status === 'checked-out' && typeof shCleanAskAfter === 'function'){
+    var _rid = b.roomId;
+    setTimeout(function(){ shCleanAskAfter(_rid, b.guestName, Date.now()); }, 500);
+  }
   try { if (typeof refreshCurrentDaily==='function') refreshCurrentDaily(); } catch(e){}
   try { if (document.querySelector('#bk-detail-modal-bg.open')) openBookingDetail(id); } catch(e){}
 };
@@ -21268,13 +22338,69 @@ async function quickCheckOut(id) {
                "\n\nถ้าลูกค้าไม่มาตามนัด ควรใช้ \"ยกเลิกการจอง\" แทน\nยืนยันเช็คเอาท์เลยหรือไม่?")) return;
   var owe = (b.totalAmount||0)-(b.paidAmount||0);
   if (owe>0){
-    /* เจ้าของ: บอกว่ามีทางเลือก "เก็บเงินไม่ได้" อยู่ในหน้ารายละเอียด
-       พนักงาน: บอกให้แจ้งเจ้าของ จะได้ไม่ไปหาทางอ้อม */
-    var _hint = (typeof bdIsOwner==='function' && bdIsOwner())
-      ? "\n\nถ้าเก็บไม่ได้จริง ๆ (ลูกค้าหนี) เช็คเอาทก่อน แล้วเปิดใบนี้กดปุ่ม\n\u201cลูกค้าไม่จ่ายเงิน \u00b7 เก็บเงินไม่ได้\u201d ในการ์ดการเงิน"
-      : "\n\nยอดนี้จะขึ้นในรายการค้างรับให้ตามต่อ\nถ้าเก็บไม่ได้จริง ๆ ให้แจ้งเจ้าของเป็นคนดำเนินการ";
-    if (!confirm("ยังค้างจ่าย ฿"+owe.toLocaleString()+_hint+"\n\nยืนยันเช็คเอาท์?")) return;
+    /* เดิมใช้ confirm ของเบราว์เซอร์ · บอกแค่ยอดค้าง ไม่บอกยอดรวม/จ่ายแล้ว
+       และเจ้าของต้องจำวิธีไปตัดหนี้เองอีก 3 ขั้น (ปิดกล่อง → เปิดใบจอง → หาปุ่มในการ์ดการเงิน)
+       ตอนนี้กดตัดได้จากหน้าต่างนี้เลย · พนักงานเห็นปุ่มแต่กดไม่ได้ พร้อมบอกให้แจ้งเจ้าของ */
+    coAskOwe(b, owe, function(){ _coDo(id, b, owe); });
+    return;
   }
+  _coDo(id, b, owe);
+}
+/* หน้าต่างเช็คเอาทตอนยังค้างจ่าย */
+function coAskOwe(b, owe, onGo){
+  var old=document.getElementById('co-ask'); if(old) old.remove();
+  var sb = mtSafe(b);
+  var isOwn = (typeof bdIsOwner==='function' && bdIsOwner());
+  var badBtn = isOwn
+    ? "<button class='co-b b2' onclick=\"coGoBad('"+b.id+"')\">"
+      + "<span class='ic'><i class='ico ico-x'></i></span><span class='tx'>ลูกค้าไม่จ่ายเงิน \u00b7 เก็บเงินไม่ได้"
+      + "<span class='badge'>เจ้าของเท่านั้น</span>"
+      + "<span class='sub'>เช็คเอาทแล้วตัดยอดค้างออกเลย \u00b7 ใช้เมื่อลูกค้าหนี</span></span></button>"
+    : "<button class='co-b blk' disabled>"
+      + "<span class='ic'><i class='ico ico-lock'></i></span><span class='tx'>ลูกค้าไม่จ่ายเงิน \u00b7 เก็บเงินไม่ได้"
+      + "<span class='badge'>เจ้าของเท่านั้น</span>"
+      + "<span class='sub'>แจ้งเจ้าของเป็นคนดำเนินการขั้นตอนนี้</span></span></button>";
+  var bg=document.createElement('div');
+  bg.className='modal-bg open'; bg.id='co-ask'; bg.style.zIndex=9350;
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal co-card' onclick='event.stopPropagation()'>"
+   +   "<div class='co-hd'><div class='t'>เช็คเอาทตอนยังค้างจ่าย</div>"
+   +     "<div class='s'>ห้อง "+mtEsc(sb.roomNumber||sb.roomId)+" \u00b7 "+mtEsc(sb.guestName||'-')+"</div></div>"
+   +   "<div class='co-info'>"
+   +     "<div class='co-r'><span class='k'>ยอดรวม"
+   +       (b.nights?"<span class='sub2'>"+b.nights+" คืน</span>":"")
+   +       "</span><span class='v'>"+(b.totalAmount||0).toLocaleString()+"</span></div>"
+   +     "<div class='co-r'><span class='k'>จ่ายแล้ว</span>"
+   +       "<span class='v'>"+(b.paidAmount||0).toLocaleString()+"</span></div>"
+   +     "<div class='co-r big'><span class='k'>ยังค้าง</span>"
+   +       "<span class='v'>฿"+owe.toLocaleString()+"</span></div>"
+   +   "</div>"
+   +   "<div class='co-sep'></div>"
+   +   "<div class='co-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='co-b b1' id='co-go'>"
+   +       "<span class='ic'><i class='ico ico-check'></i></span><span class='tx'>เช็คเอาท \u00b7 ยังตามเก็บได้"
+   +       "<span class='sub'>ห้องว่างพร้อมขายต่อ \u00b7 ยอด "+owe.toLocaleString()+" ขึ้นในรายการค้างรับ</span></span></button>"
+   +     badBtn
+   +     "<button class='co-b b3' onclick=\"var m=document.getElementById('co-ask');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span>"
+   +       "<span class='tx'>ยังไม่เช็คเอาท \u00b7 รับเงินให้ครบก่อน"
+   +       "<span class='sub'>กลับไปหน้ารายละเอียดการจอง</span></span></button>"
+   +   "</div></div>";
+  document.body.appendChild(bg);
+  var go=document.getElementById('co-go');
+  if (go) go.onclick = function(){
+    go.disabled = true;
+    var m=document.getElementById('co-ask'); if(m) m.remove();
+    try { onGo(); } catch(e){ console.error(e); }
+  };
+}
+/* กดปุ่มแดง → ไปหน้ายืนยันตัดหนี้ (เช็คเอาท + ตัดยอด พร้อมกัน) */
+window.coGoBad = function(id){
+  var m=document.getElementById('co-ask'); if(m) m.remove();
+  if (typeof bdBadDebtAsk === 'function') bdBadDebtAsk(id, true);
+};
+async function _coDo(id, b, owe){
   var upd = Object.assign({},b,{status:"checked-out", checkOutTime:Date.now(), updatedAt:Date.now()});
   var _owe = owe;
   upd.history = (b.history||[]).slice(); upd.history.push(bkHistEntry("checkout","เช็คเอาท์"+(owe>0?" · ยังค้าง ฿"+owe.toLocaleString():" · จ่ายครบ"),{}));
@@ -21291,7 +22417,7 @@ async function quickCheckOut(id) {
      ถ้ายังไม่ได้ทำ กดข้ามได้ ห้องจะค้างเป็นรอทำความสะอาดเหมือนเดิม */
   var _rid = b.roomId;
   setTimeout(function(){
-    if (typeof shCleanAskAfter === "function") shCleanAskAfter(_rid, b.guestName);
+    if (typeof shCleanAskAfter === "function") shCleanAskAfter(_rid, b.guestName, Date.now());
   }, 350);
 }
 
@@ -23087,15 +24213,76 @@ async function submitHandoffAll(){
   var note = ((noteEl && noteEl.value)||"").trim();
 
   var _tTrans = mTrans + dTrans;
-  if (!confirm("ส่งยอดให้เจ้าของ?\n\n"
-    + "รายเดือน: " + mCash.toLocaleString() + " ฿ (" + mDays.length + " วัน · " + mItems + " รายการ)\n"
-    + "รายวัน: " + dCash.toLocaleString() + " ฿ (" + dDays.length + " วัน · " + dItems + " รายการ)\n"
-    + "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n"
-    + "เงินสดที่ต้องยื่นให้เจ้าของ: " + (mCash+dCash).toLocaleString() + " ฿\n"
-    + (_tTrans > 0
-        ? "เงินโอน (เข้าบัญชีแล้ว ไม่ต้องยื่น): " + _tTrans.toLocaleString() + " ฿\n"
-        : "")
-    + "\nผู้ส่ง: " + currentUser.name + "\nสถานะ: รอเจ้าของตรวจรับ")) return;
+  /* หน้าต่างยืนยันตามต้นแบบ Modal Pattern A
+     เดิมใช้ confirm ของเบราว์เซอร์ ตัวเลขปนตัวหนังสือ กวาดตาหายอดยาก
+     และ "ไม่บอกยอดหัก" ทั้งที่หน้าส่งยอดมีโซนรายการหักอยู่
+     พนักงานจึงอาจยื่นเงินผิดจำนวน */
+  var _ded = 0;
+  try {
+    var _dg = getDeductionsByDay();
+    Object.keys(_dg).forEach(function(k){ if (k < today) _ded += (_dg[k].total || 0); });
+  } catch(e){}
+  var _net = (mCash + dCash) - _ded;
+  hoaAskSubmit({
+    mCash:mCash, mDays:mDays.length, mItems:mItems,
+    dCash:dCash, dDays:dDays.length, dItems:dItems,
+    ded:_ded, net:_net, trans:_tTrans, note:note,
+    by:(currentUser&&currentUser.name)||'-'
+  }, function(){ _hoaDoSubmit(mDays, dDays, mItems, dItems, mCash, dCash, note, today); });
+}
+/* หน้าต่างยืนยันส่งยอด */
+function hoaAskSubmit(d, onOk){
+  var old=document.getElementById('hoa-ask'); if(old) old.remove();
+  function row(k, sub, v, cls){
+    return "<div class='hoaq-r"+(cls?' '+cls:'')+"'>"
+      + "<span class='k'>"+k+(sub?" <span class='sub2'>"+sub+"</span>":"")+"</span>"
+      + "<span class='v'>"+v+"</span></div>";
+  }
+  var when = "";
+  try {
+    var n = new Date();
+    when = n.toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'})
+      + " " + ("0"+n.getHours()).slice(-2) + ":" + ("0"+n.getMinutes()).slice(-2);
+  } catch(e){}
+  var info = "";
+  if (d.mItems > 0)
+    info += row("รายเดือน", d.mDays+" วัน \u00b7 "+d.mItems+" รายการ", d.mCash.toLocaleString());
+  if (d.dItems > 0)
+    info += row("รายวัน", d.dDays+" วัน \u00b7 "+d.dItems+" รายการ", d.dCash.toLocaleString());
+  if (d.ded > 0)
+    info += row("หักรายการ", "ค่าซ่อม \u00b7 คืนเงิน", "\u2212"+d.ded.toLocaleString(), "ded");
+  info += row("เงินสดที่ต้องยื่น", "", "฿"+d.net.toLocaleString(), "big");
+  if (d.trans > 0)
+    info += row("เงินโอน", "เข้าบัญชีแล้ว", "<span style='color:#94a3b8'>"+d.trans.toLocaleString()+"</span>");
+  if (d.note)
+    info += "<div class='hoaq-r note'><span class='k'>หมายเหตุ</span>"
+          + "<span class='v'>"+hoaEsc(d.note)+"</span></div>";
+  var bg=document.createElement('div');
+  bg.className='modal-bg open'; bg.id='hoa-ask'; bg.style.zIndex=9400;
+  bg.onclick=function(e){ if(e.target===bg) bg.remove(); };
+  bg.innerHTML =
+     "<div class='modal hoaq-card' onclick='event.stopPropagation()'>"
+   +   "<div class='hoaq-hd'><div class='t'>ส่งยอดให้เจ้าของ</div>"
+   +     "<div class='s'>"+hoaEsc(d.by)+" \u00b7 "+when+"</div></div>"
+   +   "<div class='hoaq-info'>"+info+"</div>"
+   +   "<div class='hoaq-sep'></div>"
+   +   "<div class='hoaq-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+   +     "<button class='hoaq-b b1' id='hoa-ask-ok'>"
+   +       "<span class='ic'><i class='ico ico-check'></i></span><span class='tx'>ส่งยอด ฿"+d.net.toLocaleString()
+   +       "<span class='sub'>รายการจะไปรอเจ้าของตรวจรับ \u00b7 ยกเลิกเองไม่ได้</span></span></button>"
+   +     "<button class='hoaq-b b3' onclick=\"var m=document.getElementById('hoa-ask');if(m)m.remove();\">"
+   +       "<span class='ic'><i class='ico ico-chevron-left'></i></span><span class='tx'>ยังไม่ส่ง \u00b7 กลับไปตรวจก่อน"
+   +       "<span class='sub'>รายการยังอยู่ในหน้านี้</span></span></button>"
+   +   "</div></div>";
+  document.body.appendChild(bg);
+  var ok=document.getElementById('hoa-ask-ok');
+  if (ok) ok.onclick = function(){
+    ok.disabled = true; ok.classList.add('is-busy');
+    var m=document.getElementById('hoa-ask'); if(m) m.remove();
+    try { onOk(); } catch(e){ console.error(e); }
+  };
+}
+async function _hoaDoSubmit(mDays, dDays, mItems, dItems, mCash, dCash, note, today){
 
   var groupId = "HG-" + Date.now();
   // เก็บ snapshot รายการหักก่อนส่ง (เฉพาะวันที่ < วันนี้)
@@ -23780,7 +24967,7 @@ initUserSession();
       <table>
         <thead><tr>
           <th>บิล#</th><th>เดือน/ปี</th><th>ประเภท</th>
-          <th>ค่าเช่า</th><th>ค่าไฟ</th><th>ค่าน้ำ</th><th>รวม</th>
+          <th>ค่าเช่า</th><th><i class="ico ico-elec u-e"></i> ค่าไฟ</th><th><i class="ico ico-water u-w"></i> ค่าน้ำ</th><th>รวม</th>
           <th>สถานะ</th><th>จัดการ</th>
         </tr></thead>
         <tbody id="tbm-tbody"></tbody>
