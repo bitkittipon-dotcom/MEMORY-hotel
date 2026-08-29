@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v3.97.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v4.00.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -1483,7 +1483,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 .tl-cell.month-odd{background:rgba(139,92,246,.025)}
 .tl-cell.month-odd.today{background:rgba(59,130,246,.08)}
 .tl-cell.closed{background:repeating-linear-gradient(45deg,#fef2f2,#fef2f2 5px,#fee2e2 5px,#fee2e2 10px);cursor:not-allowed}
-.tl-bar{position:absolute;top:3px;bottom:3px;border-radius:6px;padding:3px 5px 3px 8px;font-size:10px;font-weight:700;display:flex;flex-direction:column;justify-content:center;gap:1px;overflow:hidden;cursor:pointer;border:1.5px solid;border-left-width:4px;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:all .15s;z-index:2;line-height:1.15}
+.tl-bar{pointer-events:none;position:absolute;top:3px;bottom:3px;border-radius:6px;padding:3px 5px 3px 8px;font-size:10px;font-weight:700;display:flex;flex-direction:column;justify-content:center;gap:1px;overflow:hidden;cursor:pointer;border:1.5px solid;border-left-width:4px;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:all .15s;z-index:2;line-height:1.15}
 .tl-bar:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.18);z-index:10}
 .tl-bar-row{display:flex;justify-content:space-between;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
 .tl-bar-name{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
@@ -2223,7 +2223,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก</div></div>
+    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.00.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -2246,7 +2246,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 
   <nav id="nav-monthly">
     <div class="nav-section">ภาพรวม</div>
-    <button class="nav-btn" data-page="rooms" onclick="goPage('rooms',this)"><i class="ico ico-home"></i> ผังห้องพัก</button>
+    <button class="nav-btn active" data-page="rooms" onclick="goPage('rooms',this)"><i class="ico ico-home"></i> ผังห้องพัก</button>
     <button class="nav-btn" data-page="tenants" onclick="goPage('tenants',this)"><i class="ico ico-users"></i> รายชื่อลูกค้า</button>
     <div class="nav-section">การเงิน</div>
     <button class="nav-btn" data-page="bulk-bill" onclick="goPage('bulk-bill',this)"><i class="ico ico-file"></i> ออกบิล</button>
@@ -2254,11 +2254,10 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <button class="nav-btn" data-page="meter-log" onclick="goPage('meter-log',this)"><i class="ico ico-bolt"></i> ประวัติมิเตอร์</button>
     <button class="nav-btn" data-page="repairs" onclick="goPage('repairs',this)"><i class="ico ico-tool"></i> ประวัติซ่อม <span class="nav-badge" id="badge-rp" style="background:#7c3aed">0</span></button>
     <div class="nav-section">เครื่องมือ</div>
-    <button class="nav-btn active" data-page="dashboard" onclick="goPage('dashboard',this)"><i class="ico ico-chart"></i> แดชบอร์ด</button>
+    <button class="nav-btn" data-page="dashboard" onclick="goPage('dashboard',this)"><i class="ico ico-chart"></i> แดชบอร์ด</button>
     <button class="nav-btn" data-page="reports" onclick="goPage('reports',this)"><i class="ico ico-chart"></i> รายงาน</button>
     <button class="nav-btn" data-page="activity-log" onclick="goPage('activity-log',this)"><i class="ico ico-file"></i> บันทึกการทำงาน</button>
-    <button class="nav-btn" data-page="settings" onclick="goPage('settings',this)"><i class="ico ico-settings"></i> ตั้งค่า</button>
-    <button class="nav-btn" data-page="guide" onclick="goPage('guide',this)"><i class="ico ico-file"></i> คู่มือระบบ</button>
+        <button class="nav-btn" data-page="guide" onclick="goPage('guide',this)"><i class="ico ico-file"></i> คู่มือระบบ</button>
     <div class="nav-section nav-bottom">ส่งยอด / ช่าง</div>
     <button class="nav-btn" data-page="handoff-all" onclick="goPage('handoff-all',this)"><i class="ico ico-money"></i> ส่งยอด <span class="nav-badge" id="badge-cs" style="background:#10b981">0</span></button>
     <button class="nav-btn" data-page="shift-handoff" onclick="goPage('shift-handoff',this)"><i class="ico ico-send"></i> ส่งกะ</button>
@@ -2266,6 +2265,9 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
          เจ้าของเห็นทุกใบและตัดสินได้ · พนักงานเห็นเฉพาะของตัวเองเพื่อรู้ว่าส่งอะไรไปแล้ว -->
     <button class="nav-btn" data-page="requests" onclick="goPage('requests',this)"><i class="ico ico-check"></i> รออนุมัติ <span class="nav-badge req-badge" id="badge-req-m">0</span></button>
     <button class="nav-btn" data-page="technicians" onclick="goPage('technicians',this)"><i class="ico ico-tool"></i> รายชื่อช่าง</button>
+    <!-- ย้ายมาจากกลุ่ม "เครื่องมือ" · ตั้งค่าเป็นงานที่ทำนาน ๆ ครั้ง
+         อยู่ท้ายสุดจะได้ไม่กดโดนตอนใช้งานประจำ -->
+    <button class="nav-btn" data-page="settings" onclick="goPage('settings',this)"><i class="ico ico-settings"></i> ตั้งค่า</button>
   </nav>
 
   <nav id="nav-daily" style="display:none">
@@ -2279,8 +2281,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <button class="nav-btn" data-page="daily-activity-log" onclick="goPage('daily-activity-log',this)"><i class="ico ico-file"></i> บันทึกกิจกรรม</button>
     <button class="nav-btn" data-page="daily-reports" onclick="goPage('daily-reports',this)"><i class="ico ico-chart"></i> รายงาน</button>
     <button class="nav-btn" data-page="daily-rooms-cfg" onclick="goPage('daily-rooms-cfg',this)"><i class="ico ico-bed"></i> จัดการห้องพัก</button>
-    <button class="nav-btn" data-page="settings" onclick="goPage('settings',this)"><i class="ico ico-settings"></i> ตั้งค่า</button>
-    <button class="nav-btn" data-page="guide" onclick="goPage('guide',this)"><i class="ico ico-file"></i> คู่มือระบบ</button>
+        <button class="nav-btn" data-page="guide" onclick="goPage('guide',this)"><i class="ico ico-file"></i> คู่มือระบบ</button>
     <div class="nav-section nav-bottom">ส่งยอด / ช่าง</div>
     <button class="nav-btn" data-page="handoff-all" onclick="goPage('handoff-all',this)"><i class="ico ico-money"></i> ส่งยอด <span class="nav-badge" id="badge-dho" style="background:#16a34a">0</span></button>
     <button class="nav-btn" data-page="shift-handoff" onclick="goPage('shift-handoff',this)"><i class="ico ico-send"></i> ส่งกะ</button>
@@ -2288,6 +2289,9 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
          เจ้าของเห็นทุกใบและตัดสินได้ · พนักงานเห็นเฉพาะของตัวเองเพื่อรู้ว่าส่งอะไรไปแล้ว -->
     <button class="nav-btn" data-page="requests" onclick="goPage('requests',this)"><i class="ico ico-check"></i> รออนุมัติ <span class="nav-badge req-badge" id="badge-req-d">0</span></button>
     <button class="nav-btn" data-page="technicians" onclick="goPage('technicians',this)"><i class="ico ico-tool"></i> รายชื่อช่าง</button>
+    <!-- ย้ายมาจากกลุ่ม "เครื่องมือ" · ตั้งค่าเป็นงานที่ทำนาน ๆ ครั้ง
+         อยู่ท้ายสุดจะได้ไม่กดโดนตอนใช้งานประจำ -->
+    <button class="nav-btn" data-page="settings" onclick="goPage('settings',this)"><i class="ico ico-settings"></i> ตั้งค่า</button>
   </nav>
 
   <div class="sidebar-footer">
@@ -4762,6 +4766,8 @@ function gdRenderBody(){
 function rGuide(){
   gdInjectHelp();
   try { localStorage.setItem('gdLastV1', String(gdCur)); } catch(e){}
+  var _lv=document.getElementById('logo-ver');
+  if (_lv && window.__APP_VERSION) _lv.textContent = window.__APP_VERSION;
   var v=document.getElementById('gd-ver');
   if (v && window.__APP_VERSION) v.textContent = window.__APP_VERSION;
   gdRenderNav(); gdRenderBody();
@@ -5557,6 +5563,14 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.00.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ลากแถบเดือน/วันที่เพื่อเลื่อนดูปฏิทินได้</b><br/>ดู 30 หรือ 60 วัน ปฏิทินกว้างเกินจอ ต้องไปหาแถบเลื่อนด้านล่างซึ่งเล็กและอยู่ไกลตา<br/>ตอนนี้<b>วางเมาส์ที่แถบเดือนหรือแถบวันที่</b>จะขึ้น<b>ลูกศร ❮ ❯ ทั้ง 2 ข้าง</b> พร้อมป้าย “กดค้างแล้วลากเพื่อเลื่อนดู” และเคอร์เซอร์เปลี่ยนเป็นรูปมือ<br/><b>กดค้างแล้วลาก</b>เลื่อนตามนิ้วได้เลย — ลากซ้ายดูวันหน้า ลากขวาดูวันหลัง<br/><b>ไม่ชนกับการลากเลือกวันจอง</b> — ลากที่<b>แถวห้อง</b>คือเลือกช่วงจอง ลากที่<b>แถบด้านบน</b>คือเลื่อนดู คนละแถวกัน · กดที่ป้าย “ห้อง” ไม่ลากเพราะติดซ้ายอยู่กับที่</td></tr>'
++'<tr><td style="font-family:monospace">v3.99.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ลากเลือกช่วงวันได้แล้วใน “แบบแท่ง”</b><br/>เดิมลากได้เฉพาะ<b>แบบกริด</b> — แต่หน้าปฏิทินเปิดมาเป็นแบบแท่งเสมอ เลยเหมือนฟังก์ชันนี้ไม่มี ต้องกดสลับเป็นกริดก่อนทุกครั้ง<br/>ตอนนี้<b>กดค้างที่ช่องว่างแล้วลากแนวนอน</b>ได้ทั้ง 2 แบบ · มี<b>แถบสีฟ้าวิ่งตาม</b>บอกว่ากี่คืน · ป้ายบอก<b>วันเข้า · คืนสุดท้าย · วันออก</b><br/>ลากทับช่วงที่มีคนจองอยู่แล้ว แถบจะเป็น<b>สีแดงพร้อมชื่อคนที่ชน</b> ปล่อยแล้วไม่เปิดฟอร์ม — กดที่ช่องที่จองแล้วก็ไม่เริ่มลาก<br/><b>คลิกช่องเดียวยังจอง 1 คืน</b>เหมือนเดิม · แถบวิ่ง<b>วัดจากช่องจริง</b> จึงไม่เพี้ยนตอนสลับ 7/14/30/60 วัน</td></tr>'
++'<tr><td style="font-family:monospace">v3.98.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ย้ายเมนู · เปลี่ยนหน้าแรก · ดู PIN ได้ชั่วคราว</b><br/><b>ปุ่มตั้งค่า</b>ย้ายจากกลุ่ม “เครื่องมือ” ไปอยู่<b>ท้ายสุดใต้รายชื่อช่าง</b> ทั้งหมวดรายเดือนและรายวัน — ตั้งค่าเป็นงานที่ทำนาน ๆ ครั้ง อยู่ท้ายจะได้ไม่กดโดนตอนใช้งานประจำ<br/><b>หน้าแรกของหมวดรายเดือน</b>เปลี่ยนจากแดชบอร์ดเป็น <b>ผังห้องพัก</b> — เข้ามาเห็นห้องเลย ไม่ต้องกดอีกที (แดชบอร์ดยังอยู่ในกลุ่มเครื่องมือ)<br/><b>ดู PIN ได้แล้ว</b> — เจ้าของกด<b>ค้างไว้</b>ที่ปุ่มรูปตาถึงจะเห็นเลขจริง <b>ปล่อยนิ้วซ่อนทันที</b> เผลอเปิดทิ้งไว้ให้คนเดินผ่านเห็นไม่ได้ · พนักงานไม่เห็นปุ่มนี้เลย · ทุกครั้งที่เปิดดูมี<b>บันทึกไว้ว่าใครดู PIN ของใคร</b> ถ้าหลุดจะตามได้</td></tr>'
++'<tr><td style="font-family:monospace">v3.97.1</td><td>22 ส.ค. 69</td>'
++'<td>แสดง<b>เลขเวอร์ชันท้ายชื่อระบบ</b>ที่มุมบนซ้าย — เวลามีคนแจ้งปัญหาจะได้รู้ทันทีว่าเครื่องนั้นใช้เวอร์ชันอะไร และรีเฟรชรับตัวใหม่แล้วหรือยัง<br/>ดึงจากเวอร์ชันจริงของแอปโดยตรง ไม่ต้องแก้มือทุกครั้งที่อัป</td></tr>'
 +'<tr><td style="font-family:monospace">v3.97.0</td><td>22 ส.ค. 69</td>'
 +'<td><b>ระบบหักเงินส่งยอดต้องอนุมัติเสร็จครบทั้ง 4 เฟส</b><br/>เจ้าของกดจากกระดิ่งหรือเมนู <b>รออนุมัติ</b> → เห็นห้อง งานซ่อม ค่าซ่อม เหตุผล และ<b>ผลถ้าอนุมัติเป็นตัวเลขใหญ่</b> → กดอนุมัติแล้ว<b>ยอดถึงจะถูกหักจากยอดส่ง</b><br/>พนักงานเปิดงานซ่อมจะเห็นแถบสถานะบนสุด — <b>รอเจ้าของ</b> (เหลือง) ย้ำว่ายอดยังไม่ถูกหัก · <b>อนุมัติแล้ว</b> (เขียว) บอกยอดและคนอนุมัติ · <b>ไม่อนุมัติ</b> (แดง) บอกเหตุผลและย้ำว่ายอดส่งไม่ถูกหัก<br/>คำขอหักยอดใช้ไอคอน <b>−</b> แยกจากคำขอชนิดอื่น ทั้งในกระดิ่ง หน้ารออนุมัติ และประวัติ<br/><b>สรุปทั้งระบบ</b> — เงินที่ออกจากลิ้นชักต้องมีเจ้าของรู้เห็นทุกบาท · พนักงานยังทำงานต่อได้ระหว่างรอ · ทุกอย่างมีร่องรอยครบ</td></tr>'
 +'<tr><td style="font-family:monospace">v3.96.0</td><td>22 ส.ค. 69</td>'
@@ -5738,8 +5752,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1207;
-window.__APP_VERSION = "v3.97.0";
+window.__APP_BUILD = 1211;
+window.__APP_VERSION = "v4.00.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -8760,6 +8774,55 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 .noti-item.noti-req .ic .ico-minus{color:inherit}
 .reqh-item .ic .ico-minus{color:inherit}
 </style>
+
+<style>
+/* เวอร์ชันท้ายชื่อระบบ · เห็นได้ทันทีว่าเครื่องไหนใช้เวอร์ชันอะไร
+   ตอนแก้บั๊กจะได้รู้ว่าลูกน้องรีเฟรชแล้วหรือยัง */
+.logo-ver{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  color:#64748b;background:rgba(148,163,184,.14);padding:1px 5px;border-radius:4px;
+  margin-left:3px;letter-spacing:0;vertical-align:1px}
+</style>
+
+<style>
+/* ── ปุ่มดู PIN ชั่วคราว ── */
+.pinpeek{border:1.5px solid #e2e8f0;background:#fff;border-radius:9px;padding:8px 12px;
+  font-size:11.5px;font-weight:800;color:#64748b;cursor:pointer;white-space:nowrap;
+  user-select:none;-webkit-user-select:none;touch-action:none;font-family:Sarabun,sans-serif;
+  display:inline-flex;align-items:center;gap:5px}
+.pinpeek:hover{background:#fafcfe}
+.pinpeek.on{border-color:#f59e0b;background:#fffbeb;color:#b45309}
+.pinmask.shown{background:#fffbeb;border-color:#fde68a;color:#b45309;letter-spacing:3px}
+.pinhint{font-size:10.5px;color:#94a3b8;margin-top:7px;line-height:1.6}
+.pinhint b{color:#64748b}
+.pinhint.warn{color:#b45309}
+.pinhint.warn b{color:#78350f}
+</style>
+
+<style>
+/* ── ลากเลือกช่วงวันในแบบแท่ง ── */
+.tl-cell.vacant{cursor:cell}
+.tl-cell.tlg-sel{background:#dbeafe !important;box-shadow:inset 0 0 0 1.5px #3b82f6}
+.tl-row{position:relative}
+/* แถบวิ่งตอนลากต้องอยู่เหนือแถบการจอง จะได้เห็นชัด */
+.tl-row .tlg-dragbar{z-index:8}
+</style>
+
+<style>
+/* ── ลากแถบเดือน/วันที่เพื่อเลื่อนดู ── */
+.tl-pan{cursor:grab}
+.tl-pan.panning{cursor:grabbing;user-select:none}
+.tl-pan .tl-pan-skip{cursor:default}
+.tl-panhint{position:absolute;top:50%;transform:translateY(-50%);pointer-events:none;
+  font-size:13px;font-weight:900;color:#94a3b8;opacity:0;transition:opacity .15s;z-index:5}
+.tl-panhint.l{left:56px}
+.tl-panhint.r{right:6px}
+.tl-pantip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+  background:#0f172a;color:#fff;font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:7px;
+  opacity:0;transition:opacity .15s;z-index:6;white-space:nowrap}
+.tl-pan.hover .tl-panhint,.tl-pan.hover .tl-pantip{opacity:1}
+.tl-pan.hover .tl-pantip{opacity:.94}
+.tl-pan.panning .tl-pantip,.tl-pan.panning .tl-panhint{opacity:0}
+</style>
 <div id="page-guide" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-file"></i> คู่มือระบบ</div>
@@ -8768,7 +8831,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.97.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.00.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -9098,7 +9161,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v3.97.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.00.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -18514,6 +18577,43 @@ function rReports() {
 // ════════════════════════════════════════════════
 // ═══ STAFF MANAGEMENT (ใน Settings)
 // ════════════════════════════════════════════════
+/* ดู PIN ชั่วคราว · เจ้าของเท่านั้น
+   กดค้างถึงจะเห็น ปล่อยแล้วซ่อนทันที — เผลอเปิดทิ้งไว้ให้คนเดินผ่านเห็นไม่ได้
+   บันทึกทุกครั้งที่เปิดดู ถ้า PIN หลุดจะตามได้ว่าใครดูของใครเมื่อไหร่ */
+var _pinPeekLogged = {};
+window.pinPeek = function(uid, on, ev){
+  if (ev && ev.preventDefault) ev.preventDefault();
+  if (!muIsOwner()) return;
+  var u = (staffList||[]).find(function(x){return x.id===uid;});
+  if (!u || !u.pin) return;
+  var mask = document.getElementById("pinmask-" + uid);
+  var btn  = document.getElementById("pinpeek-" + uid);
+  var hint = document.getElementById("pinhint-" + uid);
+  if (!mask) return;
+  if (on){
+    mask.textContent = String(u.pin);
+    mask.classList.add("shown");
+    if (btn) btn.classList.add("on");
+    if (hint) hint.innerHTML = "<b>\u26a0 กำลังแสดง PIN</b> \u00b7 ปล่อยนิ้วแล้วซ่อนทันที";
+    if (hint) hint.classList.add("warn");
+    /* จดครั้งเดียวต่อคนต่อการเปิดหน้า ไม่ให้ log ท่วมตอนกดหลายรอบ */
+    if (!_pinPeekLogged[uid]){
+      _pinPeekLogged[uid] = true;
+      try {
+        logActivity("pin-peek", u.name || uid,
+          "เปิดดู PIN ของ " + (u.name||"-"), {});
+      } catch(e){}
+    }
+  } else {
+    mask.innerHTML = "\u2022\u2022\u2022\u2022\u2022\u2022";
+    mask.classList.remove("shown");
+    if (btn) btn.classList.remove("on");
+    if (hint){
+      hint.classList.remove("warn");
+      hint.innerHTML = "กด<b>ค้างไว้</b>ที่ปุ่มตาถึงจะเห็น \u00b7 ปล่อยแล้วซ่อนทันที";
+    }
+  }
+};
 function renderStaffList() {
   try { rentSyncBtn(); } catch(e){}
   var card = document.getElementById("staff-card");
@@ -18594,13 +18694,27 @@ function renderStaffList() {
       + "><i class='ico ico-x'></i></button>"
       + "</div>";
     s += "<div class='usec'>";
-    /* PIN ไม่แสดงตัวเลขอีกต่อไป · ตั้งใหม่ได้ แต่อ่านของเดิมไม่ได้ */
+    /* PIN ปกติแสดงเป็นจุด · เจ้าของกดค้างที่ปุ่มตาถึงจะเห็นเลขจริง
+       ปล่อยนิ้วซ่อนทันที เผลอเปิดทิ้งไว้ไม่ได้ · ทุกครั้งที่เปิดดูมีบันทึกไว้ */
+    var _canPeek = muIsOwner() && !!u.pin;
     s += "<div class='ufield'><label class='flabel'>รหัส PIN</label>"
       + "<div class='pinrow'>"
-      +   "<div class='pinmask'>"+(u.pin ? "\u2022\u2022\u2022\u2022\u2022\u2022" : "<span class='nopin'>ยังไม่ได้ตั้ง</span>")+"</div>"
+      +   "<div class='pinmask' id='pinmask-"+u.id+"'>"
+      +     (u.pin ? "\u2022\u2022\u2022\u2022\u2022\u2022" : "<span class='nopin'>ยังไม่ได้ตั้ง</span>")
+      +   "</div>"
+      +   (_canPeek
+         ? "<button class='pinpeek' id='pinpeek-"+u.id+"' type='button'"
+           + " onpointerdown=\"pinPeek('"+u.id+"',1,event)\""
+           + " onpointerup=\"pinPeek('"+u.id+"',0)\""
+           + " onpointerleave=\"pinPeek('"+u.id+"',0)\""
+           + " onpointercancel=\"pinPeek('"+u.id+"',0)\""
+           + " title='กดค้างไว้ถึงจะเห็น'><i class='ico ico-eye'></i> กดค้าง</button>"
+         : "")
       +   "<button class='pinset'"+(lockAll ? " disabled title='แก้ข้อมูลของเจ้าของไม่ได้'" : " onclick=\"muAskPin('"+u.id+"')\"")
       +     ">"+(u.pin ? "ตั้ง PIN ใหม่" : "ตั้ง PIN")+"</button>"
-      + "</div></div>";
+      + "</div>"
+      + (_canPeek ? "<div class='pinhint' id='pinhint-"+u.id+"'>กด<b>ค้างไว้</b>ที่ปุ่มตาถึงจะเห็น \u00b7 ปล่อยแล้วซ่อนทันที</div>" : "")
+      + "</div>";
     if (u.role === "owner") {
       s += "<div class='owner-access'><span class='ownerbadge'><i class='ico ico-check'></i> เข้าถึงได้ทุกส่วน — ไม่ต้องตั้งสิทธิ์</span></div>";
     } else {
@@ -21577,7 +21691,9 @@ function switchMode(mode) {
   document.getElementById("nav-daily").style.display = mode==="daily" ? "flex" : "none";  /* B2: flex เพื่อให้ margin-top:auto ทำงาน */
   // เปลี่ยนหน้าไปหน้า default ของโหมด
   if (mode==="monthly") {
-    goPage("dashboard", document.querySelector("#nav-monthly [data-page='dashboard']"));
+    /* หน้าแรกเป็นผังห้องพัก — เข้ามาเห็นห้องเลย ไม่ต้องกดอีกที
+       แดชบอร์ดยังอยู่ในกลุ่มเครื่องมือ กดดูได้ */
+    goPage("rooms", document.querySelector("#nav-monthly [data-page='rooms']"));
   } else {
     goPage("daily-dash", document.querySelector("#nav-daily [data-page='daily-dash']"));
     checkNoonPopup();
@@ -22018,8 +22134,9 @@ function renderTimelineBars() {
   var html = "";
 
   // ── Month banner row ──
-  html += "<div class='tl-month-header' style='display:flex;min-width:max-content'>";
-  html += "<div class='tl-month-header-spacer'></div>";
+  /* แถวเดือนลากเพื่อเลื่อนดูได้ · ไม่ชนกับการลากเลือกวันเพราะคนละแถว */
+  html += "<div class='tl-month-header tl-pan' style='display:flex;min-width:max-content'>";
+  html += "<div class='tl-month-header-spacer tl-pan-skip'></div>";
   html += "<div style='display:flex'>";
   monthSpans.forEach(function(span){
     var width = span.count * cellWidth;
@@ -22032,8 +22149,8 @@ function renderTimelineBars() {
   html += "</div></div>";
 
   // ── Date header row ──
-  html += "<div style='display:flex;min-width:max-content'>";
-  html += "<div class='tl-room-label-header'>ห้อง</div>";
+  html += "<div class='tl-pan' style='display:flex;min-width:max-content;position:relative'>";
+  html += "<div class='tl-room-label-header tl-pan-skip'>ห้อง</div>";
   html += "<div class='tl-cells' style='flex:none;display:flex'>";
   for (var i2=0; i2<days; i2++) {
     var m2 = dayMeta[i2];
@@ -22048,19 +22165,36 @@ function renderTimelineBars() {
       + (m2.isMonthStart && cellWidth>=22 ? "<div class='tl-date-cell-month'>"+MONTHS[m2.month]+"</div>" : "")
       + "</div>";
   }
-  html += "</div></div>";
+  html += "</div>"
+    + "<span class='tl-panhint l'>\u276e</span>"
+    + "<span class='tl-panhint r'>\u276f</span>"
+    + "<span class='tl-pantip'>กดค้างแล้วลากเพื่อเลื่อนดู</span>"
+    + "</div>";
 
   // ── Rows per room ──
   dailyRooms.forEach(function(r){
     r = mtSafe(r);
     var closed = r.status!=="active";
     var rowCls = "tl-row";
-    html += "<div class='"+rowCls+"' style='display:flex;min-width:max-content'>";
+    /* ต้องมี data-room เพื่อให้ลากเลือกช่วงวันหาช่องข้างเคียงในแถวเดียวกันได้ */
+    html += "<div class='"+rowCls+"' data-room='"+r.id+"' style='display:flex;min-width:max-content'>";
     var labelCls = "tl-room-label" + (closed ? " closed" : "");
     html += "<div class='"+labelCls+"'>"
       + "<div>"+r.number+"</div>"
       + "<div class='tl-room-label-type'>"+(r.type==="double"?"เตียงคู่":"เตียงเดี่ยว")+"</div>"
       + "</div>";
+    /* วันไหนมีคนอยู่บ้าง — ใช้ทำเครื่องหมายช่องว่าง/ไม่ว่าง ให้ลากเลือกได้
+       คิดครั้งเดียวต่อห้อง ไม่ต้องวนซ้ำทุกช่อง */
+    var _occ = {};
+    var _s0 = dateOnly(start), _e0 = dateOnly(addDays(start, days));
+    (bookings||[]).forEach(function(bk){
+      if (bk.roomId !== r.id) return;
+      if (bk.status === "cancelled") return;
+      if (!(bk.checkIn < _e0 && bk.checkOut > _s0)) return;
+      var f = daysBetween(_s0, bk.checkIn < _s0 ? _s0 : bk.checkIn);
+      var t = daysBetween(_s0, bk.checkOut > _e0 ? _e0 : bk.checkOut);
+      for (var q = f; q < t; q++) _occ[q] = (bk.guestName || "ที่จองไว้");
+    });
     html += "<div class='tl-cells' style='flex:none;position:relative'>";
     for (var j=0; j<days; j++) {
       var mm = dayMeta[j];
@@ -22070,7 +22204,12 @@ function renderTimelineBars() {
       else if (mm.dow===0 || mm.dow===6) cellCls += " weekend";
       if (mm.isMonthStart) cellCls += " month-start";
       if (mm.monthIdx%2===1) cellCls += " month-odd";
-      html += "<div class='"+cellCls+"' style='min-width:"+cellWidth+"px' data-room='"+r.id+"' data-date='"+mm.ds+"' data-col-idx='"+j+"' onclick='tlCellClick(\""+r.id+"\",\""+mm.ds+"\")'></div>";
+      /* data-i กับ vacant ใช้ชื่อเดียวกับแบบกริด เพื่อให้ตัวลากตัวเดียวใช้ได้ทั้ง 2 โหมด */
+      if (closed) cellCls += "";
+      else if (_occ[j] != null) cellCls += " booked";
+      else cellCls += " vacant";
+      var _gn = _occ[j] != null ? " data-guest='" + mtEsc(String(_occ[j])) + "'" : "";
+      html += "<div class='"+cellCls+"' style='min-width:"+cellWidth+"px' data-room='"+r.id+"' data-date='"+mm.ds+"' data-col-idx='"+j+"' data-i='"+j+"'"+_gn+" onclick='tlCellClick(\""+r.id+"\",\""+mm.ds+"\")'></div>";
     }
 
     // Bars
@@ -22193,6 +22332,7 @@ function renderTimelineBars() {
   body.innerHTML = html;
   setupColumnHover();
   tlgBindDrag();
+  tlPanBind();
 
   // Legend
   var legEl = document.getElementById("tl-legend");
@@ -22292,8 +22432,9 @@ function renderTimelineGrid() {
   var html = "";
 
   // ── Month banner ──
-  html += "<div class='tl-month-header' style='display:flex;min-width:max-content'>";
-  html += "<div class='tl-month-header-spacer'></div>";
+  /* แถวเดือนลากเพื่อเลื่อนดูได้ · ไม่ชนกับการลากเลือกวันเพราะคนละแถว */
+  html += "<div class='tl-month-header tl-pan' style='display:flex;min-width:max-content'>";
+  html += "<div class='tl-month-header-spacer tl-pan-skip'></div>";
   html += "<div style='display:flex'>";
   monthSpans.forEach(function(span){
     var w = span.count * cellWidth;
@@ -22345,6 +22486,7 @@ function renderTimelineGrid() {
   body.innerHTML = html;
   setupColumnHover();
   tlgBindDrag();
+  tlPanBind();
 
   // Legend
   var legEl = document.getElementById("tl-legend");
@@ -22486,25 +22628,47 @@ var tlDrag = null;
 var TLG_CELL_W = 150;   /* ต้องตรงกับ .tlg-cell ใน CSS */
 var TLG_LABEL_W = 50;
 
+/* อยู่โหมดแท่งหรือกริด · ใช้ตัดสินว่าจะหาช่องจากคลาสไหน */
+function tlgIsBars(){ return window.tlViewMode === "bars"; }
+function tlgCls(){ return tlgIsBars() ? "tl-cell" : "tlg-cell"; }
+function tlgRowCls(){ return tlgIsBars() ? "tl-row" : "tlg-row"; }
 function tlgCellAt(x, y){
+  var cls = tlgCls();
   var el = document.elementFromPoint(x, y);
-  while (el && !(el.classList && el.classList.contains('tlg-cell'))) el = el.parentElement;
+  while (el && !(el.classList && el.classList.contains(cls))) el = el.parentElement;
   return el;
+}
+/* ความกว้างช่องจริง · แบบกริดคงที่ 150 แต่แบบแท่งเปลี่ยนตามช่วง 7/14/30/60
+   วัดจากช่องจริงเสมอ แถบวิ่งจะได้ไม่เพี้ยนตอนสลับช่วงวัน */
+function tlgCellW(room){
+  if (!tlgIsBars()) return TLG_CELL_W;
+  var c = document.querySelector("." + tlgRowCls() + "[data-room='" + room + "'] ." + tlgCls());
+  return c ? c.getBoundingClientRect().width : 40;
+}
+/* ระยะจากขอบซ้ายแถวถึงช่องแรก · แบบแท่งคือความกว้างป้ายห้อง */
+function tlgLabelW(room){
+  if (!tlgIsBars()) return TLG_LABEL_W;
+  var row = document.querySelector("." + tlgRowCls() + "[data-room='" + room + "']");
+  if (!row) return 0;
+  var lab = row.querySelector(".tl-room-label");
+  return lab ? lab.getBoundingClientRect().width : 0;
 }
 function tlgIsFree(el){
   return !!el && el.classList.contains('vacant');
 }
 /* ชนกับใครในช่วงนี้ · คืนชื่อคนแรกที่ชน */
 function tlgClashName(roomId, lo, hi){
-  var row = document.querySelector(".tlg-row[data-room='"+roomId+"']");
+  var row = document.querySelector("." + tlgRowCls() + "[data-room='"+roomId+"']");
   if (!row) return null;
   for (var i = lo; i <= hi; i++){
-    var c = row.querySelector(".tlg-cell[data-i='"+i+"']");
+    var c = row.querySelector("." + tlgCls() + "[data-i='"+i+"']");
     if (!c) continue;
     if (c.classList.contains('closed')) return 'ห้องปิด';
     if (!c.classList.contains('vacant')){
+      /* แบบกริดชื่อคนอยู่ในช่อง · แบบแท่งเก็บไว้ที่ data-guest เพราะช่องว่างเปล่า */
       var g = c.querySelector('.tlg-guest');
-      return (g ? g.textContent.trim() : 'ที่จองไว้');
+      if (g) return g.textContent.trim();
+      return c.getAttribute('data-guest') || 'ที่จองไว้';
     }
   }
   return null;
@@ -22516,7 +22680,9 @@ function tlgDayLabel(i){
   } catch(e){ return "-"; }
 }
 function tlgClearSel(){
-  document.querySelectorAll('.tlg-cell.tlg-sel').forEach(function(e){ e.classList.remove('tlg-sel'); });
+  document.querySelectorAll('.tlg-cell.tlg-sel,.tl-cell.tlg-sel').forEach(function(e){
+    e.classList.remove('tlg-sel');
+  });
 }
 function tlgKill(){
   ['tlg-dragbar','tlg-dragtip'].forEach(function(id){
@@ -22532,17 +22698,23 @@ function tlgPaint(ev){
   var who = tlgClashName(tlDrag.room, lo, hi);
   tlDrag.bad = !!who;
   tlgClearSel();
-  var row = document.querySelector(".tlg-row[data-room='"+tlDrag.room+"']");
+  var row = document.querySelector("." + tlgRowCls() + "[data-room='"+tlDrag.room+"']");
   if (!row) return;
   for (var i = lo; i <= hi; i++){
-    var cc = row.querySelector(".tlg-cell[data-i='"+i+"']");
+    var cc = row.querySelector("." + tlgCls() + "[data-i='"+i+"']");
     if (cc) cc.classList.add('tlg-sel');
   }
   var bar = document.getElementById('tlg-dragbar');
-  if (!bar){ bar = document.createElement('div'); bar.id = 'tlg-dragbar'; row.appendChild(bar); }
+  if (!bar){ bar = document.createElement('div'); bar.id = 'tlg-dragbar'; }
+  /* แถบต้องอยู่ในแถวที่กำลังลาก — สลับห้องแล้วต้องย้ายตาม */
+  if (bar.parentElement !== row) row.appendChild(bar);
   bar.className = 'tlg-dragbar' + (who ? ' bad' : '');
-  bar.style.left  = (TLG_LABEL_W + lo*TLG_CELL_W + 4) + 'px';
-  bar.style.width = ((hi-lo+1)*TLG_CELL_W - 8) + 'px';
+  /* วัดความกว้างจากช่องจริง · แบบแท่งช่องแคบลงตามช่วง 7/14/30/60
+     ถ้าใช้ค่าคงที่ แถบจะยาวเกินจอตอนดู 30/60 วัน */
+  var _w = tlgCellW(tlDrag.room), _lw = tlgLabelW(tlDrag.room);
+  var _pad = _w > 24 ? 4 : 1;   /* ช่องแคบมากอย่าเว้นขอบเยอะ ไม่งั้นแถบหาย */
+  bar.style.left  = (_lw + lo*_w + _pad) + 'px';
+  bar.style.width = Math.max(6, (hi-lo+1)*_w - _pad*2) + 'px';
   bar.textContent = who ? '' : (hi-lo+1) + ' คืน';
   var tip = document.getElementById('tlg-dragtip');
   if (!tip){ tip = document.createElement('div'); tip.id = 'tlg-dragtip'; document.body.appendChild(tip); }
@@ -22589,6 +22761,64 @@ function tlgUp(ev){
     var end   = dateOnly(addDays(new Date(tlStartDate), hi+1));
     openBookingModal(null, { roomId:d.room, checkIn:start, checkOut:end });
   } catch(e){ console.error(e); }
+}
+/* ═══════════ ลากแถบวันที่เพื่อเลื่อนดู ═══════════
+   ปฏิทิน 30/60 วันกว้างเกินจอ ต้องหาแถบเลื่อนด้านล่างซึ่งเล็กและอยู่ไกลตา
+   ลากที่แถบเดือน/วันที่ได้เลยจะเร็วกว่า · ไม่ชนกับการลากเลือกวันเพราะคนละแถว */
+var tlPan = null;
+function tlPanScroller(el){
+  /* หาตัวที่เลื่อนได้จริง — เป็น .tl-wrap ไม่ใช่ตัวที่ครอบใกล้สุด */
+  while (el && el !== document.body){
+    if (el.scrollWidth > el.clientWidth + 2){
+      var ox = getComputedStyle(el).overflowX;
+      if (ox === "auto" || ox === "scroll") return el;
+    }
+    el = el.parentElement;
+  }
+  return null;
+}
+function tlPanDown(ev){
+  if (ev.button != null && ev.button !== 0) return;
+  var row = ev.target.closest ? ev.target.closest(".tl-pan") : null;
+  if (!row) return;
+  /* ป้ายห้องติดซ้ายอยู่กับที่ กดตรงนั้นไม่ต้องลาก */
+  if (ev.target.closest(".tl-pan-skip")) return;
+  var sc = tlPanScroller(row);
+  if (!sc) return;
+  tlPan = { x: ev.clientX, sl: sc.scrollLeft, sc: sc, row: row, moved: false };
+  row.classList.add("panning");
+  ev.preventDefault();
+}
+function tlPanMove(ev){
+  if (!tlPan) return;
+  var dx = ev.clientX - tlPan.x;
+  if (Math.abs(dx) > 3) tlPan.moved = true;
+  tlPan.sc.scrollLeft = tlPan.sl - dx;
+}
+function tlPanUp(){
+  if (!tlPan) return;
+  tlPan.row.classList.remove("panning");
+  tlPan = null;
+}
+function tlPanHover(ev){
+  var row = ev.target.closest ? ev.target.closest(".tl-pan") : null;
+  document.querySelectorAll(".tl-pan.hover").forEach(function(e){
+    if (e !== row) e.classList.remove("hover");
+  });
+  if (row && !tlPan) row.classList.add("hover");
+}
+function tlPanBind(){
+  var body = document.getElementById("tl-body");
+  if (!body || body.__tlPanBound) return;
+  body.__tlPanBound = true;
+  body.addEventListener("pointerdown", tlPanDown);
+  body.addEventListener("pointermove", tlPanHover);
+  body.addEventListener("pointerleave", function(){
+    document.querySelectorAll(".tl-pan.hover").forEach(function(e){ e.classList.remove("hover"); });
+  });
+  document.addEventListener("pointermove", tlPanMove);
+  document.addEventListener("pointerup", tlPanUp);
+  document.addEventListener("pointercancel", tlPanUp);
 }
 function tlgBindDrag(){
   var body = document.getElementById('tl-body');
