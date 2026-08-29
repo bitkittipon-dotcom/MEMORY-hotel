@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v3.94.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v3.97.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -2262,6 +2262,9 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <div class="nav-section nav-bottom">ส่งยอด / ช่าง</div>
     <button class="nav-btn" data-page="handoff-all" onclick="goPage('handoff-all',this)"><i class="ico ico-money"></i> ส่งยอด <span class="nav-badge" id="badge-cs" style="background:#10b981">0</span></button>
     <button class="nav-btn" data-page="shift-handoff" onclick="goPage('shift-handoff',this)"><i class="ico ico-send"></i> ส่งกะ</button>
+    <!-- คำขอที่รอเจ้าของตัดสิน · เห็นทั้งเจ้าของและพนักงาน
+         เจ้าของเห็นทุกใบและตัดสินได้ · พนักงานเห็นเฉพาะของตัวเองเพื่อรู้ว่าส่งอะไรไปแล้ว -->
+    <button class="nav-btn" data-page="requests" onclick="goPage('requests',this)"><i class="ico ico-check"></i> รออนุมัติ <span class="nav-badge req-badge" id="badge-req-m">0</span></button>
     <button class="nav-btn" data-page="technicians" onclick="goPage('technicians',this)"><i class="ico ico-tool"></i> รายชื่อช่าง</button>
   </nav>
 
@@ -2281,6 +2284,9 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <div class="nav-section nav-bottom">ส่งยอด / ช่าง</div>
     <button class="nav-btn" data-page="handoff-all" onclick="goPage('handoff-all',this)"><i class="ico ico-money"></i> ส่งยอด <span class="nav-badge" id="badge-dho" style="background:#16a34a">0</span></button>
     <button class="nav-btn" data-page="shift-handoff" onclick="goPage('shift-handoff',this)"><i class="ico ico-send"></i> ส่งกะ</button>
+    <!-- คำขอที่รอเจ้าของตัดสิน · เห็นทั้งเจ้าของและพนักงาน
+         เจ้าของเห็นทุกใบและตัดสินได้ · พนักงานเห็นเฉพาะของตัวเองเพื่อรู้ว่าส่งอะไรไปแล้ว -->
+    <button class="nav-btn" data-page="requests" onclick="goPage('requests',this)"><i class="ico ico-check"></i> รออนุมัติ <span class="nav-badge req-badge" id="badge-req-d">0</span></button>
     <button class="nav-btn" data-page="technicians" onclick="goPage('technicians',this)"><i class="ico ico-tool"></i> รายชื่อช่าง</button>
   </nav>
 
@@ -2437,6 +2443,16 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 </div>
 
 <!-- ═══ TECHNICIANS LIST ═══ -->
+<!-- ═══ คำขอรออนุมัติ ═══ -->
+<div id="page-requests" class="page">
+  <div class="page-header">
+    <div><div class="page-title"><i class="ico ico-check"></i> รออนุมัติ</div>
+      <div class="page-sub" id="rq-sub">—</div></div>
+  </div>
+  <div class="rq-tabs" id="rq-tabs"></div>
+  <div id="rq-list"></div>
+</div>
+
 <div id="page-technicians" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-tool"></i> รายชื่อช่าง</div><div class="page-sub" id="tch-count">0 คน</div></div>
@@ -5541,6 +5557,12 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v3.97.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ระบบหักเงินส่งยอดต้องอนุมัติเสร็จครบทั้ง 4 เฟส</b><br/>เจ้าของกดจากกระดิ่งหรือเมนู <b>รออนุมัติ</b> → เห็นห้อง งานซ่อม ค่าซ่อม เหตุผล และ<b>ผลถ้าอนุมัติเป็นตัวเลขใหญ่</b> → กดอนุมัติแล้ว<b>ยอดถึงจะถูกหักจากยอดส่ง</b><br/>พนักงานเปิดงานซ่อมจะเห็นแถบสถานะบนสุด — <b>รอเจ้าของ</b> (เหลือง) ย้ำว่ายอดยังไม่ถูกหัก · <b>อนุมัติแล้ว</b> (เขียว) บอกยอดและคนอนุมัติ · <b>ไม่อนุมัติ</b> (แดง) บอกเหตุผลและย้ำว่ายอดส่งไม่ถูกหัก<br/>คำขอหักยอดใช้ไอคอน <b>−</b> แยกจากคำขอชนิดอื่น ทั้งในกระดิ่ง หน้ารออนุมัติ และประวัติ<br/><b>สรุปทั้งระบบ</b> — เงินที่ออกจากลิ้นชักต้องมีเจ้าของรู้เห็นทุกบาท · พนักงานยังทำงานต่อได้ระหว่างรอ · ทุกอย่างมีร่องรอยครบ</td></tr>'
++'<tr><td style="font-family:monospace">v3.96.0</td><td>22 ส.ค. 69</td>'
++'<td><b>หักเงินส่งยอดต้องให้เจ้าของอนุมัติก่อน (เฟส 3 จาก 4)</b><br/>🔴 <b>เจอบั๊กเก่าระหว่างทดสอบ</b> — งานซ่อมที่<b>แจ้งใหม่ไม่เคยเก็บว่าหักจากไหนเลย</b> (เก็บเฉพาะตอนแก้ไข) แปลว่าเลือก “หักเงินส่งยอด” ไปกี่ครั้ง <b>ยอดก็ไม่เคยถูกหักจริง</b> · แก้แล้ว<br/>ปุ่ม <b>หักเงินส่งยอด</b> มีป้าย <b>ขออนุมัติ</b> ที่มุม · กดแล้วขึ้นกล่องอธิบาย 3 ขั้นว่า จะเกิดอะไรต่อ และย้ำว่า<b>ยังไม่หักยอด</b>จนกว่าเจ้าของจะอนุมัติ · <b>ต้องกรอกเหตุผล</b>ก่อนบันทึก<br/><b>งานซ่อมบันทึกทันที</b> พนักงานทำงานต่อได้ · รอเฉพาะการหักยอด · เจ้าของแจ้งซ่อมเองถือว่าอนุมัติทันที ไม่ต้องขอตัวเอง<br/><b>งานซ่อมเก่ายังหักได้เหมือนเดิม</b> — งานที่ทำก่อนระบบนี้ถือว่าอนุมัติแล้ว ยอดที่เคยหักไม่หายย้อนหลัง</td></tr>'
++'<tr><td style="font-family:monospace">v3.95.0</td><td>21 ส.ค. 69</td>'
++'<td><b>เพิ่มเมนู “รออนุมัติ” (เฟส 1-2 จาก 4)</b><br/>เมนูใหม่อยู่<b>ใต้ “ส่งกะ”</b> พร้อม<b>ป้ายวงกลมแดง</b>บอกจำนวนที่ค้าง · ไม่มีรายการก็ไม่แสดงป้าย<br/><b>เห็นทั้งเจ้าของและพนักงาน</b> แต่ต่างกัน — เจ้าของเห็น<b>ทุกคำขอ</b>และกดอนุมัติได้ · พนักงานเห็น<b>เฉพาะที่ตัวเองส่ง</b> ดูได้อย่างเดียว จะได้รู้ว่าส่งอะไรไปแล้วบ้าง<br/>ในหน้ามี<b>แท็บกรองตามชนิด</b> (หักยอด · ลบเงิน · แก้ราคา · ยกเลิกจอง) แสดงเฉพาะชนิดที่มีจริง · แต่ละแถวบอก<b>ค้างมานานแค่ไหน</b> เช่น “8 นาทีที่แล้ว”<br/>ไม่มีรายการจะขึ้น ✓ เขียวว่าไม่มีอะไรค้าง พร้อมชี้ไปดูประวัติที่บันทึกการทำงาน</td></tr>'
 +'<tr><td style="font-family:monospace">v3.94.0</td><td>21 ส.ค. 69</td>'
 +'<td><b>กันเจ้าของ 2 คนตัดสินคำขอใบเดียวกัน</b><br/>ถ้า LEK เปิดคำขอค้างไว้ แล้วมิ้นท์อนุมัติจากอีกเครื่อง — เดิม LEK กดอนุมัติซ้ำได้ ทำให้<b>ลบเงินก้อนเดียว 2 รอบ</b> หรือปฏิเสธทับใบที่อนุมัติไปแล้ว<br/>ตอนนี้ก่อนลงมือจะ<b>อ่านสถานะล่าสุดจากฐานข้อมูลก่อนเสมอ</b> · ถ้ามีคนตัดสินไปแล้วจะขึ้นว่า <b>“มิ้นท์ อนุมัติคำขอนี้ไปแล้ว”</b> แล้วปิดหน้าต่างให้ พร้อมดึงสถานะใหม่มาแสดง<br/><b>กดปุ่มรัว ๆ ก็ทำงานครั้งเดียว</b> · คำขอที่ตัดสินไปแล้วเปิดไม่ได้ · ถ้าคำขอถูกล้างจากระบบระหว่างนั้นจะเตือนแทนที่จะพัง</td></tr>'
 +'<tr><td style="font-family:monospace">v3.93.0</td><td>21 ส.ค. 69</td>'
@@ -5716,8 +5738,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1204;
-window.__APP_VERSION = "v3.94.0";
+window.__APP_BUILD = 1207;
+window.__APP_VERSION = "v3.97.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -8671,6 +8693,73 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 .pmp-mhint{font-size:10.5px;color:#fca5a5;font-weight:700;margin-top:7px;line-height:1.5}
 #pmp-save-btn:disabled,#pmp-save-btn.pmp-need{opacity:.45;cursor:not-allowed;filter:grayscale(.5)}
 </style>
+
+<style>
+/* ── หน้ารออนุมัติ ── */
+.rq-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.rq-tab{border:1.5px solid #e2e8f0;background:#fff;border-radius:9px;padding:7px 13px;
+  font-size:12px;font-weight:800;color:#64748b;cursor:pointer;user-select:none}
+.rq-tab:hover{background:#fafcfe}
+.rq-tab.on{border-color:#3b82f6;background:#eff6ff;color:#1e40af}
+.rq-tab .n{font-size:10.5px;opacity:.75;margin-left:5px}
+.rq-card{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.06)}
+.rq-item{display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #f6f8fa;cursor:pointer}
+.rq-item:last-child{border-bottom:none}
+.rq-item:hover{background:#fafcfe}
+.rq-item .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0}
+.rq-item.del .ic{background:#fee2e2;color:#b91c1c}
+.rq-item.pri .ic{background:#dbeafe;color:#1e40af}
+.rq-item.ded .ic{background:#fef3c7;color:#b45309}
+.rq-item.can .ic{background:#f3e8ff;color:#7c2d92}
+.rq-item .info{flex:1;min-width:0}
+.rq-item .t{font-size:13px;font-weight:800;color:#0f172a}
+.rq-item .m{font-size:11.5px;color:#64748b;margin-top:2px}
+.rq-item .meta{font-size:10.5px;color:#94a3b8;margin-top:3px;line-height:1.5}
+.rq-item .rt{text-align:right;flex-shrink:0}
+.rq-item .amt{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:14px;color:#dc2626}
+.rq-item.pri .amt{color:#b45309}
+.rq-item .ago{font-size:10px;color:#b6c0cc;margin-top:3px;white-space:nowrap}
+.rq-empty{padding:38px 20px;text-align:center}
+.rq-empty .e1{font-size:32px;color:#bbf7d0}
+.rq-empty .e2{font-size:15px;font-weight:800;color:#15803d;margin-top:10px}
+.rq-empty .e3{font-size:12px;color:#94a3b8;margin-top:5px;line-height:1.7}
+@media(max-width:560px){ .rq-item .meta{font-size:10px} }
+</style>
+
+<style>
+/* ── หักยอดต้องขออนุมัติ ── */
+.rp-pill.p2{position:relative}
+.rp-lock{position:absolute;top:-7px;right:-4px;background:#f59e0b;color:#fff;font-size:8.5px;
+  font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:0;white-space:nowrap}
+.rp-pill.p2.warn:not(.active){border-style:dashed}
+.rp-dwbox{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:11px 12px;margin-top:9px}
+.rp-dwbox .wh{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;
+  color:#b45309;margin-bottom:6px}
+.rp-dwbox .wh .ic{width:20px;height:20px;border-radius:6px;background:#fef3c7;display:flex;
+  align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.rp-dwbox .wt{font-size:11.5px;color:#8a6d3b;line-height:1.75}
+.rp-dwbox .wt b{color:#78350f}
+.rp-dwbox .steps{margin-top:8px;padding-top:8px;border-top:1px dashed #fde68a}
+.rp-dwbox .stp{display:flex;gap:8px;font-size:11px;color:#8a6d3b;padding:3px 0;align-items:flex-start}
+.rp-dwbox .stp .n2{width:16px;height:16px;border-radius:50%;background:#fef3c7;color:#b45309;
+  display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;
+  flex-shrink:0;margin-top:1px}
+.rp-dwbox .stp b{color:#78350f}
+.rp-dedfl{font-size:10.5px;font-weight:800;color:#b45309;margin:10px 0 5px}
+.rp-dedfl .rq{color:#dc2626;font-weight:900;margin-left:3px}
+.rp-dedin{width:100%;border:1.5px solid #fde68a;border-radius:9px;padding:9px 11px;
+  font-size:12.5px;font-family:Sarabun,sans-serif;outline:none;background:#fff;color:#0f172a}
+.rp-dedin:focus{border-color:#f59e0b}
+.rp-dedin.filled{border-color:#bbf7d0;background:#fafffb}
+#rp-save-btn:disabled,#rp-save-btn.rp-need{opacity:.45;cursor:not-allowed;filter:grayscale(.5)}
+</style>
+
+<style>
+/* คำขอหักยอดในกระดิ่ง · ไอคอนเหลืองแยกจากชนิดอื่น */
+.noti-item.noti-req .ic .ico-minus{color:inherit}
+.reqh-item .ic .ico-minus{color:inherit}
+</style>
 <div id="page-guide" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-file"></i> คู่มือระบบ</div>
@@ -8679,7 +8768,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.94.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v3.97.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -8774,7 +8863,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
     <div class="sa2-body" id="rp-body" style="max-height:65vh;overflow-y:auto"></div>
     <div class="sa2-foot">
       <button class="sa2-cancel" onclick="closeModal('repair-modal-bg')">ยกเลิก</button>
-      <button class="sa2-save" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)" onclick="saveRepair()"><i class="ico ico-check"></i> บันทึกแจ้งซ่อม</button>
+      <button class="sa2-save" id="rp-save-btn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)" onclick="saveRepair()"><i class="ico ico-check"></i> บันทึกแจ้งซ่อม</button>
     </div>
   </div>
 </div>
@@ -9009,7 +9098,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v3.94.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v3.97.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -9758,6 +9847,7 @@ function updateNotiBell() {
      เดิมส่วนลดผ่านไปเงียบ ๆ ไม่มีใครรู้ว่าลดไปเท่าไหร่ เพราะอะไร */
   /* คำขออนุมัติ · เห็นเฉพาะเจ้าของ เพราะเป็นคนตัดสิน
      พนักงานเห็นผลในหน้าการจองแทน */
+  try { updateReqBadge(); } catch(e){}
   var reqN = muIsOwner() ? reqPendingList().length : 0;
   var n = pendingList.length + discPendingList().length + reqN;
 
@@ -9818,7 +9908,8 @@ function renderNotiDropdown() {
       ? new Date(q.requestedAt).toLocaleDateString("th-TH",{day:"2-digit",month:"short"}) : "-";
     var who = (q.requestedBy && q.requestedBy.name) || "-";
     var icon = (q.type === "delPayment") ? "trash"
-             : (q.type === "editPrice" ? "edit" : "x");
+             : (q.type === "editPrice" ? "edit"
+             : (q.type === "deductHandoff" ? "minus" : "x"));
     html += ""
       + "<div class='noti-item noti-req' onclick=\"reqOpen('" + q.id + "')\">"
       +   "<div class='ic'><i class='ico ico-" + icon + "'></i></div>"
@@ -11094,7 +11185,8 @@ function goPage(id, btn) {
   document.querySelectorAll("[data-page='"+id+"']").forEach(function(b){b.classList.add("active");});
   if (btn) btn.classList.add("active");
   var fns = {
-    dashboard:rDash, rooms:rRooms, tenants:rTenants, technicians:renderTechniciansPage, bills:rBills, repairs:renderRepairHistoryPage, 'bulk-bill':rBulkBill, reports:rReports,
+    dashboard:rDash, rooms:rRooms, tenants:rTenants, technicians:renderTechniciansPage,
+    requests:renderReqPage, bills:rBills, repairs:renderRepairHistoryPage, 'bulk-bill':rBulkBill, reports:rReports,
     'meter-log':(typeof rMeterLog!=='undefined'?rMeterLog:function(){}),
     'daily-activity-log':(typeof rDailyActivityLog!=='undefined'?rDailyActivityLog:function(){}),
     'activity-log':rActivityLog,
@@ -12273,7 +12365,23 @@ function openRepairDialog() {
     +     "</div>"
     +     "<div class='rp-pill-row rp-tier2' id='rp-tier2' style='display:none;margin-top:7px;padding-top:8px;border-top:1px dashed #e2e8f0'>"
     +       "<button type='button' class='rp-pill p2' data-deduct='owner' onclick='rpSetDeduct(\"owner\",this)'><i class='ico ico-home'></i> เจ้าของจ่าย<span class='rp-p2s'>โอนกันเอง ไม่กระทบยอดส่ง</span></button>"
-    +       "<button type='button' class='rp-pill p2 warn' data-deduct='handoff' onclick='rpSetDeduct(\"handoff\",this)'><i class='ico ico-minus'></i> หักเงินส่งยอด<span class='rp-p2s'>ต้องแนบบิลตอนปิดงาน</span></button>"
+    +       "<button type='button' class='rp-pill p2 warn' data-deduct='handoff' onclick='rpSetDeduct(\"handoff\",this)'><span class='rp-lock'>ขออนุมัติ</span><i class='ico ico-minus'></i> หักเงินส่งยอด<span class='rp-p2s'>ต้องให้เจ้าของอนุมัติก่อน</span></button>"
+    +     "</div>"
+    +     "<div id='rp-ded-warn' style='display:none'>"
+    +       "<div class='rp-dwbox'>"
+    +         "<div class='wh'><span class='ic'><i class='ico ico-alert'></i></span>"
+    +           "<span>หักยอดส่งเองไม่ได้</span></div>"
+    +         "<div class='wt'>เงินก้อนนี้จะ<b>ออกจากลิ้นชักที่ต้องส่งเจ้าของ</b> "
+    +           "จึงต้องให้เจ้าของอนุมัติก่อน<br/>"
+    +           "ตอนนี้เลือกได้ แต่<b>ยังไม่หักยอด</b> จนกว่าเจ้าของจะกดอนุมัติ</div>"
+    +         "<div class='steps'>"
+    +           "<div class='stp'><span class='n2'>1</span><span>กดบันทึกแจ้งซ่อม \u2192 <b>ส่งคำขอให้เจ้าของ</b></span></div>"
+    +           "<div class='stp'><span class='n2'>2</span><span>เจ้าของเห็นที่<b>กระดิ่ง</b> และเมนู <b>รออนุมัติ</b></span></div>"
+    +           "<div class='stp'><span class='n2'>3</span><span>อนุมัติแล้ว<b>ยอดถึงจะถูกหัก</b></span></div>"
+    +         "</div></div>"
+    +       "<div class='rp-dedfl'>เหตุผลที่ต้องหักจากยอดส่ง<span class='rq'>*</span></div>"
+    +       "<input class='rp-dedin' id='rp-ded-reason' maxlength='80' "
+    +         "placeholder='เช่น จ่ายช่างสดจากลิ้นชักแล้ว' oninput='rpDedSync()'/>"
     +     "</div>"
     +   "</div>"
     +   "<div style='background:#fff;padding:8px 10px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#92400e;font-weight:800;margin-bottom:0'>"
@@ -12315,7 +12423,33 @@ function rpSetDeduct(d, btn) {
   rpCurrentDeduct = d;
   document.querySelectorAll("[data-deduct]").forEach(function(b){b.classList.remove("active");});
   if (btn) btn.classList.add("active");
+  rpDedSync();
 }
+/* หักเงินส่งยอดต้องขออนุมัติ
+   เดิมเลือกแล้วยอดถูกหักทันทีตอนปิดงาน โดยเจ้าของไม่รู้เลย
+   ตอนนี้เลือกได้ แต่ต้องบอกเหตุผลและรอเจ้าของอนุมัติก่อนยอดจะถูกหักจริง */
+function rpNeedDedApproval(){
+  return rpCurrentPayer === "place" && rpCurrentDeduct === "handoff";
+}
+function rpDedReason(){
+  var el = document.getElementById("rp-ded-reason");
+  return el ? String(el.value||"").trim() : "";
+}
+window.rpDedSync = function(){
+  var box = document.getElementById("rp-ded-warn");
+  var need = rpNeedDedApproval();
+  if (box) box.style.display = need ? "" : "none";
+  var inp = document.getElementById("rp-ded-reason");
+  var ok = rpDedReason().length >= 3;
+  if (inp) inp.classList.toggle("filled", ok);
+  /* ปุ่มบันทึกกดไม่ได้จนกว่าจะใส่เหตุผล */
+  var btn = document.getElementById("rp-save-btn");
+  if (btn){
+    var bad = need && !ok;
+    btn.disabled = bad;
+    btn.classList.toggle("rp-need", bad);
+  }
+};
 
 // ─── AUTOCOMPLETE ช่าง ในฟอร์มแจ้งซ่อม ───
 function rpAcShow() {
@@ -12917,6 +13051,8 @@ function openRepairDetail(repId) {
 
   // Body
   var html = "";
+  /* ผลคำขอหักยอด · ขึ้นบนสุดเพราะพนักงานต้องรู้ก่อนทำอะไรต่อ */
+  try { html += reqDeductHTML(rep.id); } catch(e){}
 
   // รายละเอียด
   html += "<div class='rd-card'>"
@@ -13485,6 +13621,13 @@ function editRepair(repId) {
 
 // บันทึกแจ้งซ่อม
 async function saveRepair() {
+  /* หักยอดส่งต้องบอกเหตุผลก่อน · เจ้าของจะได้รู้ว่าทำไมถึงต้องหัก */
+  if (typeof rpNeedDedApproval === "function" && rpNeedDedApproval()
+      && rpDedReason().length < 3){
+    notify("ต้องบอกเหตุผลที่ต้องหักจากยอดส่ง","error");
+    try { rpDedSync(); document.getElementById("rp-ded-reason").focus(); } catch(e){}
+    return;
+  }
   var r = rooms.find(function(x){return x.id===curModal;}); if (!r) return;
   var title = document.getElementById("rp-title").value.trim();
   if (!title) { notify("กรุณาใส่หัวข้องาน","error"); return; }
@@ -13535,6 +13678,11 @@ async function saveRepair() {
     var _newRepId = "REP_" + Date.now();
     var repair = {
       id: _newRepId,
+      /* เลือกหักยอดส่ง = ยังไม่หักจนกว่าเจ้าของอนุมัติ
+         เก็บเหตุผลไว้ในงานซ่อมด้วย จะได้ตามย้อนหลังได้แม้คำขอถูกล้าง */
+      deductApproved: false,
+      deductReqId: null,
+      deductReason: rpNeedDedApproval() ? rpDedReason() : null,
       status: "in-progress",
       createdAt: Date.now(),
       completedAt: null,
@@ -13556,6 +13704,9 @@ async function saveRepair() {
       materialCost: material,
       totalCost: labor + material,
       paidBy: rpCurrentPayer,
+      /* งานใหม่ไม่เคยเก็บ deductFrom เลย — ตอนแก้ไขเก็บ แต่ตอนสร้างไม่เก็บ
+         ทำให้เลือก "หักเงินส่งยอด" แล้วยอดไม่เคยถูกหักจริง */
+      deductFrom: rpCurrentPayer === "place" ? rpCurrentDeduct : null,
       rating: null,
       completionNote: null
     };
@@ -13588,6 +13739,42 @@ async function saveRepair() {
         + (techNames.length ? " · ช่าง " + techNames.join(", ") : "")
         + " · " + (rpCurrentPayer==="place" ? "หอจ่าย" : "ลูกค้าจ่าย"),
       {amount: (labor+material) || null, roomId: r.id});
+    /* เลือกหักยอดส่ง → ส่งคำขอให้เจ้าของ
+       ทำหลังบันทึกงานสำเร็จ · ถ้าคำขอพลาด งานซ่อมยังอยู่ แค่เตือนแยก
+       เจ้าของทำเองไม่ต้องขอ เพราะเป็นคนอนุมัติอยู่แล้ว */
+    if (rpNeedDedApproval() && !rpEditingId){
+      if (muIsOwner()){
+        /* เจ้าของแจ้งซ่อมเอง → ถือว่าอนุมัติทันที */
+        try {
+          var _rr = (updated.repairs||[]).find(function(x){return x.id===_newRepId;});
+          if (_rr){
+            _rr.deductApproved = true;
+            await db.collection("rooms").doc(updated.id).set(updated);
+            rooms = rooms.map(function(x){return x.id===updated.id?updated:x;});
+          }
+        } catch(e){ console.warn("owner auto-approve:", e); }
+      } else {
+        try {
+          var _q = await reqSubmit("deductHandoff", {
+            roomId: r.number || r.id,
+            repairId: _newRepId,
+            amount: (labor + material) || 0,
+            payload: { title: title, roomDocId: r.id }
+          }, rpDedReason());
+          if (_q){
+            var _rr2 = (updated.repairs||[]).find(function(x){return x.id===_newRepId;});
+            if (_rr2){
+              _rr2.deductReqId = _q.id;
+              await db.collection("rooms").doc(updated.id).set(updated);
+              rooms = rooms.map(function(x){return x.id===updated.id?updated:x;});
+            }
+          }
+        } catch(eq){
+          console.warn("reqSubmit deduct:", eq);
+          notify("บันทึกงานซ่อมแล้ว แต่ส่งคำขอหักยอดไม่สำเร็จ","error");
+        }
+      }
+    }
     notify(actionMsg);
     closeModal("repair-modal-bg");
     rpEditingId = null;
@@ -14435,6 +14622,121 @@ function openRepairFromHistoryPage(roomId, repId) {
 }
 
 // อัพเดท badge "ประวัติซ่อม" ใน nav
+/* ป้ายนับคำขอที่รอตัดสิน
+   เจ้าของนับทุกใบ เพราะต้องตัดสินทั้งหมด
+   พนักงานนับเฉพาะที่ตัวเองส่ง จะได้รู้ว่ายังค้างอยู่กี่ใบ ไม่ต้องเดา */
+function reqMyPending(){
+  var all = (typeof reqPendingList === "function") ? reqPendingList() : [];
+  if (muIsOwner()) return all;
+  var me = currentUser ? currentUser.id : null;
+  return all.filter(function(q){ return q.requestedBy && q.requestedBy.id === me; });
+}
+function updateReqBadge(){
+  /* มีเมนู 2 ชุด (รายเดือน/รายวัน) จึงอัปเดตทั้งคู่ */
+  var n = reqMyPending().length;
+  document.querySelectorAll(".req-badge").forEach(function(el){
+    /* .nav-badge มี display:none ใน CSS · ตั้งเป็น "" จึงยังซ่อนอยู่
+       ต้องระบุค่าที่แสดงได้ตรง ๆ */
+    if (n > 0){ el.textContent = n; el.style.display = "inline-block"; }
+    else { el.style.display = "none"; }
+  });
+}
+/* หน้ารายการคำขอ
+   เจ้าของเห็นทุกใบและกดอนุมัติได้ · พนักงานเห็นเฉพาะของตัวเองและดูได้อย่างเดียว
+   ต่างจากกระดิ่งตรงที่กรองตามชนิดได้และบอกว่าค้างมานานแค่ไหน */
+var rqTab = "all";
+var RQ_ICON = { delPayment:"trash", editPrice:"edit", cancelBooking:"x", deductHandoff:"minus" };
+var RQ_CLS  = { delPayment:"del", editPrice:"pri", cancelBooking:"can", deductHandoff:"ded" };
+var RQ_TABS = [["all","ทั้งหมด"],["deductHandoff","หักยอด"],["delPayment","ลบเงิน"],
+               ["editPrice","แก้ราคา"],["cancelBooking","ยกเลิกจอง"]];
+
+window.rqSetTab = function(t){ rqTab = t; renderReqPage(); };
+
+/* ผ่านมานานแค่ไหน · บอกเป็นภาษาคน ไม่ใช่ timestamp */
+function rqAgo(ts){
+  if (!ts) return "-";
+  var m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1) return "เมื่อสักครู่";
+  if (m < 60) return m + " นาทีที่แล้ว";
+  var h = Math.floor(m/60);
+  if (h < 24) return h + " ชม.ที่แล้ว";
+  return Math.floor(h/24) + " วันที่แล้ว";
+}
+function rqAmountText(q){
+  /* editPrice ไม่มี amount ตรง ๆ · ต้องคำนวณจาก payload ก่อนเช็ค amount
+     ไม่งั้นตกที่บรรทัดแรกแล้วคืนค่าว่าง */
+  if (q.type === "editPrice"){
+    var pl = q.payload || {};
+    var diff = ((pl.newPrice||0) * (pl.nights||1)) - (pl.paid||0);
+    if (diff > 0) return "+\u0e3f" + diff.toLocaleString();
+    if (diff < 0) return "\u2212\u0e3f" + Math.abs(diff).toLocaleString();
+    return "\u0e3f0";
+  }
+  if (q.amount == null) return "";
+  if (q.type === "deductHandoff") return "\u2212\u0e3f" + q.amount.toLocaleString();
+  return "\u0e3f" + q.amount.toLocaleString();
+}
+function renderReqPage(){
+  var isO = muIsOwner();
+  var mine = reqMyPending();
+  var sub = document.getElementById("rq-sub");
+  if (sub) sub.textContent = isO
+    ? "พนักงานส่งคำขอมา \u00b7 กดเพื่ออนุมัติหรือปฏิเสธ"
+    : "คำขอที่คุณส่งไป \u00b7 รอเจ้าของตัดสิน";
+
+  var tabsEl = document.getElementById("rq-tabs");
+  var listEl = document.getElementById("rq-list");
+  if (!listEl) return;
+
+  if (!mine.length){
+    if (tabsEl) tabsEl.innerHTML = "";
+    listEl.innerHTML = "<div class='rq-card'><div class='rq-empty'>"
+      + "<div class='e1'><i class='ico ico-check'></i></div>"
+      + "<div class='e2'>ไม่มีรายการรออนุมัติ</div>"
+      + "<div class='e3'>" + (isO ? "พนักงานยังไม่ได้ส่งคำขออะไรมา" : "คุณยังไม่มีคำขอที่รออยู่")
+      + "<br/>ดูคำขอที่ตัดสินไปแล้วได้ที่ <b>บันทึกการทำงาน</b></div></div></div>";
+    return;
+  }
+  /* แท็บกรอง · แสดงเฉพาะชนิดที่มีจริง จะได้ไม่มีแท็บว่างให้กด */
+  if (tabsEl){
+    tabsEl.innerHTML = RQ_TABS.filter(function(t){
+      return t[0] === "all" || mine.some(function(q){ return q.type === t[0]; });
+    }).map(function(t){
+      var n = (t[0]==="all") ? mine.length
+        : mine.filter(function(q){ return q.type === t[0]; }).length;
+      return "<div class='rq-tab" + (rqTab===t[0]?" on":"") + "' onclick=\"rqSetTab('"
+        + t[0] + "')\">" + t[1] + "<span class='n'>" + n + "</span></div>";
+    }).join("");
+  }
+  var shown = (rqTab === "all") ? mine : mine.filter(function(q){ return q.type === rqTab; });
+  if (!shown.length){ rqTab = "all"; shown = mine; }
+
+  listEl.innerHTML = "<div class='rq-card'>" + shown.map(function(q){
+    q = mtSafe(q);
+    var pl = q.payload || {};
+    var who = (q.requestedBy && q.requestedBy.name) || "-";
+    var m3 = (q.type === "editPrice")
+      ? (pl.oldPrice||0).toLocaleString() + " \u2192 " + (pl.newPrice||0).toLocaleString() + " /คืน"
+      : (q.type === "deductHandoff"
+         ? "ค่าซ่อม" + (pl.title ? " \u00b7 " + mtEsc(pl.title) : "")
+         : mtEsc(q.guestName||"-"));
+    return "<div class='rq-item " + (RQ_CLS[q.type]||"del") + "' onclick=\"rqOpen('" + q.id + "')\">"
+      + "<div class='ic'><i class='ico ico-" + (RQ_ICON[q.type]||"file") + "'></i></div>"
+      + "<div class='info'><div class='t'>" + (REQ_TYPE_LABEL[q.type]||"คำขอ")
+      +   " \u00b7 " + mtEsc(String(q.roomId||"-")) + "</div>"
+      + "<div class='m'>" + m3 + "</div>"
+      + "<div class='meta'>" + mtEsc(q.reason||"-") + " \u00b7 " + mtEsc(who) + "</div></div>"
+      + "<div class='rt'><div class='amt'>" + rqAmountText(q) + "</div>"
+      + "<div class='ago'>" + rqAgo(q.requestedAt) + "</div></div></div>";
+  }).join("") + "</div>";
+}
+/* กดแถว · เจ้าของเปิดหน้าตัดสิน · พนักงานดูอย่างเดียว */
+window.rqOpen = function(id){
+  if (muIsOwner()){ reqOpen(id); return; }
+  var q = (pendingRequests||[]).find(function(x){return x.id===id;});
+  if (!q) return;
+  notify((REQ_TYPE_LABEL[q.type]||"คำขอ") + " \u00b7 รอเจ้าของตัดสิน", "info");
+};
 function updateRepairBadge() {
   var badgeEl = document.getElementById("badge-rp");
   if (!badgeEl) return;
@@ -23965,7 +24267,8 @@ window.__reqBusy = false;   /* กันกดอนุมัติซ้ำร�
 var REQ_TYPE_LABEL = {
   delPayment: "ขอลบรายการรับเงิน",
   editPrice: "ขอแก้ราคา",
-  cancelBooking: "ขอยกเลิกการจอง"
+  cancelBooking: "ขอยกเลิกการจอง",
+  deductHandoff: "ขอหักเงินส่งยอด"
 };
 
 async function loadRequests(){
@@ -24210,6 +24513,10 @@ function reqvRender(reqId, keep){
             m:np.toLocaleString()+" \u00d7 "+nights+" คืน = "+newTot.toLocaleString()
               +" \u00b7 รับมาแล้ว "+paid.toLocaleString()}
          : {cls:"same", k:"ถ้าอนุมัติ \u00b7 ยอดเท่าเดิม", v:"\u0e3f0", m:"ไม่ต้องเก็บเพิ่มหรือคืน"});
+  } else if (q.type === "deductHandoff"){
+    res = {cls:"plus", k:"ถ้าอนุมัติ \u00b7 หักจากยอดที่ต้องส่ง",
+           v:"\u2212\u0e3f"+(q.amount||0).toLocaleString(),
+           m:"ยอดที่พนักงานต้องส่งจะลดลงตามนี้"};
   } else if (q.type === "delPayment"){
     res = {cls:"minus", k:"ถ้าอนุมัติ \u00b7 ยอดที่รับจะลดลง",
            v:"\u2212\u0e3f"+(q.amount||0).toLocaleString(),
@@ -24227,14 +24534,23 @@ function reqvRender(reqId, keep){
     +   (REQ_TYPE_LABEL[q.type]||"คำขอ") + "</div>"
     +   "<div class='s'>" + mtEsc(who) + " ขอมาเมื่อ " + when + "</div></div>"
     /* การจอง */
-    + "<div class='reqv-sec'><div class='sh'>การจอง</div><div class='reqv-rows'>"
-    +   "<div class='r'><span class='k'>ห้อง</span><span class='v'>"
-    +     mtEsc(String(q.roomId||"-")) + (b.nights ? " \u00b7 " + b.nights + " คืน" : "") + "</span></div>"
-    +   "<div class='r'><span class='k'>ลูกค้า</span><span class='v'>"
-    +     mtEsc(q.guestName||"-") + (b.phone ? " \u00b7 " + mtEsc(b.phone) : "") + "</span></div>"
-    +   "<div class='r'><span class='k'>รับเงินแล้ว</span><span class='v mono'>"
-    +     ((b.paidAmount!=null?b.paidAmount:(pl.paid||0))).toLocaleString() + "</span></div>"
-    + "</div></div>"
+    + (q.type === "deductHandoff"
+       ? "<div class='reqv-sec'><div class='sh'>งานซ่อม</div><div class='reqv-rows'>"
+         + "<div class='r'><span class='k'>ห้อง</span><span class='v'>"
+         +   mtEsc(String(q.roomId||"-")) + "</span></div>"
+         + "<div class='r'><span class='k'>งาน</span><span class='v'>"
+         +   mtEsc(pl.title||"-") + "</span></div>"
+         + "<div class='r'><span class='k'>ค่าซ่อม</span><span class='v mono'>"
+         +   (q.amount||0).toLocaleString() + "</span></div>"
+         + "</div></div>"
+       : "<div class='reqv-sec'><div class='sh'>การจอง</div><div class='reqv-rows'>"
+         + "<div class='r'><span class='k'>ห้อง</span><span class='v'>"
+         +   mtEsc(String(q.roomId||"-")) + (b.nights ? " \u00b7 " + b.nights + " คืน" : "") + "</span></div>"
+         + "<div class='r'><span class='k'>ลูกค้า</span><span class='v'>"
+         +   mtEsc(q.guestName||"-") + (b.phone ? " \u00b7 " + mtEsc(b.phone) : "") + "</span></div>"
+         + "<div class='r'><span class='k'>รับเงินแล้ว</span><span class='v mono'>"
+         +   ((b.paidAmount!=null?b.paidAmount:(pl.paid||0))).toLocaleString() + "</span></div>"
+         + "</div></div>")
     /* ที่ขอ */
     + "<div class='reqv-sec'><div class='sh'>ที่ขอ</div><div class='reqv-rows'>"
     +   (q.type === "editPrice"
@@ -24277,6 +24593,18 @@ function reqvRender(reqId, keep){
     +     "<span class='sub'>ยังอยู่ในกระดิ่ง</span></span></button></div>";
 }
 
+/* หาห้องที่มีงานซ่อมของคำขอนี้
+   payload.roomDocId คือ id จริงของห้อง · q.roomId เป็นเลขห้องที่คนอ่าน (อาจต่างกัน) */
+function reqFindRepairRoom(q){
+  if (!q || !q.repairId) return null;
+  var pl = q.payload || {};
+  var byDoc = pl.roomDocId
+    ? (rooms||[]).find(function(r){ return r.id === pl.roomDocId; }) : null;
+  if (byDoc && (byDoc.repairs||[]).some(function(x){return x.id===q.repairId;})) return byDoc;
+  return (rooms||[]).find(function(r){
+    return (r.repairs||[]).some(function(x){ return x.id === q.repairId; });
+  }) || null;
+}
 /* อ่านสถานะล่าสุดจากฐานข้อมูล · กันเจ้าของ 2 คนตัดสินใบเดียวกันพร้อมกัน
    ในเครื่องอาจยังเห็นเป็น pending แต่อีกคนตัดสินไปแล้ว
    ถ้าไม่เช็ค จะทำซ้ำ เช่นลบเงินก้อนเดียว 2 ครั้ง หรือยกเลิกจองที่ยกเลิกไปแล้ว */
@@ -24314,8 +24642,15 @@ window.reqApprove = async function(){
   var q = (pendingRequests||[]).find(function(x){return x.id===_reqvId;});
   if (!q || !muIsOwner()) return;
   if (window.__reqBusy){ notify("กำลังดำเนินการอยู่ \u00b7 รอสักครู่","info"); return; }
-  var b = (bookings||[]).find(function(x){return x.id===q.bookingId;});
-  if (!b){ notify("ไม่พบการจองของคำขอนี้","error"); return; }
+  /* deductHandoff ผูกกับงานซ่อมในห้อง ไม่ใช่การจองรายวัน จึงไม่ต้องหา booking */
+  var b = null;
+  if (q.type !== "deductHandoff"){
+    b = (bookings||[]).find(function(x){return x.id===q.bookingId;});
+    if (!b){ notify("ไม่พบการจองของคำขอนี้","error"); return; }
+  } else {
+    var _rm0 = reqFindRepairRoom(q);
+    if (!_rm0){ notify("ไม่พบงานซ่อมของคำขอนี้","error"); return; }
+  }
   window.__reqBusy = true;
   setOverlay("กำลังตรวจสอบ...");
   /* เช็คสถานะล่าสุดก่อน · อีกคนอาจตัดสินไปแล้วระหว่างที่หน้าต่างนี้เปิดค้าง */
@@ -24338,6 +24673,34 @@ window.reqApprove = async function(){
   setOverlay("กำลังดำเนินการ...");
   try {
     var upd = null;
+    if (q.type === "deductHandoff"){
+      /* ตั้งธงอนุมัติในงานซ่อม · getDeductionItems ถึงจะปล่อยให้หัก */
+      var _rm = reqFindRepairRoom(q);
+      if (!_rm) throw new Error("ไม่พบงานซ่อม");
+      var _reps = (_rm.repairs||[]).map(function(x){
+        if (x.id !== q.repairId) return x;
+        return Object.assign({}, x, {
+          deductApproved: true,
+          deductApprovedBy: currentUser ? {id:currentUser.id, name:currentUser.name} : null,
+          deductApprovedAt: Date.now()
+        });
+      });
+      var _rmU = Object.assign({}, _rm, { repairs: _reps });
+      await db.collection("rooms").doc(_rmU.id).set(_rmU);
+      rooms = (rooms||[]).map(function(x){ return x.id===_rmU.id ? _rmU : x; });
+      await reqSetStatus(q, "approved", null);
+      window.__reqBusy = false;
+      logActivity("req-ok", (REQ_TYPE_LABEL[q.type]||q.type) + " \u00b7 " + (q.roomId||"-"),
+        "อนุมัติหักยอด " + (q.amount||0).toLocaleString() + " \u0e3f \u00b7 คำขอของ "
+          + ((q.requestedBy&&q.requestedBy.name)||"-") + " \u00b7 " + (q.reason||"-"),
+        {roomId: _rmU.id, amount: q.amount});
+      setOverlay(null);
+      notify("อนุมัติแล้ว \u00b7 หักจากยอดส่ง " + (q.amount||0).toLocaleString() + " \u0e3f","success");
+      var _m9 = document.getElementById("reqv-bg"); if (_m9) _m9.remove();
+      try { updateNotiBell(); renderNotiDropdown(); updateReqBadge();
+            if (curPage==="requests") renderReqPage(); refreshCurrent(); } catch(e){}
+      return;
+    }
     if (q.type === "delPayment"){
       var pays = (b.payments||[]).filter(function(x){return x.id !== q.paymentId;});
       var sum = pays.reduce(function(s,p){return s+(p.amount||0);},0);
@@ -24426,6 +24789,39 @@ window.reqReject = async function(){
 /* แถบผลคำขอในหน้าการจอง · แสดง 3 สถานะ
    อนุมัติแล้วบอกด้วยว่าต้องทำอะไรต่อ · ปฏิเสธบอกเหตุผลที่เจ้าของให้
    ไม่ปฏิเสธเงียบ ๆ ไม่งั้นพนักงานไม่รู้ว่าทำไม */
+/* แถบสถานะคำขอหักยอดในหน้างานซ่อม
+   พนักงานเปิดงานซ่อมแล้วเห็นเลยว่ายอดหักได้หรือยัง ไม่ต้องเดา */
+function reqDeductHTML(repairId){
+  if (!repairId) return "";
+  var q = (pendingRequests||[]).filter(function(x){
+    return x.type === "deductHandoff" && x.repairId === repairId;
+  }).sort(function(a,b){ return (b.requestedAt||0)-(a.requestedAt||0); })[0];
+  if (!q) return "";
+  q = mtSafe(q);
+  var when = q.decidedAt || q.requestedAt;
+  var wStr = when ? new Date(when).toLocaleString("th-TH",
+    {day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) : "-";
+  var who = (q.requestedBy && q.requestedBy.name) || "-";
+  var by = (q.decidedBy && q.decidedBy.name) || "-";
+  var amt = (q.amount||0).toLocaleString();
+  if (q.status === "approved"){
+    return "<div class='reqs-wrap'><div class='reqs ok'><span class='ic'><i class='ico ico-check'></i></span>"
+      + "<span class='tx'><span class='t'>เจ้าของอนุมัติการหักยอดแล้ว</span>"
+      + "<span class='s'>หักจากยอดส่ง <b>\u0e3f" + amt + "</b> \u00b7 " + mtEsc(by) + " " + wStr
+      + "</span></span></div></div>";
+  }
+  if (q.status === "rejected"){
+    return "<div class='reqs-wrap'><div class='reqs no'><span class='ic'><i class='ico ico-x'></i></span>"
+      + "<span class='tx'><span class='t'>เจ้าของไม่อนุมัติการหักยอด</span>"
+      + "<span class='s'>ขอหัก \u0e3f" + amt + "<br/>เหตุผล: <b>" + mtEsc(q.rejectReason||"-")
+      + "</b> \u00b7 " + mtEsc(by) + " " + wStr + "<br/><b>ยอดส่งไม่ถูกหัก</b></span></span></div></div>";
+  }
+  return "<div class='reqs-wrap'><div class='reqs wait'><span class='ic'><i class='ico ico-clock'></i></span>"
+    + "<span class='tx'><span class='t'>รอเจ้าของอนุมัติการหักยอด</span>"
+    + "<span class='s'>ขอหักจากยอดส่ง <b>\u0e3f" + amt + "</b><br/>"
+    + "เหตุผล: " + mtEsc(q.reason||"-") + "<br/>"
+    + mtEsc(who) + " ส่งเมื่อ " + wStr + " \u00b7 <b>ยอดยังไม่ถูกหัก</b></span></span></div></div>";
+}
 function reqStatusHTML(bookingId){
   var list = reqOfBooking(bookingId).slice(0, 4);
   if (!list.length) return "";
@@ -24487,13 +24883,17 @@ function reqHistoryHTML(){
                                          : "<span class='rb w'>รอ</span>");
     var sub = (q.type === "editPrice")
       ? (pl.oldPrice||0).toLocaleString() + " \u2192 " + (pl.newPrice||0).toLocaleString() + " /คืน"
-      : mtEsc(q.guestName||"-");
+      : (q.type === "deductHandoff"
+         ? "ค่าซ่อม" + (pl.title ? " \u00b7 " + mtEsc(pl.title) : "")
+         : mtEsc(q.guestName||"-"));
     var amt = (q.amount != null) ? "\u0e3f" + q.amount.toLocaleString() : "";
     var meta = mtEsc(q.reason||"-") + " \u00b7 " + mtEsc(who)
       + (by ? " \u2192 " + mtEsc(by) + (q.status==="rejected" && q.rejectReason
               ? " ปฏิเสธ: " + mtEsc(q.rejectReason) : " " + (q.status==="approved"?"อนุมัติ":"")) : "")
       + " \u00b7 " + dStr;
-    var icon = (q.type === "delPayment") ? "trash" : (q.type === "editPrice" ? "edit" : "x");
+    var icon = (q.type === "delPayment") ? "trash"
+             : (q.type === "editPrice" ? "edit"
+             : (q.type === "deductHandoff" ? "minus" : "x"));
     return "<div class='reqh-item " + q.status + "'>"
       + "<div class='ic'><i class='ico ico-" + icon + "'></i></div>"
       + "<div class='info'><div class='t'>" + (REQ_TYPE_LABEL[q.type]||"คำขอ")
@@ -25619,6 +26019,12 @@ function _dedDateKey(ts){
   var d = new Date(ts || Date.now());
   return d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0"+d.getDate()).slice(-2);
 }
+/* งานซ่อมที่สร้างก่อนระบบขออนุมัติ · ถือว่าอนุมัติแล้ว
+   ดูจากการที่ไม่มีช่อง deductApproved เลย (undefined) ไม่ใช่ false
+   งานใหม่ทุกใบจะมีช่องนี้เสมอ แม้ยังไม่อนุมัติก็เป็น false */
+function dedLegacyOK(rep){
+  return rep && typeof rep.deductApproved === "undefined";
+}
 function getDeductionItems(){
   var out = [];
   // 1. ค่าซ่อม paidBy=place + deductFrom=handoff (เจ้าของสำรองจ่าย ยังไม่ถูกหัก)
@@ -25629,6 +26035,10 @@ function getDeductionItems(){
        ทั้งที่ยังไม่ได้ซ่อมและราคายังเป็น 0 ได้ */
     if (rep.status !== "completed") return;
     if (!(rep.totalCost > 0)) return;
+    /* ต้องให้เจ้าของอนุมัติก่อนถึงหักได้
+       งานเก่าที่สร้างก่อนระบบนี้ไม่มีช่อง deductApproved เลย
+       ถ้ากันหมดยอดที่เคยหักจะหายย้อนหลัง จึงถือว่างานเก่าอนุมัติแล้ว */
+    if (!dedLegacyOK(rep) && !rep.deductApproved) return;
       if (rep.deductedId) return;                 // หักไปแล้ว กันซ้ำ
       var ts = rep.date ? new Date(rep.date).getTime() : (rep.createdAt || Date.now());
       out.push({
