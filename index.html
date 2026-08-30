@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v4.04.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v4.05.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -2226,11 +2226,13 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.04.0</span></div></div>
+    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.05.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
-  <div style="margin:0 12px 12px;display:flex;gap:8px;align-items:stretch">
+  <!-- ช่องไฟรอบกล่อง — เดิมด้านบนเป็น 0 กล่องเลยชิดเส้นใต้โลโก้สนิท
+       ทั้งที่ซ้ายขวาล่างห่าง 12 · ให้เท่ากันทุกด้าน -->
+  <div style="margin:12px;display:flex;gap:8px;align-items:stretch">
     <div id="user-badge" style="flex:1;margin:0"></div>
     <div id="noti-bell-wrap" style="position:relative;display:none">
       <button id="noti-bell-btn" onclick="toggleNotiDropdown(event)" style="width:38px;height:38px;border-radius:9px;background:#fef2f2;border:1.5px solid #dc2626;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;padding:0">
@@ -2243,13 +2245,13 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 
   <!-- MODE TOGGLE -->
   <div class="mode-toggle">
-    <button class="mode-btn active" id="mode-btn-monthly" onclick="switchMode('monthly')"><i class="ico ico-home"></i> รายเดือน</button>
-    <button class="mode-btn" id="mode-btn-daily" onclick="switchMode('daily')"><i class="ico ico-bed"></i> รายวัน</button>
+    <button class="mode-btn" id="mode-btn-monthly" onclick="switchMode('monthly')"><i class="ico ico-home"></i> รายเดือน</button>
+    <button class="mode-btn active" id="mode-btn-daily" onclick="switchMode('daily')"><i class="ico ico-bed"></i> รายวัน</button>
   </div>
 
-  <nav id="nav-monthly">
+  <nav id="nav-monthly" style="display:none">
     <div class="nav-section">ภาพรวม</div>
-    <button class="nav-btn active" data-page="rooms" onclick="goPage('rooms',this)"><i class="ico ico-home"></i> ผังห้องพัก</button>
+    <button class="nav-btn" data-page="rooms" onclick="goPage('rooms',this)"><i class="ico ico-home"></i> ผังห้องพัก</button>
     <button class="nav-btn" data-page="tenants" onclick="goPage('tenants',this)"><i class="ico ico-users"></i> รายชื่อลูกค้า</button>
     <div class="nav-section">การเงิน</div>
     <button class="nav-btn" data-page="bulk-bill" onclick="goPage('bulk-bill',this)"><i class="ico ico-file"></i> ออกบิล</button>
@@ -2273,9 +2275,9 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <button class="nav-btn" data-page="settings" onclick="goPage('settings',this)"><i class="ico ico-settings"></i> ตั้งค่า</button>
   </nav>
 
-  <nav id="nav-daily" style="display:none">
+  <nav id="nav-daily">
     <div class="nav-section">ภาพรวม</div>
-    <button class="nav-btn" data-page="daily-dash" onclick="goPage('daily-dash',this)"><i class="ico ico-chart"></i> วันนี้</button>
+    <button class="nav-btn active" data-page="daily-dash" onclick="goPage('daily-dash',this)"><i class="ico ico-chart"></i> วันนี้</button>
     <div class="nav-section">การจอง</div>
     <button class="nav-btn" data-page="timeline" onclick="goPage('timeline',this)"><i class="ico ico-calendar"></i><i class="ico ico-plus" style="font-size:.72em;margin-left:1px;vertical-align:.08em"></i> ปฏิทินการจอง</button>
     <button class="nav-btn" data-page="bookings" onclick="goPage('bookings',this)"><i class="ico ico-file"></i> รายงานการจอง <span class="nav-badge" id="badge-bk">0</span></button>
@@ -2309,7 +2311,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="main">
 
 <!-- ═══ DASHBOARD ═══ -->
-<div id="page-dashboard" class="page active">
+<div id="page-dashboard" class="page">
   <div class="page-header">
     <div><div class="page-title">แดชบอร์ดภาพรวม</div><div class="page-sub" id="dash-date"></div></div>
     <button class="btn btn-primary" onclick="goPage('bulk-bill',document.querySelector('[data-page=bulk-bill]'))"><i class="ico ico-file"></i> ไปหน้าออกบิล</button>
@@ -3147,7 +3149,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
   </div>
 </div>
 <!-- ═══ DAILY DASHBOARD ═══ -->
-<div id="page-daily-dash" class="page">
+<div id="page-daily-dash" class="page active">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-chart"></i> แดชบอร์ดวันนี้</div></div>
   </div>
@@ -5573,6 +5575,8 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.05.0</td><td>22 ส.ค. 69</td>'
++'<td><b>เปิดแอปมาเจอหน้า “วันนี้” ของหมวดรายวันก่อน</b><br/>เดิมเปิดมาเจอหมวดรายเดือน — แต่<b>งานรายวันต้องดูทุกวัน</b> ส่วนรายเดือนดูเป็นรอบ ๆ ไม่ใช่ทุกวัน<br/>สลับหมวดยังทำงานเหมือนเดิม · กดรายเดือนไปเจอ<b>ผังห้องพัก</b>เหมือนที่ตั้งไว้<br/>แก้<b>ช่องไฟรอบกล่องชื่อผู้ใช้</b> — เดิมด้านบนเป็น 0 กล่องเลยชิดเส้นใต้ชื่อระบบสนิท ทั้งที่ซ้ายขวาล่างห่าง 12 · ให้เท่ากันทุกด้านแล้ว</td></tr>'
 +'<tr><td style="font-family:monospace">v4.04.0</td><td>22 ส.ค. 69</td>'
 +'<td><b>ไม่ต้องใส่ PIN ใหม่ทุกครั้งที่เปิดแอป</b><br/>เดิมจำสถานะล็อกอินไว้เฉพาะในแท็บที่เปิดอยู่ — <b>ปิดแท็บหรือเปิดลิงก์ใหม่ = ต้องใส่ PIN ใหม่</b><br/>ที่น่าเสียดายคือ <b>Firebase จำให้อยู่แล้ว</b> แต่แอปไม่เคยเช็ค<br/>ตอนนี้เปิดปิดแอปในวันเดียวกัน<b>เข้าได้เลยไม่ต้องใส่ PIN</b> · <b>จำไว้ 12 ชั่วโมง</b> เกินแล้วถามใหม่<br/><b>ทำไมไม่จำตลอด</b> — เครื่องหน้าเคาน์เตอร์ใช้ร่วมกัน ถ้าจำตลอด คนกะถัดไปจะเปิดมาเป็นชื่อคนกะก่อน แล้ว<b>บันทึกกิจกรรมจะลงชื่อผิดคน</b><br/><b>PIN ไม่ได้เก็บไว้ในเครื่อง</b> — ใช้การล็อกอินของ Firebase ที่มีอยู่แล้ว · ต้องตรงกันทั้งบัญชีที่ค้างอยู่และคนที่จำไว้ ไม่งั้นถาม PIN ใหม่<br/>กด <b>ออกจากระบบ</b> ล้างทุกอย่างทันที ครั้งหน้าต้องใส่ PIN ใหม่</td></tr>'
 +'<tr><td style="font-family:monospace">v4.03.0</td><td>22 ส.ค. 69</td>'
@@ -5770,8 +5774,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1215;
-window.__APP_VERSION = "v4.04.0";
+window.__APP_BUILD = 1216;
+window.__APP_VERSION = "v4.05.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -9100,7 +9104,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.04.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.05.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -9430,7 +9434,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v4.04.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.05.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -9597,7 +9601,8 @@ var rooms = [], bills = [], checkoutHistory = [], activityLogs = [], staffList =
 // ─── Current logged-in user ───
 var currentUser = null; // {id, name, role: "owner"|"staff"}
 var pendingBillIds = new Set();
-var curPage = "dashboard", curModal = null;
+/* เปิดแอปมาที่หน้า "วันนี้" ของหมวดรายวัน · ต้องตรงกับ currentMode และ class active ใน HTML */
+var curPage = "daily-dash", curModal = null;
 var lChart = null, pChart = null, bChart = null, ddChart = null, ddChannelChart = null, drRevChart = null;
 var bulkRowCustom = {}; // roomId -> {type, extras, discount, note}
 var MONTHS = ["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
@@ -9699,7 +9704,9 @@ var CHANNEL_COLORS = { walkin:"#10b981", agoda:"#f59e0b", booking:"#3b82f6", tri
 var CHANNEL_LABELS = { walkin:"Walk-in", agoda:"Agoda", booking:"Booking.com", trip:"Trip.com", other:"โทรจอง" };
 
 // ═══ DAILY MODE STATE ═══
-var currentMode = "monthly"; // "monthly" | "daily"
+/* เปิดแอปมาเจอหมวดรายวันหน้า "วันนี้" ก่อน
+   เป็นหน้าที่ต้องดูทุกวัน · รายเดือนดูเป็นรอบ ๆ ไม่ใช่ทุกวัน */
+var currentMode = "daily"; // "monthly" | "daily"
 var dailyRooms = [];
 var bookings = [];
 /* รายงานการจอง — วาดทีละหน้า */
