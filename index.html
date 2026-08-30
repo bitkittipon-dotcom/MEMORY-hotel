@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v4.02.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v4.04.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -2226,7 +2226,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.02.0</span></div></div>
+    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.04.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -5573,6 +5573,10 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.04.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ไม่ต้องใส่ PIN ใหม่ทุกครั้งที่เปิดแอป</b><br/>เดิมจำสถานะล็อกอินไว้เฉพาะในแท็บที่เปิดอยู่ — <b>ปิดแท็บหรือเปิดลิงก์ใหม่ = ต้องใส่ PIN ใหม่</b><br/>ที่น่าเสียดายคือ <b>Firebase จำให้อยู่แล้ว</b> แต่แอปไม่เคยเช็ค<br/>ตอนนี้เปิดปิดแอปในวันเดียวกัน<b>เข้าได้เลยไม่ต้องใส่ PIN</b> · <b>จำไว้ 12 ชั่วโมง</b> เกินแล้วถามใหม่<br/><b>ทำไมไม่จำตลอด</b> — เครื่องหน้าเคาน์เตอร์ใช้ร่วมกัน ถ้าจำตลอด คนกะถัดไปจะเปิดมาเป็นชื่อคนกะก่อน แล้ว<b>บันทึกกิจกรรมจะลงชื่อผิดคน</b><br/><b>PIN ไม่ได้เก็บไว้ในเครื่อง</b> — ใช้การล็อกอินของ Firebase ที่มีอยู่แล้ว · ต้องตรงกันทั้งบัญชีที่ค้างอยู่และคนที่จำไว้ ไม่งั้นถาม PIN ใหม่<br/>กด <b>ออกจากระบบ</b> ล้างทุกอย่างทันที ครั้งหน้าต้องใส่ PIN ใหม่</td></tr>'
++'<tr><td style="font-family:monospace">v4.03.0</td><td>22 ส.ค. 69</td>'
++'<td>🔴 <b>สำรองข้อมูลไม่ครบ — แก้แล้ว</b><br/>เดิมสำรองแค่ 15 ชุด แต่ระบบใช้ 18 — <b>ขาด PIN ทุกคน · คำขออนุมัติ · รูปงานซ่อม</b><br/>แปลว่า<b>สำรองแล้วกู้คืน PIN จะหายหมด ทุกคนเข้าระบบไม่ได้</b><br/>ตอนนี้สำรองครบทุกชุด · แยกปุ่ม <b>สำรองพร้อมรูปงานซ่อม</b> ต่างหาก เพราะรูปทำไฟล์ใหญ่ขึ้นหลายเท่า จะได้สำรองข้อมูลบ่อย ๆ โดยไม่ต้องรอรูป<br/><b>เพิ่มปุ่มกู้คืนจากไฟล์สำรอง</b> — เดิม<b>สำรองได้แต่กู้คืนไม่ได้</b> มีไฟล์ก็เอากลับเข้าระบบไม่ได้ เท่ากับสำรองไปครึ่งเดียว<br/>กู้คืนจะ<b>อ่านไฟล์บอกก่อน</b>ว่าสำรองเมื่อไหร่ ใครทำ เวอร์ชันอะไร กี่รายการ · ต้อง<b>พิมพ์คำว่า “กู้คืน”</b> ถึงกดได้ · ปุ่มแรกคือ<b>สำรองของตอนนี้ก่อน</b> ไม่ใช่ปุ่มกู้<br/>ถ้าไฟล์ไม่มี PIN จะเตือนก่อน · ไฟล์ผิดรูปแบบจะไม่ยอมอ่าน · เจ้าของเท่านั้นที่กู้คืนได้</td></tr>'
 +'<tr><td style="font-family:monospace">v4.02.0</td><td>22 ส.ค. 69</td>'
 +'<td><b>ย้าย PIN ไปเก็บที่ปลอดภัยกว่า (ข้อสุดท้ายของรายการตรวจสอบ)</b><br/>รายชื่อผู้ใช้ต้องเปิดให้อ่านก่อนล็อกอิน เพราะหน้าเลือกคนต้องใช้ — แต่เดิม<b>เก็บ PIN ไว้ในนั้นด้วย</b> แปลว่า<b>ใครก็ได้บนอินเทอร์เน็ตอ่าน PIN ทุกคนได้โดยไม่ต้องล็อกอิน</b><br/>ย้ายมาเก็บแยกที่ใหม่ — ต้อง<b>ล็อกอินก่อน</b>ถึงจะอ่านได้ และอ่านได้<b>เฉพาะ PIN ของตัวเอง</b> ยกเว้นเจ้าของที่อ่านได้ทุกคน<br/><b>ปุ่มดูรหัส PIN ยังใช้ได้เหมือนเดิม</b> · กันตั้ง PIN ซ้ำ · ตรวจสุขภาพ · ตั้ง PIN ของตัวเอง ทำงานปกติ<br/>มีปุ่ม <b>ย้ายเลย</b> ในหน้าตั้งค่า กดครั้งเดียวจบ · <b>กดไม่ได้ถ้ายังมีคนไม่มีบัญชีเข้าระบบ</b> เพราะย้ายแล้วคนนั้นจะเข้าไม่ได้<br/>⚠ <b>ต้องวางกฎ Firestore ชุดใหม่ก่อนกดย้าย</b></td></tr>'
 +'<tr><td style="font-family:monospace">v4.01.0</td><td>22 ส.ค. 69</td>'
@@ -5766,8 +5770,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1213;
-window.__APP_VERSION = "v4.02.0";
+window.__APP_BUILD = 1215;
+window.__APP_VERSION = "v4.04.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -6980,8 +6984,12 @@ function hcPanel(){
         + '</div></div>';
     }).join('');
   }
-  h += '<div class="hc-f"><button class="hc-bk" onclick="hcBackupNow()">สำรองข้อมูลเดี๋ยวนี้</button>'
-    + '<span class="n">โหลดข้อมูลทั้ง 15 ชุดออกมาเป็นไฟล์เดียว เก็บไว้นอกระบบ</span></div>'
+  h += '<div class="hc-f"><button class="hc-bk" onclick="hcBackupNow(false)">สำรองข้อมูลเดี๋ยวนี้</button>'
+    + '<button class="hc-bk" onclick="hcBackupNow(true)">สำรองพร้อมรูปงานซ่อม</button>'
+    + '<span class="n">โหลดข้อมูลทั้ง ' + HC_COLLECTIONS.length + ' ชุดออกมาเป็นไฟล์เดียว เก็บไว้นอกระบบ<br/>'
+    + 'รูปงานซ่อมทำให้ไฟล์ใหญ่ขึ้นหลายเท่า \u00b7 สำรองข้อมูลอย่างเดียวบ่อย ๆ แล้วเอารูปนาน ๆ ครั้ง</span></div>'
+    + '<div class="hc-f"><button class="hc-bk" style="border-color:#fca5a5;color:#b91c1c" onclick="hcRestoreOpen()">กู้คืนจากไฟล์สำรอง</button>'
+    + '<span class="n">เอาไฟล์สำรองกลับเข้าระบบ \u00b7 <b>ข้อมูลปัจจุบันจะถูกเขียนทับทั้งหมด</b></span></div>'
     + '<div class="hc-f"><button class="hc-bk" onclick="hoCleanRun()">เก็บกวาดรายการส่งยอดค้าง</button>'
     + '<span class="n">ติดธงย้อนหลังให้รายการที่ส่งไปแล้วแต่ยังค้างอยู่ในหน้าส่งยอด '
     + '\u00b7 แสดงรายการให้ดูก่อนยืนยัน ไม่ลบข้อมูล</span></div></div>';
@@ -6992,21 +7000,188 @@ function hcPanel(){
 
 <script>
 /* ═══ สำรองข้อมูลทั้งระบบ ═══ */
-var HC_COLLECTIONS = ['rooms','bills','bookings','dailyRooms','staffList','settings',
+/* ทุกตู้ที่แอปใช้ · ขาดตู้ไหน = กู้คืนแล้วส่วนนั้นหายถาวร
+   เดิมขาด staffPins (PIN ทุกคน) · requestsApproval · repairPhotos */
+var HC_COLLECTIONS = ['rooms','bills','bookings','dailyRooms','staffList','staffPins','settings',
   'cashHandoffs','cashHandovers','activityLogs','checkoutHistory','refunds',
-  'technicians','shiftState','shiftClean','verifyChecks'];
+  'technicians','shiftState','shiftClean','verifyChecks','requestsApproval'];
+/* รูปงานซ่อมทำไฟล์ใหญ่ขึ้นหลายเท่า · แยกให้เลือกเอาหรือไม่เอา
+   จะได้สำรองข้อมูลบ่อย ๆ โดยไม่ต้องรอรูป */
+var HC_PHOTO_COL = 'repairPhotos';
 var HC_BK_RUNNING = false;
-async function hcBackupNow(){
+/* ═══════════ กู้คืนจากไฟล์สำรอง ═══════════
+   เดิมสำรองได้แต่กู้คืนไม่ได้ — มีไฟล์ก็เอากลับเข้าระบบไม่ได้ เท่ากับสำรองไปครึ่งเดียว
+   กู้คืนแล้วได้สภาพเดิมเป๊ะ ข้อมูลที่ไม่มีในไฟล์จะถูกลบ
+   ไม่งั้นจะได้ของผสมที่ไม่มีใครรู้ว่าคืออะไร */
+var HC_RS_FILE = null, HC_RS_RUNNING = false, HC_RS_TYPED = '';
+function hcReloadPage(){ location.reload(); }
+
+window.hcRestoreOpen = function(){
+  if (!muIsOwner()){ notify('เฉพาะเจ้าของเท่านั้น','error'); return; }
+  HC_RS_FILE = null; HC_RS_TYPED = '';
+  var old = document.getElementById('hcrs-bg'); if (old) old.remove();
+  var bg = document.createElement('div');
+  bg.className = 'modal-bg open'; bg.id = 'hcrs-bg'; bg.style.zIndex = 9700;
+  bg.onclick = function(e){ if (e.target === bg && !HC_RS_RUNNING) bg.remove(); };
+  bg.innerHTML = "<div class='modal hcrs-card' onclick='event.stopPropagation()'>"
+    + "<div id='hcrs-body'></div>"
+    + "<input type='file' id='hcrs-file' accept='.json,application/json' "
+    +   "style='display:none' onchange='hcRestorePick(this)'/></div>";
+  document.body.appendChild(bg);
+  hcRestoreRender();
+};
+window.hcRestoreType = function(v){ HC_RS_TYPED = v||''; hcRestoreRender(true); };
+
+window.hcRestorePick = function(inp){
+  var f = inp && inp.files && inp.files[0];
+  if (!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    try {
+      var j = JSON.parse(rd.result);
+      if (!j || !j._meta) throw new Error('ไม่ใช่ไฟล์สำรองของระบบนี้');
+      var cols = Object.keys(j).filter(function(k){ return k !== '_meta' && Array.isArray(j[k]); });
+      if (!cols.length) throw new Error('ไม่พบข้อมูลในไฟล์');
+      var n = cols.reduce(function(a,c){ return a + j[c].length; }, 0);
+      HC_RS_FILE = {name:f.name, data:j, cols:cols, count:n,
+        at:j._meta.at||0, by:j._meta.by||'-', ver:j._meta.app||'-', photos:!!j._meta.photos};
+      HC_RS_TYPED = '';
+      hcRestoreRender();
+    } catch(e){
+      notify('อ่านไฟล์ไม่ได้ \u00b7 ' + (e.message||''), 'error');
+    }
+  };
+  rd.onerror = function(){ notify('อ่านไฟล์ไม่สำเร็จ','error'); };
+  rd.readAsText(f);
+};
+
+function hcRestoreRender(keep){
+  var body = document.getElementById('hcrs-body');
+  if (!body) return;
+  var h = "<div class='hcrs-hd'><div class='t'>กู้คืนจากไฟล์สำรอง</div>"
+    + "<div class='s'>ข้อมูลปัจจุบันจะถูกเขียนทับทั้งหมด</div></div>";
+  if (!HC_RS_FILE){
+    h += "<div class='hcrs-sec'>"
+      + "<div class='hcrs-drop' onclick=\"document.getElementById('hcrs-file').click()\">"
+      +   "<div class='di'><i class='ico ico-file'></i></div>"
+      +   "<div class='dt'>เลือกไฟล์สำรอง</div>"
+      +   "<div class='ds'>ไฟล์ .json ที่ได้จากการสำรอง</div></div></div>"
+      + "<div class='hcrs-acts'><button class='hcrs-b3' "
+      +   "onclick=\"var m=document.getElementById('hcrs-bg');if(m)m.remove();\">"
+      +   "<span class='ic'><i class='ico ico-chevron-left'></i></span><span>ปิด</span></button></div>";
+  } else {
+    var f = HC_RS_FILE;
+    var when = f.at ? new Date(f.at).toLocaleString('th-TH',
+      {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '-';
+    var ok = String(HC_RS_TYPED||'').trim() === 'กู้คืน';
+    h += "<div class='hcrs-sec'><div class='hcrs-file'>"
+      + "<div class='fn'><i class='ico ico-check'></i> " + mtEsc(f.name) + "</div>"
+      + "<div class='rows'>"
+      +   "<div class='r'><span class='k'>สำรองเมื่อ</span><span class='v'>" + when + "</span></div>"
+      +   "<div class='r'><span class='k'>โดย</span><span class='v'>" + mtEsc(f.by) + "</span></div>"
+      +   "<div class='r'><span class='k'>เวอร์ชัน</span><span class='v'>" + mtEsc(f.ver) + "</span></div>"
+      +   "<div class='r'><span class='k'>ข้อมูล</span><span class='v'>"
+      +     f.count.toLocaleString() + " รายการ \u00b7 " + f.cols.length + " ชุด"
+      +     (f.photos ? " \u00b7 พร้อมรูป" : "") + "</span></div>"
+      + "</div></div>"
+      + "<div class='hcrs-warn'><div class='wt'><i class='ico ico-alert'></i> อ่านก่อนกด</div>"
+      +   "ข้อมูลที่มีอยู่ตอนนี้จะ<b>ถูกเขียนทับทั้งหมด</b> ย้อนกลับไม่ได้<br/>"
+      +   "งานที่ทำหลัง <b>" + when + "</b> จะหายไป<br/>"
+      +   (f.cols.indexOf('staffPins') < 0
+         ? "<b>\u26a0 ไฟล์นี้ไม่มี PIN</b> \u2014 กู้แล้วอาจเข้าระบบไม่ได้<br/>" : "")
+      +   "พิมพ์คำว่า <b>กู้คืน</b> เพื่อยืนยัน"
+      +   "<input class='hcrs-in" + (ok?' ok':'') + "' id='hcrs-typed' maxlength='10' "
+      +     "value='" + mtEsc(HC_RS_TYPED) + "' placeholder='พิมพ์: กู้คืน' "
+      +     "oninput='hcRestoreType(this.value)'/>"
+      + "</div></div>"
+      + "<div class='hcrs-acts'><div class='ah'>เลือกทำอย่างใดอย่างหนึ่ง</div>"
+      + "<button class='hcrs-b1' onclick='hcBackupNow(false)'>"
+      +   "<span class='ic'><i class='ico ico-download'></i></span><span>สำรองของตอนนี้ก่อน"
+      +   "<span class='sb'>ปลอดภัยกว่า \u00b7 ทำก่อนกู้คืนเสมอ</span></span></button>"
+      + "<button class='hcrs-b2' " + (ok?'':'disabled') + " onclick='hcRestoreRun()'>"
+      +   "<span class='ic'><i class='ico ico-undo'></i></span><span>"
+      +   (ok ? 'กู้คืนทับข้อมูลปัจจุบัน' : 'พิมพ์ยืนยันก่อน')
+      +   "<span class='sb'>" + (ok ? 'เขียนทับ ' + f.cols.length + ' ชุด \u00b7 ย้อนกลับไม่ได้'
+                                    : 'ยังยืนยันไม่ครบ') + "</span></span></button>"
+      + "<button class='hcrs-b3' onclick=\"HC_RS_FILE=null;HC_RS_TYPED='';hcRestoreRender();\">"
+      +   "<span class='ic'><i class='ico ico-chevron-left'></i></span><span>เลือกไฟล์อื่น</span></button>"
+      + "</div>";
+  }
+  body.innerHTML = h;
+  if (keep){
+    var el = document.getElementById('hcrs-typed');
+    if (el){ el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
+  }
+}
+
+window.hcRestoreRun = async function(){
+  if (HC_RS_RUNNING || !HC_RS_FILE) return;
+  if (!muIsOwner()){ notify('เฉพาะเจ้าของเท่านั้น','error'); return; }
+  if (String(HC_RS_TYPED||'').trim() !== 'กู้คืน'){ notify('พิมพ์คำว่า กู้คืน ก่อน','error'); return; }
+  var f = HC_RS_FILE;
+  HC_RS_RUNNING = true;
+  setOverlay('กำลังกู้คืน... อย่าปิดหน้านี้');
+  var wrote = 0, removed = 0, failed = [];
+  try {
+    for (var i=0;i<f.cols.length;i++){
+      var c = f.cols[i];
+      var arr = f.data[c] || [];
+      try {
+        /* ลบของเดิมที่ไม่มีในไฟล์ก่อน · กู้คืนต้องได้สภาพเดิมเป๊ะ ไม่ใช่ของผสม */
+        var keep = {};
+        arr.forEach(function(o){ if (o && o.__id) keep[o.__id] = 1; });
+        var snap = await db.collection(c).get();
+        var dels = [];
+        snap.forEach(function(d){ if (!keep[d.id]) dels.push(d.id); });
+        for (var k=0;k<dels.length;k++){
+          await db.collection(c).doc(dels[k]).delete(); removed++;
+        }
+        /* แล้วค่อยเขียนของในไฟล์ทับลงไป */
+        for (var j=0;j<arr.length;j++){
+          var o = Object.assign({}, arr[j]);
+          var id = o.__id; delete o.__id;
+          if (!id) continue;
+          await db.collection(c).doc(String(id)).set(o); wrote++;
+        }
+      } catch(e){ console.warn('restore '+c+':', e); failed.push(c); }
+    }
+    setOverlay(null);
+    HC_RS_RUNNING = false;
+    var m = document.getElementById('hcrs-bg'); if (m) m.remove();
+    try {
+      logActivity('settings','กู้คืนข้อมูล',
+        'กู้คืนจากไฟล์ ' + f.name + ' \u00b7 เขียน ' + wrote + ' \u00b7 ลบ ' + removed
+        + (failed.length ? ' \u00b7 พลาด ' + failed.length + ' ชุด' : ''));
+    } catch(e){}
+    alert('กู้คืนเสร็จแล้ว\n\nเขียน ' + wrote.toLocaleString() + ' รายการ'
+      + '\nลบของเดิมที่ไม่มีในไฟล์ ' + removed.toLocaleString() + ' รายการ'
+      + (failed.length ? '\n\n\u26a0 อ่านไม่ได้ ' + failed.length + ' ชุด: ' + failed.join(', ') : '')
+      + '\n\nระบบจะโหลดหน้าใหม่');
+    /* โหลดหน้าใหม่เพื่อดึงข้อมูลที่กู้มาทั้งชุด · แยกออกมาให้เทสแทนที่ได้ */
+    hcReloadPage();
+  } catch(e){
+    setOverlay(null);
+    HC_RS_RUNNING = false;
+    console.error('hcRestoreRun:', e);
+    notify('กู้คืนไม่สำเร็จ \u00b7 ' + (e.message||''), 'error');
+  }
+};
+
+async function hcBackupNow(withPhotos){
   if (HC_BK_RUNNING) return;
   if (typeof db==='undefined' || !db){ notify('ยังไม่ได้ต่อกับที่เก็บข้อมูล','error'); return; }
-  if (!confirm('สำรองข้อมูลทั้ง '+HC_COLLECTIONS.length+' ชุดออกมาเป็นไฟล์?\n\n'
+  var cols = HC_COLLECTIONS.slice();
+  if (withPhotos) cols.push(HC_PHOTO_COL);
+  if (!confirm('สำรองข้อมูลทั้ง '+cols.length+' ชุดออกมาเป็นไฟล์?\n\n'
+    + (withPhotos ? '\u26a0 รวมรูปงานซ่อมด้วย \u00b7 ไฟล์จะใหญ่และใช้เวลานาน\n\n' : '')
     +'จะใช้โควตาอ่านตามจำนวนข้อมูลที่มี · ทำเดือนละครั้งพอ')) return;
   HC_BK_RUNNING = true;
   notify('กำลังสำรอง… อย่าปิดหน้านี้','info');
-  var out = {_meta:{at:Date.now(), app:(window.__APP_VERSION||''), by:(currentUser&&currentUser.name)||'-'}};
+  var out = {_meta:{at:Date.now(), app:(window.__APP_VERSION||''),
+    by:(currentUser&&currentUser.name)||'-', photos:!!withPhotos, cols:cols.slice()}};
   var total = 0, failed = [];
-  for (var i=0;i<HC_COLLECTIONS.length;i++){
-    var c = HC_COLLECTIONS[i];
+  for (var i=0;i<cols.length;i++){
+    var c = cols[i];
     try {
       var snap = await db.collection(c).get();
       var arr = [];
@@ -7016,19 +7191,22 @@ async function hcBackupNow(){
   }
   out._meta.count = total;
   out._meta.failed = failed;
+  out._meta.colCount = cols.length;
   try {
     var blob = new Blob([JSON.stringify(out)], {type:'application/json'});
     var d = new Date();
     var nm = 'สำรอง-เมมโมรี่เพลส-'
       + d.getFullYear() + ('0'+(d.getMonth()+1)).slice(-2) + ('0'+d.getDate()).slice(-2)
-      + '-' + ('0'+d.getHours()).slice(-2) + ('0'+d.getMinutes()).slice(-2) + '.json';
+      + '-' + ('0'+d.getHours()).slice(-2) + ('0'+d.getMinutes()).slice(-2)
+      + (withPhotos ? '-พร้อมรูป' : '') + '.json';
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = nm;
     document.body.appendChild(a); a.click();
     setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
     try { localStorage.setItem('hcBackupAt', String(Date.now())); } catch(e){}
     if (typeof logActivity==='function')
-      logActivity('settings','สำรองข้อมูล','สำรอง '+total+' รายการ จาก '+(HC_COLLECTIONS.length-failed.length)+' ชุด');
+      logActivity('settings','สำรองข้อมูล','สำรอง '+total+' รายการ จาก '+(cols.length-failed.length)+' ชุด'
+        + (withPhotos ? ' \u00b7 พร้อมรูป' : ''));
     notify('สำรองแล้ว '+total.toLocaleString()+' รายการ'
       + (failed.length ? ' \u00b7 อ่านไม่ได้ '+failed.length+' ชุด' : '')
       + ' \u00b7 เก็บไฟล์ไว้นอกเครื่องด้วย', failed.length?'info':'success');
@@ -8869,6 +9047,51 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   font-family:Sarabun,sans-serif;cursor:pointer}
 .noacc-btn:hover{filter:brightness(1.06)}
 </style>
+
+<style>
+/* ── กู้คืนจากไฟล์สำรอง ── */
+.hcrs-card{max-width:420px;width:100%;padding:0;overflow:hidden;max-height:90vh;overflow-y:auto}
+.hcrs-hd{padding:14px 16px 12px;background:#fef2f2}
+.hcrs-hd .t{font-size:15px;font-weight:800;color:#b91c1c}
+.hcrs-hd .s{font-size:11.5px;color:#94a3b8;margin-top:3px}
+.hcrs-sec{padding:14px 16px;border-top:1px solid #f1f5f9}
+.hcrs-drop{border:2px dashed #cbd5e1;border-radius:12px;padding:24px 14px;text-align:center;cursor:pointer}
+.hcrs-drop:hover{border-color:#3b82f6;background:#fafcff}
+.hcrs-drop .di{font-size:26px;color:#cbd5e1}
+.hcrs-drop .dt{font-size:12.5px;font-weight:800;color:#475569;margin-top:8px}
+.hcrs-drop .ds{font-size:11px;color:#94a3b8;margin-top:3px}
+.hcrs-file{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:11px;padding:11px 12px}
+.hcrs-file .fn{font-size:12.5px;font-weight:800;color:#15803d;display:flex;align-items:center;gap:6px;
+  word-break:break-all}
+.hcrs-file .rows{margin-top:8px;padding-top:8px;border-top:1px dashed #bbf7d0}
+.hcrs-file .r{display:flex;font-size:11.5px;padding:2px 0;color:#15803d}
+.hcrs-file .r .k{flex:0 0 88px;color:#86c9a0}
+.hcrs-file .r .v{font-weight:800;flex:1;min-width:0}
+.hcrs-warn{background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:11px 12px;
+  font-size:11.5px;color:#b91c1c;line-height:1.75;margin-top:11px}
+.hcrs-warn b{color:#7f1d1d}
+.hcrs-warn .wt{font-weight:800;display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.hcrs-in{width:100%;border:1.5px solid #fecaca;border-radius:9px;padding:9px 11px;font-size:13px;
+  font-family:'JetBrains Mono',monospace;outline:none;text-align:center;letter-spacing:1px;
+  margin-top:9px;background:#fff;color:#0f172a}
+.hcrs-in.ok{border-color:#bbf7d0;background:#fafffb}
+.hcrs-acts{padding:13px 16px 16px;border-top:1px solid #f1f5f9}
+.hcrs-acts .ah{font-size:10.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;margin-bottom:8px}
+.hcrs-b1,.hcrs-b2,.hcrs-b3{display:flex;align-items:flex-start;gap:9px;width:100%;border-radius:11px;
+  padding:12px 14px;font-size:13px;font-weight:800;font-family:Sarabun,sans-serif;cursor:pointer;
+  border:1.5px solid transparent;margin-bottom:7px;text-align:left}
+.hcrs-b1{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.hcrs-b2{background:#fff;border-color:#fecaca;color:#b91c1c}
+.hcrs-b2:disabled{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+.hcrs-b3{background:#fff;border-color:#e2e8f0;color:#64748b}
+.hcrs-b1 .ic,.hcrs-b2 .ic,.hcrs-b3 .ic{width:21px;height:21px;border-radius:6px;display:flex;
+  align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.hcrs-b1 .ic{background:rgba(255,255,255,.22)}
+.hcrs-b2 .ic{background:#fee2e2}
+.hcrs-b3 .ic{background:#f1f5f9}
+.hcrs-b1 .sb,.hcrs-b2 .sb,.hcrs-b3 .sb{display:block;font-size:10px;font-weight:600;opacity:.78;margin-top:2px}
+@media(max-width:560px){ .hcrs-card{max-width:100%} }
+</style>
 <div id="page-guide" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-file"></i> คู่มือระบบ</div>
@@ -8877,7 +9100,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.02.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.04.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -9207,7 +9430,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v4.02.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.04.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -9814,6 +10037,7 @@ function finishLogin(u) {
   try {
     sessionStorage.setItem("currentUser", JSON.stringify(u));
   } catch(e) {}
+  sessSave(u);
   document.getElementById("login-modal-bg").classList.remove("open");
   updateUserBadge();
   applyPermissions();
@@ -9920,6 +10144,7 @@ function doLogout() {
   try { rentClearVerified(); } catch(e){}
   currentUser = null;
   try { sessionStorage.removeItem("currentUser"); } catch(e) {}
+  sessClear();
   // 🛡 4.1 - reset title
   document.title = settings.hotelName || "เมมโมรี่ เพลส";
   updateUserBadge();
@@ -10391,27 +10616,99 @@ function updateHandoffNavBadge() {
 }
 
 // เรียก init ตอนเปิดแอป
+/* ═══════════ จำสถานะล็อกอินข้ามการปิดแท็บ ═══════════
+   เดิมเก็บใน sessionStorage ซึ่งตายเมื่อปิดแท็บ → เปิดใหม่ต้องใส่ PIN ทุกครั้ง
+   Firebase Auth จำ session ให้อยู่แล้วข้ามการปิดเบราว์เซอร์ แต่แอปไม่เคยเช็ค
+
+   จำแค่ 12 ชั่วโมง ไม่จำตลอด เพราะเครื่องหน้าเคาน์เตอร์ใช้ร่วมกัน
+   ถ้าจำตลอด คนกะถัดไปจะเปิดมาเป็นชื่อคนกะก่อน → บันทึกกิจกรรมลงชื่อผิดคน
+   PIN ไม่ได้เก็บไว้ในเครื่องแบบถาวร ใช้ session ของ Firebase ที่มีอยู่แล้ว */
+var SESS_HOURS = 12;
+function sessSave(u){
+  try {
+    localStorage.setItem("sessUser", JSON.stringify({id:u.id, at:Date.now()}));
+  } catch(e){}
+}
+function sessLoad(){
+  try {
+    var raw = localStorage.getItem("sessUser");
+    if (!raw) return null;
+    var o = JSON.parse(raw);
+    if (!o || !o.id || !o.at) return null;
+    var hrs = (Date.now() - o.at) / 3600000;
+    if (hrs > SESS_HOURS){ sessClear(); return null; }
+    return o;
+  } catch(e){ return null; }
+}
+function sessClear(){
+  try { localStorage.removeItem("sessUser"); } catch(e){}
+}
+/* บัญชี Firebase ที่ยังล็อกอินค้างอยู่เป็นของใคร
+   รอให้ SDK กู้ session เสร็จก่อน ไม่งั้นอ่านตอนแรกจะได้ null เสมอ */
+function authWhoIsSignedIn(){
+  return new Promise(function(resolve){
+    if (!fbAuth){ resolve(null); return; }
+    if (fbAuth.currentUser){ resolve(fbAuth.currentUser); return; }
+    var done = false;
+    var un = fbAuth.onAuthStateChanged(function(u){
+      if (done) return;
+      done = true; try { un(); } catch(e){}
+      resolve(u || null);
+    });
+    /* กันค้างถ้า SDK ไม่ตอบ */
+    setTimeout(function(){
+      if (done) return;
+      done = true; try { un(); } catch(e){}
+      resolve(fbAuth.currentUser || null);
+    }, 4000);
+  });
+}
+
 async function initUserSession() {
   await loadStaffList();
-  // ลอง restore จาก sessionStorage
+  /* ① แท็บเดิมที่ยังเปิดอยู่ */
   try {
     var saved = sessionStorage.getItem("currentUser");
     if (saved) {
       var u = JSON.parse(saved);
-      // verify ยังอยู่ใน staffList
       var found = staffList.find(function(x){return x.id===u.id;});
       if (found) {
         currentUser = found;
+        sessSave(found);
         updateUserBadge();
         applyPermissions();
-        /* เคยล็อกอินไว้แล้ว → โหลดข้อมูลต่อได้เลย
-           แต่ต้องเชื่อมบัญชี Firebase ใหม่ก่อน ไม่งั้นกฎจะปฏิเสธ */
         await bootAfterLogin(found, pinCacheGet(found.id));
         return;
       }
     }
   } catch(e) {}
-  // ไม่มี → แสดง login
+  /* ② เปิดแท็บใหม่ / ปิดแล้วเปิดใหม่
+     ต้องมีครบ 2 อย่าง — บัญชี Firebase ยังล็อกอินค้าง และจำไว้ไม่เกิน 12 ชม.
+     ขาดอย่างใดอย่างหนึ่งให้ใส่ PIN ใหม่ */
+  try {
+    var mark = sessLoad();
+    if (mark){
+      setOverlay("กำลังเข้าระบบ...");
+      var fu = await authWhoIsSignedIn();
+      var email = fu && fu.email ? String(fu.email).toLowerCase() : "";
+      var byMail = email
+        ? staffList.find(function(x){ return String(authEmailOf(x)||"").toLowerCase() === email; })
+        : null;
+      setOverlay(null);
+      /* บัญชีที่ค้างอยู่ต้องเป็นคนเดียวกับที่จำไว้ · คนละคนแปลว่ามีคนสลับบัญชี */
+      if (byMail && byMail.id === mark.id){
+        currentUser = byMail;
+        sessSave(byMail);
+        try { sessionStorage.setItem("currentUser", JSON.stringify(byMail)); } catch(e){}
+        updateUserBadge();
+        applyPermissions();
+        await bootAfterLogin(byMail, pinCacheGet(byMail.id));
+        notify("ยินดีต้อนรับกลับ คุณ" + byMail.name, "success");
+        return;
+      }
+      sessClear();
+    }
+  } catch(e){ setOverlay(null); console.warn("initUserSession:", e); }
   showLoginModal();
 }
 
