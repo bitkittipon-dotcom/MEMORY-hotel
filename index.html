@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v4.00.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v4.02.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -582,7 +582,10 @@ textarea.form-input{resize:vertical;min-height:72px}
 .login-arrow{font-size:22px;color:#cbd5e1;font-weight:300}
 
 /* ━━━━━ User Badge in topbar ━━━━━ */
-#user-badge{display:none;align-items:center;gap:8px;padding:5px 11px 5px 6px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;font-size:12px}
+/* ช่องไฟรอบกล่อง — เดิมซ้าย 6 ขวา 11 แต่ปุ่มมี padding ของตัวเองอีก 7
+   รวมแล้วขวาห่าง 18 ซ้ายห่าง 6 ดูเบี้ยว
+   ตั้งซ้ายขวาเท่ากันที่ 6 แล้วให้ปุ่มเป็นตัวเว้นขวาเอง */
+#user-badge{display:none;align-items:center;gap:8px;padding:5px 6px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;font-size:12px}
 .ub-avatar{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;font-family:'Inter','Sarabun',sans-serif;flex-shrink:0}
 .ub-info{display:flex;flex-direction:column;line-height:1.2;min-width:0;overflow:hidden}
 .ub-name{font-size:11px;font-weight:800;color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -590,7 +593,7 @@ textarea.form-input{resize:vertical;min-height:72px}
 /* ข้อความแทนสัญลักษณ์ — ของเดิมใช้ ⏻ ซึ่งฟอนต์หลายตัวไม่มี เลยขึ้นเป็นกล่องเปล่า */
 .ub-logout{margin-left:auto;flex-shrink:0;background:transparent;color:#dc2626;border:none;
   cursor:pointer;font-size:11px;font-weight:800;font-family:'Sarabun',sans-serif;
-  padding:5px 7px;border-radius:8px;white-space:nowrap;line-height:1.2}
+  padding:5px 8px;border-radius:8px;white-space:nowrap;line-height:1.2}
 .ub-logout:hover{background:#fef2f2}
 .ub-logout:active{background:#fee2e2}
 
@@ -2223,7 +2226,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.00.0</span></div></div>
+    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.02.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -3047,6 +3050,13 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
     <div class="settings-body">
       <!-- ล้างรายการซ่อม · อยู่เหนือปุ่มรีเซ็ตเพราะอันตรายน้อยกว่า
            ปุ่มเหลือง (ระวัง) ต่างจากแดงที่สงวนไว้ให้รีเซ็ตทั้งระบบ -->
+      <!-- ย้าย PIN ไปเก็บที่ปลอดภัยกว่า · ทำครั้งเดียวจบ
+           ต้องวางกฎ Firestore ชุดใหม่ก่อน ไม่งั้นเขียนตู้ใหม่ไม่ได้ -->
+      <div class="settings-row" id="row-migpin" style="display:none">
+        <div><div class="settings-label">ย้าย PIN ไปเก็บที่ปลอดภัยกว่า</div>
+          <div class="settings-sub" id="migpin-sub">—</div></div>
+        <button class="btn btn-warn btn-sm" id="migpin-btn" onclick="migPins()"><i class="ico ico-lock"></i> ย้ายเลย</button>
+      </div>
       <div class="settings-row" id="row-purge" style="display:none">
         <div><div class="settings-label">ล้างรายการซ่อม</div><div class="settings-sub">ลบรูป หรือ ลบทั้งรายการ · เลือกเดือน/ปีได้หลายอัน</div></div>
         <button class="btn btn-warn btn-sm" onclick="prgOpen()"><i class="ico ico-trash"></i> เลือกที่จะล้าง</button>
@@ -5563,6 +5573,10 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.02.0</td><td>22 ส.ค. 69</td>'
++'<td><b>ย้าย PIN ไปเก็บที่ปลอดภัยกว่า (ข้อสุดท้ายของรายการตรวจสอบ)</b><br/>รายชื่อผู้ใช้ต้องเปิดให้อ่านก่อนล็อกอิน เพราะหน้าเลือกคนต้องใช้ — แต่เดิม<b>เก็บ PIN ไว้ในนั้นด้วย</b> แปลว่า<b>ใครก็ได้บนอินเทอร์เน็ตอ่าน PIN ทุกคนได้โดยไม่ต้องล็อกอิน</b><br/>ย้ายมาเก็บแยกที่ใหม่ — ต้อง<b>ล็อกอินก่อน</b>ถึงจะอ่านได้ และอ่านได้<b>เฉพาะ PIN ของตัวเอง</b> ยกเว้นเจ้าของที่อ่านได้ทุกคน<br/><b>ปุ่มดูรหัส PIN ยังใช้ได้เหมือนเดิม</b> · กันตั้ง PIN ซ้ำ · ตรวจสุขภาพ · ตั้ง PIN ของตัวเอง ทำงานปกติ<br/>มีปุ่ม <b>ย้ายเลย</b> ในหน้าตั้งค่า กดครั้งเดียวจบ · <b>กดไม่ได้ถ้ายังมีคนไม่มีบัญชีเข้าระบบ</b> เพราะย้ายแล้วคนนั้นจะเข้าไม่ได้<br/>⚠ <b>ต้องวางกฎ Firestore ชุดใหม่ก่อนกดย้าย</b></td></tr>'
++'<tr><td style="font-family:monospace">v4.01.0</td><td>22 ส.ค. 69</td>'
++'<td>🔴 <b>แก้บั๊กใหญ่ — เพิ่มพนักงานใหม่แล้วเขาเข้าระบบไม่ได้</b><br/>ทุกตู้ข้อมูลต้องเชื่อมบัญชี Firebase ก่อนถึงจะอ่านได้ แต่<b>ตอนเพิ่มพนักงานไม่ได้สร้างบัญชีให้เลย</b> — คนใหม่จึงผ่านหน้า PIN ไม่ได้ และต่อให้ผ่านก็โหลดข้อมูลไม่ขึ้น<br/>ตอนนี้<b>เพิ่มพนักงานแล้วสร้างบัญชีให้อัตโนมัติ</b> · ถ้าสร้างไม่สำเร็จจะ<b>ไม่เพิ่มเลย</b> ไม่ให้ค้างครึ่งทางแบบเดิม · มีข้อความบอกชัดว่าต้องไปเปิดอะไรใน Firebase<br/>คนที่<b>ตกค้างอยู่แล้ว</b>จะขึ้นกล่องแดงในหน้าตั้งค่า พร้อมปุ่ม <b>สร้างบัญชีให้</b> · <b>ตรวจสุขภาพ</b>เพิ่มหัวข้อบอกว่าใครยังไม่มีบัญชี<br/><b>ห้ามตั้ง PIN ให้คนอื่นแล้ว</b> — Firebase ยอมให้เปลี่ยนรหัสเฉพาะบัญชีที่ล็อกอินอยู่ ตั้งให้คนอื่นแล้วรหัสจริงไม่เปลี่ยนตาม เขาจะเข้าไม่ได้อีกเลย · ลืม PIN ให้เจ้าของกด<b>ปุ่มรูปตา</b>ดูแล้วบอกเลขเดิมแทน</td></tr>'
 +'<tr><td style="font-family:monospace">v4.00.0</td><td>22 ส.ค. 69</td>'
 +'<td><b>ลากแถบเดือน/วันที่เพื่อเลื่อนดูปฏิทินได้</b><br/>ดู 30 หรือ 60 วัน ปฏิทินกว้างเกินจอ ต้องไปหาแถบเลื่อนด้านล่างซึ่งเล็กและอยู่ไกลตา<br/>ตอนนี้<b>วางเมาส์ที่แถบเดือนหรือแถบวันที่</b>จะขึ้น<b>ลูกศร ❮ ❯ ทั้ง 2 ข้าง</b> พร้อมป้าย “กดค้างแล้วลากเพื่อเลื่อนดู” และเคอร์เซอร์เปลี่ยนเป็นรูปมือ<br/><b>กดค้างแล้วลาก</b>เลื่อนตามนิ้วได้เลย — ลากซ้ายดูวันหน้า ลากขวาดูวันหลัง<br/><b>ไม่ชนกับการลากเลือกวันจอง</b> — ลากที่<b>แถวห้อง</b>คือเลือกช่วงจอง ลากที่<b>แถบด้านบน</b>คือเลื่อนดู คนละแถวกัน · กดที่ป้าย “ห้อง” ไม่ลากเพราะติดซ้ายอยู่กับที่</td></tr>'
 +'<tr><td style="font-family:monospace">v3.99.0</td><td>22 ส.ค. 69</td>'
@@ -5752,8 +5766,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1211;
-window.__APP_VERSION = "v4.00.0";
+window.__APP_BUILD = 1213;
+window.__APP_VERSION = "v4.02.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -6781,10 +6795,29 @@ async function hcRules(){
 }
 
 /* ── 2. PIN ── */
+/* ใครยังไม่มีบัญชี Firebase
+   ไม่มีบัญชี = ผ่านหน้า PIN ได้ แต่ข้อมูลโหลดไม่ขึ้น ใช้แอปไม่ได้เลย */
+function hcAuth(){
+  var out = [], no = [];
+  (staffList||[]).forEach(function(u){
+    if (!u.authLinked) no.push(u.name || u.id);
+  });
+  if (!no.length){
+    out.push(hcRow('ok','บัญชีเข้าระบบ',
+      'ทุกคนมีบัญชีครบ \u00b7 ' + (staffList||[]).length + ' คน'));
+  } else {
+    out.push(hcRow('bad','บัญชีเข้าระบบ', no.join(' \u00b7 '),
+      'คนเหล่านี้อาจ<b>ใช้แอปไม่ได้</b> \u2014 ผ่านหน้า PIN ได้แต่ข้อมูลไม่โหลด<br/>'
+      + 'ไปที่ <b>ตั้งค่า</b> แล้วกด <b>สร้างบัญชีให้</b> ในการ์ดของคนนั้น<br/>'
+      + '<span style="color:#94a3b8">คนที่ยังไม่เคยเข้าระบบตั้งแต่อัปเวอร์ชันนี้ '
+      + 'จะขึ้นตรงนี้ด้วย \u00b7 ให้เขาเข้าระบบ 1 ครั้งแล้วเช็คใหม่</span>'));
+  }
+  return out;
+}
 function hcPins(){
   var out=[], dup=[], weak=[], seen={};
   (staffList||[]).forEach(function(u){
-    var p=String(u.pin||''); if (p.length!==6) return;
+    var p=pinOf(u); if (p.length!==6) return;
     if (seen[p]) dup.push(seen[p]+' กับ '+u.name); else seen[p]=u.name;
     var w = (typeof pinWeakReason==='function') ? pinWeakReason(p) : null;
     if (w) weak.push(u.name+' ('+w+')');
@@ -6907,6 +6940,7 @@ async function hcRun(){
   HC_RUNNING = true; HC_RESULT = null; gdRenderBody();
   var rows = [];
   try { rows = rows.concat(await hcRules()); } catch(e){ rows.push(hcRow('warn','กฎกันคนนอก','ตรวจไม่สำเร็จ')); }
+  try { rows = rows.concat(hcAuth()); } catch(e){}
   try { rows = rows.concat(hcPins()); } catch(e){}
   try { rows = rows.concat(hcBackup()); } catch(e){}
   try { rows = rows.concat(hcPending()); } catch(e){}
@@ -8823,6 +8857,18 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 .tl-pan.hover .tl-pantip{opacity:.94}
 .tl-pan.panning .tl-pantip,.tl-pan.panning .tl-panhint{opacity:0}
 </style>
+
+<style>
+/* ── ยังไม่มีบัญชีเข้าระบบ ── */
+.noacc{background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:11px 12px;margin-top:10px}
+.noacc .t{font-size:12px;font-weight:800;color:#b91c1c;display:flex;align-items:center;gap:6px}
+.noacc .s{font-size:11px;color:#b91c1c;line-height:1.65;margin-top:4px;opacity:.85}
+.noacc .s b{opacity:1;font-weight:800}
+.noacc-btn{margin-top:8px;width:100%;background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;
+  border:none;border-radius:9px;padding:9px 12px;font-size:12.5px;font-weight:800;
+  font-family:Sarabun,sans-serif;cursor:pointer}
+.noacc-btn:hover{filter:brightness(1.06)}
+</style>
 <div id="page-guide" class="page">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-file"></i> คู่มือระบบ</div>
@@ -8831,7 +8877,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.00.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.02.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -9161,7 +9207,7 @@ try{ if(typeof dailyRoomDelete==='function') window.dailyRoomDelete = guardOnce(
 try{ if(typeof doCheckInReserved==='function') window.doCheckInReserved = guardOnce('doCheckInReserved', doCheckInReserved); }catch(e){}
 try{ if(typeof doWalkInCheckin==='function') window.doWalkInCheckin = guardOnce('doWalkInCheckin', doWalkInCheckin); }catch(e){}
 try{ if(typeof cancelMoveOut==='function') window.cancelMoveOut = guardOnce('cancelMoveOut', cancelMoveOut); }catch(e){}
-console.log("HotelPro v4.00.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.02.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -9255,6 +9301,49 @@ async function authSignOut(){
   try { if (fbAuth && fbAuth.currentUser) await fbAuth.signOut(); } catch(e){}
 }
 /* เปลี่ยน PIN → ต้องเปลี่ยนรหัสผ่าน Firebase ตามด้วย ไม่งั้นเข้าไม่ได้ */
+/* ═══════════ สร้างบัญชี Firebase ให้พนักงาน ═══════════
+   ทุกตู้ใน Firestore ต้อง signedIn() ก่อนถึงอ่านได้
+   คนที่ไม่มีบัญชี Firebase จึงผ่านหน้า PIN ได้ แต่ข้อมูลโหลดไม่ขึ้น = ใช้แอปไม่ได้เลย
+   เดิม addStaff ไม่สร้างบัญชีให้ → พนักงานใหม่ทุกคนติดปัญหานี้
+
+   สร้างผ่าน Firebase "ตัวที่สอง" เพราะ createUser จะสลับผู้ใช้ที่ล็อกอินอยู่
+   ถ้าใช้ตัวหลักจะเตะเจ้าของออกจากระบบทันที */
+async function authMakeAccount(u, pin){
+  var email = authEmailOf(u);
+  if (!email) return {ok:false, why:"ไม่รู้รหัสพนักงาน"};
+  if (String(pin||"").length < 6) return {ok:false, why:"PIN ต้องมี 6 หลัก"};
+  if (typeof firebase === "undefined" || !firebase.initializeApp)
+    return {ok:false, why:"ระบบล็อกอินยังไม่พร้อม"};
+  var sec = null;
+  try {
+    /* ชื่อไม่ซ้ำกันทุกครั้ง กันกรณีตัวเก่ายังปิดไม่สนิท */
+    sec = firebase.initializeApp(firebaseConfig, "mkuser_" + Date.now());
+    await sec.auth().createUserWithEmailAndPassword(email, String(pin));
+    try { await sec.auth().signOut(); } catch(e){}
+    return {ok:true, created:true};
+  } catch(e){
+    var code = (e && e.code) || "";
+    /* มีบัญชีอยู่แล้ว = เป้าหมายสำเร็จอยู่ดี ไม่ถือว่าพลาด */
+    if (code === "auth/email-already-in-use") return {ok:true, created:false};
+    return {ok:false, code:code, why:authMakeErrText(code) || code || "ไม่ทราบสาเหตุ"};
+  } finally {
+    if (sec){ try { await sec.delete(); } catch(e){} }
+  }
+}
+function authMakeErrText(code){
+  var M = {
+    "auth/admin-restricted-operation":
+      "Firebase ปิดการสมัครไว้ \u00b7 เปิดที่ Authentication \u2192 Settings \u2192 User actions",
+    "auth/operation-not-allowed":
+      "ยังไม่ได้เปิด Email/Password ใน Firebase",
+    "auth/weak-password": "PIN สั้นเกินไป \u00b7 ต้องมี 6 หลัก",
+    "auth/invalid-email": "รูปแบบอีเมลของบัญชีไม่ถูกต้อง",
+    "auth/network-request-failed": "เน็ตมีปัญหา \u00b7 ลองใหม่อีกครั้ง",
+    "auth/too-many-requests": "สร้างบัญชีถี่เกินไป \u00b7 รอสักครู่แล้วลองใหม่"
+  };
+  return M[code] || null;
+}
+
 async function authChangePin(u, oldPin, newPin){
   var email = authEmailOf(u);
   try {
@@ -9708,7 +9797,7 @@ function doLogin(staffId) {
 async function bootAfterLogin(u, cachedPin){
   if (window.__bootedData) return;
   try {
-    var pin = cachedPin || (u && u.pin) || null;
+    var pin = cachedPin || (typeof pinOf==="function" ? pinOf(u) : "") || null;
     if (!authIsOn() && u && pin && typeof authSignIn === "function"){
       await authSignIn(u, pin);
     }
@@ -9785,8 +9874,8 @@ async function pinVerify() {
              chk.code === "auth/invalid-credential" ||
              chk.code === "auth/invalid-login-credentials") {
     pass = false;                                  /* Firebase บอกว่าผิด */
-  } else if (u.pin) {
-    pass = (pin === String(u.pin));                /* เชื่อมไม่ได้ → ใช้ของเก่า */
+  } else if (pinOf(u)) {
+    pass = (pin === pinOf(u));                     /* เชื่อมไม่ได้ → ใช้ของเก่า */
   } else {
     pass = false;
   }
@@ -9805,6 +9894,15 @@ async function pinVerify() {
       }, 1200);
     } else {
       window.__authLinked = true;
+      /* จดไว้ว่าคนนี้มีบัญชีแล้ว · ตรวจสุขภาพจะได้บอกได้ว่าใครยังขาด
+         จดได้เฉพาะตอนเชื่อมสำเร็จ เพราะตอนไม่เชื่อมเขียน Firestore ไม่ได้ */
+      if (!u.authLinked){
+        try {
+          u.authLinked = true; u.authLinkedAt = Date.now();
+          staffList = (staffList||[]).map(function(x){ return x.id===u.id ? u : x; });
+          db.collection("staffList").doc(u.id).set(u);
+        } catch(e){ console.warn("mark linked:", e); }
+      }
     }
   } else {
     document.getElementById("pin-modal-err").style.display = "block";
@@ -10456,6 +10554,7 @@ async function initFirebase() {
     setOverlay("โหลดรายชื่อช่าง...");
     await loadTechnicians();
     await loadRequests();
+    await loadStaffPins();
 
     setOverlay(null);
     applySettings();
@@ -11515,7 +11614,7 @@ window.rentPinType = function(){
   el.classList.remove('err'); if (msg) msg.textContent='';
   if (v.length < 6) return;
   var me = currentUser || {};
-  var ok = String(me.pin||'') === v;
+  var ok = pinOf(me) === v;
   /* PIN ไม่ได้เก็บในฐานข้อมูลแล้ว (v3.61) → เทียบกับที่เก็บไว้ในเครื่องตอนล็อกอิน */
   if (!ok && typeof pinCacheGet === 'function') ok = (String(pinCacheGet(me.id)||'') === v);
   if (ok){
@@ -18581,17 +18680,92 @@ function rReports() {
    กดค้างถึงจะเห็น ปล่อยแล้วซ่อนทันที — เผลอเปิดทิ้งไว้ให้คนเดินผ่านเห็นไม่ได้
    บันทึกทุกครั้งที่เปิดดู ถ้า PIN หลุดจะตามได้ว่าใครดูของใครเมื่อไหร่ */
 var _pinPeekLogged = {};
+/* สร้างบัญชีให้คนที่ตกค้าง · ใช้ PIN ที่เก็บไว้เป็นรหัสผ่าน
+   เจ้าของเท่านั้น เพราะต้องอ่าน PIN ของคนอื่น */
+/* ย้าย PIN ไปตู้ใหม่ · ทำครั้งเดียวจบ
+   กันไว้ 2 ชั้น — ต้องเป็นเจ้าของ และทุกคนต้องมีบัญชี Firebase ครบก่อน
+   เพราะพอลบ PIN ออกจากตู้เก่าแล้ว คนที่ไม่มีบัญชีจะเข้าระบบไม่ได้เลย */
+function pinsMigrated(){
+  return (staffList||[]).every(function(u){ return typeof u.pin === "undefined"; });
+}
+window.migPins = async function(){
+  if (!muIsOwner()){ notify("เฉพาะเจ้าของเท่านั้น","error"); return; }
+  var noAcc = (staffList||[]).filter(function(u){ return !u.authLinked; });
+  if (noAcc.length){
+    notify("ย้ายไม่ได้ \u00b7 ยังมีคนไม่มีบัญชีเข้าระบบ: "
+      + noAcc.map(function(u){return u.name;}).join(", ")
+      + " \u00b7 กด \u201cสร้างบัญชีให้\u201d ก่อน", "error");
+    return;
+  }
+  var noPin = (staffList||[]).filter(function(u){ return pinOf(u).length !== 6; });
+  if (noPin.length){
+    notify("ย้ายไม่ได้ \u00b7 ยังมีคนไม่มี PIN: "
+      + noPin.map(function(u){return u.name;}).join(", "), "error");
+    return;
+  }
+  if (!confirm("ย้าย PIN ไปเก็บที่ปลอดภัยกว่า?\n\n"
+    + "หลังย้ายแล้ว PIN จะไม่อยู่ในที่ที่คนนอกอ่านได้อีก\n"
+    + "ทุกคนต้องเข้าระบบผ่านบัญชี Firebase เท่านั้น\n\n"
+    + "\u26a0 ต้องวางกฎ Firestore ชุดใหม่แล้วก่อนกดตกลง")) return;
+  setOverlay("กำลังย้าย PIN...");
+  try {
+    /* ① คัดลอกไปตู้ใหม่ให้ครบก่อน */
+    for (var i=0;i<staffList.length;i++){
+      await pinSaveTo(staffList[i].id, pinOf(staffList[i]));
+    }
+    /* ② ลบออกจากตู้เก่า — ทำหลังคัดลอกครบแล้วเท่านั้น */
+    for (var j=0;j<staffList.length;j++){
+      var u = staffList[j];
+      if (typeof u.pin !== "undefined"){
+        delete u.pin;
+        await db.collection("staffList").doc(u.id).set(u);
+      }
+    }
+    window.__pinsMigrated = true;
+    setOverlay(null);
+    logActivity("staff","ระบบ","ย้าย PIN ไปเก็บแยกตู้ที่ปลอดภัยกว่า");
+    notify("ย้าย PIN เรียบร้อย \u00b7 " + staffList.length + " คน","success");
+    renderStaffList();
+  } catch(e){
+    setOverlay(null);
+    console.error("migPins:", e);
+    notify("ย้ายไม่สำเร็จ \u00b7 " + (e.message||"") + " \u00b7 วางกฎ Firestore ชุดใหม่แล้วหรือยัง","error");
+  }
+};
+
+window.staffMakeAuth = async function(uid){
+  if (!muIsOwner()){ notify("เฉพาะเจ้าของเท่านั้น","error"); return; }
+  var u = (staffList||[]).find(function(x){return x.id===uid;});
+  if (!u){ notify("ไม่พบผู้ใช้","error"); return; }
+  var _pn = pinOf(u);
+  if (!_pn || _pn.length !== 6){
+    notify("คนนี้ยังไม่มี PIN \u00b7 กด \u201cตั้ง PIN\u201d ก่อน","error"); return;
+  }
+  setOverlay("กำลังสร้างบัญชี...");
+  var r = await authMakeAccount(u, _pn);
+  setOverlay(null);
+  if (!r.ok){ notify("สร้างบัญชีไม่สำเร็จ \u00b7 " + (r.why||""), "error"); return; }
+  try {
+    u.authLinked = true; u.authLinkedAt = Date.now();
+    staffList = (staffList||[]).map(function(x){ return x.id===u.id ? u : x; });
+    await db.collection("staffList").doc(u.id).set(u);
+  } catch(e){ console.warn(e); }
+  logActivity("staff", u.name, r.created ? "สร้างบัญชีเข้าระบบให้" : "บัญชีมีอยู่แล้ว \u00b7 ทำเครื่องหมายว่าเชื่อมแล้ว");
+  notify(r.created ? "สร้างบัญชีให้ " + u.name + " แล้ว" : "บัญชีของ " + u.name + " มีอยู่แล้ว", "success");
+  renderStaffList();
+};
+
 window.pinPeek = function(uid, on, ev){
   if (ev && ev.preventDefault) ev.preventDefault();
   if (!muIsOwner()) return;
   var u = (staffList||[]).find(function(x){return x.id===uid;});
-  if (!u || !u.pin) return;
+  if (!u || !pinOf(u)) return;
   var mask = document.getElementById("pinmask-" + uid);
   var btn  = document.getElementById("pinpeek-" + uid);
   var hint = document.getElementById("pinhint-" + uid);
   if (!mask) return;
   if (on){
-    mask.textContent = String(u.pin);
+    mask.textContent = pinOf(u);
     mask.classList.add("shown");
     if (btn) btn.classList.add("on");
     if (hint) hint.innerHTML = "<b>\u26a0 กำลังแสดง PIN</b> \u00b7 ปล่อยนิ้วแล้วซ่อนทันที";
@@ -18628,9 +18802,29 @@ function renderStaffList() {
   var _rowR = document.getElementById("row-reset");
   var _dc   = document.getElementById("data-card");
   var _canP = prgCan(), _canR = muIsOwner();
+  /* ปุ่มย้าย PIN · เจ้าของเท่านั้น และซ่อนเมื่อย้ายเสร็จแล้ว */
+  var _rowM = document.getElementById("row-migpin");
+  var _canM = muIsOwner() && !pinsMigrated();
+  if (_rowM){
+    _rowM.style.display = _canM ? "" : "none";
+    if (_canM){
+      var _noAcc = (staffList||[]).filter(function(u){ return !u.authLinked; });
+      var _sub = document.getElementById("migpin-sub");
+      var _btn = document.getElementById("migpin-btn");
+      if (_noAcc.length){
+        if (_sub) _sub.innerHTML = "\u26a0 ยังมี <b>" + _noAcc.length
+          + " คน</b>ไม่มีบัญชีเข้าระบบ \u00b7 กด \u201cสร้างบัญชีให้\u201d ก่อน";
+        if (_btn) _btn.disabled = true;
+      } else {
+        if (_sub) _sub.textContent = "ตอนนี้ PIN อยู่ในที่ที่คนนอกอ่านได้ \u00b7 "
+          + "ย้ายแล้วต้องล็อกอินก่อนถึงจะอ่านได้";
+        if (_btn) _btn.disabled = false;
+      }
+    }
+  }
   if (_rowP) _rowP.style.display = _canP ? "" : "none";
   if (_rowR) _rowR.style.display = _canR ? "" : "none";
-  if (_dc)   _dc.style.display   = (_canP || _canR) ? "" : "none";
+  if (_dc)   _dc.style.display   = (_canP || _canR || _canM) ? "" : "none";
   /* ล้างเนื้อหาทิ้งด้วย ไม่ใช่แค่ซ่อน — ถ้าเคยวาดตอนเป็นเจ้าของแล้วสลับเป็นพนักงาน
      HTML เดิมจะยังค้างใน DOM เปิด Inspect ก็เห็น (แม้ PIN จะเป็น •••••• แล้วก็ตาม) */
   if (!muCan()) {
@@ -18648,7 +18842,7 @@ function renderStaffList() {
   var _warn = [];
   var _seen = {};
   staffList.forEach(function(u){
-    var p = String(u.pin||'');
+    var p = pinOf(u);
     if (!p) { _warn.push({t:'ยังไม่ตั้ง', m:mtEsc(u.name)+' เข้าระบบได้โดยไม่ต้องใส่รหัส'}); return; }
     if (p.length!==6) return;
     if (_seen[p]) _warn.push({t:'ซ้ำ', m:mtEsc(_seen[p])+' กับ '+mtEsc(u.name)+' ใช้ PIN เดียวกัน'});
@@ -18696,11 +18890,12 @@ function renderStaffList() {
     s += "<div class='usec'>";
     /* PIN ปกติแสดงเป็นจุด · เจ้าของกดค้างที่ปุ่มตาถึงจะเห็นเลขจริง
        ปล่อยนิ้วซ่อนทันที เผลอเปิดทิ้งไว้ไม่ได้ · ทุกครั้งที่เปิดดูมีบันทึกไว้ */
-    var _canPeek = muIsOwner() && !!u.pin;
+    var _pinShown = pinOf(u);
+    var _canPeek = muIsOwner() && !!_pinShown;
     s += "<div class='ufield'><label class='flabel'>รหัส PIN</label>"
       + "<div class='pinrow'>"
       +   "<div class='pinmask' id='pinmask-"+u.id+"'>"
-      +     (u.pin ? "\u2022\u2022\u2022\u2022\u2022\u2022" : "<span class='nopin'>ยังไม่ได้ตั้ง</span>")
+      +     (_pinShown ? "\u2022\u2022\u2022\u2022\u2022\u2022" : "<span class='nopin'>ยังไม่ได้ตั้ง</span>")
       +   "</div>"
       +   (_canPeek
          ? "<button class='pinpeek' id='pinpeek-"+u.id+"' type='button'"
@@ -18711,9 +18906,20 @@ function renderStaffList() {
            + " title='กดค้างไว้ถึงจะเห็น'><i class='ico ico-eye'></i> กดค้าง</button>"
          : "")
       +   "<button class='pinset'"+(lockAll ? " disabled title='แก้ข้อมูลของเจ้าของไม่ได้'" : " onclick=\"muAskPin('"+u.id+"')\"")
-      +     ">"+(u.pin ? "ตั้ง PIN ใหม่" : "ตั้ง PIN")+"</button>"
+      +     ">"+(_pinShown ? "ตั้ง PIN ใหม่" : "ตั้ง PIN")+"</button>"
       + "</div>"
       + (_canPeek ? "<div class='pinhint' id='pinhint-"+u.id+"'>กด<b>ค้างไว้</b>ที่ปุ่มตาถึงจะเห็น \u00b7 ปล่อยแล้วซ่อนทันที</div>" : "")
+      /* ยังไม่มีบัญชี Firebase = ใช้แอปไม่ได้ ต้องกดสร้างให้ก่อน */
+      + (!u.authLinked
+         ? "<div class='noacc'>"
+           + "<div class='t'><i class='ico ico-alert'></i> ยังไม่มีบัญชีเข้าระบบ</div>"
+           + "<div class='s'>คนนี้อาจ<b>ใช้แอปไม่ได้</b> \u2014 ผ่านหน้า PIN ได้แต่ข้อมูลไม่โหลด</div>"
+           + (muIsOwner()
+              ? "<button class='noacc-btn' onclick=\"staffMakeAuth('"+u.id+"')\">"
+                + "สร้างบัญชีให้</button>"
+              : "<div class='s' style='margin-top:5px'>แจ้งเจ้าของให้กดสร้างบัญชีให้</div>")
+           + "</div>"
+         : "")
       + "</div>";
     if (u.role === "owner") {
       s += "<div class='owner-access'><span class='ownerbadge'><i class='ico ico-check'></i> เข้าถึงได้ทุกส่วน — ไม่ต้องตั้งสิทธิ์</span></div>";
@@ -18748,6 +18954,15 @@ function renderStaffList() {
 window.muAskPin = function(id){
   var u = (staffList||[]).find(function(x){return x.id===id;});
   if (!muGuard(u, "edit")) return;
+  /* ตั้ง PIN ให้คนอื่นไม่ได้ · Firebase ยอมให้เปลี่ยนรหัสเฉพาะบัญชีที่ล็อกอินอยู่
+     เดิมเปลี่ยนใน Firestore ได้ แต่รหัส Firebase ไม่เปลี่ยนตาม → คนนั้นเข้าไม่ได้อีกเลย
+     ลืม PIN ให้เจ้าของกดปุ่มรูปตาดูแล้วบอกเลขเดิมแทน */
+  var _me = (currentUser && currentUser.id) || null;
+  if (u.id !== _me && u.authLinked){
+    notify("ตั้ง PIN ให้คนอื่นไม่ได้ \u00b7 ตั้งแล้วเขาจะเข้าระบบไม่ได้"
+      + (muIsOwner() ? " \u00b7 ลืม PIN ให้กดปุ่มรูปตาดูแล้วบอกเลขเดิม" : ""), "error");
+    return;
+  }
   var old = document.getElementById("mu-pin-bg"); if (old) old.remove();
   var bg = document.createElement("div");
   bg.className = "modal-bg open"; bg.id = "mu-pin-bg"; bg.style.zIndex = 9500;
@@ -18789,10 +19004,46 @@ function togglePermChip(id, key, el) {
 }
 
 /* ── PIN: กันซ้ำ กันเดาง่าย ── */
+/* ═══════════ PIN เก็บแยกตู้ ═══════════
+   เดิม PIN อยู่ใน staffList ซึ่งกฎเปิดให้อ่านได้โดยไม่ต้องล็อกอิน
+   (จำเป็น เพราะหน้าเลือกคนตอนล็อกอินต้องอ่านรายชื่อก่อน)
+   → ใครก็ได้บนอินเทอร์เน็ตอ่าน PIN ทุกคนได้
+
+   ย้ายมาไว้ตู้ staffPins ที่กฎบังคับให้ล็อกอินก่อน
+   และอ่านได้เฉพาะของตัวเองหรือถ้าเป็นเจ้าของ
+
+   ระหว่างเปลี่ยนผ่าน อ่านได้ทั้ง 2 ที่ · ตู้ใหม่มาก่อน */
+var PINMAP = {};
+async function loadStaffPins(){
+  try {
+    var snap = await db.collection("staffPins").get();
+    PINMAP = {};
+    snap.forEach(function(d){
+      var v = d.data() || {};
+      if (v.pin) PINMAP[d.id] = String(v.pin);
+    });
+  } catch(e){
+    /* พนักงานอ่านของคนอื่นไม่ได้ = ปกติ ไม่ใช่ความผิดพลาด */
+    console.warn("loadStaffPins:", e && e.code);
+  }
+}
+function pinOf(u){
+  if (!u) return "";
+  var id = u.id || u;
+  if (PINMAP[id]) return PINMAP[id];
+  return String((u && u.pin) || "");
+}
+/* เขียน PIN ลงตู้ใหม่ · เก็บในเครื่องด้วยจะได้ใช้ได้ทันทีไม่ต้องโหลดซ้ำ */
+async function pinSaveTo(id, pin){
+  PINMAP[id] = String(pin);
+  await db.collection("staffPins").doc(String(id)).set({
+    id: String(id), pin: String(pin), updatedAt: Date.now()
+  });
+}
 function pinOwnerOf(pin){
   if (!pin) return null;
   var L = (typeof staffList!=='undefined' && staffList) ? staffList : [];
-  for (var i=0;i<L.length;i++) if (String(L[i].pin||'')===String(pin)) return L[i];
+  for (var i=0;i<L.length;i++) if (pinOf(L[i])===String(pin)) return L[i];
   return null;
 }
 function pinTakenBy(pin, exceptId){
@@ -18833,8 +19084,10 @@ async function updateStaffPin(id, val) {
       }
     }
   }
-  var _oldPin = u.pin;
-  u.pin = val;
+  var _oldPin = pinOf(u);
+  /* เขียนลงตู้ใหม่เป็นหลัก · ตู้เก่ายังเขียนอยู่จนกว่าจะย้ายเสร็จ */
+  try { await pinSaveTo(id, val); } catch(e){ console.warn("pinSaveTo:", e); }
+  if (typeof u.pin !== "undefined") u.pin = val;
   try { await db.collection("staffList").doc(id).set(u); } catch(e){ console.warn(e); }
   /* PIN คือรหัสผ่านของบัญชี Firebase ด้วย · ถ้าไม่เปลี่ยนตามจะเข้าระบบไม่ได้ครั้งหน้า
      เปลี่ยนได้เฉพาะบัญชีตัวเอง · ของคนอื่นต้องไปเปลี่ยนที่ Firebase Console */
@@ -18874,11 +19127,25 @@ async function addStaff() {
     pin: pinMakeUnique(),
     perms: defaultPerms()
   };
+  /* สร้างบัญชี Firebase ก่อน — ถ้าไม่สำเร็จก็ไม่เพิ่ม
+     เดิมเพิ่มลง Firestore เลยโดยไม่มีบัญชี ทำให้คนใหม่เข้าระบบไม่ได้เลย */
+  setOverlay("กำลังสร้างบัญชี...");
+  var _mk = await authMakeAccount(newStaff, newStaff.pin);
+  setOverlay(null);
+  if (!_mk.ok){
+    notify("เพิ่มพนักงานไม่สำเร็จ \u00b7 " + (_mk.why||"สร้างบัญชีไม่ได้"), "error");
+    return;
+  }
+  newStaff.authLinked = true;
+  newStaff.authLinkedAt = Date.now();
   staffList.push(newStaff);
+  try { await pinSaveTo(newStaff.id, newStaff.pin); } catch(e){ console.warn("pinSaveTo:", e); }
+  /* ย้าย PIN เสร็จแล้วไม่ต้องเก็บในตู้เก่าอีก */
+  if (window.__pinsMigrated) delete newStaff.pin;
   try {
     await db.collection("staffList").doc(newStaff.id).set(newStaff);
   } catch(e) { console.warn(e); }
-  logActivity("staff", newStaff.name, "เพิ่มผู้ใช้ใหม่ (พนักงาน)");
+  logActivity("staff", newStaff.name, "เพิ่มผู้ใช้ใหม่ (พนักงาน) \u00b7 สร้างบัญชีแล้ว");
   renderStaffList();
   /* เดิมโชว์ PIN ตั้งต้นในข้อความแจ้งเตือน — ใครยืนข้างหลังก็เห็น
      ตอนนี้ให้ไปกด "ตั้ง PIN ใหม่" เอง จะได้ไม่มี PIN โผล่บนหน้าจอ */
