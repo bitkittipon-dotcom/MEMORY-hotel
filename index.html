@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HotelPro v4.33.0 — ระบบบริหารหอพัก</title>
+<title>HotelPro v4.36.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -508,6 +508,17 @@ textarea.form-input{resize:vertical;min-height:72px}
 .rmod-frame-label{position:absolute;top:-10px;left:14px;padding:2px 10px;font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;border:1.5px solid currentColor;border-radius:6px;background:#fff}
 .rmod-frame.bill .rmod-frame-label{color:#15803d;background:#fff}
 .rmod-frame.repair .rmod-frame-label{color:#8b5cf6;background:#fff}
+/* การ์ดมิเตอร์ · โครงเดียวกับบิล/ซ่อม แต่คงสีเหลืองไว้ให้รู้ว่าเป็นเรื่องมิเตอร์ */
+.rmod-frame.meter{border-color:#fde68a;cursor:pointer;transition:background .15s}
+.rmod-frame.meter:hover{background:#fffdf7}
+.rmod-frame.meter .rmod-frame-label{color:#b45309;background:#fff}
+.mtf{display:flex;align-items:center;gap:13px}
+.mtf-big{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:800;color:#0f172a;line-height:1}
+.mtf-u{font-size:10.5px;color:#94a3b8;font-weight:700;margin-top:3px}
+.mtf-rt{margin-left:auto;text-align:right;min-width:0}
+.mtf-d{font-size:12px;color:#475569;font-weight:700}
+.mtf-w{font-size:10px;color:#94a3b8;margin-top:2px}
+.mtf-ar{color:#cbd5e1;font-size:.95em;flex-shrink:0}
 .rmod-frame-meta{position:absolute;top:-9px;right:12px;background:#fff;padding:2px 10px;font-size:10px;color:#64748b;font-weight:700;font-family:'JetBrains Mono',monospace;border:1px solid #e2e8f0;border-radius:6px}
 
 /* Bill rows · Style A · ไม่มี avatar */
@@ -2279,7 +2290,7 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.33.0</span></div></div>
+    <div><div class="logo-text">HotelPro</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.36.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -3075,8 +3086,10 @@ tr.drc-dirty .form-input{border-color:#fbbf24}
 <div id="page-settings" class="page">
   <div class="page-header">
     <div><div class="page-title">ตั้งค่าระบบ</div><div class="page-sub">กำหนดอัตราค่าบริการและข้อมูลหอพัก</div></div>
-    <button class="btn btn-primary" onclick="saveSettings()"><i class="ico ico-save"></i> บันทึกการตั้งค่า</button>
+    <button class="btn btn-primary" id="stg-savebtn" onclick="saveSettings()"><i class="ico ico-save"></i> บันทึกการตั้งค่า</button>
   </div>
+  <!-- ไม่ใช่เจ้าของ = ดูได้อย่างเดียว · เดิมพิมพ์แก้ได้ตามปกติ กดบันทึกแล้วค่อยขึ้นว่าไม่มีสิทธิ์ -->
+  <div id="stg-ro-note" style="display:none"></div>
   <div class="settings-card" id="staff-card">
     <div class="settings-header"><i class="ico ico-users"></i> พนักงาน · ผู้ใช้ระบบ</div>
     <div class="settings-body">
@@ -5884,6 +5897,75 @@ GD_BODY[14] = function(){ return ''
 +'<td>หน้าตั้งค่า · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.36.0</td><td>9 ก.ย. 69</td>'
++'<td><b>ตรวจกฎความปลอดภัยซ้ำก่อนวางจริง · เจอ 3 จุดที่จะชนกัน แก้ครบแล้ว</b><br/>'
++'กฎชุดนี้เขียนไว้ตอน v4.33.0 · ก่อนเอาไปวางจริงจึงไล่ดูใหม่ว่าแอปรุ่นปัจจุบัน '
++'แตะตู้ข้อมูลไหนบ้าง ทำอะไรกับตู้นั้น แล้วกฎที่จะวางอนุญาตไหม<br/>'
++'ผลคือตู้ครบทั้ง 19 ตู้ ไม่มีตกหล่น แต่เจอ <b>3 จุดที่ถ้าวางไปเลยจะกลายเป็นปัญหา</b><br/><br/>'
++'🔴 <b>เครื่องพนักงานจะอืดทุกครั้งที่เปิดแอป</b><br/>'
++'ตัวย้ายข้อมูลรอบเก่ารันตอนเปิดแอปของทุกคน แล้วเขียนธง "รันแล้ว" ลงตู้ตั้งค่า '
++'· กฎเปิดให้พนักงานเขียนตู้นั้นได้แค่ช่องเลขบิล ธงจึงเขียนไม่ลง '
++'= วนไล่การจองทุกใบใหม่ทุกครั้งที่เปิดแอป · เปิดช่องธงเพิ่มให้แล้ว (เป็นแค่ true/false ไม่ใช่ตัวเงิน)<br/><br/>'
++'🔴 <b>กระดิ่งเตือน "มีคนลบการจอง" จะค้างตลอดไป กดยังไงก็ไม่หาย</b><br/>'
++'กดดูแล้วระบบเขียนช่อง "ดูแล้ว" ทับใบเดิม แต่กฎปิดการแก้ทั้งตู้ไว้ '
++'· เปิดเฉพาะช่องนั้นช่องเดียว เนื้อหาหลักฐานว่าใครลบใบไหนเมื่อไหร่ ยังแก้ไม่ได้ลบไม่ได้เหมือนเดิม<br/><br/>'
++'🔴 <b>กู้คืนข้อมูลแล้วขึ้นว่า "พลาด" ทั้งที่ระบบทำงานถูก</b><br/>'
++'ตัวกู้คืนพยายามเขียนทับบันทึกการทำงานด้วย ซึ่งกฎปิดไว้ตั้งใจ (ร่องรอยต้องลบไม่ได้ แม้แต่เจ้าของ) '
++'· ตอนนี้ข้ามตู้หลักฐานตั้งแต่ต้น และบอกว่า <b>"ข้ามไว้ตั้งใจ · ของเดิมยังอยู่ครบ"</b> '
++'แทนคำว่าพลาด ซึ่งอ่านแล้วนึกว่าระบบเสีย<br/><br/>'
++'📄 <b>คู่มือวางกฎเพิ่มให้อีก 3 หัวข้อ</b> — รายการทดสอบรอบที่ 3 (กระดิ่ง + กู้คืน) · '
++'วิธีกู้คืนกรณีฐานข้อมูลถูกล้างทั้งตัว (ต้องผ่อนกฎชั่วคราวแล้วปิดคืนทันที) · '
++'และผลข้างเคียงที่ต้องรู้ — หลังวางกฎ ถ้าต่อ Firebase ไม่ได้เลย พนักงานที่ไม่เคยล็อกอิน'
++'บนเครื่องนั้นจะเข้าแอปไม่ได้<br/><br/>'
++'<b>ย้ำ · กฎยังไม่เคยผ่านตัวตรวจกฎของ Firebase จริง</b> — เครื่องที่ใช้ทำงานโหลด emulator ไม่ได้ '
++'(โดนบล็อกที่ปลายทาง) ขั้นทดสอบที่ Console หลังวางจึงข้ามไม่ได้เด็ดขาด</td></tr>'
++'<tr><td style="font-family:monospace">v4.35.0</td><td>9 ก.ย. 69</td>'
++'<td><b>เก็บงานที่ทำค้างไว้ 2 เรื่อง · ทั้งคู่เป็นของที่ทำไปครึ่งเดียว</b><br/><br/>'
++'🔴 <b>เมนูซ้ายบังหน้าจอบนมือถือ · ทุกหน้า</b><br/>'
++'กฎจอเล็กเขียนไว้ครึ่งเดียว — สั่งให้เนื้อหาเต็มจอแล้ว แต่ไม่ได้สั่งให้เมนูหลบ '
++'เมนูกว้าง 220px ลอยทับอยู่ · วัดที่ iPhone 390px = <b>บังไป 56% ของทุกหน้า</b><br/>'
++'ที่ไม่มีใครทักเพราะงานรายวันทำผ่านหน้าต่างลอยเป็นหลัก ซึ่งลอยอยู่เหนือเมนู เลยยังใช้ได้ '
++'แต่หน้าห้องพัก หน้าบิล หน้ารายงาน หน้าตั้งค่า โดนบังหมด<br/>'
++'ตอนนี้จอเล็กเมนูเก็บเป็นลิ้นชัก · <b>ปุ่มเปิดอยู่มุมซ้ายบน คู่กับกระดิ่งให้สมมาตร</b> '
++'เลือกเมนูแล้วปิดเอง · กดพื้นที่มืดหรือปุ่ม Esc ก็ปิด · จอคอมเหมือนเดิมทุกอย่าง<br/><br/>'
++'🔴 <b>หน้าตั้งค่า · พนักงานพิมพ์แก้ได้ แล้วค่อยรู้ว่าทำไม่ได้</b><br/>'
++'v4.29 เปลี่ยนค่าไฟ/ค่าน้ำ/ค่าตั้งต้นเป็นของเจ้าของคนเดียว แต่ทำแค่ด่านตอนกดบันทึก '
++'ช่องยังพิมพ์ได้ปกติ ปุ่มบันทึกยังอยู่ · พนักงานแก้จนเสร็จแล้วกดบันทึกถึงเด้งว่าไม่มีสิทธิ์<br/>'
++'ตอนนี้ทั้ง 7 ช่อง (ค่าไฟ ค่าน้ำ ค่าเช่าตั้งต้น ค่ามัดจำตั้งต้น ชื่อหอ เบอร์ ที่อยู่) '
++'<b>ล็อกเป็นดูอย่างเดียว</b> ปุ่มบันทึกหายไป และมีแถบบอกว่าทำไมแก้ไม่ได้ ต้องแจ้งเจ้าของ<br/>'
++'<b>ไม่ซ่อนทิ้ง</b> เพราะพนักงานต้องเห็นค่าไฟไว้ตอบผู้เช่า · '
++'เสียงและสั่นแจ้งเตือนยังตั้งเองได้ เพราะเก็บแยกแต่ละเครื่อง ไม่กระทบใคร</td></tr>'
++'<tr><td style="font-family:monospace">v4.34.0</td><td>8 ก.ย. 69</td>'
++'<td><b>ยกเครื่องการเลือกวันและเลือกห้องทั้งแอป</b><br/><br/>'
++'📅 <b>ปฏิทินของเราเอง · ใช้ทุกช่องวันที่</b><br/>'
++'เดิมทุกช่องวันใช้ตัวเลือกของเครื่อง หน้าตาไม่เหมือนกันสักเครื่อง และเลือกได้ทีละวัน '
++'จองรายวันต้องเปิด 2 รอบ (เข้า แล้วออก) · ตอนนี้เป็นปฏิทินแบบเดียวกันทั้ง 8 ช่อง '
++'แตะ 2 ครั้งได้ทั้งช่วง มีแถบเชื่อมให้เห็นว่ากี่คืน<br/>'
++'<b>ขีดฆ่าวันที่ห้องนั้นติดจองไว้แล้ว</b> — เดิมเลือกทับได้ก่อนแล้วค่อยขึ้นเตือนทีหลัง '
++'ตอนนี้กดไม่ได้ตั้งแต่แรก และเลือกคร่อมวันที่ติดจองก็ไม่ได้<br/>'
++'ช่องวันเกิดเปิดมาที่หน้าเลือกปีเลย เห็นทีเดียว 36 ปี (อายุ 16–51) พร้อมบอกอายุใต้ทุกปี '
++'ไม่ต้องกดลูกศรถอยทีละเดือน<br/>'
++'แต่ละช่องกติกาไม่เหมือนกัน — แจ้งซ่อมและจดมิเตอร์เลือกวันอนาคตไม่ได้ · '
++'วันเข้าพักย้อนหลังได้ตามสิทธิ์เดิมของแต่ละคน<br/><br/>'
++'🌙 <b>กะดึกไม่ต้องคิดเองแล้ว</b><br/>'
++'ก่อนตี 5 ปฏิทินเปิดมาเลือก "คืนของเมื่อวาน" ไว้ให้เลย พร้อมบอกเหตุผลใต้ปฏิทิน '
++'· แถบเหลืองเตือนกะดึกอันเดิมเอาออก ไม่ต้องอ่านแล้วมาแก้เอง<br/><br/>'
++'🚪 <b>เลือกห้องรายวันแบบใหม่</b><br/>'
++'เดิมเป็นรายการของเครื่อง ตัวหนังสือเล็ก แตะยาก และบอกได้แค่ชื่อกับราคา '
++'· ตอนนี้เป็นแผ่นเลื่อนขึ้นแบบเดียวกับปฏิทิน <b>บอกตั้งแต่ยังไม่กดว่าห้องไหนติดจองถึงวันไหน</b> '
++'ห้องที่ติดจองกดไม่ได้ · กรองได้ (ว่างเท่านั้น / เตียงเดี่ยว / เตียงคู่) · จัดกลุ่มตามราคา<br/>'
++'ช่องที่ปิดอยู่ก็บอกสถานะห้องด้วย ไม่ใช่แค่ชื่อกับราคา<br/><br/>'
++'💾 <b>ปุ่มบันทึกลอยขึ้นมาเมื่อมีการแก้ไข · หน้าตั้งค่าระบบ</b><br/>'
++'เดิมปุ่มบันทึกอยู่มุมขวาบนหน้าเดียว เลื่อนลงไปแก้ค่าไฟแล้วปุ่มหายจากจอ '
++'ต้องเลื่อนกลับขึ้นไปกด · ตอนนี้พอแก้จริงแถบจะลอยขึ้นมายึดล่างจอ '
++'บอกด้วยว่าแก้อะไรไปกี่อย่าง มีปุ่มยกเลิกคืนค่าเดิมทุกช่องในคลิกเดียว '
++'· แก้แล้วแก้กลับเป็นค่าเดิม แถบหายเอง<br/><br/>'
++'🧾 <b>ค่ามัดจำตั้งต้นเคยแก้ได้โดยไม่มีร่องรอย</b><br/>'
++'หน้าตั้งค่าบันทึกค่ามัดจำลงฐานข้อมูลจริง แต่ตอนเขียนประวัติกลับไม่ได้นับช่องนี้ '
++'แก้จาก 5,000 เป็นเท่าไหร่ก็ไม่มีบันทึกว่าใครแก้ · ตอนนี้ลงประวัติเหมือนค่าไฟค่าน้ำแล้ว<br/><br/>'
++'🎨 <b>หน้าตา</b> — กล่องวันเข้า-ออกเท่ากันเป๊ะ ลูกศรอยู่กลาง จำนวนคืนลงบรรทัดล่างเดี่ยว ๆ '
++'· กล่องมิเตอร์ล่าสุดใช้โครงเดียวกับการ์ดข้าง ๆ (ป้ายคร่อมขอบ + วันที่มุมขวา) '
++'· ช่องคำแนะนำมิเตอร์แรกเข้าเต็มความกว้างแล้ว · เอาช่องค่าคอมมิชชั่นในฟอร์มจองออก</td></tr>'
 +'<tr><td style="font-family:monospace">v4.33.0</td><td>6 ก.ย. 69</td>'
 +'<td>เตรียมวางกฎความปลอดภัย Firestore · แก้ของที่จะพังตอนวางกฎ<br/><br/>'
 +'🔴 <b>PIN หลุดกลับเข้าตู้ที่คนนอกอ่านได้</b><br/>'
@@ -6436,8 +6518,8 @@ GD_BODY[14] = function(){ return ''
 
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
-window.__APP_BUILD = 1255;
-window.__APP_VERSION = "v4.33.0";
+window.__APP_BUILD = 1258;
+window.__APP_VERSION = "v4.36.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -7787,11 +7869,18 @@ window.hcRestoreRun = async function(){
   var f = HC_RS_FILE;
   HC_RS_RUNNING = true;
   setOverlay('กำลังกู้คืน... อย่าปิดหน้านี้');
-  var wrote = 0, removed = 0, failed = [];
+  var wrote = 0, removed = 0, failed = [], skipped = [];
+  /* ตู้หลักฐาน · กฎ Firestore ปิดการแก้และการลบไว้ แม้แต่เจ้าของ
+     ถ้าดันเขียนไปจะโดนปฏิเสธแล้วขึ้นว่า "พลาด" ซึ่งอ่านแล้วนึกว่าระบบมีปัญหา
+     จึงข้ามตั้งแต่ต้นและบอกให้ชัดว่าตั้งใจข้าม
+     ของพวกนี้ "เพิ่มอย่างเดียว" อยู่แล้ว การกู้คืนจึงไม่เคยทำให้หาย
+     ยกเว้นกรณีฐานข้อมูลถูกล้างทั้งตัว — ดูวิธีในคู่มือวางกฎ หัวข้อ "กู้คืนหลังฐานข้อมูลหาย" */
+  var EVIDENCE = ['activityLogs','deletedBookings'];
   try {
     for (var i=0;i<f.cols.length;i++){
       var c = f.cols[i];
       var arr = f.data[c] || [];
+      if (EVIDENCE.indexOf(c) >= 0){ skipped.push(c + ' (' + arr.length + ')'); continue; }
       try {
         /* ลบของเดิมที่ไม่มีในไฟล์ก่อน · กู้คืนต้องได้สภาพเดิมเป๊ะ ไม่ใช่ของผสม */
         var keep = {};
@@ -7817,10 +7906,14 @@ window.hcRestoreRun = async function(){
     try {
       logActivity('settings','กู้คืนข้อมูล',
         'กู้คืนจากไฟล์ ' + f.name + ' \u00b7 เขียน ' + wrote + ' \u00b7 ลบ ' + removed
-        + (failed.length ? ' \u00b7 พลาด ' + failed.length + ' ชุด' : ''));
+        + (failed.length ? ' \u00b7 พลาด ' + failed.length + ' ชุด' : '')
+        + (skipped.length ? ' \u00b7 ข้ามตู้หลักฐาน ' + skipped.length + ' ชุด' : ''));
     } catch(e){}
     alert('กู้คืนเสร็จแล้ว\n\nเขียน ' + wrote.toLocaleString() + ' รายการ'
       + '\nลบของเดิมที่ไม่มีในไฟล์ ' + removed.toLocaleString() + ' รายการ'
+      + (skipped.length ? '\n\n\u2713 ข้ามไว้ตั้งใจ: ' + skipped.join(', ')
+          + '\nบันทึกการทำงานและสำเนาการจองที่ถูกลบ เขียนทับไม่ได้ตามกฎความปลอดภัย'
+          + '\nของเดิมที่มีอยู่ยังอยู่ครบ ไม่ได้หายไปไหน' : '')
       + (failed.length ? '\n\n\u26a0 อ่านไม่ได้ ' + failed.length + ' ชุด: ' + failed.join(', ') : '')
       + '\n\nระบบจะโหลดหน้าใหม่');
     /* โหลดหน้าใหม่เพื่อดึงข้อมูลที่กู้มาทั้งชุด · แยกออกมาให้เทสแทนที่ได้ */
@@ -9797,15 +9890,19 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 
 <style>
 /* ── เลือกวันเข้า-ออก ── */
-.bkstay-pk{display:flex;align-items:stretch;gap:0;margin-bottom:16px}
-.bkstay-b{flex:1;min-width:0;position:relative;border:1.5px solid #e8edf3;border-radius:12px;
+/* กล่องวันเข้า-ออกเท่ากันเป๊ะ · ลูกศรอยู่กลางพอดี · จำนวนคืนลงบรรทัดล่างเดี่ยวๆ */
+.bkstay-pk{display:flex;flex-direction:column;margin-bottom:16px}
+.bkstay-top{display:flex;align-items:stretch;gap:0}
+.bkstay-b{flex:1 1 0;min-width:0;position:relative;border:1.5px solid #e8edf3;border-radius:12px;
   padding:11px 13px;cursor:pointer;background:#fff;min-height:62px;transition:border-color .12s}
 .bkstay-b:hover{border-color:#cbd5e1}
 .bkstay-b.on{border-color:#0f172a;background:#fafbfc}
 .bkstay-b.empty{border-style:dashed;border-color:#cbd5e1}
 /* ช่องวันที่จริงซ่อนทับทั้งการ์ด · กดตรงไหนก็เด้งตัวเลือกวันของเครื่อง
    inset ติดลบเพื่อคลุมเส้นขอบด้วย จะได้กดขอบก็ติด */
-.bkstay-b input{position:absolute;inset:-1.5px;opacity:0;width:auto;height:auto;cursor:pointer;
+/* เดิมช่องวันซ่อนทับการ์ดไว้เพื่อให้เครื่องเด้งตัวเลือกวันของตัวเอง
+   ตอนนี้ใช้ปฏิทินของเราแล้ว จึงต้องกันไม่ให้ช่องนี้รับการกด ไม่งั้นเด้งสองชั้น */
+.bkstay-b input{position:absolute;inset:-1.5px;opacity:0;width:auto;height:auto;pointer-events:none;cursor:pointer;
   border:none;background:transparent;font-size:16px;padding:0;margin:0}
 .bkstay-b .k{font-size:9.5px;font-weight:800;color:#b6c0cc;letter-spacing:.06em;
   display:flex;align-items:center;gap:5px}
@@ -9817,13 +9914,15 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 .bkstay-b.empty .v{color:#94a3b8;font-weight:700}
 .bkstay-b .s{font-size:10.5px;color:#94a3b8;margin-top:3px;font-weight:500}
 .bkstay-b.dis{opacity:.5;pointer-events:none}
-.bkstay-arw{flex:0 0 40px;display:flex;align-items:center;justify-content:center;
-  color:#cbd5e1;font-size:15px;font-weight:700}
-.bkstay-nb{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding-left:16px;margin-left:16px;border-left:1px solid #eef2f7;min-width:56px}
-.bkstay-nb .v{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:800;
-  color:#0f172a;line-height:1}
-.bkstay-nb .u{font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-top:4px}
+.bkstay-arw{flex:0 0 38px;display:flex;align-items:center;justify-content:center;
+  color:#cbd5e1;font-size:16px;font-weight:700}
+/* เม็ดยาอยู่กลางบรรทัดล่าง · margin auto ซ้ายขวาเป็นตัวจัดกึ่งกลาง เพราะขึ้นบรรทัดใหม่แล้ว */
+.bkstay-nb{flex:0 0 auto;margin:9px auto 0;display:inline-flex;align-items:baseline;
+  justify-content:center;gap:6px;background:#f1f5f9;border-radius:999px;padding:5px 15px}
+.bkstay-nb .v{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:800;
+  color:#0f172a;line-height:1.2}
+.bkstay-nb .u{font-size:11.5px;font-weight:600;color:#64748b}
+.bkstay-nb.off{background:#f8fafc}
 .bkstay-nb.off .v{color:#cbd5e1}
 /* แถบวัน */
 .bkstay-tl{position:relative;margin:0 -2px}
@@ -9854,12 +9953,8 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   font-size:13px;color:#475569;font-weight:600}
 .bkstay-long b{color:#0f172a;font-weight:800}
 @media(max-width:560px){
-  .bkstay-pk{flex-wrap:wrap}
-  .bkstay-arw{display:none}
-  .bkstay-b{flex:1 1 calc(50% - 4px)}
-  .bkstay-nb{flex:1 1 100%;flex-direction:row;gap:7px;padding:11px 0 0;margin:9px 0 0;
-    border-left:none;border-top:1px solid #eef2f7}
-  .bkstay-nb .u{margin-top:0}
+  .bkstay-arw{flex:0 0 30px;font-size:15px}
+  .bkstay-b{padding:10px 11px}
   .bkstay-d .n{font-size:13.5px}
   .bkstay-d.edge .n{width:32px;height:32px;line-height:32px}
   .bkstay-band{height:32px}
@@ -10065,7 +10160,7 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.33.0</span></div></div>
+        <div class="s">เมมโมรี่ เพลส<br/><span id="gd-ver">v4.36.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -10093,6 +10188,9 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
 </div><!-- end main -->
 
 <!-- ═══ NOTIFICATION BELL + PANEL ═══ -->
+<!-- ปุ่มเปิดเมนูบนจอเล็ก · วางคู่กับกระดิ่งให้สมมาตร ซ้าย-ขวา -->
+<div id="nav-scrim" onclick="navClose()"></div>
+<button type="button" id="nav-open" onclick="navToggle()" aria-label="เปิดเมนู"><i></i></button>
 <div id="notif-bell" onclick="toggleNotifPanel()">
   <span style="font-size:22px;line-height:1"><i class="ico ico-bell"></i></span>
   <span class="notif-badge" id="notif-badge" style="display:none">0</span>
@@ -10274,8 +10372,12 @@ th .ico-elec,th .ico-water{font-size:.95em;vertical-align:-1px;margin-right:1px}
         </div>
         <div class="rf-grid-2">
           <div class="rf-field"><label class="rf-label">วันเข้าพัก <span class="rf-req">*</span></label><input class="rf-input" type="date" id="rf-checkin"/></div>
-          <div class="rf-field" id="rf-firstme-group" style="margin-bottom:0"><label class="rf-label">มิเตอร์ไฟฟ้าแรกเข้า (หน่วย) <span class="rf-req">*</span> <i class="ico ico-lock" id="rf-firstme-lock" style="display:none;color:#f59e0b;font-size:.9em"></i></label><input class="rf-input" type="number" id="rf-firstme" min="0" max="9999" step="1" inputmode="numeric" placeholder="เช่น 8412" oninput="mtCheckDiff()"/><div id="rf-firstme-hint" style="display:none"></div></div>
+          <div class="rf-field" id="rf-firstme-group" style="margin-bottom:0"><label class="rf-label">มิเตอร์ไฟฟ้าแรกเข้า (หน่วย) <span class="rf-req">*</span> <i class="ico ico-lock" id="rf-firstme-lock" style="display:none;color:#f59e0b;font-size:.9em"></i></label><input class="rf-input" type="number" id="rf-firstme" min="0" max="9999" step="1" inputmode="numeric" placeholder="เช่น 8412" oninput="mtCheckDiff()"/></div>
         </div>
+        <!-- กล่องเทียบเลขมิเตอร์คนเก่า · เดิมอยู่ในช่องขวาของตาราง 2 คอลัมน์
+             จึงกว้างแค่ครึ่งเดียว เหลือที่ว่างข้างซ้ายทั้งแถบ
+             ย้ายออกมานอกตาราง ให้กินเต็มความกว้างเหมือนกล่องอื่นในการ์ด -->
+        <div id="rf-firstme-hint" style="display:none"></div>
         <!-- ซ่อนสถานะใน Form B (set จาก context) -->
         <div class="rf-field" id="rf-status-group" style="display:none">
           <label class="rf-label">สถานะห้อง</label>
@@ -10408,7 +10510,7 @@ try{ if(typeof submitHandoff==='function')       window.submitHandoff       = gu
 try{ if(typeof submitHandoffAll==='function')    window.submitHandoffAll    = guardOnce('submitHandoffAll', submitHandoffAll); }catch(e){}
 try{ if(typeof deletePayment==='function')       window.deletePayment       = guardOnce('deletePayment', deletePayment); }catch(e){}
 try{ if(typeof saveRoom==='function')            window.saveRoom            = guardOnce('saveRoom', saveRoom); }catch(e){}
-console.log("HotelPro v4.33.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.36.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -12482,10 +12584,15 @@ function mtRoomBoxData(r) {
   if (!tl.length) return null;
   var e = tl[0];
   var when = e.date ? formatDate(e.date) : (e.ts ? new Date(e.ts).toLocaleDateString("th-TH",{day:"numeric",month:"short"}) : "-");
-  if (r.st !== "occupied") return { me:e.to, sub:"คนเก่าออก \u00b7 " + when, cls:"neu" };
-  if (e.kind === "checkin") return { me:e.to, sub:"เลขแรกเข้า \u00b7 " + when, cls:"neu" };
-  if (e.kind === "edit")    return { me:e.to, sub:"แก้ล่าสุด \u00b7 " + when, cls:"" };
-  return { me:e.to, sub:when, cls:"" };
+  /* แยก "เกิดอะไร" กับ "เมื่อไหร่" ออกจากกัน · การ์ดแบบเต็มเอาวันที่ไปไว้ป้ายมุมขวา
+     เหมือนการ์ดบิลล่าสุดกับประวัติซ่อมที่อยู่ข้าง ๆ กัน */
+  if (r.st !== "occupied") return { me:e.to, what:"คนเก่าออก", when:when,
+                                    sub:"คนเก่าออก \u00b7 " + when, cls:"neu" };
+  if (e.kind === "checkin") return { me:e.to, what:"เลขแรกเข้า", when:when,
+                                    sub:"เลขแรกเข้า \u00b7 " + when, cls:"neu" };
+  if (e.kind === "edit")    return { me:e.to, what:"แก้ล่าสุด", when:when,
+                                    sub:"แก้ล่าสุด \u00b7 " + when, cls:"" };
+  return { me:e.to, what:"อัปเดตล่าสุด", when:when, sub:when, cls:"" };
 }
 function mtRoomBox(r) {
   var d = mtRoomBoxData(r);
@@ -12496,6 +12603,24 @@ function mtRoomBox(r) {
     +   "<i class='ico ico-chevron-right mt-box-ar'></i></div>"
     + "<div class='info-val mt-box-v'>" + (+d.me||0).toLocaleString() + "</div>"
     + "<div class='mt-box-s'>" + d.sub + "</div></div>";
+}
+/* การ์ดมิเตอร์แบบเต็มใบ · ใช้ตอนห้องว่าง ซึ่งวางเรียงกับการ์ดบิลและการ์ดซ่อม
+   ต้องใช้โครง rmod-frame เหมือนกัน (ป้ายคร่อมขอบบนซ้าย + วันที่มุมขวา) ไม่งั้นดูหลุดชุด
+   ส่วนในตารางข้อมูลห้อง (ห้องมีคนอยู่) ยังใช้ mtRoomBox แบบช่องเล็กเหมือนเดิม */
+function mtRoomFrame(r) {
+  var d = mtRoomBoxData(r);
+  if (!d) return "";
+  return "<div class='rmod-frame meter' onclick=\"mtFromRoom('" + r.id + "')\" "
+    +   "title='ดูประวัติมิเตอร์ห้องนี้'>"
+    + "<div class='rmod-frame-label'><i class='ico ico-bolt'></i> มิเตอร์ล่าสุด</div>"
+    + (d.when ? "<div class='rmod-frame-meta'>" + mtEsc(String(d.when)) + "</div>" : "")
+    + "<div class='mtf'>"
+    +   "<div class='mtf-l'><div class='mtf-big'>" + (+d.me||0).toLocaleString() + "</div>"
+    +     "<div class='mtf-u'>หน่วย</div></div>"
+    +   "<div class='mtf-rt'><div class='mtf-d'>" + mtEsc(String(d.what||"")) + "</div>"
+    +     "<div class='mtf-w'>แตะดูประวัติทั้งหมด</div></div>"
+    +   "<i class='ico ico-chevron-right mtf-ar'></i>"
+    + "</div></div>";
 }
 window.mtFromRoom = function(id){
   try { closeModal("room-modal-bg"); } catch(e){}
@@ -12672,9 +12797,9 @@ function mtRenderHint(r) {
   box.style.display = "";
   box.className = "mt-hint";
   box.innerHTML = "<div class='mt-hint-l'>"
-    + "<i class='ico ico-logout'></i> ผู้เช่าเดิม <b>" + mtEsc(prev.tenant) + "</b> ออกที่ "
-    + "<b class='mt-num'>" + prev.me.toLocaleString() + "</b>"
-    + (prev.date ? " <span class='mt-dim'>· " + formatDate(prev.date) + "</span>" : "")
+    + "<i class='ico ico-logout'></i> ผู้เช่าเดิม <b>" + mtEsc(prev.tenant) + "</b>"
+    + " เลขที่ไฟที่ออก <b class='mt-num'>" + prev.me.toLocaleString() + "</b>"
+    + (prev.date ? " <span class='mt-dim'>เมื่อ " + formatDate(prev.date) + "</span>" : "")
     + "</div>"
     + "<button type='button' class='mt-use' onclick='mtUsePrev(" + prev.me + ")'>ใช้เลขนี้</button>"
     + "<div id='mt-diff' class='mt-diff'></div>";
@@ -12915,6 +13040,11 @@ function goPage(id, btn) {
     'shift-handoff':(typeof rShiftHandoff!=='undefined'?rShiftHandoff:function(){})
   };
   if (fns[id]) fns[id]();
+  /* ออกจากหน้าตั้งค่า → เก็บแถบบันทึกลอย · เข้ามาใหม่แล้วยังแก้ค้างอยู่ก็เด้งกลับมา */
+  if (typeof stgApplyRole === "function") stgApplyRole();
+  if (typeof stgBar === "function") stgBar();
+  /* เลือกเมนูแล้วปิดลิ้นชักเอง · ไม่ต้องกดปิดอีกที */
+  if (typeof navClose === "function") navClose();
 }
 function closeModal(id) {
   var el = document.getElementById(id);
@@ -17282,8 +17412,8 @@ function showRoomView(r, vacantMode) {
 
   /* ห้องว่าง: ยังอยากรู้เลขสุดท้ายที่คนเก่าออก จะได้รับคนใหม่ถูก */
   if (vacantMode) {
-    var _mvb = mtRoomBox(r);
-    if (_mvb) html += "<div class='info-grid mt-solo'>" + _mvb + "</div>";
+    var _mvb = mtRoomFrame(r);
+    if (_mvb) html += _mvb;
   }
 
   // ─── Section ประวัติซ่อม (Repair history) — พับ-ขยายได้ ───
@@ -21427,6 +21557,7 @@ async function deleteStaff(id) {
 }
 
 var AL_SET_TH = {eRate:"ค่าไฟ/หน่วย", wRate:"ค่าน้ำ/คน", defaultRent:"ค่าเช่าตั้งต้น",
+                 defaultDeposit:"ค่ามัดจำตั้งต้น",
                  hotelName:"ชื่อหอพัก", hotelPhone:"เบอร์โทร", hotelAddr:"ที่อยู่"};
 async function saveSettings() {
   /* H1c · ค่าไฟ/ค่าน้ำต่อหน่วยคือ "ราคา" ไม่ใช่งานประจำวัน
@@ -21436,7 +21567,8 @@ async function saveSettings() {
     notify("แก้ค่าไฟ ค่าน้ำ และค่าตั้งต้นได้เฉพาะเจ้าของ · ถ้าต้องแก้ ให้แจ้งเจ้าของ","error");
     return;
   }
-  var _keys = ["eRate","wRate","defaultRent","hotelName","hotelPhone","hotelAddr"];
+  /* ค่ามัดจำตั้งต้นเคยตกสำรวจ · แก้แล้วไม่มีบันทึกว่าใครแก้ ทั้งที่เป็นตัวเงิน */
+  var _keys = ["eRate","wRate","defaultRent","defaultDeposit","hotelName","hotelPhone","hotelAddr"];
   var _before = {}; _keys.forEach(function(k){ _before[k]=settings[k]; });
   settings.eRate=parseFloat(document.getElementById("s-e-rate").value)||7;
   settings.wRate=parseFloat(document.getElementById("s-w-rate").value)||100;
@@ -26172,6 +26304,9 @@ function bkLockFields(on, b){
     var c = document.getElementById(id);
     if (c) c.classList.toggle("dis", on);
   });
+  /* การ์ดเลือกห้องก็ต้องกดไม่ได้ตอนล็อก · ไม่งั้นแตะเปิดแผ่นแล้วเลือกทับได้ */
+  var rb = document.getElementById("bkm-roombtn");
+  if (rb) rb.classList.toggle("dis", on);
   var msg = document.getElementById("bkm-lockmsg");
   if (msg){
     msg.style.display = on ? "" : "none";
@@ -26290,6 +26425,9 @@ function openBookingModal(bookingId, prefill) {
 
   document.getElementById("booking-modal-bg").classList.add("open");
   bkmValidate();
+  /* เปิดฟอร์มมาแล้วการ์ดเลือกห้องต้องตรงกับค่าในฟอร์มทันที
+     ตอนแก้ใบเดิมโค้ดเซ็ต .value ตรง ๆ ไม่ได้ยิง change การ์ดจึงไม่รู้ตัว */
+  try { if (typeof rmpSyncBtn === "function") rmpSyncBtn(); } catch(e){}
 }
 
 // ─── ตรวจช่องจำเป็นแบบ real-time: ปุ่มจาง+กดไม่ได้ · ไฮไลต์ช่องที่ยังว่าง ───
@@ -26302,6 +26440,11 @@ function bkmValidate() {
     var empty = !raw || (id==="bkm-actual-price" && (parseFloat(raw)||0)<=0);
     if (empty){ el.classList.add("field-invalid"); allOk=false; }
     else el.classList.remove("field-invalid");
+    /* ช่องห้องถูกซ่อนไว้ · กรอบแดง "ยังไม่ได้เลือก" ต้องไปขึ้นที่การ์ดที่คนเห็นแทน */
+    if (id === "bkm-room"){
+      var rb = document.getElementById("bkm-roombtn");
+      if (rb) rb.classList.toggle("inv", empty);
+    }
   });
   // เช็คเอาท์ต้องหลังเช็คอิน
   var ciEl=document.getElementById("bkm-checkin"), coEl=document.getElementById("bkm-checkout");
@@ -26530,7 +26673,64 @@ function bkmCheckinChange() {
   bkmDateChange();
 }
 
+/* ═══ ปฏิทินของหน้าจองรายวัน ═══
+   สองช่อง (เข้า/ออก) เปิดปฏิทินตัวเดียวกันแบบเลือกช่วง · กดช่องไหนก็ได้
+   แตะช่อง "ออก" จะเริ่มที่การเลือกวันออกให้เลย */
+function bkmDateLimits(){
+  /* ย้อนหลังได้แค่ไหน ขึ้นกับสิทธิ์ "เช็คอินย้อนหลัง" ที่มีอยู่แล้ว
+     เจ้าของไม่จำกัด · พนักงานที่มีสิทธิ์ย้อนได้ตามจำนวนวันที่ระบบกำหนด · ไม่มีสิทธิ์ = ตั้งแต่วันนี้ */
+  var today = todayStr();
+  try {
+    if (window.currentUser && currentUser.role === "owner") return { min:null };
+    var lim = (typeof BACKDATE_MAX_DAYS !== "undefined") ? BACKDATE_MAX_DAYS : 0;
+    var can = !!(currentUser && currentUser.perms && currentUser.perms.backdateCheckin);
+    if (!can) {
+      /* กะดึก · ก่อนตี 5 วันทำการคือเมื่อวาน ต้องเลือกได้ ไม่งั้นพนักงานกะดึกทำงานไม่ได้ */
+      if (typeof isDawnNow === "function" && isDawnNow() && typeof dailyBizDate === "function")
+        return { min: dailyBizDate(new Date()) };
+      return { min: today };
+    }
+    return { min: dateOnly(addDays(parseDate(today), -lim)) };
+  } catch(e){ return { min: today }; }
+}
+window.bkmOpenDates = function(which){
+  var ciEl = document.getElementById("bkm-checkin");
+  var coEl = document.getElementById("bkm-checkout");
+  if (!ciEl || !coEl) return;
+  var rid = (document.getElementById("bkm-room")||{}).value || "";
+  var lim = bkmDateLimits();
+  var a = ciEl.value, b = coEl.value;
+  /* ยังไม่เคยเลือก · ก่อนตี 5 ให้ตั้งต้นเป็น "คืนของเมื่อวาน" ไว้ให้เลย
+     (ทางเลือก ค ที่เจ้าของเลือก · เอาแถบเหลืองออก ให้ปฏิทินเปิดมาพร้อมเลือกไว้แล้ว) */
+  var dawn = false;
+  if (!a && !b && typeof isDawnNow === "function" && isDawnNow()
+      && typeof dailyBizDate === "function"){
+    a = dailyBizDate(new Date());
+    b = dateOnly(addDays(parseDate(a), 1));
+    dawn = true;
+  }
+  dpkOpen({
+    mode: "range",
+    value: a, value2: b,
+    minDate: lim.min,
+    busy: rid ? dpkBusyForRoom(rid, window.bkmEditId || null) : null,
+    hint: dawn ? ("ตอนนี้ยังไม่ถึง 0" + DAILY_DAY_START + ":00 · นับเป็นคืนของเมื่อวาน") : null,
+    onPick: function(x, y){
+      ciEl.setAttribute("data-prev", ciEl.value || "");
+      ciEl.value = x; coEl.value = y;
+      /* ยิงให้โค้ดเดิมทำงานต่อ · คิดจำนวนคืน ราคา และเตือนจองทับ */
+      if (typeof bkmDateChange === "function") bkmDateChange();
+    }
+  });
+  if (which === "out"){
+    /* เปิดมาแล้วให้เริ่มที่ช่องวันออก */
+    var c = document.querySelector('#dpk .dpk-sel .c[data-edge="out"]');
+    if (c) c.click();
+  }
+};
 function bkmCheckOverlap() {
+  /* การ์ดเลือกห้องบอกสถานะว่าง/ติดจองด้วย · ทั้งเปลี่ยนห้องและเปลี่ยนวันมาลงที่นี่หมด */
+  try { if (typeof rmpSyncBtn === "function") rmpSyncBtn(); } catch(e){}
   var rid = document.getElementById("bkm-room").value;
   var ci = document.getElementById("bkm-checkin").value;
   var co = document.getElementById("bkm-checkout").value;
@@ -26806,7 +27006,10 @@ function bkmCalc() {
   var commAmt = (listPrice - actualPrice) * nights;
   if (commAmt < 0) commAmt = 0;
 
-  document.getElementById("bkm-commission").value = commRate>0 ? commRate+"% (≈ ฿"+commAmt.toLocaleString()+")" : "0% (ไม่มีคอมฯ)";
+  /* เอาช่องคอมมิชชั่นออกจากหน้าจองแล้ว · ค่าคอมยังคิดอยู่ในรายงานรายได้สุทธิเหมือนเดิม
+     เก็บบรรทัดนี้ไว้แบบไม่พังถ้าไม่มีช่อง เผื่อมีที่อื่นเรียกใช้ */
+  var _cmEl = document.getElementById("bkm-commission");
+  if (_cmEl) _cmEl.value = commRate>0 ? commRate+"% (≈ ฿"+commAmt.toLocaleString()+")" : "0% (ไม่มีคอมฯ)";
   document.getElementById("bkm-calc-subtotal").textContent = "฿ "+actualPrice.toLocaleString()+" × "+nights+" = ฿ "+subtotal.toLocaleString();
   document.getElementById("bkm-calc-total").textContent = "฿ "+total.toLocaleString();
   try { bkmDiscSync(); } catch(e){}
@@ -27260,49 +27463,21 @@ function dawnThai(k){
   try { var p = String(k).split("-");
     return parseInt(p[2],10) + " " + MONTHS[parseInt(p[1],10)]; } catch(e){ return k; }
 }
+/* ═══ แถบเหลืองกะดึก · เอาออกแล้วตามที่เจ้าของสั่ง ═══
+   เดิมแถบนี้ทำ 2 อย่างพร้อมกัน — อธิบายว่าทำไมวันเข้าเป็นเมื่อวาน และเติมวันให้เอง
+   ตอนนี้ปฏิทินเปิดมาพร้อมเลือก "คืนของเมื่อวาน" ไว้ให้แล้ว และบอกเหตุผลอยู่ในปฏิทินเอง
+   จึงไม่ต้องมีแถบมาพูดซ้ำอีกชั้น
+   เก็บฟังก์ชันไว้แบบไม่ทำอะไร เพราะมีที่เรียกอยู่ 1 จุดตอนเปิดหน้าจอง */
 function bkmDawnBar(){
   var el = document.getElementById("bkm-dawn");
-  if (!el) return;
+  if (el){ el.innerHTML = ""; el.style.display = "none"; }
   var ci = document.getElementById("bkm-checkin");
   var co = document.getElementById("bkm-checkout");
-  if (bkmEditId || !isDawnNow()){
-    el.innerHTML = ""; el.style.display = "none";
-    if (ci) ci.classList.remove("bkm-dawnfld");
-    if (co) co.classList.remove("bkm-dawnfld");
-    return;
-  }
-  var now = new Date();
-  var biz = dailyBizDate(now);
-  var out = dateOnly(addDays(parseDate(biz), 1));
-  var on = !window.bkmDawnUseToday;
-  el.style.display = "block";
-  el.innerHTML = "<div class='bkm-dawn" + (on?"":" off") + "'>"
-    + "<div class='ic'><i class='ico ico-clock'></i></div>"
-    + "<div class='bd'>"
-    +   (on
-        ? "<div class='t'>ตอนนี้ " + dawnClock(now) + " น. \u00b7 ยังไม่ถึง 0" + DAILY_DAY_START + ":00</div>"
-          + "<div class='s'>นับเป็นคืนของ <b>" + dawnThai(biz) + "</b> (เมื่อวาน) \u00b7 ออกเที่ยง <b>"
-          + dawnThai(out) + "</b> \u00b7 1 คืน</div>"
-        : "<div class='t'>ใช้วันนี้แล้ว \u00b7 " + dawnThai(todayStr()) + "</div>"
-          + "<div class='s'>ถ้าแขกมาเปิดห้องตอนดึกของเมื่อวาน กดปุ่มขวาเพื่อกลับไปนับเป็น <b>"
-          + dawnThai(biz) + "</b></div>")
-    + "</div>"
-    + "<button type='button' class='btn' onclick='bkmDawnToggle()'>"
-    +   (on ? "ใช้วันนี้แทน" : "นับเป็นเมื่อวาน") + "</button>"
-    + "</div>";
-  if (ci) ci.classList.toggle("bkm-dawnfld", on);
-  if (co) co.classList.toggle("bkm-dawnfld", on);
+  if (ci) ci.classList.remove("bkm-dawnfld");
+  if (co) co.classList.remove("bkm-dawnfld");
 }
-window.bkmDawnToggle = function(){
-  window.bkmDawnUseToday = !window.bkmDawnUseToday;
-  var base = window.bkmDawnUseToday ? todayStr() : dailyBizDate(new Date());
-  var ci = document.getElementById("bkm-checkin");
-  var co = document.getElementById("bkm-checkout");
-  if (ci) ci.value = base;
-  if (co) co.value = dateOnly(addDays(parseDate(base), 1));
-  bkmDawnBar();
-  if (typeof bkmDateChange === "function") bkmDateChange();
-};
+window.bkmDawnToggle = function(){ /* ไม่มีปุ่มนี้แล้ว */ };
+
 /* ═══════════ ลูกค้าไม่จ่ายเงิน · เก็บเงินไม่ได้ ═══════════
    ใช้เมื่อลูกค้าหนีหรือติดต่อไม่ได้จริง ๆ · เจ้าของเท่านั้นที่กดได้
    พนักงานเห็นปุ่มแต่กดไม่ได้ จะได้รู้ว่าต้องแจ้งเจ้าของ ไม่ไปหาทางอ้อม
@@ -32456,23 +32631,34 @@ initUserSession();
       <div id="bkm-dawn" style="display:none"></div>
       <div class="form-group" style="margin-bottom:14px">
         <div class="form-label required">ห้อง</div>
-        <select class="form-input" id="bkm-room" onchange="bkmRoomChange()"><option value="">เลือกห้อง</option></select>
+        <!-- ช่องเลือกห้องของเครื่องยังอยู่ (ซ่อนไว้) เพราะมีโค้ดอ่าน .value / สั่ง disabled อยู่หลายจุด
+             การ์ดข้างล่างเป็นตัวที่คนเห็นและกด · เลือกแล้วเขียนค่ากลับลง select เดิม -->
+        <select class="form-input" id="bkm-room" onchange="bkmRoomChange()" style="display:none"><option value="">เลือกห้อง</option></select>
+        <div class="rmp-tr empty" id="bkm-roombtn" onclick="rmpOpen()">
+          <div class="no" id="bkm-roombtn-no">—</div>
+          <div class="tx"><div class="t" id="bkm-roombtn-t">เลือกห้อง</div>
+            <div class="s" id="bkm-roombtn-s">แตะเพื่อเลือกห้อง</div></div>
+          <div class="pr" id="bkm-roombtn-pr"></div>
+          <div class="cv">▾</div>
+        </div>
       </div>
       <!-- เลือกวันเข้า-ออก · กดได้ทั้งการ์ด
            ช่องวันที่จริงซ่อนทับอยู่ ทำให้เครื่องเด้งตัวเลือกวันขึ้นมาเหมือนเดิม -->
       <div class="bkstay-pk">
-        <div class="bkstay-b" id="bkstay-ci">
-          <input type="date" id="bkm-checkin" onchange="bkmCheckinChange()"/>
+        <div class="bkstay-top">
+        <div class="bkstay-b" id="bkstay-ci" onclick="bkmOpenDates('in')">
+          <input type="date" id="bkm-checkin" onchange="bkmCheckinChange()" tabindex="-1"/>
           <div class="k"><span class="dt"></span>เข้าพัก</div>
           <div class="v" id="bkstay-civ">เลือกวัน<span class="cv">▾</span></div>
           <div class="s" id="bkstay-cis">แตะเพื่อเลือก</div>
         </div>
         <div class="bkstay-arw">→</div>
-        <div class="bkstay-b" id="bkstay-co">
-          <input type="date" id="bkm-checkout" onchange="bkmDateChange()"/>
+        <div class="bkstay-b" id="bkstay-co" onclick="bkmOpenDates('out')">
+          <input type="date" id="bkm-checkout" onchange="bkmDateChange()" tabindex="-1"/>
           <div class="k"><span class="dt"></span>ออก</div>
           <div class="v" id="bkstay-cov">เลือกวัน<span class="cv">▾</span></div>
           <div class="s" id="bkstay-cos">เลือกวันเข้าก่อน</div>
+        </div>
         </div>
         <div class="bkstay-nb" id="bkstay-nb">
           <div class="v" id="bkstay-nbv">–</div><div class="u">คืน</div>
@@ -32525,10 +32711,6 @@ initUserSession();
         <div class="form-group">
           <div class="form-label required">ราคาจริง/คืน</div>
           <input class="form-input" type="number" id="bkm-actual-price" oninput="bkmCalc()"/>
-        </div>
-        <div class="form-group">
-          <div class="form-label">คอมมิชชั่น</div>
-          <input class="form-input" id="bkm-commission" readonly/>
         </div>
       </div>
       <!-- ราคาไม่ตรงป้ายบน Walk-in / โทรจอง · ต้องให้เจ้าของอนุมัติก่อนถึงรับเข้าพักได้
@@ -32706,6 +32888,933 @@ initUserSession();
     </div>
   </div>
 </div>
+
+<style>
+/* ═══════════ ปฏิทินเลือกวัน · ใช้ร่วมกันทุกช่องวันที่ในแอป ═══════════
+   3 โหมด — range (ช่วงวันเข้า-ออก) · one (วันเดียว) · dob (วันเกิด เลือกปีได้)
+   ครอบ <input type="date"> เดิมไว้ ไม่ได้รื้อออก
+   เพราะมีโค้ดอ่าน .value ของช่องพวกนี้อยู่ 80 กว่าจุด ถ้ารื้อจะพังเป็นแถบ */
+.dpk-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:10000;display:none;
+  align-items:flex-end;justify-content:center;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.dpk-bg.open{display:flex}
+.dpk{background:#fff;width:100%;max-width:440px;max-height:94vh;border-radius:18px 18px 0 0;
+  display:flex;flex-direction:column;color:#0f172a;font-family:Sarabun,sans-serif;
+  animation:dpkUp .26s cubic-bezier(.2,.9,.3,1)}
+@keyframes dpkUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(min-width:560px){
+  .dpk-bg{align-items:center}
+  .dpk{border-radius:18px;max-height:88vh}
+}
+.dpk-hd{padding:13px 14px 0;flex-shrink:0}
+.dpk-hd .r1{display:flex;align-items:center;position:relative;height:26px}
+.dpk-x{position:absolute;left:0;font-size:20px;color:#0f172a;background:none;border:none;
+  font-family:inherit;line-height:1;cursor:pointer;padding:0 6px}
+.dpk-ttl{flex:1;text-align:center;font-size:14.5px;font-weight:700;color:#0f172a}
+.dpk-sel{display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 0 12px}
+.dpk-sel .c{text-align:center;flex:1;min-width:0;border-radius:10px;padding:5px 4px;cursor:pointer}
+.dpk-sel .c.act{background:#eff6ff;box-shadow:inset 0 0 0 1.5px #bfdbfe}
+.dpk-sel .c .k{font-size:11px;color:#64748b}
+.dpk-sel .c .v{font-size:16px;font-weight:800;margin-top:1px;white-space:nowrap;color:#0f172a}
+.dpk-sel .c.act .v{color:#1a73e8}
+.dpk-sel .c.emp .v{color:#cbd5e1}
+.dpk-sel .ar{font-size:15px;color:#0f172a;flex-shrink:0}
+.dpk-one{text-align:center;padding:10px 0 12px}
+.dpk-one .k{font-size:11px;color:#64748b}
+.dpk-one .v{font-size:19px;font-weight:800;color:#1a73e8;margin-top:2px}
+.dpk-one .v.emp{color:#cbd5e1}
+.dpk-chips{display:flex;gap:7px;justify-content:center;padding:0 12px 11px;flex-wrap:wrap}
+.dpk-chip{background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:99px;padding:6px 14px;
+  font-size:12px;font-weight:700;color:#475569;cursor:pointer;font-family:inherit}
+.dpk-chip.on{background:#eff6ff;border-color:#bfdbfe;color:#1a73e8}
+.dpk-wd{display:grid;grid-template-columns:repeat(7,1fr);padding:0 9px 8px;
+  border-bottom:1px solid #eef2f7;flex-shrink:0}
+.dpk-wd span{text-align:center;font-size:10.5px;color:#64748b;font-weight:600}
+.dpk-lg{display:flex;gap:13px;justify-content:center;font-size:10.5px;color:#64748b;
+  padding:8px 0 6px;border-bottom:1px solid #eef2f7;flex-shrink:0;flex-wrap:wrap}
+.dpk-lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.dpk-body{flex:1;overflow-y:auto;padding:2px 9px 12px;-webkit-overflow-scrolling:touch}
+.dpk-mon{margin-top:12px}
+.dpk-mon h3{text-align:center;font-size:14px;font-weight:700;margin:6px 0 9px;color:#0f172a}
+.dpk-mon h3.jump{cursor:pointer}
+.dpk-mon h3 .cv{color:#1a73e8;font-size:11px;margin-left:5px}
+.dpk-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.dpk-d{aspect-ratio:1;display:grid;place-items:center;position:relative;font-size:14px;
+  color:#0f172a;cursor:pointer;font-family:Sarabun,sans-serif}
+.dpk-d.pad{pointer-events:none}
+.dpk-d.off{color:#cbd5e1;pointer-events:none}
+.dpk-d.busy{color:#cbd5e1;pointer-events:none;text-decoration:line-through}
+.dpk-d>span{position:relative;z-index:2;width:36px;height:36px;display:grid;place-items:center;
+  border-radius:50%}
+.dpk-d.today>span{box-shadow:inset 0 0 0 1.5px #cbd5e1}
+.dpk-d.in>span,.dpk-d.out>span,.dpk-d.pick>span{background:#1a73e8;color:#fff;font-weight:800;
+  box-shadow:none}
+.dpk-d.mid::before{content:'';position:absolute;inset:6px 0;background:#e8f0fe;z-index:1}
+.dpk-d.in::before{content:'';position:absolute;inset:6px 0 6px 50%;background:#e8f0fe;z-index:1}
+.dpk-d.out::before{content:'';position:absolute;inset:6px 50% 6px 0;background:#e8f0fe;z-index:1}
+.dpk-d.in.out::before{display:none}
+.dpk-ygrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:12px 4px}
+.dpk-ygrid button,.dpk-mgrid button{background:#f8fafc;border:1.5px solid #eef2f7;border-radius:10px;
+  padding:10px 0;font-size:13px;font-weight:700;color:#0f172a;font-family:inherit;cursor:pointer}
+.dpk-ygrid button.on,.dpk-mgrid button.on{background:#1a73e8;border-color:#1a73e8;color:#fff}
+.dpk-ygrid button .ag{display:block;font-size:9.5px;font-weight:500;opacity:.6}
+.dpk-mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:12px 4px}
+.dpk-ft{flex-shrink:0;padding:11px 14px calc(14px + env(safe-area-inset-bottom));
+  border-top:1px solid #eef2f7;background:#fff}
+.dpk-go{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:12px;padding:13px;
+  font-size:15px;font-weight:800;font-family:inherit;cursor:pointer}
+.dpk-go:disabled{background:#cbd5e1;cursor:default}
+.dpk-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.5}
+.dpk-note b{color:#b45309}
+</style>
+<script>
+/* ═══════════ ตัวเลือกวันที่ · ใช้ร่วมกันทุกหน้า ═══════════ */
+(function(){
+  var TH_M  = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
+               'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  var TH_MS = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  var TH_D  = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัส','ศุกร์','เสาร์'];
+  var MONTHS_AHEAD = 12;
+
+  function k(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')
+                      +'-'+String(d.getDate()).padStart(2,'0'); }
+  function pd(s){ if(!s) return null; var p=String(s).split('-');
+    if(p.length!==3) return null;
+    var d=new Date(+p[0], +p[1]-1, +p[2]); return isNaN(d.getTime())?null:d; }
+  function same(a,b){ return !!(a&&b) && k(a)===k(b); }
+  function midnight(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function fmtS(d){ return d ? d.getDate()+' '+TH_MS[d.getMonth()]+' '+(d.getFullYear()+543) : '—'; }
+  function fmtD(d){ return d ? TH_D[d.getDay()]+' '+String(d.getDate()).padStart(2,'0')
+                                +' '+TH_MS[d.getMonth()] : '—'; }
+  function nightsOf(a,b){ return (a&&b) ? Math.round((b-a)/86400000) : 0; }
+
+  var S = null, EL = null;
+
+  function bgEl(){
+    var e = document.getElementById('dpk-bg');
+    if (e) return e;
+    e = document.createElement('div');
+    e.id = 'dpk-bg'; e.className = 'dpk-bg';
+    e.innerHTML = '<div class="dpk" id="dpk"></div>';
+    document.body.appendChild(e);
+    e.addEventListener('click', function(ev){ if (ev.target === e) close(); });
+    e.addEventListener('click', onTap);
+    return e;
+  }
+
+  function busyOn(d){
+    if (!S.busy || !S.busy.length) return false;
+    return S.busy.indexOf(k(d)) >= 0;
+  }
+  /* มีวันติดจองคั่นระหว่าง a (รวม) ถึง b (ไม่รวม) ไหม */
+  function busyBetween(a, b){
+    if (!S.busy || !S.busy.length) return false;
+    for (var i=0;i<S.busy.length;i++){
+      var d = pd(S.busy[i]);
+      if (d && d >= a && d < b) return true;
+    }
+    return false;
+  }
+  function blocked(d){
+    if (S.minD && d < S.minD) return true;
+    if (S.maxD && d > S.maxD) return true;
+    return false;
+  }
+
+  function draw(){
+    var d = EL, h = '';
+    var isRange = S.mode === 'range';
+    var ttl = S.title || (isRange ? (S.edge==='out' ? 'เลือกวันออก' : 'เลือกวันเข้าพัก')
+                                  : (S.mode==='dob' ? 'เลือกวันเกิด' : 'เลือกวันที่'));
+    h += '<div class="dpk-hd"><div class="r1">'
+       + '<button type="button" class="dpk-x" data-close="1">✕</button>'
+       + '<div class="dpk-ttl">' + mtEsc(ttl) + '</div></div>';
+    if (isRange){
+      h += '<div class="dpk-sel">'
+         + '<div class="c'+(S.edge==='in'?' act':'')+(S.a?'':' emp')+'" data-edge="in">'
+         +   '<div class="k">เช็คอิน</div><div class="v">'+fmtD(S.a)+'</div></div>'
+         + '<div class="ar">→</div>'
+         + '<div class="c'+(S.edge==='out'?' act':'')+(S.b?'':' emp')+'" data-edge="out">'
+         +   '<div class="k">เช็คเอาต์</div><div class="v">'+fmtD(S.b)+'</div></div>'
+         + '</div>';
+    } else {
+      h += '<div class="dpk-one"><div class="k">'+mtEsc(S.label||'วันที่เลือก')+'</div>'
+         + '<div class="v'+(S.a?'':' emp')+'">'+(S.a?fmtS(S.a):'ยังไม่ได้เลือก')+'</div></div>';
+    }
+    h += '</div>';
+
+    if (S.view === 'year'){
+      h += '<div class="dpk-body" id="dpk-yb"><div class="dpk-ygrid">';
+      var nowY = new Date().getFullYear();
+      for (var y = nowY; y >= nowY-99; y--)
+        h += '<button type="button" data-y="'+y+'"'+(S.y0===y?' class="on"':'')+'>'
+           + (y+543) + '<span class="ag">'+(nowY-y)+' ปี</span></button>';
+      h += '</div></div><div class="dpk-ft"><div class="dpk-note">แตะปีเกิด · ย้อนได้ 100 ปี</div></div>';
+      d.innerHTML = h;
+      scrollYearIntoView();
+      return;
+    }
+    if (S.view === 'month'){
+      h += '<div class="dpk-body"><div class="dpk-mgrid">';
+      for (var mi=0; mi<12; mi++)
+        h += '<button type="button" data-m="'+mi+'"'+(S.m0===mi?' class="on"':'')+'>'+TH_MS[mi]+'</button>';
+      h += '</div></div><div class="dpk-ft"><div class="dpk-note">ปี '+(S.y0+543)
+         + ' · เลือกเดือน</div></div>';
+      d.innerHTML = h; return;
+    }
+
+    if (S.quick){
+      var t0 = midnight(new Date()), y0 = new Date(t0.getTime()-86400000);
+      h += '<div class="dpk-chips">'
+         + (blocked(t0)?'':'<button type="button" class="dpk-chip'+(same(S.a,t0)?' on':'')+'" data-q="0">วันนี้</button>')
+         + (blocked(y0)?'':'<button type="button" class="dpk-chip'+(same(S.a,y0)?' on':'')+'" data-q="-1">เมื่อวาน</button>')
+         + '</div>';
+    }
+    h += '<div class="dpk-wd">'
+       + ['อา','จ','อ','พ','พฤ','ศ','ส'].map(function(x){return '<span>'+x+'</span>';}).join('')
+       + '</div>';
+    if (S.busy && S.busy.length)
+      h += '<div class="dpk-lg"><span><i style="background:#1a73e8"></i>วันที่เลือก</span>'
+         + (isRange?'<span><i style="background:#e8f0fe"></i>ช่วงที่พัก</span>':'')
+         + '<span><i style="background:#cbd5e1"></i>มีคนจองแล้ว</span></div>';
+
+    h += '<div class="dpk-body" id="dpk-scroll">';
+    var today = midnight(new Date());
+    var first, count;
+    if (S.mode === 'dob'){ first = new Date(S.y0, S.m0, 1); count = 1; }
+    else { first = new Date(S.startY, S.startM, 1); count = MONTHS_AHEAD; }
+    for (var m=0; m<count; m++){
+      var d0 = new Date(first.getFullYear(), first.getMonth()+m, 1);
+      h += '<div class="dpk-mon"><h3'+(S.mode==='dob'?' class="jump" data-jump="1"':'')+'>'
+         + TH_M[d0.getMonth()] + ' ' + (d0.getFullYear()+543)
+         + (S.mode==='dob'?'<span class="cv">▾</span>':'') + '</h3><div class="dpk-grid">';
+      for (var p=0; p<d0.getDay(); p++) h += '<div class="dpk-d pad"></div>';
+      var last = new Date(d0.getFullYear(), d0.getMonth()+1, 0).getDate();
+      for (var day=1; day<=last; day++){
+        var dt = new Date(d0.getFullYear(), d0.getMonth(), day), c = 'dpk-d';
+        if (same(dt, today)) c += ' today';
+        if (blocked(dt)) c += ' off';
+        else if (busyOn(dt)) c += ' busy';
+        else {
+          if (isRange){
+            if (same(dt,S.a)) c += ' in';
+            if (same(dt,S.b)) c += ' out';
+            if (S.a && S.b && dt > S.a && dt < S.b) c += ' mid';
+          } else if (same(dt,S.a)) c += ' pick';
+        }
+        h += '<div class="'+c+'" data-k="'+k(dt)+'"><span>'+day+'</span></div>';
+      }
+      h += '</div></div>';
+    }
+    h += '</div>';
+
+    h += '<div class="dpk-ft">';
+    if (isRange){
+      var n = nightsOf(S.a, S.b);
+      h += '<button type="button" class="dpk-go"'+(n>0?'':' disabled')+' data-go="1">'
+         + (n>0 ? 'ตกลง ('+n+' คืน)' : 'ตกลง') + '</button>'
+         + '<div class="dpk-note">'
+         + (!S.a ? 'เลือกวันเข้าพักก่อน'
+            : (n<=0 ? 'เลือกวันออก'
+               : 'เข้า '+fmtS(S.a)+' → ออก '+fmtS(S.b)+' · '+n+' คืน'))
+         + (S.hint ? '<br/><b>'+mtEsc(S.hint)+'</b>' : '')
+         + '</div>';
+    } else {
+      h += '<button type="button" class="dpk-go"'+(S.a?'':' disabled')+' data-go="1">ตกลง</button>'
+         + '<div class="dpk-note">'+(S.a?fmtS(S.a):'แตะวันที่ต้องการ')
+         + (S.hint ? '<br/><b>'+mtEsc(S.hint)+'</b>' : '') + '</div>';
+    }
+    h += '</div>';
+    d.innerHTML = h;
+    if (S.scrollToSel) scrollSelIntoView();
+  }
+
+  function scrollSelIntoView(){
+    S.scrollToSel = false;
+    var body = document.getElementById('dpk-scroll');
+    var sel = EL.querySelector('.dpk-d.in, .dpk-d.pick');
+    if (!body || !sel) return;
+    var sb = sel.getBoundingClientRect(), bb = body.getBoundingClientRect();
+    body.scrollTop += (sb.top - bb.top) - (body.clientHeight/2 - sb.height/2);
+  }
+  function scrollYearIntoView(){
+    var body = document.getElementById('dpk-yb');
+    if (!body) return;
+    /* เคยเลือกไว้แล้ว → ไปที่ปีนั้น · ยังไม่เคย → ไปที่ช่วงอายุ 35 ปี ซึ่งเจอบ่อยสุด
+       ถ้าเปิดมาที่ปีปัจจุบัน (บนสุด) ทุกคนต้องเลื่อนลงยาว */
+    var t = body.querySelector('.dpk-ygrid button.on')
+         || body.querySelector('.dpk-ygrid button[data-y="'
+              + (S.yAnchor != null ? S.yAnchor : (new Date().getFullYear()-35)) + '"]');
+    if (!t) return;
+    var tb = t.getBoundingClientRect(), bb = body.getBoundingClientRect();
+    body.scrollTop += (tb.top - bb.top) - (body.clientHeight/2 - tb.height/2);
+  }
+
+  function onTap(ev){
+    if (!S) return;
+    var t = ev.target;
+    if (t.closest('[data-close]')) { close(); return; }
+    if (t.closest('[data-go]'))    { confirm(); return; }
+    var eg = t.closest('[data-edge]');
+    if (eg){ S.edge = eg.dataset.edge; draw(); return; }
+    var q = t.closest('[data-q]');
+    if (q){
+      var base = midnight(new Date());
+      S.a = new Date(base.getTime() + (+q.dataset.q)*86400000);
+      draw(); return;
+    }
+    var jm = t.closest('[data-jump]');
+    if (jm){ S.view = (S.view==='day') ? 'year' : 'day'; draw(); return; }
+    var yb = t.closest('button[data-y]');
+    if (yb){ S.y0 = +yb.dataset.y; S.view = 'month'; draw(); return; }
+    var mb = t.closest('button[data-m]');
+    if (mb){ S.m0 = +mb.dataset.m; S.view = 'day'; draw(); return; }
+    var cell = t.closest('.dpk-d[data-k]');
+    if (cell && !cell.classList.contains('off') && !cell.classList.contains('busy')){
+      pick(pd(cell.dataset.k));
+    }
+  }
+
+  function pick(d){
+    if (!d) return;
+    if (S.mode !== 'range'){ S.a = d; draw(); return; }
+    /* กติกาแบบ Agoda · แตะย้อนกลับ = เปลี่ยนใจ ถือเป็นวันเข้าใหม่ ไม่ต้องขึ้น error
+       และห้ามคร่อมวันที่ห้องติดจองอยู่ */
+    if (S.edge === 'in' || !S.a || d <= S.a || busyBetween(S.a, d)){
+      S.a = d; S.b = null; S.edge = 'out';
+    } else {
+      S.b = d; S.edge = 'in';
+    }
+    draw();
+  }
+
+  function close(){
+    var bg = document.getElementById('dpk-bg');
+    if (bg) bg.classList.remove('open');
+    S = null;
+    document.body.style.overflow = '';
+  }
+  function confirm(){
+    if (!S.a) return;
+    if (S.mode === 'range' && nightsOf(S.a, S.b) <= 0) return;
+    var cb = S.onPick, a = k(S.a), b = S.b ? k(S.b) : null;
+    close();
+    if (typeof cb === 'function') { try { cb(a, b); } catch(e){ console.error('dpk onPick:', e); } }
+  }
+
+  /* ══ ทางเข้าหลัก ══
+     opt = { mode, value, value2, title, label, minDate, maxDate, busy[], quick,
+             hint, monthsAhead, onPick(a,b) } */
+  window.dpkOpen = function(opt){
+    opt = opt || {};
+    var bg = bgEl();
+    EL = document.getElementById('dpk');
+    var a = pd(opt.value), b = pd(opt.value2);
+    var today = midnight(new Date());
+    S = {
+      mode: opt.mode || 'one',
+      a: a, b: b,
+      edge: (opt.mode === 'range') ? (a && !b ? 'out' : 'in') : 'in',
+      title: opt.title || null,
+      label: opt.label || null,
+      hint: opt.hint || null,
+      busy: opt.busy || null,
+      quick: !!opt.quick,
+      minD: pd(opt.minDate),
+      maxD: pd(opt.maxDate),
+      onPick: opt.onPick,
+      view: 'day',
+      scrollToSel: true
+    };
+    if (S.mode === 'dob'){
+      /* ยังไม่เคยกรอก → ห้ามทำเป็นสีน้ำเงินให้ดูเหมือนเลือกไว้แล้ว
+         (หัวข้อบอก "ยังไม่ได้เลือก" แต่ปีเป็นสีน้ำเงิน คนกรอกจะเข้าใจผิด)
+         เก็บปีที่จะเลื่อนไปให้ไว้คนละตัว ไม่ปนกับปีที่เลือกจริง */
+      S.yAnchor = today.getFullYear()-35;
+      S.y0 = a ? a.getFullYear() : null;
+      S.m0 = a ? a.getMonth() : 0;
+      S.view = a ? 'day' : 'year';   /* ยังไม่เคยกรอก → เริ่มที่เลือกปีเลย จะได้ไม่ต้องเลื่อนหา */
+      S.scrollToSel = false;
+    } else {
+      /* เริ่มที่เดือนของวันที่เลือกไว้ · ถ้ายังไม่เลือก เริ่มเดือนปัจจุบัน
+         แต่ถ้าย้อนหลังได้ ให้ถอยไป 1 เดือนเพื่อให้เลือกวันที่ผ่านมาแล้วได้ */
+      var anchor = a || today;
+      if (S.minD && anchor < S.minD) anchor = S.minD;
+      var back = (!S.minD || S.minD < today) ? 1 : 0;
+      S.startY = anchor.getFullYear();
+      S.startM = anchor.getMonth() - back;
+    }
+    document.body.style.overflow = 'hidden';
+    bg.classList.add('open');
+    draw();
+  };
+  window.dpkClose = close;
+
+  /* ══ ผูกกับช่อง <input type="date"> ที่มีอยู่แล้ว ══
+     ไม่ได้เอา input ออก · แค่ห้ามเครื่องเด้งตัวเลือกของตัวเอง แล้วเปิดของเราแทน
+     พอเลือกเสร็จเขียนกลับลง input แล้วยิง change ให้โค้ดเดิมทำงานต่อตามปกติ */
+  window.dpkBind = function(id, optFn){
+    var el = document.getElementById(id);
+    if (!el || el.__dpk) return;
+    el.__dpk = true;
+    el.setAttribute('readonly','readonly');
+    el.addEventListener('focus', function(e){ e.target.blur(); });
+    el.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      var o = (typeof optFn === 'function') ? (optFn(el) || {}) : (optFn || {});
+      o.value = o.value !== undefined ? o.value : el.value;
+      var user = o.onPick;
+      o.onPick = function(a, b){
+        el.value = a;
+        try { el.dispatchEvent(new Event('change', {bubbles:true})); } catch(e2){}
+        if (typeof user === 'function') user(a, b);
+      };
+      window.dpkOpen(o);
+    });
+  };
+  /* ══ ทะเบียนช่องวันที่ทั้งแอป ══
+     ดักการกดที่ระดับเอกสาร แทนที่จะไปผูกทีละหน้าตอนเปิดฟอร์ม
+     เพราะบางช่องถูกสร้างตอนเปิดหน้าต่าง (แจ้งซ่อม · ย้ายห้อง) จะผูกล่วงหน้าไม่ได้ */
+  function today(){ try { return todayStr(); } catch(e){ return null; } }
+  var FIELDS = {
+    /* วันเข้าพักรายเดือน · ย้อนหลังได้ตามสิทธิ์เดิม */
+    "rf-checkin": function(){
+      var min = null;
+      try {
+        if (!(window.currentUser && currentUser.role === "owner")){
+          var can = !!(currentUser && currentUser.perms && currentUser.perms.backdateCheckin);
+          var lim = (typeof BACKDATE_MAX_DAYS !== "undefined") ? BACKDATE_MAX_DAYS : 0;
+          min = can ? dateOnly(addDays(parseDate(today()), -lim)) : today();
+        }
+      } catch(e){ min = today(); }
+      return { mode:"one", label:"วันเข้าพัก", title:"เลือกวันเข้าพัก", quick:true, minDate:min };
+    },
+    /* วันเกิด · ย้อนได้ 100 ปี · ห้ามอนาคต */
+    "rf-dob": function(){
+      return { mode:"dob", label:"วันเกิด", title:"เลือกวันเกิด", maxDate:today() };
+    },
+    /* วันย้ายออก · ย้อนหลังได้ (ระบบบอก "เลยกำหนดมาแล้ว" ให้เอง) */
+    "mo-date": function(){
+      return { mode:"one", label:"วันย้ายออก", title:"เลือกวันย้ายออก", quick:true };
+    },
+    /* ย้ายห้องผู้จอง · ไม่มีวันไหนต้องขีดฆ่า
+       เพราะรายชื่อห้องปลายทางกรองมาแล้วว่า "ว่าง และไม่มีใครจองค้างไว้"
+       (openMoveRoomFlow: st==='vacant' && !reservation) และตอนกดยืนยันยังเช็คซ้ำอีกที
+       ส่วนตู้ bookings เป็นของห้องรายวัน (M1–M99) คนละชุดกับห้องรายเดือน (11–84)
+       เอามาขีดฆ่าที่นี่ไม่ได้ · วันเข้าพักจริงอาจเลยมาแล้ว จึงไม่ปิดวันย้อนหลัง */
+    "move-checkin": function(){
+      return { mode:"one", label:"วันที่จะเข้าพัก", title:"เลือกวันเข้าพัก", quick:true };
+    },
+    /* วันที่แจ้งซ่อม · แจ้งล่วงหน้าไม่สมเหตุผล */
+    "rp-date": function(){
+      return { mode:"one", label:"วันที่แจ้ง", title:"เลือกวันที่แจ้ง",
+               quick:true, maxDate:today() };
+    },
+    /* วันจดมิเตอร์ · จดล่วงหน้าไม่ได้ · ช่องนี้ไม่มีค่าตั้งต้น ปุ่มลัดช่วยได้มาก */
+    "bb-meter-date": function(){
+      return { mode:"one", label:"วันจดมิเตอร์", title:"เลือกวันจดมิเตอร์",
+               quick:true, maxDate:today() };
+    }
+  };
+  /* กันช่องพวกนี้ไม่ให้เครื่องเด้งตัวเลือกของตัวเองขึ้นมา */
+  function guard(el){
+    if (el.__dpkGuard) return;
+    el.__dpkGuard = true;
+    el.setAttribute("readonly","readonly");
+  }
+  document.addEventListener("click", function(ev){
+    var el = ev.target.closest && ev.target.closest("input[type=date]");
+    if (!el || !el.id || !FIELDS[el.id]) return;
+    ev.preventDefault(); ev.stopPropagation();
+    guard(el);
+    var o = FIELDS[el.id]() || {};
+    o.value = el.value;
+    o.onPick = function(a){
+      el.value = a;
+      try { el.dispatchEvent(new Event("change", {bubbles:true})); } catch(e){}
+      try { el.dispatchEvent(new Event("input",  {bubbles:true})); } catch(e){}
+    };
+    window.dpkOpen(o);
+  }, true);
+  /* ช่องที่มีอยู่ตั้งแต่แรกก็กันไว้เลย จะได้ไม่เด้งตัวเลือกของเครื่องตอนโฟกัสด้วยคีย์บอร์ด */
+  document.addEventListener("DOMContentLoaded", function(){
+    Object.keys(FIELDS).forEach(function(id){
+      var el = document.getElementById(id); if (el) guard(el);
+    });
+  });
+
+  /* คืนวันที่ห้องรายวันห้องนี้ติดจองไว้แล้ว · เอาไปขีดฆ่าในปฏิทิน */
+  window.dpkBusyForRoom = function(roomId, excludeId){
+    var out = [];
+    try {
+      (window.bookings||[]).forEach(function(b){
+        if (!b || b.status === 'cancelled') return;
+        if (b.roomId !== roomId) return;
+        if (excludeId && b.id === excludeId) return;
+        var s = pd(b.checkIn), e = pd(b.checkOut);
+        if (!s || !e) return;
+        /* วันเช็คเอาท์ไม่นับว่าเต็ม · ห้องว่างให้คนถัดไปเข้าได้วันนั้น */
+        for (var d = new Date(s); d < e; d.setDate(d.getDate()+1)) out.push(k(d));
+      });
+    } catch(e){ console.warn('dpkBusyForRoom:', e); }
+    return out;
+  };
+})();
+</script>
+
+<!-- ═══ เลือกห้องรายวัน · แผ่นเลื่อนขึ้นจากล่างจอ ═══
+     เดิมใช้รายการของเครื่อง · หน้าตาไม่เหมือนทั้งแอป ตัวหนังสือเล็ก แตะยากบนมือถือ
+     และบอกได้แค่ชื่อกับราคา ไม่รู้ว่าห้องไหนติดจองในช่วงวันที่เลือกไว้
+     ต้องกดเลือกไปก่อนแล้วรอระบบเตือนทีหลัง
+     ตอนนี้บอกตั้งแต่ยังไม่กดว่าห้องไหนว่าง ห้องไหนติดถึงวันไหน · กรองได้ · จัดกลุ่มตามราคา -->
+<style>
+/* การ์ดที่แทนช่องเลือกของเครื่อง */
+.rmp-tr{display:flex;align-items:center;gap:11px;border:1.5px solid #e8edf3;border-radius:12px;
+  padding:10px 13px;cursor:pointer;background:#fff;transition:border-color .12s}
+.rmp-tr:hover{border-color:#cbd5e1}
+.rmp-tr.empty{border-style:dashed;border-color:#cbd5e1}
+.rmp-tr.dis{opacity:.55;pointer-events:none}
+.rmp-tr.inv{border-color:#fca5a5;border-style:solid;background:#fffafa}
+.rmp-tr .no{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;color:#0f172a;
+  min-width:44px;text-align:center;flex-shrink:0}
+.rmp-tr.empty .no{color:#cbd5e1}
+.rmp-tr .tx{flex:1;min-width:0}
+.rmp-tr .tx .t{font-size:13px;font-weight:800;color:#0f172a;line-height:1.25}
+.rmp-tr.empty .tx .t{color:#94a3b8;font-weight:700}
+.rmp-tr .tx .s{font-size:10.5px;color:#94a3b8;margin-top:2px;font-weight:600}
+.rmp-tr .tx .s.ok{color:#059669}
+.rmp-tr .tx .s.no{color:#dc2626}
+.rmp-tr .pr{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:800;
+  color:#0f172a;flex-shrink:0}
+.rmp-tr .cv{color:#cbd5e1;font-size:11px;flex-shrink:0}
+/* แผ่นเลือกห้อง · ใช้โครงเดียวกับปฏิทิน จะได้เป็นท่าเดียวกันทั้งแอป */
+.rmp-bg{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:10000;display:none;
+  align-items:flex-end;justify-content:center;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.rmp-bg.open{display:flex}
+.rmp{background:#fff;width:100%;max-width:440px;max-height:94vh;border-radius:18px 18px 0 0;
+  display:flex;flex-direction:column;color:#0f172a;font-family:Sarabun,sans-serif;
+  animation:dpkUp .26s cubic-bezier(.2,.9,.3,1)}
+@media(min-width:560px){ .rmp-bg{align-items:center} .rmp{border-radius:18px;max-height:88vh} }
+.rmp-hd{padding:13px 14px 0;flex-shrink:0}
+.rmp-hd .r1{display:flex;align-items:center;position:relative;height:26px}
+.rmp-x{position:absolute;left:0;font-size:20px;color:#0f172a;background:none;border:none;
+  font-family:inherit;line-height:1;cursor:pointer;padding:0 6px}
+.rmp-ttl{flex:1;text-align:center;font-size:14.5px;font-weight:700}
+.rmp-sub{text-align:center;font-size:11.5px;color:#64748b;padding:5px 0 10px}
+.rmp-sub b{color:#0f172a;font-weight:800}
+.rmp-chips{display:flex;gap:7px;justify-content:center;padding:0 12px 11px;flex-wrap:wrap}
+.rmp-chip{background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:99px;padding:6px 14px;
+  font-size:12px;font-weight:700;color:#475569;cursor:pointer;font-family:inherit}
+.rmp-chip.on{background:#eff6ff;border-color:#bfdbfe;color:#1a73e8}
+.rmp-body{flex:1;overflow-y:auto;padding:0 11px 14px;-webkit-overflow-scrolling:touch;
+  border-top:1px solid #eef2f7}
+.rmp-gh{font-size:11px;font-weight:800;color:#64748b;letter-spacing:.04em;
+  padding:13px 4px 7px;display:flex;align-items:center;gap:7px}
+.rmp-gh .ln{flex:1;height:1px;background:#eef2f7}
+.rmp-r{display:flex;align-items:center;gap:11px;border:1.5px solid #eef2f7;border-radius:12px;
+  padding:11px 12px;margin-bottom:7px;cursor:pointer;background:#fff}
+.rmp-r:hover{border-color:#cbd5e1}
+.rmp-r.on{border-color:#1a73e8;background:#f5f9ff}
+.rmp-r.bz{background:#fafbfc;border-style:dashed;cursor:default;opacity:.72}
+.rmp-r .no{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:800;
+  min-width:46px;text-align:center;flex-shrink:0}
+.rmp-r.bz .no{color:#94a3b8}
+.rmp-r .tx{flex:1;min-width:0}
+.rmp-r .tx .t{font-size:12.5px;font-weight:700;color:#0f172a}
+.rmp-r.bz .tx .t{color:#94a3b8}
+.rmp-r .tx .s{font-size:10.5px;margin-top:2px;font-weight:600;color:#059669}
+.rmp-r.bz .tx .s{color:#dc2626}
+.rmp-r .pr{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;
+  color:#0f172a;flex-shrink:0}
+.rmp-r.bz .pr{color:#cbd5e1}
+.rmp-r .tk{color:#1a73e8;font-size:14px;font-weight:800;flex-shrink:0;width:14px;text-align:center}
+.rmp-emp{text-align:center;padding:34px 16px;color:#94a3b8;font-size:12.5px;font-weight:600}
+</style>
+<script>
+(function(){
+  var S = null;   /* {filter:'all'|'free'|'single'|'double'} */
+
+  function sel(){ return document.getElementById("bkm-room"); }
+  function dates(){
+    var a = (document.getElementById("bkm-checkin")||{}).value || "";
+    var b = (document.getElementById("bkm-checkout")||{}).value || "";
+    return (a && b && a < b) ? [a, b] : null;
+  }
+  function nights(a, b){
+    try { return Math.round((parseDate(b) - parseDate(a)) / 86400000); } catch(e){ return 0; }
+  }
+  function fd(s){ try { return bksFd(s); } catch(e){ return s; } }
+  function typeTH(r){ return (r && r.type === "double") ? "เตียงคู่" : "เตียงเดี่ยว"; }
+  function list(){
+    return (window.dailyRooms || []).filter(function(r){ return r && r.status === "active"; });
+  }
+  /* ห้องนี้ติดจองในช่วงที่เลือกไว้ไหม · ใบที่กำลังแก้อยู่ไม่นับว่าชนตัวเอง */
+  function clash(rid){
+    var d = dates(); if (!d) return null;
+    var hit = [];
+    try { hit = bookingsInRoomBetween(rid, d[0], d[1], window.bkmEditId || null) || []; }
+    catch(e){ return null; }
+    if (!hit.length) return null;
+    var s = hit[0].checkIn, e2 = hit[0].checkOut;
+    hit.forEach(function(b){ if (b.checkIn < s) s = b.checkIn; if (b.checkOut > e2) e2 = b.checkOut; });
+    return { n: hit.length, from: s, to: e2 };
+  }
+
+  /* ── การ์ดที่ปิดอยู่ · บอกสถานะห้องด้วย ไม่ใช่แค่ชื่อกับราคา ── */
+  window.rmpSyncBtn = function(){
+    var btn = document.getElementById("bkm-roombtn"); if (!btn) return;
+    var s = sel(); var rid = s ? s.value : "";
+    var r = list().find(function(x){ return x.id === rid; });
+    var no = document.getElementById("bkm-roombtn-no"),
+        t  = document.getElementById("bkm-roombtn-t"),
+        sb = document.getElementById("bkm-roombtn-s"),
+        pr = document.getElementById("bkm-roombtn-pr");
+    btn.classList.toggle("dis", !!(s && s.disabled));
+    if (!r){
+      btn.classList.add("empty");
+      no.textContent = "—"; t.textContent = "เลือกห้อง";
+      sb.className = "s"; sb.textContent = "แตะเพื่อเลือกห้อง"; pr.textContent = "";
+      return;
+    }
+    btn.classList.remove("empty");
+    no.textContent = r.number;
+    t.textContent  = r.number + " · " + typeTH(r);
+    pr.textContent = "฿" + (r.price || 0).toLocaleString();
+    var d = dates(), c = clash(r.id);
+    if (!d){ sb.className = "s"; sb.textContent = "ยังไม่ได้เลือกวัน"; }
+    else if (c){ sb.className = "s no";
+                 sb.textContent = "ติดจองอยู่ " + fd(c.from) + " – " + fd(c.to); }
+    else { sb.className = "s ok";
+           sb.textContent = "ว่างตลอด " + fd(d[0]) + " – " + fd(d[1]); }
+  };
+
+  function el(){
+    var bg = document.getElementById("rmp-bg");
+    if (bg) return bg;
+    bg = document.createElement("div");
+    bg.className = "rmp-bg"; bg.id = "rmp-bg";
+    bg.innerHTML =
+        '<div class="rmp" id="rmp">'
+      +   '<div class="rmp-hd"><div class="r1">'
+      +     '<button type="button" class="rmp-x" data-x>✕</button>'
+      +     '<div class="rmp-ttl">เลือกห้อง</div></div>'
+      +     '<div class="rmp-sub" id="rmp-sub"></div>'
+      +     '<div class="rmp-chips" id="rmp-chips"></div></div>'
+      +   '<div class="rmp-body" id="rmp-body"></div>'
+      + '</div>';
+    document.body.appendChild(bg);
+    bg.addEventListener("click", function(ev){
+      if (ev.target === bg || ev.target.closest("[data-x]")) { window.rmpClose(); return; }
+      var ch = ev.target.closest(".rmp-chip");
+      if (ch){ S.filter = ch.dataset.f; draw(); return; }
+      var row = ev.target.closest(".rmp-r");
+      if (row && !row.classList.contains("bz")) pick(row.dataset.rid);
+    });
+    return bg;
+  }
+
+  function pick(rid){
+    var s = sel(); if (!s) return;
+    s.value = rid;
+    try { s.dispatchEvent(new Event("change", {bubbles:true})); } catch(e){}
+    /* select ถูกซ่อนไว้ · onchange ใน HTML ยังทำงาน แต่ยิงซ้ำให้ชัวร์ไม่เสียหาย */
+    if (typeof bkmRoomChange === "function") bkmRoomChange();
+    window.rmpSyncBtn();
+    window.rmpClose();
+  }
+
+  var CHIPS = [ {f:"all",lb:"ทั้งหมด"}, {f:"free",lb:"ว่างเท่านั้น"},
+                {f:"single",lb:"เตียงเดี่ยว"}, {f:"double",lb:"เตียงคู่"} ];
+
+  function draw(){
+    var d = dates(), s = sel(), cur = s ? s.value : "";
+    document.getElementById("rmp-sub").innerHTML = d
+      ? ("สำหรับ <b>" + fd(d[0]) + " → " + fd(d[1]) + "</b> · "
+         + nights(d[0], d[1]) + " คืน")
+      : "ยังไม่ได้เลือกวัน · เลือกวันก่อนจะบอกได้ว่าห้องไหนว่าง";
+    document.getElementById("rmp-chips").innerHTML = CHIPS.map(function(c){
+      /* ไม่ได้เลือกวัน = ไม่รู้ว่าห้องไหนว่าง · ปุ่มกรอง "ว่างเท่านั้น" จึงไม่มีความหมาย */
+      if (c.f === "free" && !d) return "";
+      return '<button type="button" class="rmp-chip' + (S.filter === c.f ? " on" : "")
+           + '" data-f="' + c.f + '">' + c.lb + '</button>';
+    }).join("");
+
+    var rows = list().map(function(r){ return { r:r, c:clash(r.id) }; });
+    if (S.filter === "free")   rows = rows.filter(function(x){ return !x.c; });
+    if (S.filter === "single") rows = rows.filter(function(x){ return x.r.type !== "double"; });
+    if (S.filter === "double") rows = rows.filter(function(x){ return x.r.type === "double"; });
+    /* จัดกลุ่มตามราคา · ถูกไปแพง */
+    var g = {};
+    rows.forEach(function(x){ var k = x.r.price || 0; (g[k] = g[k] || []).push(x); });
+    var keys = Object.keys(g).map(Number).sort(function(a,b){ return a-b; });
+    var h = "";
+    keys.forEach(function(k){
+      var free = g[k].filter(function(x){ return !x.c; }).length;
+      h += '<div class="rmp-gh">฿' + k.toLocaleString()
+         + '<span class="ln"></span>' + (d ? ("ว่าง " + free + "/" + g[k].length + " ห้อง")
+                                            : (g[k].length + " ห้อง")) + '</div>';
+      g[k].sort(function(a,b){ return String(a.r.number).localeCompare(String(b.r.number),
+                                 undefined, {numeric:true}); });
+      g[k].forEach(function(x){
+        var r = x.r, c = x.c;
+        h += '<div class="rmp-r' + (c ? " bz" : "") + (r.id === cur ? " on" : "")
+           + '" data-rid="' + mtEsc(r.id) + '">'
+           +   '<div class="no">' + mtEsc(String(r.number)) + '</div>'
+           +   '<div class="tx"><div class="t">' + typeTH(r) + '</div>'
+           +     '<div class="s">' + (c ? ("ติดจอง " + fd(c.from) + " – " + fd(c.to))
+                                        : (d ? "ว่างตลอดช่วงนี้" : " ")) + '</div></div>'
+           +   '<div class="pr">฿' + (r.price || 0).toLocaleString() + '</div>'
+           +   '<div class="tk">' + (r.id === cur ? "✓" : "") + '</div>'
+           + '</div>';
+      });
+    });
+    document.getElementById("rmp-body").innerHTML =
+      h || '<div class="rmp-emp">ไม่มีห้องที่ตรงกับตัวกรองนี้</div>';
+  }
+
+  window.rmpOpen = function(){
+    var s = sel(); if (!s || s.disabled) return;
+    if (!list().length){
+      try { notify("ยังไม่มีห้องรายวันในระบบ","error"); } catch(e){}
+      return;
+    }
+    S = { filter: "all" };
+    var bg = el();
+    document.body.style.overflow = "hidden";
+    bg.classList.add("open");
+    draw();
+  };
+  window.rmpClose = function(){
+    var bg = document.getElementById("rmp-bg");
+    if (bg) bg.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+})();
+</script>
+
+<!-- ═══ เมนูซ้ายบนจอเล็ก ═══
+     กฎเดิมเขียนไว้ครึ่งเดียว — @media(max-width:768px) สั่งให้เนื้อหาเต็มจอแล้ว (.main margin-left:0)
+     แต่ไม่ได้สั่งให้เมนูหลบ · เมนูกว้าง 220px เป็น position:fixed จึงลอยทับเนื้อหาอยู่
+     วัดจริงที่จอ 390px = บังไป 220/390 คิดเป็น 56% ของทุกหน้า
+     (หน้าต่างลอยอย่างฟอร์มจองไม่โดน เพราะ z-index สูงกว่า งานรายวันเลยยังพอทำได้)
+     ตอนนี้จอเล็กเมนูซ่อนเป็นลิ้นชัก · ปุ่มเปิดวางคู่กับกระดิ่งให้สมมาตรซ้าย-ขวา -->
+<style>
+#nav-scrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:140;display:none;
+  -webkit-backdrop-filter:blur(1px);backdrop-filter:blur(1px)}
+#nav-scrim.open{display:block}
+#nav-open{position:fixed;top:14px;left:20px;width:42px;height:42px;display:none;
+  align-items:center;justify-content:center;cursor:pointer;z-index:100;padding:0;
+  border:none;border-radius:10px;background:rgba(255,255,255,.85);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .15s}
+#nav-open:hover{background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+#nav-open i{display:block;width:18px;height:2px;background:#475569;border-radius:2px;position:relative}
+#nav-open i::before,#nav-open i::after{content:'';position:absolute;left:0;width:18px;height:2px;
+  background:#475569;border-radius:2px}
+#nav-open i::before{top:-6px}
+#nav-open i::after{top:6px}
+@media(max-width:768px){
+  #nav-open{display:flex}
+  .sidebar{transform:translateX(-100%);z-index:150;
+    transition:transform .24s cubic-bezier(.2,.9,.3,1);box-shadow:0 0 40px rgba(0,0,0,.34)}
+  .sidebar.open{transform:translateX(0)}
+  /* หัวหน้าเว้นที่ให้ปุ่มเมนู เหมือนที่เว้นขวาให้กระดิ่งอยู่แล้ว */
+  .page-header{padding-left:56px}
+}
+</style>
+<script>
+(function(){
+  function sb(){ return document.querySelector(".sidebar"); }
+  function scrim(){ return document.getElementById("nav-scrim"); }
+  function narrow(){ return window.innerWidth <= 768; }
+  window.navOpen = function(){
+    if (!narrow()) return;
+    var s = sb(); if (!s) return;
+    s.classList.add("open");
+    var sc = scrim(); if (sc) sc.classList.add("open");
+    document.body.style.overflow = "hidden";
+  };
+  window.navClose = function(){
+    var s = sb(); if (s) s.classList.remove("open");
+    var sc = scrim(); if (sc) sc.classList.remove("open");
+    /* หน้าต่างลอยอาจกำลังเปิดอยู่และล็อกการเลื่อนของมันเอง · อย่าไปปลดให้ */
+    var modalOpen = document.querySelector(".modal-bg.open, .dpk-bg.open, .rmp-bg.open, .sa2-bg.open");
+    if (!modalOpen) document.body.style.overflow = "";
+  };
+  window.navToggle = function(){
+    var s = sb();
+    if (s && s.classList.contains("open")) window.navClose(); else window.navOpen();
+  };
+  /* กดเมนูข้างในแล้วปิดเอง · goPage ก็เรียก navClose อยู่แล้ว อันนี้เผื่อปุ่มที่ไม่ผ่าน goPage */
+  document.addEventListener("click", function(ev){
+    if (!narrow()) return;
+    var s = sb(); if (!s || !s.classList.contains("open")) return;
+    if (ev.target.closest(".nav-btn, .sidebar-footer")) setTimeout(window.navClose, 0);
+  });
+  document.addEventListener("keydown", function(ev){
+    if (ev.key === "Escape") window.navClose();
+  });
+  /* หมุนจอเป็นแนวนอนแล้วกว้างพอ · เมนูกลับมาอยู่ประจำที่ ต้องเก็บฉากมืดให้ด้วย */
+  window.addEventListener("resize", function(){
+    if (!narrow()) window.navClose();
+  });
+})();
+</script>
+
+<!-- ═══ แถบบันทึกลอย · หน้าตั้งค่าระบบ ═══
+     เดิมปุ่มบันทึกอยู่มุมขวาบนหน้าเดียว · เลื่อนลงไปแก้ค่าไฟแล้วปุ่มหายจากจอ
+     ต้องเลื่อนกลับขึ้นไปกด · หลายครั้งลืมกด แก้แล้วไม่ได้บันทึก
+     ตอนนี้พอมีการแก้จริง แถบจะลอยขึ้นมายึดล่างจอ กดได้ทันทีไม่ว่าเลื่อนไปไหน -->
+<style>
+#stg-bar{position:fixed;left:0;right:0;bottom:0;z-index:900;
+  transform:translateY(115%);transition:transform .2s cubic-bezier(.22,.61,.36,1);
+  padding:0 12px calc(12px + env(safe-area-inset-bottom,0px));pointer-events:none}
+#stg-bar.on{transform:translateY(0);pointer-events:auto}
+#stg-bar .in{max-width:760px;margin:0 auto;background:#0f172a;border-radius:16px;
+  box-shadow:0 12px 34px rgba(15,23,42,.34);padding:12px 14px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#stg-bar .tx{flex:1;min-width:150px}
+#stg-bar .t1{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#fff}
+#stg-bar .t1 .dt{width:7px;height:7px;border-radius:50%;background:#fbbf24;flex-shrink:0}
+#stg-bar .t2{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+#stg-bar .t2 span{font-size:10.5px;font-weight:700;color:#cbd5e1;background:rgba(255,255,255,.10);
+  border-radius:99px;padding:3px 9px}
+#stg-bar .bt{display:flex;gap:8px;flex-shrink:0}
+#stg-bar button{font-family:'Sarabun',sans-serif;font-size:12.5px;font-weight:800;
+  border-radius:10px;padding:10px 17px;cursor:pointer;border:none;white-space:nowrap}
+#stg-bar .no{background:rgba(255,255,255,.12);color:#e2e8f0}
+#stg-bar .no:hover{background:rgba(255,255,255,.2)}
+#stg-bar .ok{background:#fff;color:#0f172a}
+#stg-bar .ok:hover{background:#e2e8f0}
+#stg-bar .ok[disabled]{opacity:.55;cursor:default}
+body.stg-open #page-settings{padding-bottom:96px}
+/* ── หน้าตั้งค่า · คนที่ไม่ใช่เจ้าของ ดูได้อย่างเดียว ── */
+.stg-ro{background:#f8fafc !important;color:#64748b !important;cursor:default}
+.stg-ro::-webkit-outer-spin-button,.stg-ro::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#stg-ro-note{display:flex;gap:11px;align-items:flex-start;background:#fffbeb;
+  border:1.5px solid #fde68a;border-radius:12px;padding:12px 14px;margin-bottom:16px}
+#stg-ro-note .ic{width:30px;height:30px;border-radius:9px;background:#fef3c7;color:#b45309;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+#stg-ro-note .t{font-size:12.5px;font-weight:800;color:#92400e}
+#stg-ro-note .s{font-size:11.5px;color:#a16207;margin-top:3px;line-height:1.5}
+@media(max-width:480px){
+  #stg-bar .in{padding:11px 12px}
+  #stg-bar .bt{flex:1 1 100%}
+  #stg-bar button{flex:1}
+}
+</style>
+<script>
+(function(){
+  /* ช่องที่นับเข้าแถบนี้ · ต้องเทียบแบบเดียวกับที่ saveSettings() เขียนจริง
+     ไม่งั้น "7" กับ "7.0" จะกลายเป็นว่าแก้แล้วทั้งที่ค่าเท่ากัน */
+  var F = [
+    { id:"s-e-rate",          k:"eRate",          lb:"ค่าไฟ",           num:7    },
+    { id:"s-w-rate",          k:"wRate",          lb:"ค่าน้ำ",          num:100  },
+    { id:"s-default-rent",    k:"defaultRent",    lb:"ค่าเช่าตั้งต้น",  num:4500 },
+    { id:"s-default-deposit", k:"defaultDeposit", lb:"ค่ามัดจำตั้งต้น", num:5000 },
+    { id:"s-hotel-name",      k:"hotelName",      lb:"ชื่อหอพัก"  },
+    { id:"s-hotel-phone",     k:"hotelPhone",     lb:"เบอร์โทร"   },
+    { id:"s-hotel-addr",      k:"hotelAddr",      lb:"ที่อยู่"     }
+  ];
+  /* ค่าที่ "บันทึกไว้แล้ว" คือ settings ในหน่วยความจำ · ไม่ต้องจำ baseline เอง
+     ทำให้ยกเลิก = เขียนค่าจาก settings กลับลงช่อง (applySettings) จบในบรรทัดเดียว */
+  function saved(f){
+    var v = (window.settings||{})[f.k];
+    if (f.num !== undefined) return (v === undefined || v === null || v === "") ? f.num : parseFloat(v);
+    return String(v == null ? "" : v).trim();
+  }
+  function typed(f){
+    var el = document.getElementById(f.id); if (!el) return null;
+    if (f.num !== undefined) return parseFloat(el.value) || f.num;
+    return String(el.value == null ? "" : el.value).trim();
+  }
+  function diff(){
+    var out = [];
+    F.forEach(function(f){
+      var t = typed(f); if (t === null) return;
+      if (String(t) !== String(saved(f))) out.push(f.lb);
+    });
+    return out;
+  }
+  function canSave(){
+    try { return typeof muIsOwner === "function" && muIsOwner(); } catch(e){ return false; }
+  }
+  function el(){
+    var b = document.getElementById("stg-bar");
+    if (b) return b;
+    b = document.createElement("div");
+    b.id = "stg-bar";
+    b.innerHTML =
+        '<div class="in">'
+      +   '<div class="tx"><div class="t1"><span class="dt"></span>'
+      +     '<span id="stg-n">ยังไม่ได้บันทึก</span></div>'
+      +     '<div class="t2" id="stg-l"></div></div>'
+      +   '<div class="bt">'
+      +     '<button type="button" class="no" id="stg-no">ยกเลิก</button>'
+      +     '<button type="button" class="ok" id="stg-ok">บันทึก</button>'
+      +   '</div></div>';
+    document.body.appendChild(b);
+    b.querySelector("#stg-no").addEventListener("click", function(){
+      if (typeof applySettings === "function") applySettings();
+      window.stgBar();
+    });
+    b.querySelector("#stg-ok").addEventListener("click", async function(){
+      var ok = b.querySelector("#stg-ok");
+      ok.disabled = true;
+      try { if (typeof saveSettings === "function") await saveSettings(); }
+      finally { ok.disabled = false; window.stgBar(); }
+    });
+    return b;
+  }
+  /* ── ไม่ใช่เจ้าของ = ดูได้อย่างเดียว ──
+     v4.29 เปลี่ยนค่าไฟ/ค่าน้ำ/ค่าตั้งต้นเป็นของเจ้าของคนเดียว แต่ทำแค่ด่านตอนกดบันทึก
+     ช่องยังพิมพ์ได้ปกติ ปุ่มบันทึกยังอยู่ · พนักงานพิมพ์แก้จนเสร็จแล้วค่อยรู้ว่าทำไม่ได้
+     (ของค่าเช่ารายเดือนทำถูกอยู่แล้ว — ไม่ใช่เจ้าของจะไม่เห็นแถวนั้นเลย ดู rentSyncBtn)
+     ที่นี่ไม่ซ่อน เพราะพนักงานต้องเห็นค่าไฟไว้ตอบผู้เช่า · ล็อกไม่ให้แก้ + บอกเหตุผลแทน */
+  window.stgApplyRole = function(){
+    var can = canSave();
+    F.forEach(function(f){
+      var el = document.getElementById(f.id); if (!el) return;
+      if (can) el.removeAttribute("readonly"); else el.setAttribute("readonly","readonly");
+      el.classList.toggle("stg-ro", !can);
+    });
+    var sv = document.getElementById("stg-savebtn");
+    if (sv) sv.style.display = can ? "" : "none";
+    var note = document.getElementById("stg-ro-note");
+    if (note){
+      note.style.display = can ? "none" : "";
+      if (!can && !note.innerHTML.trim())
+        note.innerHTML =
+            '<div class="ic"><i class="ico ico-lock"></i></div><div>'
+          + '<div class="t">ค่าพวกนี้เจ้าของแก้ได้คนเดียว</div>'
+          + '<div class="s">ค่าไฟ ค่าน้ำ ค่าเช่าตั้งต้น ค่ามัดจำตั้งต้น และข้อมูลหอพัก '
+          + 'เป็นราคาที่ใช้กับทั้งหอ · ดูได้แต่แก้ไม่ได้ <b>ถ้าต้องแก้ ให้แจ้งเจ้าของ</b><br/>'
+          + 'เสียงและสั่นแจ้งเตือนด้านล่างยังตั้งเองได้ตามปกติ เพราะเก็บแยกแต่ละเครื่อง</div></div>';
+    }
+    if (!can) window.stgBar();
+  };
+
+  /* เรียกซ้ำได้ตลอด · ตัดสินเองว่าจะโชว์หรือซ่อน */
+  window.stgBar = function(){
+    var b = el();
+    var on = (window.curPage === "settings") && canSave() && diff().length > 0;
+    var d  = on ? diff() : [];
+    if (on){
+      b.querySelector("#stg-n").textContent = "ยังไม่ได้บันทึก " + d.length + " อย่าง";
+      b.querySelector("#stg-l").innerHTML =
+        d.map(function(x){ return "<span>" + x + "</span>"; }).join("");
+    }
+    b.classList.toggle("on", on);
+    document.body.classList.toggle("stg-open", on);
+    return on;
+  };
+  /* ดักที่ระดับหน้า · ช่องพวกนี้มีอยู่ตั้งแต่แรก แต่ผูกทีเดียวจบและไม่พังถ้าใครย้าย DOM */
+  document.addEventListener("input", function(ev){
+    var t = ev.target;
+    if (!t || !t.id) return;
+    for (var i=0;i<F.length;i++) if (F[i].id === t.id) { window.stgBar(); return; }
+  }, true);
+})();
+</script>
 
 </body>
 </html>
