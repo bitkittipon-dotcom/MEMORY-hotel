@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Memory Place v4.89.0 — ระบบบริหารหอพัก</title>
+<title>Memory Place v4.90.0 — ระบบบริหารหอพัก</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -159,6 +160,9 @@ body{font-family:'Sarabun',sans-serif;background:#d6e0ec;color:#1e293b;font-size
 .ico-refresh{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='23 4 23 10 17 10'/><polyline points='1 20 1 14 7 14'/><path d='M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='23 4 23 10 17 10'/><polyline points='1 20 1 14 7 14'/><path d='M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15'/></svg>")}
 .ico-undo{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 7v6h6'/><path d='M21 17a9 9 0 00-15-6.7L3 13'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 7v6h6'/><path d='M21 17a9 9 0 00-15-6.7L3 13'/></svg>")}
 .ico-search{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>")}
+/* v4.90.0 · ไอคอน จัดการ OTA (จอ + เคอร์เซอร์คลิก) */
+.ico-ota{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='20' height='14' rx='2'/><path d='M8 21h8M12 17v4'/><path d='M10.5 7.5v7l2-1.8 1.4 2.8 1.6-.8-1.4-2.8h2.6z' fill='black' stroke-width='1.2'/><path d='M8.2 7.2 7 6M8 9.6H6.4M10.4 5.4V4.6' stroke-width='1.6'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='20' height='14' rx='2'/><path d='M8 21h8M12 17v4'/><path d='M10.5 7.5v7l2-1.8 1.4 2.8 1.6-.8-1.4-2.8h2.6z' fill='black' stroke-width='1.2'/><path d='M8.2 7.2 7 6M8 9.6H6.4M10.4 5.4V4.6' stroke-width='1.6'/></svg>")}
+#page-ota{max-width:none}
 .ico-home{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/><polyline points='9 22 9 12 15 12 15 22'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/><polyline points='9 22 9 12 15 12 15 22'/></svg>")}
 .ico-bed{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512' fill='black'><path d='M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512' fill='black'><path d='M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z'/></svg>")}
 .ico-calendar{-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>")}
@@ -2992,7 +2996,7 @@ tr.al-fold td{background:#f8fafc;padding:6px 12px}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">Memory Place</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.89.0</span></div></div>
+    <div><div class="logo-text">Memory Place</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.90.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -3044,6 +3048,7 @@ tr.al-fold td{background:#f8fafc;padding:6px 12px}
   <nav id="nav-daily">
     <div class="nav-section">ภาพรวม</div>
     <button class="nav-btn active" data-page="daily-dash" onclick="goPage('daily-dash',this)"><i class="ico ico-chart"></i> วันนี้</button>
+    <button class="nav-btn" data-page="ota" onclick="goPage('ota',this)"><i class="ico ico-ota"></i> จัดการ OTA <span class="nav-badge" id="badge-ota">0</span></button>
     <div class="nav-section">การจอง</div>
     <button class="nav-btn" data-page="timeline" onclick="goPage('timeline',this)"><i class="ico ico-calendar"></i> ปฏิทินการจอง</button>
     <button class="nav-btn" data-page="bookings" onclick="goPage('bookings',this)"><i class="ico ico-file"></i> ใบจองทั้งหมด <span class="nav-badge" id="badge-bk">0</span></button>
@@ -3970,6 +3975,12 @@ tr.al-fold td{background:#f8fafc;padding:6px 12px}
   </div>
 </div>
 <!-- ═══ DAILY DASHBOARD ═══ -->
+<!-- ═══ v4.90.0 · จัดการ OTA ═══ -->
+<div id="page-ota" class="page">
+  <div class="page-header"><div><div class="page-title"><i class="ico ico-ota"></i> จัดการ OTA</div></div></div>
+  <div id="ota-host"></div>
+</div>
+
 <div id="page-daily-dash" class="page active">
   <div class="page-header">
     <div><div class="page-title"><i class="ico ico-chart"></i> วันนี้</div></div>
@@ -8342,6 +8353,10 @@ GD_BODY[14] = function(){ return ''
 +'<td><b>แก้ในหน้าจอไม่ได้</b> · ฝังไว้ในไฟล์แอป ถ้าจะเปลี่ยนต้องแก้ไฟล์'+' · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.90.0</td><td>24 พ.ย. 69</td>'
++'<td><b>จัดการ OTA</b> · เมนูใหม่ใต้ "วันนี้" (ฝั่งรายวัน) · ปฏิทินห้องว่าง HotelPro เทียบ Booking/Trip · งานที่ต้องทำเมื่อแขกยกเลิกใน OTA พร้อมปุ่มติ๊ก (ทุกเครื่องเห็นตรงกัน บอกชื่อคนติ๊ก) · เลขแดงที่เมนู = งานค้าง · ไม่บล็อกการส่งกะ · ข้อมูล Booking/Trip มาจากรอบอ่านอัตโนมัติ (otaSync) · ต้องเพิ่มกฎ Firestore otaSync/otaTicks</td></tr>'
++'<tr><td style="font-family:monospace">v4.89.1</td><td>23 พ.ย. 69</td>'
++'<td><b>ลิงก์ตรงเปิดใบจอง</b> · เปิดแอปด้วย #booking=เลขจอง (และ &amp;room=ห้อง) แล้วเด้งหน้ารายละเอียดใบจองให้เอง · ใช้จากปุ่มในหน้าห้องว่างรวม · ไม่พบใน 20 วิ แจ้งเตือนแล้วอยู่หน้าเดิม</td></tr>'
 +'<tr><td style="font-family:monospace">v4.89.0</td><td>21 พ.ย. 69</td>'
 +'<td><b>ย้ายห้องรายเดือน · ตรวจรอบ v4.88</b> · หน้าแรกเจ้าของนับบิลค้างที่ตามผู้เช่าไปห้องใหม่ด้วย (ยอดค้าง · กล่องบิลค้าง · ป้ายแดงเมนูบิล) · '
 +'ออกบิลห้องใหม่ไม่ขึ้นเตือน “หาบิลเก่าไม่เจอ” ผิด ๆ (นับจากวันย้ายเข้าห้องนี้) · ใบพิมพ์บิลปิดห้องบอกว่าค่าน้ำไปเก็บที่บิลรอบเดือน</td></tr>'
@@ -10149,7 +10164,7 @@ GD_BODY[14] = function(){ return ''
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
 window.__APP_BUILD = 1337;
-window.__APP_VERSION = "v4.89.0";
+window.__APP_VERSION = "v4.90.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -15013,7 +15028,7 @@ body.tl-panning, body.tl-panning *{user-select:none;-webkit-user-select:none}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">Memory Place<br/><span id="gd-ver">v4.89.0</span></div></div>
+        <div class="s">Memory Place<br/><span id="gd-ver">v4.90.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -15378,7 +15393,7 @@ try{ if(typeof submitHandoff==='function')       window.submitHandoff       = gu
 try{ if(typeof submitHandoffAll==='function')    window.submitHandoffAll    = guardOnce('submitHandoffAll', submitHandoffAll); }catch(e){}
 try{ if(typeof deletePayment==='function')       window.deletePayment       = guardOnce('deletePayment', deletePayment); }catch(e){}
 try{ if(typeof saveRoom==='function')            window.saveRoom            = guardOnce('saveRoom', saveRoom); }catch(e){}
-console.log("HotelPro v4.89.0 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.90.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -20550,7 +20565,8 @@ function goPage(id, btn) {
     'daily-handoff':rDailyHandoff,
     'handoff-all':(typeof rHandoffAll!=='undefined'?rHandoffAll:function(){}),
     'slip-review':function(){ if(typeof rSlipReview==='function' && window._srvKind && window._srvId) rSlipReview(window._srvKind, window._srvId); },
-    'shift-handoff':(typeof rShiftHandoff!=='undefined'?rShiftHandoff:function(){})
+    'shift-handoff':(typeof rShiftHandoff!=='undefined'?rShiftHandoff:function(){}),
+    ota:(typeof rOta!=='undefined'?rOta:function(){})   /* v4.90.0 */
   };
   if (fns[id]) fns[id]();
   /* ออกจากหน้าตั้งค่า → เก็บแถบบันทึกลอย · เข้ามาใหม่แล้วยังแก้ค้างอยู่ก็เด้งกลับมา */
@@ -40312,7 +40328,8 @@ function switchMode(mode) {
 function refreshCurrentDaily() {
   try { if (typeof drpMigrate === "function") drpMigrate(); } catch(e){}   /* v4.81.0 · ข้อ 23 ค · ครั้งแรกหลังโหลด */
   try { if (typeof toSweepSoon === "function") toSweepSoon(); } catch(e){}   /* v4.77.2 */
-  try { updateBadgeBookings(); } catch(e){}   /* v4.80 · ป้าย "ค้าง N" ตามข้อมูลจากเครื่องอื่นทันที (เดิมอัปเดตเฉพาะตอนเครื่องนี้บันทึกเอง) */
+  try { updateBadgeBookings(); } catch(e){}
+  try { if (typeof otaTick === "function") otaTick(); } catch(e){}   /* v4.90.0 · เลขงาน OTA + หน้าจัดการ OTA ตามข้อมูลสด */   /* v4.80 · ป้าย "ค้าง N" ตามข้อมูลจากเครื่องอื่นทันที (เดิมอัปเดตเฉพาะตอนเครื่องนี้บันทึกเอง) */
   if (curPage==="daily-dash") rDailyDash();
   if (curPage==="timeline") rTimeline();
   if (curPage==="heatmap") rHeatmap();
@@ -54952,5 +54969,343 @@ window.toFormApproved = function(bk){
   .sh-chevbtn::after{content:'';position:absolute;inset:-11px}
 }
 </style>
+<script>
+/* ═══ v4.89.1 · ลิงก์ตรงเปิดใบจอง ═══
+   ใช้จากหน้า "ห้องว่างรวม" (ปุ่มเปิด HotelPro บนการ์ดงานที่ต้องทำ)
+   รูปแบบ: https://memory-hotel-three.vercel.app/#booking=<เลขจอง OTA หรือรหัสใบ>&room=<ห้อง ถ้ามี>
+   · ใช้ # จึงไม่โหลดหน้าใหม่ และเลขจองไม่ถูกส่งไปเซิร์ฟเวอร์
+   · รอจนล็อกอินและโหลดการจองเสร็จ แล้วเปิดหน้ารายละเอียดใบจอง · ไม่พบใน 20 วิ = แจ้งเตือน แล้วอยู่หน้าเดิม
+   · ใบ Trip ที่จองหลายห้องใช้เลขจองเดียวกัน → ใส่ &room= เพื่อเลือกห้อง · ไม่ใส่ = เปิดใบแรกที่ยังไม่ยกเลิก
+   · เปิดแล้วล้าง # ออก กดรีเฟรชจะไม่เปิดซ้ำ */
+(function(){
+  var timer = null, startAt = 0;
+  function parse(){
+    var h = String(location.hash || "").replace(/^#/, ""), p = {};
+    if (!h) return null;
+    h.split("&").forEach(function(kv){
+      var i = kv.indexOf("=");
+      if (i > 0) { try { p[decodeURIComponent(kv.slice(0, i))] = decodeURIComponent(kv.slice(i + 1)); } catch(e){} }
+    });
+    return p.booking ? p : null;
+  }
+  function raw(x){ return typeof mtRaw === "function" ? String(mtRaw(x)).trim() : String(x == null ? "" : x).trim(); }
+  function find(p){
+    var ref = String(p.booking).trim();
+    var list = (typeof bookings !== "undefined" && Array.isArray(bookings)) ? bookings : [];
+    var hit = list.filter(function(b){ return b && (b.id === ref || raw(b.bookingRef) === ref); });
+    if (p.room) {
+      var r = hit.filter(function(b){ return b.roomId === p.room || b.roomNumber === p.room; });
+      if (r.length) hit = r;
+    }
+    hit.sort(function(a, b){ return (a.status === "cancelled") - (b.status === "cancelled"); });
+    return hit[0] || null;
+  }
+  function clear(){ try { history.replaceState(null, "", location.pathname + location.search); } catch(e){} }
+  function tick(){
+    var p = parse();
+    if (!p) { stop(); return; }
+    if (typeof currentUser === "undefined" || !currentUser) { timer = setTimeout(tick, 700); return; }   /* ยังไม่ล็อกอิน · รอ */
+    if (!startAt) startAt = Date.now();
+    var b = find(p);
+    if (b && typeof openBookingDetail === "function") { stop(); clear(); openBookingDetail(b.id); return; }
+    if (Date.now() - startAt > 20000) {
+      stop(); clear();
+      if (typeof notify === "function") notify("ไม่พบใบจองเลข " + p.booking + (p.room ? " ห้อง " + p.room : "") + " · อาจถูกลบ หรือยังไม่ได้ลงในแอป", "warning");
+      return;
+    }
+    timer = setTimeout(tick, 700);
+  }
+  function stop(){ if (timer) clearTimeout(timer); timer = null; startAt = 0; }
+  function go(){ stop(); if (parse()) tick(); }
+  window.addEventListener("hashchange", go);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go();
+  window.__bkDeepLink = {parse: parse, find: find};   /* ไว้ทดสอบ */
+})();
+</script>
+
+<script>
+
+/* ═══ v4.90.0 · จัดการ OTA (ห้องว่าง HotelPro เทียบ Booking/Trip) ═══
+   ฝั่ง HotelPro = ข้อมูลสดจาก bookings/dailyRooms ในแอป
+   ฝั่ง Booking/Trip = เอกสาร otaSync/latest (รอบอ่านอัตโนมัติเขียนให้ · เจ้าของเท่านั้น)
+   ติ๊ก "ทำแล้ว" = otaTicks/{id} {k,r,by,t,at} · ไม่บล็อกการส่งกะ
+   หน้าแยกอยู่ใน Shadow DOM · CSS ไม่ชนกับแอป */
+(function(){
+var HOST=null,R=null,D0=null,LOADED=false,LOADING=null,OTA_TASKS=[];
+const $=id=>R.getElementById(id);
+function tkId(k){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<k.length;i++){const c=k.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
+ h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+ return "t"+(h2>>>0).toString(36)+(h1>>>0).toString(36);}
+function otaFail(e){try{notify("บันทึกการติ๊กไม่สำเร็จ · "+((e&&e.code)||"ลองใหม่"),"error");}catch(x){}try{todo();det();otaBadge();}catch(x){}}
+function liveHp(){const from=new Date(Date.now()+7*3600e3-3*864e5).toISOString().slice(0,10);
+ return (window.bookings||[]).filter(b=>b&&b.status!=="cancelled"&&b.checkOut>from)
+  .map(b=>({id:b.id,code:b.bookingRef||"",name:b.guestName,room:b.roomNumber,ch:b.channel,in:b.checkIn,out:b.checkOut,amount:b.totalAmount!=null?b.totalAmount:b.actualPrice,status:b.status}));}
+function liveRepair(){try{return (window.dailyRooms||[]).map(r=>{const rp=window.drpOpenOf&&drpOpenOf(r.id);
+ return rp?{room:r.number,from:rp.drp.from,to:drpEnd(rp),bookable:rp.drp.mode!=="closed",note:drpTitle(rp)}:null}).filter(Boolean);}catch(e){return [];}}
+function compose(){const d=Object.assign({},D0);d.updated=Object.assign({},D0.updated||{},{H:new Date().toISOString()});
+ d.hp=liveHp();d.repair=liveRepair();d.avail=D0.avail||{};d.ota=D0.ota||{};return d;}
+
+const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."],WD=["อา","จ","อ","พ","พฤ","ศ","ส"];
+const APPS=["B","T","A"],AN={B:"Booking",T:"Trip",A:"Agoda",H:"HotelPro"};
+const TYPES=[["ดีลัก",["M1","M2","M3","M4","M5","M6"]],["เดี่ยว",["M91","M92","M94","M95","M97","M98"]],["คู่",["M93","M96","M99"]]];
+const NEAR=14;
+const ACTIVE=["B","T"];   /* แอปที่ขายอยู่จริง · Agoda ยังไม่ใช้ = ไม่เทียบ ไม่เตือน */
+let D,TODAY,DAYS=[],MIS=[],TASKS=[],sel,FLT="";
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ad=(d,n)=>{const t=new Date(d+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10)};
+const dd=d=>new Date(d+"T00:00:00");
+const fd=d=>{const t=dd(d);return t.getDate()+" "+TH[t.getMonth()]};
+const money=v=>v==null||v===""?"":"฿"+Number(v).toLocaleString("th-TH",{minimumFractionDigits:v%1?2:0,maximumFractionDigits:2});
+const typeOfRoom=r=>{for(const[t,rs]of TYPES)if(rs.includes(r))return t;return null};
+const covers=(b,d)=>b.in<=d&&d<b.out;
+const chKey=c=>/booking/i.test(c||"")?"B":/trip/i.test(c||"")?"T":/agoda/i.test(c||"")?"A":"O";
+const IC={ok:'<path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/>',warn:'<path d="M12 9v4M12 17h.01M10.3 3.9L2.4 18a2 2 0 001.7 3h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'};
+const ico=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[n]+'</svg>';
+const CV={r:'<svg class="rd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>',y:'<svg class="yw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M9 9a3 3 0 115 2.2c-1.2.8-2 1.5-2 2.8M12 19h.01"/></svg>'};
+
+function appOk(k){return D.updated&&D.updated[k]&&!(D.errors&&D.errors[k])}
+/* ช่วงที่ HotelPro ลงการจองครบแล้ว · นอกช่วงนี้ไม่เทียบกับ HotelPro */
+function inCover(d){const c=D.hpCover;return !c||(d>=c.from&&d<=c.to)}
+function bTouchCover(b){const c=D.hpCover;return !c||(b.in<=c.to&&b.out>c.from)}
+const coverTxt=()=>D.hpCover?fd(D.hpCover.from)+"–"+fd(D.hpCover.to):"ทุกวัน";
+/* ลิงก์ไปหน้าจัดการ · ทดสอบแล้ว 23 พ.ย. 69 */
+const LK={
+ hp:(c,r)=>"hp:"+c+"|"+(r||""),
+ resB:c=>"https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/booking.html?res_id="+encodeURIComponent(c)+"&hotel_id=2138961&lang=th",
+ resT:c=>"https://ebooking.trip.com/ebkorderv3#hotel=133460124&orderId="+encodeURIComponent(c)+"&orderSource=Ebooking&sourceType=EBK&geoType=2",
+ calB:(a,b)=>"https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/calendar/index.html?hotel_id=2138961&lang=th&view_mode=LIST&from="+a+"&until="+b,
+ calT:()=>"https://ebooking.trip.com/calendar/rateplan"};
+const lnk=(u,t,cls)=>'<a class="lk '+(cls||"")+'" href="'+esc(u)+'" target="_blank" rel="noopener">'+t+' ↗</a>';
+const fdr=(a,b)=>{const x=dd(a),y=dd(ad(b,-1));return x.getTime()===y.getTime()?"คืน "+fd(a):x.getMonth()===y.getMonth()?x.getDate()+"–"+y.getDate()+" "+TH[x.getMonth()]:fd(a)+" – "+fd(ad(b,-1))};
+const OKI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const TASK_APPS=["B","T"];
+/* ติ๊ก "ทำแล้ว" · จำไว้ในเครื่องนี้เท่านั้น ไม่ส่งไปไหน ไม่เปลี่ยนข้อมูล
+   เก็บว่าติ๊กตอนข้อมูลรอบไหน · ถ้ารอบใหม่มาแล้วเรื่องเดิมยังอยู่ = ติ๊กแล้วแต่ยังไม่เรียบร้อย */
+let TK={};   /* v4.90.0 · ติ๊กเก็บใน Firestore otaTicks · ทุกเครื่องเห็นตรงกัน */
+const tkState=k=>!TK[k]?"":TK[k].r===D.updated.at?"on":"old";
+function tkToggle(k){const id=tkId(k),was=TK[k],ref=db.collection("otaTicks").doc(id);
+ if(was&&was.r===D.updated.at){delete TK[k];ref.delete().catch(e=>{TK[k]=was;otaFail(e);});}
+ else{const me=(window.currentUser&&currentUser.name)||"-",v={k,r:D.updated.at,by:me,t:Date.now()};TK[k]=v;
+  ref.set(Object.assign({},v,{at:firebase.firestore.FieldValue.serverTimestamp()})).catch(e=>{if(was)TK[k]=was;else delete TK[k];otaFail(e);});}
+ todo();det();otaBadge();}
+const tkNote=(st,k)=>st==="on"?'<span class="tkn on">'+esc(TK[k]&&TK[k].by?TK[k].by+" ":"")+'ทำแล้ว · รอตรวจ</span>':st==="old"?'<span class="tkn old">ยังไม่เรียบร้อย · ตรวจอีกครั้ง</span>':"";
+const ARW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg>';
+const CKI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const acts=(u,k,app)=>{const st=tkState(k);return '<span class="ac"><span class="ab"><a class="ib go g'+app+'" href="'+esc(u)+'" target="_blank" rel="noopener" title="แก้ใน '+AN[app]+'" aria-label="แก้ใน '+AN[app]+'">'+ARW+'</a><button class="ib ck '+st+'" data-tk="'+esc(k)+'" title="ติ๊กเมื่อแก้แล้ว" aria-label="ติ๊กเมื่อแก้แล้ว">'+CKI+'</button></span>'+(st?'<span class="tkn2 '+st+'" title="'+esc(TK[k]&&TK[k].by?"ติ๊กโดย "+TK[k].by:"")+'">'+(st==="on"?"ทำแล้ว · รอตรวจ":"ยังไม่เรียบร้อย")+'</span>':'')+'</span>';};
+const chk=k=>{const st=tkState(k);return '<button class="tkb chk '+st+'" data-tk="'+esc(k)+'"><i>'+(st==="on"?"✓":"")+'</i>'+(st==="on"?"ทำแล้ว":st==="old"?"ยังไม่เรียบร้อย · ติ๊กใหม่":"ติ๊กเมื่อแก้แล้ว")+'</button>';};
+const calOf=(k,d)=>k==="B"?LK.calB(d,ad(d,1)):LK.calT();
+const resOf=(k,c)=>k==="B"?LK.resB(c):k==="T"?LK.resT(c):"";
+const HPHOME="hp:home";   /* Agoda ยังไม่ใช้ · ไม่สร้างงาน */
+
+/* ---------- งานที่ต้องทำ (แขกยกเลิก) ---------- */
+function buildTasks(){
+ const hp=D.hp||[],cx={},tasks=[],used=new Set();
+ TASK_APPS.forEach(k=>((D.ota&&D.ota[k])||[]).forEach(o=>{if(o.status==="cancel")cx[k+":"+String(o.code).trim()]=1}));
+ const isCx=h=>cx[chKey(h.ch)+":"+String(h.code||"").trim()];
+ /* ห้องว่างจริง ถ้าถือว่าใบที่ยกเลิกใน OTA คืนห้องแล้ว (ไม่ต้องรอพนักงานยกเลิกใน HotelPro ก่อน) */
+ const freeOf=(t,d)=>{const rs=TYPES.find(x=>x[0]===t)[1];
+  const occ=hp.filter(h=>covers(h,d)&&typeOfRoom(h.room)===t&&!isCx(h)),ur=new Set(occ.map(h=>h.room));
+  const rep=(D.repair||[]).filter(r=>typeOfRoom(r.room)===t&&r.from<=d&&(!r.to||d<r.to)&&!r.bookable&&!ur.has(r.room)).length;
+  return rs.length-occ.length-rep};
+ /* มีการจองใน OTA ที่ยังไม่ลง HotelPro = ห้องว่างที่คิดได้ไม่น่าเชื่อ · ห้ามบอกให้เปิดเพิ่ม */
+ const hpShort=(t,d)=>TASK_APPS.some(a=>{const s=(((D.avail[d]||{})[t]||{})[a]||{}).sold||0;
+  return appOk(a)&&s>hp.filter(h=>covers(h,d)&&typeOfRoom(h.room)===t&&chKey(h.ch)===a&&!isCx(h)).length});
+ TASK_APPS.forEach(k=>{if(!appOk(k))return;
+  ((D.ota&&D.ota[k])||[]).forEach(o=>{
+   if(o.status!=="cancel"||o.out<=TODAY)return;
+   const code=String(o.code).trim(),steps=[],done=[];
+   hp.filter(h=>chKey(h.ch)===k&&String(h.code||"").trim()===code&&h.out>TODAY).forEach(h=>
+    steps.push({tx:"ยกเลิกใบจองนี้ใน HotelPro",sub:"ห้อง "+h.room+" · "+fdr(h.in,h.out),btn:lnk(LK.hp(code,h.room),"เปิด HotelPro","lkH")}));
+   if(o.seen){
+    const nts=[];for(let d=o.in<TODAY?TODAY:o.in;d<o.out;d=ad(d,1))if(inCover(d)&&D.avail[d])nts.push(d);
+    let short=false;
+    TASK_APPS.forEach(a=>{if(!appOk(a)||!nts.length)return;const need=[];
+     nts.forEach(d=>{const key=a+"|"+o.type+"|"+d;if(used.has(key))return;
+      if(hpShort(o.type,d)){short=true;return;}
+      const op=((((D.avail[d]||{})[o.type]||{})[a]||{}).open)||0,n=freeOf(o.type,d)-op;
+      if(n>0){need.push([d,n]);used.add(key);}});
+     if(need.length){const same=need.every(x=>x[1]===need[0][1]);
+      const sub=o.type+" · "+(same?need.map(x=>dd(x[0]).getDate()).join(", ")+" "+TH[dd(need[0][0]).getMonth()]:need.map(x=>fd(x[0])+" +"+x[1]).join(" · "));
+      steps.push({tx:"เปิดขายใน "+AN[a]+" เพิ่ม "+(same?need[0][1]+" ห้อง":"ตามวันด้านล่าง"),sub,
+       btn:a==="B"?lnk(LK.calB(need[0][0],ad(need[need.length-1][0],1)),"เปิด Booking","lkB"):lnk(LK.calT(),"เปิด Trip","lkT")});}
+     else if(!short)done.push(AN[a]+" เปิดขายครบแล้ว");});
+    if(short)steps.push({tx:"มีการจองใน OTA ที่ยังไม่ลง HotelPro",sub:o.type+" · ลงให้ครบก่อน แล้วค่อยดูว่าต้องเปิดห้องเพิ่มไหม",btn:""});
+   }
+   if(steps.length)tasks.push({key:k+":"+code,app:k,o,steps,done});});});
+ tasks.sort((a,b)=>(a.o.in<b.o.in?-1:1));
+ return tasks;}
+function todo(){const el=R.getElementById("todo"),T=TASKS;
+ if(!T.length){el.innerHTML='<div class="tkok"><span>✓ ไม่มีงานค้าง</span><small>เทียบ HotelPro '+coverTxt()+'</small></div>';return;}
+ el.innerHTML='<div class="tdh"><b>งานที่ต้องทำ <span>· '+T.length+'</span></b><small>เทียบ HotelPro '+coverTxt()+'</small></div>'+T.map(t=>{const o=t.o;
+  const res=t.app==="B"?LK.resB(o.code):LK.resT(o.code);
+  return '<div class="tk"><div class="tk1"><b>แขกยกเลิก</b><span class="ap ap'+t.app+'" style="width:auto;padding:2px 10px;font-size:11px">'+AN[t.app]+'</span></div>'+
+  '<div class="tk2">'+esc(o.name||"—")+' · '+esc(o.type||"")+(o.rooms>1?" "+o.rooms+" ห้อง":"")+' · '+fdr(o.in,o.out)+'</div>'+
+  '<div class="tkl">ต้องทำ · แตะเลขข้อเพื่อติ๊กว่าทำแล้ว</div>'+
+  t.steps.map((s,i)=>{const k="t|"+t.key+"|"+s.tx+"|"+(s.sub||""),st=tkState(k);return '<div class="st2'+(st?" tk-"+st:"")+'"><button class="tkb no" data-tk="'+esc(k)+'" aria-label="ติ๊กว่าทำแล้ว">'+(st==="on"?"✓":(i+1))+'</button><span class="tx"><span class="m">'+esc(s.tx)+'</span>'+(s.sub?'<small>'+esc(s.sub)+'</small>':'')+tkNote(st,k)+'</span>'+s.btn+'</div>';}).join("")+
+  t.done.map(x=>'<div class="st2 dn"><span class="ok">'+OKI+'</span><span class="tx">'+esc(x)+'</span></div>').join("")+
+  '<div class="tkf">'+(o.seen?'เจอเมื่อ '+fdt(o.seen)+' · ':'')+'เลขจอง '+esc(o.code)+' · '+lnk(res,"ดูใบจองใน "+AN[t.app],"tx2 lk"+t.app)+'</div></div>';}).join("");}
+
+/* ---------- เทียบการจองรายใบ ---------- */
+function buildMismatch(){
+ const out=[],hp=D.hp||[],byCode={};
+ hp.forEach(h=>{if(h.code)byCode[String(h.code).trim()]=(byCode[String(h.code).trim()]||[]).concat(h)});
+ APPS.forEach(k=>{if(!appOk(k)||!ACTIVE.includes(k))return;
+  const list=(D.ota&&D.ota[k])||[],seen={};
+  list.forEach(o=>{const code=String(o.code).trim();seen[code]=o;const hs=byCode[code];
+   if(o.out<=TODAY||!bTouchCover(o))return;
+   if(o.status==="cancel"){if(hs&&hs.some(h=>h.out>TODAY))out.push({lv:2,app:k,o,h:hs[0],kind:"cxl",txt:AN[k]+" ยกเลิกแล้ว · HotelPro ยังกันห้องไว้"});return;}
+   if(!hs){out.push({lv:3,app:k,o,kind:"miss",txt:"ยังไม่มีใน HotelPro"});return;}
+   const n=hs.length,diff=[];
+   const hin=hs.map(h=>h.in).sort()[0],hout=hs.map(h=>h.out).sort().pop();
+   if(hin!==o.in||hout!==o.out)diff.push("วันที่ต่างกัน (HotelPro "+fd(hin)+"–"+fd(hout)+")");
+   const ht=[...new Set(hs.map(h=>typeOfRoom(h.room)))];
+   if(o.type&&ht.length&&!ht.includes(o.type))diff.push("ชนิดห้องต่างกัน (HotelPro "+ht.join(", ")+")");
+   if((o.rooms||1)!==n)diff.push("จำนวนห้องต่างกัน (HotelPro "+n+" ห้อง)");
+   if(diff.length)out.push({lv:2,app:k,o,h:hs[0],kind:"diff",txt:diff.join(" · ")});
+  });
+  hp.filter(h=>chKey(h.ch)===k&&h.out>TODAY&&bTouchCover(h)).forEach(h=>{const c=String(h.code||"").trim();
+   if(!c)out.push({lv:2,app:k,h,kind:"nocode",txt:"HotelPro ไม่มีเลขที่การจอง"});
+   else if(!seen[c])out.push({lv:2,app:k,h,kind:"ghost",txt:"ไม่พบเลขนี้ใน "+AN[k]+" · เลขพิมพ์ผิดหรือถูกยกเลิก?"});});
+ });
+ return out;}
+
+/* ---------- คำนวณรายวัน ---------- */
+function buildDays(){
+ const dates=Object.keys(D.avail||{}).sort();
+ const hp=D.hp||[],rep=D.repair||[];
+ return dates.map(d=>{const past=d<TODAY,near=(dd(d)-dd(TODAY))/864e5<NEAR,cov=inCover(d);
+  const rooms=TYPES.map(([t,rs])=>{
+   const occ=[],usedRooms=new Set();
+   hp.filter(h=>covers(h,d)&&typeOfRoom(h.room)===t).forEach(h=>{occ.push({k:chKey(h.ch),h});usedRooms.add(h.room)});
+   const reps=rep.filter(r=>typeOfRoom(r.room)===t&&r.from<=d&&(!r.to||d<r.to)&&!r.bookable&&!usedRooms.has(r.room));
+   const T=rs.length,used=occ.length+reps.length,A=Math.max(0,T-used),over=Math.max(0,used-T);
+   const av=(D.avail[d]||{})[t]||{};
+   const msgs=[];let lv=0;const add=(l,m,u,t,tk)=>{lv=Math.max(lv,l);msgs.push([l,m,u,t,tk])};
+   if(over)add(3,"HotelPro ใช้ห้องเกินจำนวนจริง "+over+" ห้อง · ตรวจการจองซ้อน",HPHOME,"เปิด HotelPro");
+   const ap=APPS.map(k=>{const a=av[k]||{},r={k,open:a.open,sold:a.sold,ok:true,hint:"",na:!appOk(k)||a.open==null};
+    if(!ACTIVE.includes(k)){r.na=true;r.label="ยังไม่ใช้";return r;}
+    if(r.na){r.label=appOk(k)?"ไม่มีข้อมูลวันนี้":"อ่านไม่ได้รอบนี้";return r;}
+    r.label=a.open>0?"เปิด "+a.open:"ปิดขาย";
+    if(!cov)return r;
+    const hpN=occ.filter(o=>o.k===k).length;
+    if(!past&&(a.sold||0)>hpN){r.ok=false;add(3,AN[k]+" มีจอง "+a.sold+" แต่ HotelPro ลงไว้ "+hpN+" · ลงการจองที่ขาด",HPHOME,"เปิด HotelPro");}
+    if(!past&&a.open>A){r.ok=false;r.hint="ต้องปิดเพิ่ม "+(a.open-A);add(3,AN[k]+" ต้องปิดเพิ่ม "+(a.open-A)+" ห้อง",0,0,"d|"+d+"|"+t+"|"+k);}
+    else if(!past&&a.open<A&&near){r.ok=false;r.warn=true;r.hint="ควรเปิด "+A;add(2,AN[k]+(a.open?" ปิดเกิน "+(A-a.open)+" ห้อง":" ปิดขายทั้งที่ยังว่าง "+A+" ห้อง")+" · ตรวจ",0,0,"d|"+d+"|"+t+"|"+k);}
+    return r;});
+   return{t,T,A,over,occ,reps,ap,msgs,lv:past?0:lv};});
+  return{d,past,cov,rooms,lv:Math.max(...rooms.map(r=>r.lv))};});}
+
+function mrow(r){let c=r.occ.map(o=>"q"+o.k).concat(r.reps.map(()=>"qR"));const ex=Math.max(0,c.length-r.T);c=c.slice(0,r.T);while(c.length<r.T)c.push("qE");if(ex)c[c.length-1]="qX";return '<div class="rr">'+c.map(k=>'<i class="q '+k+'"></i>').join("")+'</div>';}
+const lvk=v=>v>=3?"r":v==2?"y":"g";
+const CHD={};
+function cal(){let h="",cur=-1;
+ DAYS.forEach(x=>{const t=dd(x.d),m=t.getMonth();
+  if(m!==cur){if(cur>=0)h+="</div>";cur=m;h+='<div class="mo">'+TH[m]+" "+(t.getFullYear()+543)+'</div><div class="grid">'+WD.map(w=>'<div class="wd">'+w+"</div>").join("");for(let k=0;k<t.getDay();k++)h+='<div class="d e"></div>';}
+  const k=lvk(x.lv),mis=MIS.some(z=>touches(z,x.d));
+  const dim=FLT&&(x.past||(FLT==="m"?!mis:FLT!==k));
+  h+='<div class="d'+(x.past?" pst":"")+(x.d===sel?" on":"")+(dim?" dim":"")+'" data-d="'+x.d+'">'+(CHD[x.d]?'<i class="cdot"></i>':'')+'<div class="dhd"><span class="n2'+(x.d===TODAY?" tdy":"")+'">'+t.getDate()+'</span>'+(x.past||k==="g"?"":CV[k])+'</div>'+x.rooms.map(mrow).join("")+'</div>';});
+ R.getElementById("cal").innerHTML=h+"</div>";}
+function touches(z,d){const b=z.o||z.h;return b&&b.in<=d&&d<b.out}
+
+function gcard(o,d){const b=o.h,k=o.k;const n=Math.round((dd(d)-dd(b.in))/864e5)+1,N=Math.round((dd(b.out)-dd(b.in))/864e5);
+ let tag="";if(k!=="O"){const m=MIS.find(z=>z.h===b);tag=m?'<span class="pill p-y">ไม่ตรง '+AN[k]+'</span>':(b.code&&appOk(k)?'<span class="pill p-ok">ตรงกับ '+AN[k]+'</span>':"");}
+ const gl=b.code?'<div class="gl"><a class="cH" href="'+esc(LK.hp(b.code,b.room))+'" target="_blank" rel="noopener">HotelPro ↗</a>'+(resOf(k,b.code)?'<a class="c'+k+'" href="'+esc(resOf(k,b.code))+'" target="_blank" rel="noopener">'+AN[k]+' ↗</a>':'')+'</div>':'';
+ return '<div class="gc"><div>'+esc(b.name||"—")+'<div class="sm">'+esc(b.room)+' · '+esc(b.ch||"")+(b.code?' #'+esc(b.code):'')+'</div>'+gl+'</div><div class="rt">'+tag+'<div class="sm">พัก '+n+'/'+N+' คืน'+(b.amount!=null?' · '+money(b.amount):'')+'</div></div></div>';}
+function det(){const x=DAYS.find(y=>y.d===sel);if(!x)return;const t=dd(x.d);
+ let h='<div class="dh">'+WD[t.getDay()]+" "+t.getDate()+" "+TH[t.getMonth()]+" "+(t.getFullYear()+543)+'</div>';
+ if(x.past)h+='<div class="ban">วันที่ผ่านแล้ว · แสดงเฉพาะห้องที่ใช้ใน HotelPro ไม่เทียบกับแอปขาย</div>';
+ else if(!x.cov)h+='<div class="ban">วันนี้ยังไม่ได้ลงการจองใน HotelPro ครบ · แสดงตัวเลขจากแอปขายอย่างเดียว ไม่เทียบ</div>';
+ x.rooms.forEach(r=>{
+  h+='<div class="c"><div class="top"><b>'+r.t+'</b>'+(r.over?'<span class="av">เกิน <em class="rd">'+r.over+'</em> ห้อง</span>':'<span class="av">ว่างจริง <em class="gn">'+r.A+'</em> จาก '+r.T+'</span>')+'</div>';
+  let sq=r.occ.map(o=>"q"+o.k).concat(r.reps.map(()=>"qR"));while(sq.length<r.T)sq.push("qE");
+  const SQL={qB:"B",qT:"T",qA:"A",qO:"W",qR:"ซ"};h+='<div class="sqs">'+sq.map((k,i)=>'<i class="q '+(i>=r.T?"qX":k)+'">'+(i>=r.T?"!":(SQL[k]||""))+'</i>').join("")+'</div>';
+  h+='<div class="hd"><span></span><span>'+(x.past?"ใช้ห้อง":"ใช้ / จอง")+'</span><span>'+(x.past?"":"สถานะในแอป")+'</span><span></span></div>';
+  h+='<div class="rw"><span><span class="ap apH">HotelPro</span></span><span class="num">'+(r.occ.length+r.reps.length)+'</span><span class="st dim">ตัวหลัก</span><span></span></div>';
+  if(r.occ.length||r.reps.length)h+='<div class="gs">'+r.occ.map(o=>gcard(o,x.d)).join("")+r.reps.map(p=>'<div class="gc"><div>'+esc(p.room)+' ซ่อม · ปิดขาย<div class="sm">'+esc(p.note||"")+(p.to?' · คาดเสร็จ '+fd(p.to):'')+'</div></div></div>').join("")+'</div>';
+  if(!x.past)r.ap.forEach(a=>{const cls=a.na?"dim":a.ok?"ok":a.warn?"yw":"bad";
+   h+='<div class="rw"><span><span class="ap ap'+a.k+'">'+AN[a.k]+'</span></span><span class="num">'+(a.na?"–":(a.sold||0))+'</span><span class="st '+cls+(!a.na&&!a.ok&&tkState("d|"+x.d+"|"+r.t+"|"+a.k)==="on"?" tk-on":"")+'"><span class="lb">'+a.label+'</span>'+''+(a.hint?'<small>'+a.hint+'</small>':'')+''+'</span>'+(!a.na&&!a.ok?acts(calOf(a.k,x.d),"d|"+x.d+"|"+r.t+"|"+a.k,a.k):'<span></span>')+'</div>';});
+  r.msgs.forEach(m=>h+='<div class="msg'+(m[0]<3?" y":"")+(m[4]&&tkState(m[4])==="on"?" tk-on":"")+'">'+ico("warn")+'<span>'+esc(m[1])+(m[2]?lnk(m[2],m[3],m[3].indexOf("HotelPro")>=0?"lkH":"lk"+(m[3].indexOf("Booking")>=0?"B":"T")):"")+'</span></div>');
+  if(!x.past&&x.cov&&!r.msgs.length)h+='<div class="msg g">'+ico("ok")+'ตรงกันทุกแอป</div>';
+  h+='</div>';});
+ R.getElementById("det").innerHTML=h;}
+
+function misList(){const el=R.getElementById("mis");if(FLT!=="m"){el.innerHTML="";return;}
+ const g=(f,title)=>{const xs=MIS.filter(f);if(!xs.length)return"";return '<div class="grp">'+title+'</div>'+xs.map(z=>{const o=z.o,b=z.h;
+  const r2=o?esc(o.type||"?")+" · "+fd(o.in)+"–"+fd(o.out)+(o.rooms>1?" · "+o.rooms+" ห้อง":"")+(o.amount!=null?" · "+money(o.amount):"")+" · #"+esc(o.code):"HotelPro: "+esc(b.room)+" · "+fd(b.in)+"–"+fd(b.out)+(b.code?" · #"+esc(b.code):"");
+  const mc=(o||b).code,ml='<div class="gl">'+(z.kind==="miss"?'<a class="cH" href="hp:new">ลงใน HotelPro ↗</a>':(mc?'<a class="cH" href="'+esc(LK.hp(mc,b&&b.room))+'" target="_blank" rel="noopener">HotelPro ↗</a>':''))+(mc&&resOf(z.app,mc)?'<a class="c'+z.app+'" href="'+esc(resOf(z.app,mc))+'" target="_blank" rel="noopener">'+AN[z.app]+' ↗</a>':'')+'</div>';
+  return '<div class="mm"><div class="r1"><span class="nm">'+esc((o||b).name||"—")+'</span><span class="ap ap'+z.app+'" style="width:auto;padding:2px 9px;font-size:11px">'+AN[z.app]+'</span></div><div class="r2">'+r2+'</div><div class="r3'+(z.lv<3?" y":"")+'">'+esc(z.txt)+'</div>'+ml+'</div>';}).join("");};
+ const h=g(z=>z.kind==="miss","อยู่ในแอปขาย แต่ยังไม่ลง HotelPro")+g(z=>z.kind!=="miss","ข้อมูลไม่ตรงกัน");
+ el.innerHTML='<div class="c" style="margin-top:12px"><div style="font-weight:600;font-size:15px">การจองที่ไม่ตรงกัน · '+MIS.length+' รายการ</div>'+(h||'<div class="msg g">'+ico("ok")+'ทุกการจองตรงกับ HotelPro</div>')+'</div>';}
+
+function sum(){const a=[0,0,0];DAYS.forEach(x=>{if(x.past)return;x.lv>=3?a[0]++:x.lv==2?a[1]++:a[2]++});$("s3").textContent=a[0];$("s2").textContent=a[1];$("s0").textContent=a[2];$("sm").textContent=MIS.length;}
+
+/* ---------- ป้ายอัปเดต ---------- */
+const hm=t=>{const d=new Date(t);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")};
+const fdt=t=>{const d=new Date(t);return WD[d.getDay()]+". "+d.getDate()+" "+TH[d.getMonth()]+" "+(d.getFullYear()+543)+" · "+hm(t)+" น."};
+function age(){const m=Math.max(0,Math.floor((Date.now()-new Date(D.updated.at))/60000)),h=Math.floor(m/60);
+ const big=h>=24?Math.floor(h/24)+" วัน":h?h+" ชม. "+(m%60)+" น.":m+" นาที";
+ const st=h<3?["#E3F4E6","#1B5E2A","ข้อมูลยังใหม่"]:h<12?["#FBF0D9","#6B4708","ควรอัปเดตเร็วๆ นี้"]:["#F6E3E3","#7A1F1F","ข้อมูลเก่า อย่าใช้ตัดสินใจ"];return{big,st,h};}
+function pop(){const a=age(),uo=R.getElementById("uo");
+ const rows=["H","B","T","A"].map(k=>{const t=D.updated[k],e=D.errors&&D.errors[k];
+  return '<div class="uli"><div class="ulg" style="background:var(--'+(k==="H"?"H":k)+')">'+k+'</div><div class="ut">'+AN[k]+'<span class="us"'+(e?' style="color:#8A1F1F"':'')+'>'+(e?esc(e):k==="H"?"การจองทุกช่องทาง · ห้องซ่อม":"เปิดขาย · การจอง")+'</span></div><div class="utm"'+(e||!t?' style="color:#8A1F1F"':'')+'>'+(t&&!e?hm(t):"ไม่สำเร็จ")+'</div></div>';}).join("");
+ const ch=D.changes||[];
+ uo.innerHTML='<div class="um" role="dialog" aria-modal="true"><div class="ueb">ข้อมูลในปฏิทินนี้อัปเดตเมื่อ</div><div class="ubig">'+a.big+'</div><div class="uwh">ที่แล้ว · <b>'+fdt(D.updated.at)+'</b></div><span class="upl" style="background:'+a.st[0]+';color:'+a.st[1]+'">'+a.st[2]+'</span><div class="ul">'+rows+'</div>'+
+  '<div class="usm">'+(ch.length?'<b>เปลี่ยนจากรอบก่อน '+ch.length+' รายการ</b>'+ch.map(c=>'<div class="urw"><span class="ap ap'+c.app+'" style="width:auto;padding:1px 8px;font-size:11px">'+AN[c.app]+'</span> <b>'+(c.type==="cancel"?"ยกเลิก":c.type==="edit"?"แก้ไข":"จองใหม่")+'</b> '+esc(c.name)+'<div style="color:#8a8882;font-size:12px">'+esc(c.line||"")+'</div></div>').join(""):(D.updated.prev?"ไม่มีการจองเปลี่ยนจากรอบก่อน":"รอบแรก ยังไม่มีรอบก่อนให้เทียบ"))+'</div>'+
+  '<button class="ubt" id="uok">ดูปฏิทิน</button></div>';
+ uo.hidden=false;document.body.style.overflow="hidden";
+ R.getElementById("uok").onclick=()=>{uo.hidden=true;document.body.style.overflow=""};}
+
+function render(){sum();todo();cal();misList();det();}
+function compute(){
+ D=compose();
+ const now=new Date(Date.now()+7*3600e3);TODAY=now.toISOString().slice(0,10);
+ Object.keys(CHD).forEach(k=>delete CHD[k]);(D.changes||[]).forEach(c=>(c.days||[]).forEach(d=>CHD[d]=1));
+ DAYS=buildDays();MIS=buildMismatch();TASKS=buildTasks();
+ /* ให้รอบอัปเดตอัตโนมัติอ่านจำนวนงานไปแจ้งเตือนได้ */
+ OTA_TASKS=TASKS.map(t=>({key:t.key,app:t.app,name:t.o.name,code:t.o.code,type:t.o.type,in:t.o.in,out:t.o.out,seen:t.o.seen||null,steps:t.steps.map(s=>s.tx+(s.sub?" ("+s.sub+")":""))}));
+  if(!sel||!DAYS.some(x=>x.d===sel))sel=(DAYS.find(x=>x.d===TODAY)||DAYS.find(x=>!x.past)||DAYS[0]||{}).d;
+ }
+function paint(){
+ if(!D)return;
+ const errs=Object.entries(D.errors||{}).filter(([,v])=>v);
+ if(errs.length){const e=R.getElementById("err");e.style.display="block";e.innerHTML='<div class="msg">'+ico("warn")+'<div>รอบนี้อ่านไม่สำเร็จ: '+errs.map(([k,v])=>"<b>"+AN[k]+"</b> "+esc(v)).join(" · ")+'<br>แอปนั้นจะไม่ถูกนำมาเทียบจนกว่าจะอัปเดตรอบถัดไป</div></div>';}
+ const a=age();
+ R.getElementById("hsub").innerHTML=fd(DAYS[0].d)+" – "+fd(DAYS[DAYS.length-1].d)+" · <button id='upb'>อัปเดต "+fdt(D.updated.at)+"</button> <span class='pill' style='background:"+a.st[0]+";color:"+a.st[1]+"'>"+a.st[2]+"</span>";
+ R.getElementById("upb").onclick=pop;
+ render();}
+
+function openHp(code,room){
+ if(code==="home"){goPage("timeline",document.querySelector("#nav-daily [data-page='timeline']"));return;}
+ if(code==="new"){openBookingModal();return;}
+ const c=String(code).trim(),xs=(window.bookings||[]).filter(b=>b&&String(b.bookingRef||"").trim()===c||b.id===c);
+ const b=xs.find(x=>x.status!=="cancelled"&&(!room||x.roomNumber===room))||xs.find(x=>x.status!=="cancelled")||xs[0];
+ if(b)openBookingDetail(b.id);else notify("ไม่พบใบจอง "+c+" ใน HotelPro","warning");}
+function build(){if(R)return true;HOST=document.getElementById("ota-host");if(!HOST)return false;
+ R=HOST.attachShadow({mode:"open"});R.innerHTML="<style>"+"\n:host{--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a65;--mu2:#8a8880;--ln:#e4e2db;--ln2:#eeece6;\n--B:#003B95;--BL:#B9CBEA;--T:#287DFA;--TL:#BFD8FE;--A:#4B4F5C;--AL:#C9CBD2;--O:#B98A4E;--OL:#EADBC4;--H:#2F5D50;\n--ok:#178A2E;--bad:#9B1C1C;--warn:#B7791F;--sel:#1d1d1b;color-scheme:light}\n*{box-sizing:border-box}\n:host{display:block;background:var(--bg);color:var(--tx);font-family:\"IBM Plex Sans Thai\",system-ui,sans-serif;-webkit-text-size-adjust:100%}\n.w{max-width:560px;margin:0 auto;padding-block:14px 48px;padding-inline:14px}\n.hc{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 14px 4px}\nh1{font-size:19px;font-weight:600;margin:0}.sub{font-size:13px;color:var(--mu);margin:2px 0 8px}\n.sub button{font:inherit;color:var(--tx);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}\n.fl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ln2)}\n.fi{padding:9px 2px 7px;text-align:center;cursor:pointer;border-radius:8px;margin:4px 0}\n.fi.on{background:var(--bg)}\n.fn{font-size:21px;font-weight:600}.fl2{font-size:11.5px;color:var(--mu2);line-height:1.3}\n.rd{color:var(--bad)}.yw{color:var(--warn)}.gn{color:var(--ok)}\n.ky{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--mu2);margin:12px 2px 4px}\n.ky i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.qB{background:var(--BL)}.qT{background:var(--TL)}.qA{background:var(--AL)}.qO{background:var(--OL)}.qE{border:1px solid #d3d1c9;background:#fff}\n.qR{background:repeating-linear-gradient(45deg,#e2cdb4 0 3px,#f6ece0 3px 6px)}\n.qX{border:2px solid var(--bad);background:#FCEBEB}\n.mo{font-size:15px;font-weight:600;margin:14px 0 6px}\n.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}\n.wd{font-size:11px;color:var(--mu);text-align:center}\n.d{position:relative;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:5px 4px 6px;cursor:pointer}\n.d.e{visibility:hidden}.d.dim{opacity:.22}.d.on{border:1.5px solid var(--sel)}.d.pst{background:#faf9f6}\n.dhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;min-height:16px}\n.n2{font-size:13px;font-weight:500;color:#55534d}.n2.tdy{background:var(--sel);color:#fff;border-radius:999px;padding:0 6px;font-size:12px}\n.dhd svg{width:12px;height:12px}\n.rr{display:flex;gap:1.5px;margin-top:2px;align-items:center}\n.rr .q{width:4.5px;height:4.5px;border-radius:1.2px;border-width:.5px}\n.rr .qX{border-width:1px}\n.cdot{position:absolute;top:4px;left:50%;width:6px;height:6px;border-radius:50%;background:#2E7D3B}\n#det{margin-top:16px}\n.dh{font-size:17px;font-weight:600;margin:0 0 8px}\n.c{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 15px;margin:0 0 10px}\n.top{display:flex;justify-content:space-between;align-items:center}\n.top b{font-size:18px;font-weight:600}.av{font-size:13px;color:var(--mu)}.av em{font-style:normal;font-size:20px;font-weight:600;margin:0 2px}\n.sqs{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 6px}\n.sqs .q{width:24px;height:24px;border-radius:5px}\n.key{display:flex;flex-wrap:wrap;gap:3px 11px;font-size:11px;color:var(--mu2);margin-bottom:8px}\n.key i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.hd,.rw{display:grid;grid-template-columns:84px .7fr 1.2fr 92px;align-items:center}\n.hd{font-size:11px;color:var(--mu2);padding:0 0 4px;text-align:center}\n.rw{padding:8px 0;border-top:1px solid var(--ln2)}\n.ap{display:inline-block;width:76px;padding:3px 0;border-radius:999px;font-size:12px;font-weight:600;text-align:center;color:#fff}\n.apB{background:var(--B)}.apT{background:var(--T)}.apA{background:var(--A)}.apH{background:var(--H)}\n.num{font-size:19px;font-weight:500;text-align:center}\n.st{display:flex;flex-direction:column;align-items:center;font-size:14px;font-weight:500;line-height:1.3;text-align:center}\n.st small{font-size:11.5px;font-weight:400}\n.st.ok{color:var(--ok)}.st.bad{color:var(--bad)}.st.yw{color:var(--warn)}.st.dim{color:var(--mu2);font-weight:400;font-size:12.5px}\n.gs{margin:2px 0 6px 8px;border-radius:12px;padding:2px 13px;background:#fafaf8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}\n.gc{display:flex;justify-content:space-between;gap:8px;padding:8px 0;font-size:13.5px}.gc+.gc{border-top:1px solid rgba(0,0,0,.05)}\n.gc>div:first-child{min-width:0;overflow-wrap:anywhere}\n.gc .sm{font-size:11.5px;color:#9a988f}.gc .rt{text-align:right;flex:none}\n.pill{font-size:11px;padding:1px 8px;border-radius:99px;white-space:nowrap;display:inline-block}\n.p-ok{background:#E3F4E6;color:#1B5E2A}.p-bad{background:#F6E3E3;color:#7A1F1F}.p-y{background:#FBF0D9;color:#6B4708}\n.msg{margin-top:6px;font-size:13px;display:flex;gap:7px;align-items:flex-start;color:#8A1F1F;line-height:1.5}\n.msg.y{color:#7a4e07}.msg.g{color:var(--ok)}\n.ic{width:16px;height:16px;flex:none;margin-top:2px}\n.ban{margin:0 0 10px;padding:8px 10px;border-radius:8px;background:#efeee9;color:#5F5E5A;font-size:13px}\n.mm{padding:11px 0;border-top:1px solid var(--ln2)}\n.mm .r1{display:flex;justify-content:space-between;gap:6px;align-items:center}\n.mm .nm{font-weight:600;font-size:14px;overflow-wrap:anywhere}\n.mm .r2{font-size:12.5px;color:var(--mu)}.mm .r3{font-size:12.5px;color:#8A1F1F;margin-top:2px}.mm .r3.y{color:#7a4e07}\n.grp{font-size:12px;font-weight:600;color:var(--mu);margin:12px 0 2px}\n.uo[hidden]{display:none}\n.uo{position:fixed;inset:0;z-index:50;background:rgba(24,23,20,.5);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}\n.um{background:#fff;border-radius:22px;padding:20px 18px 16px;width:100%;max-width:400px;margin:auto}\n.ueb{font-size:12px;color:#8a8882;text-align:center}\n.ubig{text-align:center;font-size:34px;font-weight:600;margin:6px 0 0;font-variant-numeric:tabular-nums}\n.uwh{text-align:center;font-size:14px;color:#55534d;margin:2px 0 10px}.uwh b{color:var(--tx)}\n.upl{display:block;width:fit-content;margin:0 auto 12px;font-size:13px;font-weight:500;padding:5px 13px;border-radius:99px}\n.ul{border-radius:14px;background:#f7f6f3;padding:2px 14px}\n.uli{display:flex;align-items:center;gap:12px;padding:10px 0}.uli+.uli{border-top:1px solid #ebe9e4}\n.ulg{width:30px;height:30px;border-radius:8px;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}\n.uli .ut{flex:1;font-size:14.5px;font-weight:500;min-width:0}.uli .us{display:block;font-size:12px;color:#8a8882;font-weight:400}\n.uli .utm{font-size:14.5px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}\n.usm{font-size:13px;color:#55534d;margin:14px 2px}\n.urw{padding:10px 0;border-top:1px solid #eeede8;font-size:13px}\n.ubt{width:100%;height:50px;border-radius:15px;border:none;background:#1d1c1a;color:#fff;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:6px}\n.note{font-size:12px;color:var(--mu);margin-top:14px;line-height:1.65}\n#err{display:none}\n.td{margin:10px 0 4px}\n.tdh{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 8px}\n.tdh b{font-size:16px;font-weight:600}.tdh b span{color:var(--bad)}.tdh small{font-size:11.5px;color:var(--mu2)}\n.tk{background:var(--card);border:1px solid var(--ln);border-left:4px solid var(--bad);padding:12px 14px;margin-bottom:8px}\n.tk1{display:flex;justify-content:space-between;align-items:center;gap:8px}.tk1 b{font-size:15px;font-weight:600}\n.tk2{font-size:13px;color:#55534d;margin-top:2px;overflow-wrap:anywhere}\n.tkl{font-size:12px;color:var(--mu2);margin:10px 0 2px}\n.st2{display:flex;gap:10px;align-items:center;padding:9px 0}.st2+.st2{border-top:1px solid #f0eee8}\n.st2 .no{width:21px;height:21px;border:1.5px solid var(--bad);border-radius:50%;flex:none;font-size:11px;color:var(--bad);display:flex;align-items:center;justify-content:center}\n.st2 .ok{width:21px;height:21px;background:var(--ok);border-radius:50%;flex:none;color:#fff;display:flex;align-items:center;justify-content:center}\n.st2 .ok svg{width:13px;height:13px}\n.st2 .tx{flex:1;font-size:14px;min-width:0}.st2 .tx small{display:block;font-size:12px;color:var(--mu2)}\n.st2.dn .tx{color:var(--ok)}\n.lk{font:inherit;font-size:12.5px;border:1px solid currentColor;border-radius:8px;padding:5px 10px;white-space:nowrap;text-decoration:none;flex:none}\n.lk.tx2{border:0;padding:0;text-decoration:underline}\n.lkH{color:var(--H)}.lkB{color:var(--B)}.lkT{color:#1a5fc4}\n.tkf{font-size:11.5px;color:var(--mu2);margin-top:6px}\n.tkok{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--ok);display:flex;justify-content:space-between;gap:8px;align-items:baseline}\n.tkok small{font-size:11.5px;color:var(--mu2)}\n.lk.sm{font-size:11.5px;padding:3px 9px;margin-top:5px;display:inline-block;font-weight:500}\n.msg .lk{margin-left:6px;font-size:12px;padding:1px 8px}\n.tkb{font:inherit;cursor:pointer;background:none;padding:0}\n.st2 button.no{background:#fff}\n.st2.tk-on .no{border-color:var(--ok);background:var(--ok);color:#fff}\n.st2.tk-on .tx{color:var(--mu2)}.st2.tk-on .tx .m{text-decoration:line-through}\n.st2.tk-old .no{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn{display:table;font-size:11px;margin-top:5px;padding:1px 8px;border-radius:99px;text-decoration:none}\n.tkn.on{background:#E3F4E6;color:#1B5E2A}.tkn.old{background:#FBF0D9;color:#6B4708}\n.chk{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mu);margin-top:5px;border:1px solid var(--ln);border-radius:8px;padding:3px 9px;background:#fff}\n.chk i{width:13px;height:13px;border:1.5px solid #b4b2a9;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:10px;color:#fff}\n.chk.on{color:var(--mu2)}.chk.on i{background:#b4b2a9}.chk.old{color:var(--warn);border-color:#ecd6a8}.chk.old i{border-color:var(--warn)}\n.ac{display:flex;flex-direction:column;align-items:center;gap:5px}\n.ac .ab{display:flex;gap:6px}\n.st .lb{color:var(--tx)}\n.msg.tk-on span{text-decoration:line-through;text-decoration-thickness:1px}.msg.tk-on{opacity:.6}\n.st.tk-on .lb,.st.tk-on small{text-decoration:line-through;text-decoration-thickness:1px}.st.tk-on .lb,.st.tk-on small{opacity:.65}.st.dim .lb{color:inherit}\n.ib.ck{color:#cfcdc6}\n.sqs .q{font-style:normal;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;line-height:1}\n.sqs .qB{background:var(--B)}.sqs .qT{background:var(--T)}.sqs .qA{background:var(--A)}.sqs .qO{background:var(--O)}\n.sqs .qR{background:repeating-linear-gradient(45deg,#c99c6a 0 4px,#ddb98f 4px 8px);color:#5a3a14}\n.sqs .qX{color:var(--bad)}\n.gl a.cH{color:var(--H)}.gl a.cB{color:var(--B)}.gl a.cT{color:#1a5fc4}.gl a.cA{color:var(--A)}\n.ib{width:30px;height:30px;border-radius:50%;border:1px solid var(--ln);background:#fff;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;text-decoration:none;color:var(--mu2);transition:background .15s,border-color .15s}\n.ib svg{width:15px;height:15px}\n.ib:hover{border-color:#c9c7bf}\n.ib.go.gB{color:var(--B)}.ib.go.gT{color:#1a5fc4}\n.ib.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}\n.ib.ck.old{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn2{display:inline-block;font-size:10.5px;font-weight:400;margin-top:0;padding:1px 8px;border-radius:99px;white-space:nowrap}.tkn2.on{background:#E3F4E6;color:#1B5E2A}.tkn2.old{background:#FBF0D9;color:#6B4708}\n.gl{display:flex;gap:10px;margin-top:3px;font-size:11.5px}.gl a{color:var(--mu);text-decoration:underline}\n\n:host{background:transparent}.w{padding-top:0}\n.hpa{cursor:pointer}.emp{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:22px 16px;text-align:center;color:var(--mu);line-height:1.7}\n"+"</style>"+"\n<div class=\"w\">\n<div class=\"hc\"><h1>ห้องว่างรวม · HotelPro + Booking + Trip + Agoda</h1>\n<div class=\"sub\" id=\"hsub\">กำลังโหลด…</div>\n<div class=\"fl\">\n<div class=\"fi\" data-f=\"r\"><div class=\"fn rd\" id=\"s3\">0</div><div class=\"fl2\">วันต้องแก้</div></div>\n<div class=\"fi\" data-f=\"y\"><div class=\"fn yw\" id=\"s2\">0</div><div class=\"fl2\">วันต้องตรวจ</div></div>\n<div class=\"fi\" data-f=\"g\"><div class=\"fn gn\" id=\"s0\">0</div><div class=\"fl2\">วันปกติ</div></div>\n<div class=\"fi\" data-f=\"m\"><div class=\"fn rd\" id=\"sm\">0</div><div class=\"fl2\">ไม่ตรง HotelPro</div></div>\n</div></div>\n<div class=\"ky\"><span><i class=\"qB\"></i>Booking</span><span><i class=\"qT\"></i>Trip</span><span><i class=\"qA\"></i>Agoda</span><span><i class=\"qO\"></i>วอล์คอิน/โทร</span><span><i class=\"qR\"></i>ซ่อม</span><span><i class=\"qE\"></i>ว่าง</span><span style=\"margin-left:auto\">แถว: ดีลัก · เดี่ยว · คู่</span></div>\n<div class=\"c\" id=\"err\"></div>\n<div id=\"todo\" class=\"td\"></div>\n<div id=\"cal\"></div>\n<div id=\"mis\"></div>\n<div id=\"det\"></div>\n<div class=\"note\">ว่างจริง = ห้องทั้งหมด − ห้องที่ใช้ใน HotelPro (ทุกช่องทาง) − ห้องซ่อมที่ปิดขาย · แต่ละแอปควรเปิดขายเท่ากับว่างจริง<br>\nแดง = แอปเปิดเกินห้องว่างจริง หรือมีการจองในแอปที่ยังไม่ลง HotelPro · เหลือง = แอปปิดเกินทั้งที่ยังว่าง (เตือนเฉพาะ 14 วันข้างหน้า) หรือข้อมูลไม่ตรงกัน<br>\nงานที่ต้องทำ = แขกที่เพิ่งยกเลิกใน Booking/Trip (หลังรอบอัปเดตก่อน) ที่ยังต้องคืนห้อง หรือใบยกเลิกที่ HotelPro ยังกันห้องไว้ · ทำครบแล้วการ์ดหายเองในรอบถัดไป<br>\nเทียบกับ HotelPro เฉพาะช่วงที่ลงการจองครบแล้ว (บอกไว้ที่หัวกล่องงาน) · ข้อมูลอ่านแบบอ่านอย่างเดียว ไม่ได้แก้อะไรในแอปใด</div>\n</div>\n<div class=\"uo\" id=\"uo\" hidden></div>\n";
+ R.getElementById("cal").addEventListener("click",e=>{const t=e.target.closest(".d[data-d]");if(!t)return;sel=t.dataset.d;cal();det();R.getElementById("det").scrollIntoView({behavior:"smooth",block:"start"});});
+ R.addEventListener("click",e=>{const b=e.target.closest("[data-tk]");if(b){e.preventDefault();tkToggle(b.dataset.tk);return;}
+  const a=e.target.closest('a[href^="hp:"]');if(a){e.preventDefault();const v=a.getAttribute("href").slice(3),p=v.split("|");openHp(p[0],p[1]);}});
+ R.querySelectorAll(".fi").forEach(t=>t.addEventListener("click",()=>{FLT=FLT===t.dataset.f?"":t.dataset.f;R.querySelectorAll(".fi").forEach(x=>x.classList.toggle("on",x.dataset.f===FLT));render();}));
+ return true;}
+function load(force){if(LOADING)return LOADING;if(LOADED&&!force)return Promise.resolve();
+ if(!window.db||!window.currentUser)return Promise.resolve();
+ LOADING=Promise.all([db.collection("otaSync").doc("latest").get(),db.collection("otaTicks").where("t",">=",Date.now()-21*864e5).get()])
+  .then(([s,q])=>{D0=s.exists?s.data():null;TK={};q.forEach(x=>{const v=x.data();if(v&&v.k)TK[v.k]=v;});LOADED=true;})
+  .catch(e=>{console.warn("ota load",e);if(!LOADED)D0=null;LOADED=true;window.__otaErr=String(e&&e.code||e);})
+  .finally(()=>{LOADING=null;refresh();});
+ return LOADING;}
+function otaBadge(){const el=document.getElementById("badge-ota");if(!el)return;
+ const n=D0?TASKS.filter(t=>t.steps.some(s=>tkState("t|"+t.key+"|"+s.tx+"|"+(s.sub||""))!=="on")).length:0;
+ el.textContent=n;el.title="งานที่ต้องทำ "+n+" งาน";el.style.display=n?"inline":"none";}
+function empty(msg){if(!build())return;R.getElementById("todo").innerHTML="";R.getElementById("cal").innerHTML="";R.getElementById("det").innerHTML="";R.getElementById("mis").innerHTML="";
+ R.getElementById("hsub").innerHTML='<span class="emp" style="display:block">'+msg+'</span>';}
+function refresh(){if(!D0){otaBadge();if(R&&window.curPage==="ota")empty(window.__otaErr?"อ่านข้อมูล Booking/Trip ไม่ได้ ("+esc(window.__otaErr)+") · ถ้าขึ้น permission-denied ต้องเพิ่มกฎ otaSync/otaTicks ใน Firebase Console":"ยังไม่มีข้อมูลจาก Booking/Trip · รอรอบอ่านอัตโนมัติรอบแรก");return;}
+ compute();otaBadge();if(R&&curPage==="ota")paint();}
+window.rOta=function(){build();load(true);refresh();};
+window.otaTick=function(){if(!LOADED&&!LOADING)load(false);else if(D0)refresh();};
+window.__ota={tkId,get D(){return D},get TK(){return TK},get TASKS(){return OTA_TASKS},openHp,load,refresh};
+})();
+
+</script>
 </body>
 </html>
