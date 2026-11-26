@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Memory Place v4.92.1 — ระบบบริหารหอพัก</title>
+<title>Memory Place v4.93.0 — ระบบบริหารหอพัก</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -2996,7 +2996,7 @@ tr.al-fold td{background:#f8fafc;padding:6px 12px}
 <div class="sidebar">
   <div class="logo">
     <div class="logo-icon"><i class="ico ico-home"></i></div>
-    <div><div class="logo-text">Memory Place</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.92.1</span></div></div>
+    <div><div class="logo-text">Memory Place</div><div class="logo-sub">ระบบบริหารหอพัก <span class="logo-ver" id="logo-ver">v4.93.0</span></div></div>
   </div>
 
   <!-- USER BADGE + NOTI BELL -->
@@ -8353,6 +8353,8 @@ GD_BODY[14] = function(){ return ''
 +'<td><b>แก้ในหน้าจอไม่ได้</b> · ฝังไว้ในไฟล์แอป ถ้าจะเปลี่ยนต้องแก้ไฟล์'+' · ใช้คิดรายได้สุทธิในรายงานเท่านั้น</td></tr></table>'
 +'<div class="gd-h3">ประวัติการแก้ไข</div>'
 +'<table class="gd-tbl"><tr><th style="width:110px">เวอร์ชัน</th><th style="width:110px">วันที่</th><th>แก้อะไร</th></tr>'
++'<tr><td style="font-family:monospace">v4.92.2</td><td>26 พ.ย. 69</td>'
++'<td><b>ปุ่ม "ตั้งค่า" (ฟันเฟือง) มุมบนขวาของหน้า จัดการ OTA</b> · กดแล้วมีเมนูหัวข้อย่อยลอยในหน้าเดิม · ย้าย "ชื่อห้องของ Booking" เข้าไปเป็นหัวข้อแรก (เฉพาะเจ้าของ) · เพิ่มหัวข้อตั้งค่าใหม่ต่อได้</td></tr>'
 +'<tr><td style="font-family:monospace">v4.92.1</td><td>26 พ.ย. 69</td>'
 +'<td><b>ตารางชื่อห้อง Booking</b> · ปุ่ม "ชื่อห้อง Booking" ในแถวหัวข้อรายการอีเมล (เฉพาะเจ้าของ) แก้ชื่อห้อง/ประเภทได้เอง · ใส่ไว้ 3 ชื่อ (เตียงใหญ่ 6 ฟุต=ดีลัก · ดีลักซ์เตียงใหญ่=เดี่ยว · มาตรฐานเตียงคู่ 3.5 ฟุต=คู่) · เตือนเมื่อประเภทห้อง Trip ไม่รู้จัก</td></tr>'
 +'<tr><td style="font-family:monospace">v4.92.0</td><td>26 พ.ย. 69</td>'
@@ -10172,7 +10174,7 @@ GD_BODY[14] = function(){ return ''
 <script>
 /* ═══ หมวด 3 · ช่องกรอกบัญชีและรหัส ═══ */
 window.__APP_BUILD = 1337;
-window.__APP_VERSION = "v4.92.1";
+window.__APP_VERSION = "v4.93.0";
 var GD_PIN = '101237';
 var gdOpen = false, gdTimer = null, gdLeft = 0;
 var GD_VAULT = null;
@@ -15036,7 +15038,7 @@ body.tl-panning, body.tl-panning *{user-select:none;-webkit-user-select:none}
   <div class="gd-wrap">
     <div class="gd-side">
       <div class="gd-brand"><div class="t">คู่มือระบบ</div>
-        <div class="s">Memory Place<br/><span id="gd-ver">v4.92.1</span></div></div>
+        <div class="s">Memory Place<br/><span id="gd-ver">v4.93.0</span></div></div>
       <div class="gd-search">
         <input id="gd-q" class="gd-qin" type="search" placeholder="ค้นหาในคู่มือ…"
                oninput="gdSearch(this.value)"/>
@@ -15401,7 +15403,7 @@ try{ if(typeof submitHandoff==='function')       window.submitHandoff       = gu
 try{ if(typeof submitHandoffAll==='function')    window.submitHandoffAll    = guardOnce('submitHandoffAll', submitHandoffAll); }catch(e){}
 try{ if(typeof deletePayment==='function')       window.deletePayment       = guardOnce('deletePayment', deletePayment); }catch(e){}
 try{ if(typeof saveRoom==='function')            window.saveRoom            = guardOnce('saveRoom', saveRoom); }catch(e){}
-console.log("HotelPro v4.92.1 loaded OK — " + new Date().toLocaleString('th-TH'));
+console.log("HotelPro v4.93.0 loaded OK — " + new Date().toLocaleString('th-TH'));
 var firebaseConfig = {
   apiKey: "AIzaSyBB2lJ50t3jun6i2Vqgpke3TBhFQEvU9XY",
   authDomain: "memory-a60ea.firebaseapp.com",
@@ -55050,15 +55052,19 @@ function liveHp(){const from=new Date(Date.now()+7*3600e3-3*864e5).toISOString()
   .map(b=>({id:b.id,code:b.bookingRef||"",name:b.guestName,room:b.roomNumber,ch:b.channel,in:b.checkIn,out:b.checkOut,amount:b.totalAmount!=null?b.totalAmount:b.actualPrice,status:b.status}));}
 function liveRepair(){try{return (window.dailyRooms||[]).map(r=>{const rp=window.drpOpenOf&&drpOpenOf(r.id);
  return rp?{room:r.number,from:rp.drp.from,to:drpEnd(rp),bookable:rp.drp.mode!=="closed",note:drpTitle(rp)}:null}).filter(Boolean);}catch(e){return [];}}
+var CFG={};
+function CMP_ON(){return !!(CFG.otaCompare&&CFG.otaCompare.on&&CFG.otaCompare.from);}
 function compose(){const d=Object.assign({},D0);d.updated=Object.assign({},D0.updated||{},{H:new Date().toISOString()});
- d.hp=liveHp();d.repair=liveRepair();d.avail=D0.avail||{};d.ota=D0.ota||{};return d;}
+ d.hp=liveHp();d.repair=liveRepair();d.avail=D0.avail||{};d.ota=D0.ota||{};
+ d.hpCover=CMP_ON()?{from:CFG.otaCompare.from,to:"9999-12-31"}:{from:"9999-12-30",to:"9999-12-31"};
+ SHOWA=!!CFG.otaShowAgoda;return d;}
 
 const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."],WD=["อา","จ","อ","พ","พฤ","ศ","ส"];
 const APPS=["B","T","A"],AN={B:"Booking",T:"Trip",A:"Agoda",H:"HotelPro"};
 const TYPES=[["ดีลัก",["M1","M2","M3","M4","M5","M6"]],["เดี่ยว",["M91","M92","M94","M95","M97","M98"]],["คู่",["M93","M96","M99"]]];
 const NEAR=14;
 const ACTIVE=["B","T"];   /* แอปที่ขายอยู่จริง · Agoda ยังไม่ใช้ = ไม่เทียบ ไม่เตือน */
-let D,TODAY,DAYS=[],MIS=[],TASKS=[],sel,FLT="";
+let CMORE=false,SHOWA=false;let D,TODAY,DAYS=[],MIS=[],TASKS=[],sel,FLT="";
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ad=(d,n)=>{const t=new Date(d+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10)};
 const dd=d=>new Date(d+"T00:00:00");
@@ -55075,7 +55081,7 @@ function appOk(k){return D.updated&&D.updated[k]&&!(D.errors&&D.errors[k])}
 /* ช่วงที่ HotelPro ลงการจองครบแล้ว · นอกช่วงนี้ไม่เทียบกับ HotelPro */
 function inCover(d){const c=D.hpCover;return !c||(d>=c.from&&d<=c.to)}
 function bTouchCover(b){const c=D.hpCover;return !c||(b.in<=c.to&&b.out>c.from)}
-const coverTxt=()=>D.hpCover?fd(D.hpCover.from)+"–"+fd(D.hpCover.to):"ทุกวัน";
+const coverTxt=()=>!CMP_ON()?"ยังไม่เริ่ม":"ตั้งแต่ "+fd(D.hpCover.from);
 /* ลิงก์ไปหน้าจัดการ · ทดสอบแล้ว 23 พ.ย. 69 */
 const LK={
  hp:(c,r)=>"hp:"+c+"|"+(r||""),
@@ -55142,7 +55148,8 @@ function buildTasks(){
    if(steps.length)tasks.push({key:k+":"+code,app:k,o,steps,done});});});
  tasks.sort((a,b)=>(a.o.in<b.o.in?-1:1));
  return tasks;}
-function todo(){const el=R.getElementById("todo"),T=TASKS;
+function todo(){const el=R.getElementById("todo"),T=todoTasks();
+ if(!CMP_ON()||!T.length){el.innerHTML="";return;}
  if(!T.length){el.innerHTML='<div class="tkok"><span>✓ ไม่มีงานค้าง</span><small>เทียบ HotelPro '+coverTxt()+'</small></div>';return;}
  el.innerHTML='<div class="tdh"><b>งานที่ต้องทำ <span>· '+T.length+'</span></b><small>เทียบ HotelPro '+coverTxt()+'</small></div>'+T.map(t=>{const o=t.o;
   const res=t.app==="B"?LK.resB(o.code):LK.resT(o.code);
@@ -55200,6 +55207,8 @@ function buildDays(){
     if(!past&&a.open>A){r.ok=false;r.hint="ต้องปิดเพิ่ม "+(a.open-A);add(3,AN[k]+" ต้องปิดเพิ่ม "+(a.open-A)+" ห้อง",0,0,"d|"+d+"|"+t+"|"+k);}
     else if(!past&&a.open<A&&near){r.ok=false;r.warn=true;r.hint="ควรเปิด "+A;add(2,AN[k]+(a.open?" ปิดเกิน "+(A-a.open)+" ห้อง":" ปิดขายทั้งที่ยังว่าง "+A+" ห้อง")+" · ตรวจ",0,0,"d|"+d+"|"+t+"|"+k);}
     return r;});
+   if(!past&&!cov&&near){const bb=ap.find(x=>x.k==="B"),tt=ap.find(x=>x.k==="T");
+    if(bb&&tt&&!bb.na&&!tt.na&&(bb.open||0)!==(tt.open||0)){bb.ok=tt.ok=false;bb.warn=tt.warn=true;bb.hint=tt.hint="ไม่เท่ากัน";add(2,"Booking เปิด "+(bb.open||0)+" · Trip เปิด "+(tt.open||0)+" · ไม่เท่ากัน ตรวจว่าตั้งใจไหม",0,0,"x|"+d+"|"+t);}}
    return{t,T,A,over,occ,reps,ap,msgs,lv:past?0:lv};});
   return{d,past,cov,rooms,lv:Math.max(...rooms.map(r=>r.lv))};});}
 
@@ -55207,12 +55216,13 @@ function mrow(r){let c=r.occ.map(o=>"q"+o.k).concat(r.reps.map(()=>"qR"));const 
 const lvk=v=>v>=3?"r":v==2?"y":"g";
 const CHD={};
 function cal(){let h="",cur=-1;
- DAYS.forEach(x=>{const t=dd(x.d),m=t.getMonth();
+ const LIM=ad(TODAY,14),shown=DAYS.filter(x=>CMORE||x.d<LIM);
+ shown.forEach(x=>{const t=dd(x.d),m=t.getMonth();
   if(m!==cur){if(cur>=0)h+="</div>";cur=m;h+='<div class="mo">'+TH[m]+" "+(t.getFullYear()+543)+'</div><div class="grid">'+WD.map(w=>'<div class="wd">'+w+"</div>").join("");for(let k=0;k<t.getDay();k++)h+='<div class="d e"></div>';}
   const k=lvk(x.lv),mis=MIS.some(z=>touches(z,x.d));
   const dim=FLT&&(x.past||(FLT==="m"?!mis:FLT!==k));
   h+='<div class="d'+(x.past?" pst":"")+(x.d===sel?" on":"")+(dim?" dim":"")+'" data-d="'+x.d+'">'+(CHD[x.d]?'<i class="cdot"></i>':'')+'<div class="dhd"><span class="n2'+(x.d===TODAY?" tdy":"")+'">'+t.getDate()+'</span>'+(x.past||k==="g"?"":CV[k])+'</div>'+x.rooms.map(mrow).join("")+'</div>';});
- R.getElementById("cal").innerHTML=h+"</div>";}
+ R.getElementById("cal").innerHTML=h+"</div>"+(DAYS.length>shown.length||CMORE?'<button class="more" data-cmore="1">'+(CMORE?"ย่อเหลือ 2 สัปดาห์ ▴":"ดูวันถัดไป ▾ (ถึง "+fd(DAYS[DAYS.length-1].d)+")")+'</button>':"");}
 function touches(z,d){const b=z.o||z.h;return b&&b.in<=d&&d<b.out}
 
 function gcard(o,d){const b=o.h,k=o.k;const n=Math.round((dd(d)-dd(b.in))/864e5)+1,N=Math.round((dd(b.out)-dd(b.in))/864e5);
@@ -55222,19 +55232,21 @@ function gcard(o,d){const b=o.h,k=o.k;const n=Math.round((dd(d)-dd(b.in))/864e5)
 function det(){const x=DAYS.find(y=>y.d===sel);if(!x)return;const t=dd(x.d);
  let h='<div class="dh">'+WD[t.getDay()]+" "+t.getDate()+" "+TH[t.getMonth()]+" "+(t.getFullYear()+543)+'</div>';
  if(x.past)h+='<div class="ban">วันที่ผ่านแล้ว · แสดงเฉพาะห้องที่ใช้ใน HotelPro ไม่เทียบกับแอปขาย</div>';
- else if(!x.cov)h+='<div class="ban">วันนี้ยังไม่ได้ลงการจองใน HotelPro ครบ · แสดงตัวเลขจากแอปขายอย่างเดียว ไม่เทียบ</div>';
+ else if(!x.cov)h+='<div class="ban">'+(CMP_ON()?"วันนี้อยู่ก่อนวันเริ่มเทียบกับ HotelPro":"ยังไม่เทียบกับ HotelPro (ช่วงพัฒนา)")+' · แสดงตัวเลขจากแอปขายอย่างเดียว</div>';
  x.rooms.forEach(r=>{
-  h+='<div class="c"><div class="top"><b>'+r.t+'</b>'+(r.over?'<span class="av">เกิน <em class="rd">'+r.over+'</em> ห้อง</span>':'<span class="av">ว่างจริง <em class="gn">'+r.A+'</em> จาก '+r.T+'</span>')+'</div>';
+  const lvT=x.past?"n":r.lv>=3?"r":r.lv==2?"y":"g",sTx=x.past?"วันที่ผ่านแล้ว":r.lv>=3?"ต้องแก้ "+r.msgs.filter(m=>m[0]>=3).length+" เรื่อง":r.lv==2?"ควรตรวจ":x.cov?"ตรงทุกแอป":"Booking = Trip";
+  h+='<details class="c tc"'+(r.lv>0?' open':'')+'><summary><div class="top"><b>'+r.t+'</b><span class="tcs '+lvT+'">'+sTx+'</span>'+(r.over?'<span class="av">เกิน <em class="rd">'+r.over+'</em> ห้อง</span>':'<span class="av">ว่างจริง <em class="gn">'+r.A+'</em> จาก '+r.T+'</span>')+'</div></summary>';
   let sq=r.occ.map(o=>"q"+o.k).concat(r.reps.map(()=>"qR"));while(sq.length<r.T)sq.push("qE");
   const SQL={qB:"B",qT:"T",qA:"A",qO:"W",qR:"ซ"};h+='<div class="sqs">'+sq.map((k,i)=>'<i class="q '+(i>=r.T?"qX":k)+'">'+(i>=r.T?"!":(SQL[k]||""))+'</i>').join("")+'</div>';
   h+='<div class="hd"><span></span><span>'+(x.past?"ใช้ห้อง":"ใช้ / จอง")+'</span><span>'+(x.past?"":"สถานะในแอป")+'</span><span></span></div>';
   h+='<div class="rw"><span><span class="ap apH">HotelPro</span></span><span class="num">'+(r.occ.length+r.reps.length)+'</span><span class="st dim">ตัวหลัก</span><span></span></div>';
   if(r.occ.length||r.reps.length)h+='<div class="gs">'+r.occ.map(o=>gcard(o,x.d)).join("")+r.reps.map(p=>'<div class="gc"><div>'+esc(p.room)+' ซ่อม · ปิดขาย<div class="sm">'+esc(p.note||"")+(p.to?' · คาดเสร็จ '+fd(p.to):'')+'</div></div></div>').join("")+'</div>';
-  if(!x.past)r.ap.forEach(a=>{const cls=a.na?"dim":a.ok?"ok":a.warn?"yw":"bad";
+  if(!x.past)r.ap.filter(a=>SHOWA||a.k!=="A").forEach(a=>{const cls=a.na?"dim":a.ok?"ok":a.warn?"yw":"bad";
    h+='<div class="rw"><span><span class="ap ap'+a.k+'">'+AN[a.k]+'</span></span><span class="num">'+(a.na?"–":(a.sold||0))+'</span><span class="st '+cls+(!a.na&&!a.ok&&tkState("d|"+x.d+"|"+r.t+"|"+a.k)==="on"?" tk-on":"")+'"><span class="lb">'+a.label+'</span>'+''+(a.hint?'<small>'+a.hint+'</small>':'')+''+'</span>'+(!a.na&&!a.ok?acts(calOf(a.k,x.d),"d|"+x.d+"|"+r.t+"|"+a.k,a.k):'<span></span>')+'</div>';});
   r.msgs.forEach(m=>h+='<div class="msg'+(m[0]<3?" y":"")+(m[4]&&tkState(m[4])==="on"?" tk-on":"")+'">'+ico("warn")+'<span>'+esc(m[1])+(m[2]?lnk(m[2],m[3],m[3].indexOf("HotelPro")>=0?"lkH":"lk"+(m[3].indexOf("Booking")>=0?"B":"T")):"")+'</span></div>');
   if(!x.past&&x.cov&&!r.msgs.length)h+='<div class="msg g">'+ico("ok")+'ตรงกันทุกแอป</div>';
-  h+='</div>';});
+  if(!x.past&&!x.cov&&!r.msgs.length)h+='<div class="msg g">'+ico("ok")+'Booking กับ Trip เปิดขายเท่ากัน</div>';
+  h+='</details>';});
  R.getElementById("det").innerHTML=h;}
 
 function misList(){const el=R.getElementById("mis");if(FLT!=="m"){el.innerHTML="";return;}
@@ -55276,10 +55288,12 @@ function compute(){
 function paint(){
  if(!D)return;
  const errs=Object.entries(D.errors||{}).filter(([,v])=>v);
+ {const e0=R.getElementById("err");e0.style.display="none";e0.innerHTML="";}
  if(errs.length){const e=R.getElementById("err");e.style.display="block";e.innerHTML='<div class="msg">'+ico("warn")+'<div>รอบนี้อ่านไม่สำเร็จ: '+errs.map(([k,v])=>"<b>"+AN[k]+"</b> "+esc(v)).join(" · ")+'<br>แอปนั้นจะไม่ถูกนำมาเทียบจนกว่าจะอัปเดตรอบถัดไป</div></div>';}
  const a=age();
  R.getElementById("hsub").innerHTML=fd(DAYS[0].d)+" – "+fd(DAYS[DAYS.length-1].d)+" · <button id='upb'>อัปเดต "+fdt(D.updated.at)+"</button> <span class='pill' style='background:"+a.st[0]+";color:"+a.st[1]+"'>"+a.st[2]+"</span>";
  R.getElementById("upb").onclick=pop;
+ cvbPaint();
  render();}
 
 
@@ -55288,20 +55302,24 @@ var M0=null,MAIL_ERR=null,MTIMER=null;
 function mHp(code){const c=String(code||"").trim();return (window.bookings||[]).filter(b=>b&&String(b.bookingRef||"").trim()===c);}
 function mTime(iso){try{return new Date(iso).toLocaleString("th-TH",{timeZone:"Asia/Bangkok",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});}catch(e){return iso||"";}}
 function mDate(d){if(!d)return"";const p=d.split("-");return (+p[2])+"/"+(+p[1]);}
+function mAdm(it){try{const L=(D0&&D0.ota&&D0.ota[it.app])||[];return L.find(o=>String(o.code).trim()===String(it.code).trim())||null;}catch(e){return null;}}
+function mNights(a,b){return a&&b?Math.max(1,Math.round((Date.parse(b+"T00:00:00Z")-Date.parse(a+"T00:00:00Z"))/864e5)):0;}
 function mKey(it){return "m|"+it.app+":"+it.code;}
 function mDone(it){const t=TK[mKey(it)];return !!(t&&t.r===(it.lastAt||""));}
 function mailRows(){
  const items=Object.values((M0&&M0.items)||{}),cut=Date.now()-14*864e5,out=[];
  items.forEach(it=>{if(Date.parse(it.lastAt||0)<cut)return;
   const live=mHp(it.code).filter(b=>b.status!=="cancelled"),need=it.rooms||1;let kind,done=false,why="";
+  const adm=mAdm(it);
   if(it.state==="new"){
-   if(live.length>=need){kind="new";done=true;why="ลงใน HotelPro แล้ว";}
-   else kind=it.detail?"new":"wait";}
+   if(adm&&adm.status==="cancel"){if(live.length)kind="cancel";else{kind="both";done=true;why="จองแล้วยกเลิก · ไม่ต้องทำอะไร";}}
+   else if(live.length>=need){kind="new";done=true;why="ลงใน HotelPro แล้ว";}
+   else kind=(it.detail||adm)?"new":"wait";}
   else if(it.state==="cancel"){
    if(live.length){kind="cancel";} else{kind="cancel";done=true;why="ไม่มีใบนี้ใน HotelPro · ไม่ต้องทำ";}}
   else{ if(live.length)kind="cancel"; else{kind="both";done=true;why="จองแล้วยกเลิก · ไม่ต้องทำอะไร";}}
   if(!done&&mDone(it)){done=true;why="จัดการแล้ว · "+(TK[mKey(it)].by||"");}
-  out.push({it,kind,done,why,live:live.length});});
+  out.push({it,kind,done,why,live:live.length,adm});});
  (M0&&M0.unknown||[]).forEach(u=>{const k="m|U:"+(u.id||u.at);const t=TK[k];const done=!!(t&&t.r===(u.at||""));
   out.push({u,kind:"unk",done,why:done?"จัดการแล้ว · "+(t.by||""):"",key:k});});
  out.sort((a,b)=>(a.done-b.done)||((b.it?b.it.lastAt:b.u.at)||"").localeCompare((a.it?a.it.lastAt:a.u.at)||""));
@@ -55314,24 +55332,34 @@ function mRow(r){
  const it=r.it,ap=it.app==="T"?"Trip":"Booking",col=it.app==="T"?"var(--T)":"var(--B)";
  const tag=r.kind==="cancel"?'<span class="mk cn">ยกเลิก</span>':r.kind==="both"?'<span class="mk gy">จองแล้วยกเลิก</span>':'<span class="mk nw">จองใหม่</span>'+(r.kind==="wait"?'<span class="mk wt">รอรายละเอียด</span>':'');
  let line;
- if(it.detail){const ty=it.type||"",n=it.nights?" · "+it.nights+" คืน":"",rm=(it.rooms||1)>1?" · "+it.rooms+" ห้อง":"",am=it.amount?" · ยอดตามอีเมล "+Number(it.amount).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท":"";
+ const A=(!it.detail&&r.adm)?r.adm:null;
+ if(A){const n=mNights(A.in,A.out),rm=(A.rooms||1)>1?" · "+A.rooms+" ห้อง":"",am=A.amount?" · ราคา "+Number(A.amount).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท":"";
+  line=esc(A.mix||A.type||"")+" · "+mDate(A.in)+"–"+mDate(A.out)+(n?" · "+n+" คืน":"")+rm+am;}
+ else if(it.detail){const ty=it.type||"",n=it.nights?" · "+it.nights+" คืน":"",rm=(it.rooms||1)>1?" · "+it.rooms+" ห้อง":"",am=it.amount?" · ยอดตามอีเมล "+Number(it.amount).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท":"";
   line=esc(ty)+" · "+mDate(it.in)+"–"+mDate(it.out)+n+rm+am;}
- else line="เช็คอิน "+mDate(it.in)+" · อีเมล Booking ไม่บอกชื่อ ประเภทห้อง และราคา";
+ else line="เช็คอิน "+mDate(it.in)+" · รอรอบอ่านหน้าแอดมิน (06:49 / 16:49) เติมชื่อ ห้อง ราคาให้ · รีบก็ใช้ PDF ได้";
  const link=it.app==="T"?"https://ebooking.ctrip.com/ebkorderv2/orderlist.html?orderId="+encodeURIComponent(it.code):"https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/booking.html?res_id="+encodeURIComponent(it.code)+"&hotel_id=2138961&lang=th";
  let acts="";
  if(!r.done){
   if(r.kind==="new")acts='<button class="pr" data-mnew="'+esc(mKey(it))+'">ลงใน HotelPro</button>';
-  else if(r.kind==="wait")acts='<button class="pr" data-mpdf="'+esc(mKey(it))+'">เลือกไฟล์ใบจอง (PDF)</button><a href="'+link+'" target="_blank" rel="noopener">ดูใน Booking</a><button data-mnew="'+esc(mKey(it))+'">กรอกเอง</button>';
+  else if(r.kind==="wait")acts='<button data-mpdf="'+esc(mKey(it))+'">เลือกไฟล์ใบจอง (PDF)</button><a href="'+link+'" target="_blank" rel="noopener">ดูใน Booking</a><button data-mnew="'+esc(mKey(it))+'">กรอกเอง</button>';
   else if(r.kind==="cancel")acts='<button class="pr" data-mopen="'+esc(it.code)+'">เปิดการจองใน HotelPro</button>';
   if(r.kind!=="wait")acts+='<a href="'+link+'" target="_blank" rel="noopener">เปิดใน '+ap+'</a>';
+  const ci=(A&&A.in)||it.in,co=(A&&A.out)||it.out;
+  if(r.kind==="cancel"&&it.app==="B"&&ci)acts+='<a href="'+LK.calB(ci,co&&co>ci?co:ad(ci,1))+'" target="_blank" rel="noopener">ปฏิทิน Booking วันนั้น</a>';
   acts+='<button data-mk="'+esc(mKey(it))+'" data-mr="'+esc(it.lastAt||"")+'">จัดการแล้ว</button>';
   acts='<div class="ma">'+acts+'</div>';}
  const warn=(r.kind==="cancel"&&!r.done)?'<p class="mw">ใน HotelPro ยังมีใบจองนี้อยู่ · เปิดใบจอง แล้วยกเลิกด้วยขั้นตอนเดิมของแอป</p>':"";
  const tw=(it.app==="T"&&it.detail&&!it.type&&!r.done&&r.kind!=="cancel")?'<p class="mw">ประเภทห้อง Trip: ยังไม่รู้จักชื่อห้องนี้ · ดูชื่อห้องใน Trip แล้วเลือกประเภทเอง</p>':"";
  const extra=tw+((r.kind==="new"&&!r.done&&(it.rooms||1)>1)?'<p class="mw">จอง '+it.rooms+' ห้อง · ต้องลงใน HotelPro '+it.rooms+' ใบ (ลงแล้ว '+r.live+')</p>':"");
  return '<div class="mr'+(r.done?' dn':'')+'"><div class="mt"><span class="ap" style="background:'+col+'">'+ap+'</span>'+tag+'</div>'+warn+extra
-  +'<p class="mn">'+(it.detail?esc(it.name||""):"เลขจอง "+esc(it.code))+'</p><p class="ml">'+line+'</p>'+acts+mPv(it)
-  +'<div class="mm">เลขจอง '+esc(it.code)+' · อีเมลเข้า '+mTime(it.firstAt||it.lastAt)+(r.done&&r.why?' · '+esc(r.why):'')+'</div></div>';}
+  +'<p class="mn">'+(it.detail?esc(it.name||""):A?esc(A.name||""):"เลขจอง "+esc(it.code))+'</p><p class="ml">'+line+'</p>'+acts+mPv(it)
+  +mSteps(it,r)+'<div class="mm">'+(A?'ข้อมูลจากหน้าแอดมิน '+ap+' · ':'')+'เลขจอง '+esc(it.code)+' · อีเมลเข้า '+mTime(it.firstAt||it.lastAt)+(r.done&&r.why?' · '+esc(r.why):'')+'</div></div>';}
+function mTaskOf(it){if(!CMP_ON())return null;return (TASKS||[]).find(t=>t.app===it.app&&String(t.o.code).trim()===String(it.code).trim())||null;}
+function mSteps(it,r){if(r.done||r.kind!=="cancel")return"";const t=mTaskOf(it);if(!t||!t.steps.length)return"";
+ return '<ol class="mstp">'+t.steps.map(x=>'<li>'+esc(x.tx)+(x.sub?' <small>'+esc(x.sub)+'</small>':'')+'</li>').join("")+'</ol>';}
+function mailCodes(){const m={};try{mailRows().forEach(r=>{if(r.it)m[r.it.app+":"+String(r.it.code).trim()]=1;});}catch(e){}return m;}
+function todoTasks(){if(!CMP_ON())return [];const m=mailCodes();return (TASKS||[]).filter(t=>!m[t.app+":"+String(t.o.code).trim()]);}
 function mClock(ms){try{return new Date(ms).toLocaleTimeString("th-TH",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});}catch(e){return"";}}
 function mStatInfo(now){
  const u=M0&&M0.updated;if(!u||!u.at)return null;const at=Date.parse(u.at);if(!(at>0))return null;
@@ -55355,14 +55383,20 @@ function mailStat(){
  else if(s.state==="wait")l2='ตรวจทุก '+s.every+' นาที · กำลังรอรอบถัดไป';
  else l2='ตรวจทุก '+s.every+' นาที · รอบนี้ช้ากว่าปกติ กำลังรอ';
  el.innerHTML='<p class="ms">ตรวจล่าสุด '+s.hhmm+' · '+mAgo(s.age)+'<br>'+l2+'</p><div class="mbar"><i class="'+(s.state==="slow"?'sl':'')+'" style="width:'+Math.round(s.frac*100)+'%"></i></div>'+err;}
+var MFLT="",MALL=false;
 function mailPaint(){
  if(!R)return;const el=R.getElementById("mail");if(!el)return;
- if(!M0){el.innerHTML='<div class="mh"><b>รายการใหม่จากอีเมล</b><span class="mhb">'+rmBtn()+'</span></div>'+(MAIL_ERR?'<div class="mw" style="margin-top:12px">อ่านรายการจากอีเมลไม่ได้ ('+esc(MAIL_ERR)+')</div>':'<p class="ms" style="margin:12px 2px">ยังไม่มีข้อมูลจากตัวอ่านอีเมล</p>');return;}
+ if(!M0){el.innerHTML='<div class="mh"><b>ต้องทำตอนนี้</b></div>'+(MAIL_ERR?'<div class="mw" style="margin-top:12px">อ่านรายการจากอีเมลไม่ได้ ('+esc(MAIL_ERR)+')</div>':'<p class="ms" style="margin:12px 2px">ยังไม่มีข้อมูลจากตัวอ่านอีเมล</p>');gearSync();return;}
  const rows=mailRows(),todo=rows.filter(r=>!r.done),done=rows.filter(r=>r.done);
- el.innerHTML='<div class="mh"><b>รายการใหม่จากอีเมล'+(todo.length?' · '+todo.length:'')+'</b><span class="mhb">'+rmBtn()+'<button data-mref="1">โหลดใหม่</button></span></div><div id="mstat"></div><input type="file" id="mpdf" accept="application/pdf,.pdf" hidden>'
-  +(todo.length?todo.map(mRow).join(""):'<div class="emp" style="padding:14px">ไม่มีรายการใหม่ที่ต้องจัดการ</div>')
-  +(done.length?'<details class="mdn"><summary>จัดการแล้ว '+done.length+' รายการ</summary>'+done.map(mRow).join("")+'</details>':"");
- mailStat();}
+ const isN=r=>r.kind==="new"||r.kind==="wait",isC=r=>r.kind==="cancel";
+ const nN=todo.filter(isN).length,nC=todo.filter(isC).length;
+ if(MFLT==="n"&&!nN||MFLT==="c"&&!nC)MFLT="";
+ const shown=todo.filter(r=>!MFLT||(MFLT==="n"?isN(r):isC(r))),LIM=5,vis=MALL?shown:shown.slice(0,LIM);
+ const chips=todo.length>3?'<div class="mch">'+[["","ทั้งหมด "+todo.length,1],["n","จองใหม่ "+nN,nN],["c","ยกเลิก "+nC,nC]].filter(x=>x[2]).map(([k,t])=>'<button class="'+(MFLT===k?"on":"")+'" data-mflt="'+k+'">'+t+'</button>').join("")+'</div>':"";
+ el.innerHTML='<div class="mh"><b>ต้องทำตอนนี้'+(todo.length?' · '+todo.length:'')+'</b><button data-mref="1">โหลดใหม่</button></div><div id="mstat"></div><input type="file" id="mpdf" accept="application/pdf,.pdf" hidden>'+chips
+  +(todo.length?vis.map(mRow).join("")+(shown.length>vis.length?'<button class="more" data-mall="1">ดูอีก '+(shown.length-vis.length)+' รายการ ▾</button>':(MALL&&shown.length>LIM?'<button class="more" data-mall="1">ย่อ ▴</button>':"")):(todoTasks().length?"":'<div class="emp" style="padding:14px">ไม่มีงานค้าง · รายการใหม่จากอีเมลจะขึ้นที่นี่</div>'))
+  +(done.length?'<details class="mdn"><summary>จัดการแล้ว (14 วัน) '+done.length+' รายการ</summary>'+done.map(mRow).join("")+'</details>':"");
+ mailStat();gearSync();}
 function mTick(k,r){const id=tkId(k),was=TK[k],ref=db.collection("otaTicks").doc(id);
  if(was&&was.r===r){delete TK[k];ref.delete().catch(e=>{TK[k]=was;otaFail(e);});}
  else{const me=(window.currentUser&&currentUser.name)||"-",v={k,r,by:me,t:Date.now()};TK[k]=v;ref.set(Object.assign({},v,{at:firebase.firestore.FieldValue.serverTimestamp()})).catch(e=>{if(was)TK[k]=was;else delete TK[k];otaFail(e);});}
@@ -55370,16 +55404,21 @@ function mTick(k,r){const id=tkId(k),was=TK[k],ref=db.collection("otaTicks").doc
 function mOpenNew(key,pv){
  const it=((M0&&M0.items)||{})[key.slice(2)];if(!it)return;
  const ch=it.app==="T"?"trip":"booking",g=id=>document.getElementById(id);
- openBookingModal(null,pv?{checkIn:pv.in,checkOut:pv.out}:{checkIn:it.in,checkOut:it.out||undefined});
+ const A0=(!pv&&!it.detail)?mAdm(it):null;
+ openBookingModal(null,pv?{checkIn:pv.in,checkOut:pv.out}:A0?{checkIn:A0.in,checkOut:A0.out}:{checkIn:it.in,checkOut:it.out||undefined});
  const set=(id,v)=>{const e=g(id);if(e&&v!=null&&v!==""){e.value=v;e.dispatchEvent(new Event("input",{bubbles:true}));}};
  try{bkmSetChannel(ch,null);}catch(e){}
  if(pv){set("bkm-guest",pv.name);set("bkm-actual-price",pv.perNight);if(pv.guests)set("bkm-guests",pv.guests);
-  const nt=["จากไฟล์ใบจอง Booking"];if(pv.type)nt.push("ประเภทห้อง "+pv.type);else if(pv.roomName)nt.push("ห้อง: "+pv.roomName);nt.push("ราคารวมที่แขกจ่าย "+Number(pv.total).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท");if((pv.rooms||1)>1)nt.push(pv.rooms+" ห้อง");set("bkm-note",nt.join(" · "));}
+  const nt=["จากไฟล์ใบจอง Booking"];if(pv.type)nt.push("ประเภทห้อง "+pv.type);else if(pv.roomName)nt.push("ห้อง: "+pv.roomName);nt.push("ราคารวม "+Number(pv.total).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท"+(pv.cityTax?" (ไม่รวมภาษีเมือง "+Number(pv.cityTax).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท ตรงกับหน้ารายการจอง Booking)":""));if((pv.rooms||1)>1)nt.push(pv.rooms+" ห้อง");set("bkm-note",nt.join(" · "));}
+ const A=(!pv&&!it.detail)?mAdm(it):null;
+ if(A){set("bkm-guest",A.name);const n=mNights(A.in,A.out);
+  if(A.amount&&n)set("bkm-actual-price",Math.round(A.amount/n/(A.rooms||1)*100)/100);
+  const nt=["จากหน้าแอดมิน "+(it.app==="T"?"Trip":"Booking")];if(A.type)nt.push("ประเภทห้อง "+(A.mix||A.type));if(A.amount)nt.push("ราคารวม "+Number(A.amount).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท");if((A.rooms||1)>1)nt.push(A.rooms+" ห้อง · ราคาต่อคืนเฉลี่ยต่อห้อง ตรวจก่อนบันทึก");set("bkm-note",nt.join(" · "));}
  if(it.detail)set("bkm-guest",it.name);
  set("bkm-ref",it.code);try{bkmRefSync();}catch(e){}
  if(it.detail){const nt=[];nt.push("จากอีเมล "+(it.app==="T"?"Trip":"Booking"));if(it.amount)nt.push("ยอดตามอีเมล "+Number(it.amount).toLocaleString("th-TH",{maximumFractionDigits:2})+" บาท (ตรวจก่อนใส่ราคา)");if((it.rooms||1)>1)nt.push(it.rooms+" ห้อง");set("bkm-note",nt.join(" · "));}
  try{bkmCalc();}catch(e){}try{bkmValidate();}catch(e){}
- try{notify(pv?"กรอกจากไฟล์ใบจองให้แล้ว · "+(pv.type?"ประเภท "+pv.type+" · ":"")+"เลือกเลขห้อง ตรวจข้อมูล แล้วกดจอง":it.detail?"กรอกจากอีเมลให้แล้ว · เลือกห้อง ใส่ราคา ตรวจข้อมูล แล้วกดจอง":"กรอกเลขจองให้แล้ว · ดูชื่อ ห้อง และราคาใน Booking แล้วกรอกเพิ่ม","info");}catch(e){}}
+ try{notify(pv?"กรอกจากไฟล์ใบจองให้แล้ว · "+(pv.type?"ประเภท "+pv.type+" · ":"")+"เลือกเลขห้อง ตรวจข้อมูล แล้วกดจอง":A0?"กรอกจากหน้าแอดมินให้แล้ว · ประเภท "+(A0.mix||A0.type||"-")+" · เลือกเลขห้อง ตรวจข้อมูล แล้วกดจอง":it.detail?"กรอกจากอีเมลให้แล้ว · เลือกห้อง ใส่ราคา ตรวจข้อมูล แล้วกดจอง":"กรอกเลขจองให้แล้ว · ดูชื่อ ห้อง และราคาใน Booking แล้วกรอกเพิ่ม","info");}catch(e){}}
 var BK_DEFAULT={"ห้องเตียงใหญ่ 6 ฟุต":"ดีลัก","ห้องดีลักซ์เตียงใหญ่":"เดี่ยว","ห้องมาตรฐานเตียงคู่ 3.5 ฟุต":"คู่"};
 var BK_TYPES={};function bkSetMap(m){BK_TYPES={};Object.keys(m||{}).forEach(n=>{BK_TYPES[n.replace(/\s+/g,"")]=m[n];});}bkSetMap(BK_DEFAULT);
 var BK_MON={"ม.ค.":1,"ก.พ.":2,"มี.ค.":3,"เม.ย.":4,"พ.ค.":5,"มิ.ย.":6,"ก.ค.":7,"ส.ค.":8,"ก.ย.":9,"ต.ค.":10,"พ.ย.":11,"ธ.ค.":12,jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
@@ -55413,15 +55452,18 @@ function bkParse(items,wantCode){
  const iG=idx("จำนวนผู้เข้าพักทั้งหมด:");let g=0;if(iG>=0){const r=run(iG,8),a=/ผู้ใหญ่\s*(\d+)/.exec(r),c=/เด็ก\s*(\d+)/.exec(r);g=(a?+a[1]:0)+(c?+c[1]:0);}o.guests=g||null;
  const iT=idx("ราคารวม:");const tm=iT>=0?/THB\s*([\d,]+(?:\.\d+)?)/.exec(run(iT,5)):null;o.total=tm?bkNum(tm[1]):null;
  if(!(o.total>0))return fail("อ่านราคารวมไม่ได้");
- const all=T.map(t=>t.s).join(" "),rl=[];const re=/(\d+)\s*x\s*THB\s*([\d,]+(?:\.\d+)?)/g;let m;while((m=re.exec(all)))rl.push({n:+m[1],p:bkNum(m[2])});
+ const all=T.map(t=>t.s).join(" "),rl=[];
+ /* v4.93.0 · ราคารวมใน PDF รวมภาษีเมืองไว้ · หน้ารายการจองของ Booking (และที่พนักงานลง HotelPro) ไม่รวม → หักออกให้ตรงกัน */
+ {const ct=/City\s*Tax\)?\s*THB\s*([\d,]+(?:\.\d+)?)\s*(ต่อการเข้าพัก|ต่อคืน)?/i.exec(all);if(ct){let v=bkNum(ct[1]);if(ct[2]==="ต่อคืน")v*=o.nights*(o.rooms||1);if(v>0&&v<o.total){o.cityTax=v;o.gross=o.total;o.total=Math.round((o.total-v)*100)/100;}}}const re=/(\d+)\s*x\s*THB\s*([\d,]+(?:\.\d+)?)/g;let m;while((m=re.exec(all)))rl.push({n:+m[1],p:bkNum(m[2])});
  let rateY=null;{const ys={};T.forEach(t=>{(ys[t.y]=ys[t.y]||[]).push(t.s);});Object.keys(ys).forEach(y=>{if(rateY===null&&/^\d{1,2}\s+[A-Za-z]{3}\s*-\s*\d{1,2}/.test(ys[y].join(" ")))rateY=+y;});}
  const rn=[];T.forEach((t,k)=>{if(/^ห้อง/.test(t.s)&&t.s.indexOf("ทั้งหมด")<0&&(rateY===null?!/^ห้องพัก/.test(t.s):t.y>rateY)){const y=t.y,p=[];for(let j=k;j<T.length&&T[j].y===y;j++)p.push(T[j].s);const n=p.join(" ").replace(/\s+/g," ");if(rn.indexOf(n)<0)rn.push(n);}});
  o.roomName=rn[0]||null;o.type=o.roomName?(BK_TYPES[o.roomName.replace(/\s+/g,"")]||null):null;
  if(rn.length>1)warns.push("ไฟล์นี้มีห้องหลายแบบ · ตรวจประเภทห้อง/ราคาเอง");
  if(!o.type)warns.push(o.roomName?"ยังไม่รู้จักห้อง “"+o.roomName+"” · เลือกประเภทเอง และแจ้งเจ้าของเพิ่มชื่อนี้ในตารางชื่อห้อง":"อ่านประเภทห้องไม่ได้ · เลือกเอง");
  const per=o.total/o.nights/(o.rooms||1);
- if(rl.length===1&&o.rooms===1&&rl[0].n===o.nights&&Math.abs(rl[0].p*rl[0].n-o.total)<=1)o.perNight=rl[0].p;
+ if(!o.cityTax&&rl.length===1&&o.rooms===1&&rl[0].n===o.nights&&Math.abs(rl[0].p*rl[0].n-o.total)<=1)o.perNight=rl[0].p;
  else{o.perNight=Math.round(per*100)/100;if(o.rooms>1||rl.length!==1)warns.push("ราคาต่อคืนคำนวณจากราคารวม ÷ คืน ÷ ห้อง · ตรวจราคาก่อนบันทึก");}
+ if(o.cityTax){const d=Math.round((o.perNight*o.nights*(o.rooms||1)-o.total)*100)/100;if(d)warns.push("หักภาษีเมืองแล้วราคาต่อคืนมีเศษ · ยอดใน HotelPro จะต่างจาก Booking "+Math.abs(d)+" บาท");}
  return o;}
 
 var PV=null,BKPDF=null;
@@ -55439,24 +55481,63 @@ function mPv(it){if(!PV||PV.key!==mKey(it))return"";const k=esc(mKey(it));
  if(!r.ok)return'<div class="mp"><p class="mw">'+esc(r.err)+'</p><div class="ma"><button data-mpdf="'+k+'">เลือกไฟล์อื่น</button><button data-mpx="1">ปิด</button></div></div>';
  const fm=n=>Number(n).toLocaleString("th-TH",{maximumFractionDigits:2}),row=(a,b)=>'<tr><td>'+a+'</td><td>'+b+'</td></tr>';
  return'<div class="mp"><table>'+row("ชื่อแขก",r.name?esc(r.name):"—")+row("เข้า – ออก",mDate(r.in)+" – "+mDate(r.out)+" · "+r.nights+" คืน")+row("ห้อง",(r.rooms>1?r.rooms+" ห้อง · ":"")+esc(r.roomName||"—"))
-  +row("ประเภทใน HotelPro",r.type?esc(r.type):"<b>ยังไม่รู้ · เลือกเอง</b>")+row("ราคารวมที่แขกจ่าย",fm(r.total)+" บาท")+row("ต่อคืน",fm(r.perNight)+" บาท")+'</table>'
+  +row("ประเภทใน HotelPro",r.type?esc(r.type):"<b>ยังไม่รู้ · เลือกเอง</b>")+row("ราคารวม",fm(r.total)+" บาท"+(r.cityTax?" <small>(ไม่รวมภาษีเมือง "+fm(r.cityTax)+" · ตรงกับหน้ารายการ Booking)</small>":""))+row("ต่อคืน",fm(r.perNight)+" บาท")+'</table>'
   +r.warns.map(w=>'<p class="mw">'+esc(w)+'</p>').join("")+'<div class="ma"><button class="pr" data-mpgo="'+k+'">ลงใน HotelPro</button><button data-mpx="1">ปิด</button></div></div>';}
 
 var RM=null,RMOPEN=false,RMDRAFT=[],RMERR="",RMBUSY=false,RMTYPES=["ดีลัก","เดี่ยว","คู่"];
 function mIsOwner(){return !!(window.currentUser&&currentUser.role==="owner");}
-function rmBtn(){return mIsOwner()?'<button class="rmb" data-mrm="1" aria-label="ตั้งค่าชื่อห้องของ Booking"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> ชื่อห้อง Booking</button>':"";}
+var RMVIEW="menu";
+var GEARSVG='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+var GEARCSS="display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border:1px solid #d8dde8;border-radius:10px;background:#fff;color:#1d2330;font:inherit;font-size:14px;cursor:pointer;margin-left:auto;margin-right:4px;flex:none";
+function gearSync(){const h=document.querySelector("#page-ota .page-header");if(!h)return;let g=document.getElementById("ota-gear");
+ if(!g){g=document.createElement("button");g.id="ota-gear";g.type="button";g.setAttribute("aria-label","ตั้งค่าหน้านี้");g.style.cssText=GEARCSS;g.innerHTML=GEARSVG+"<span>ตั้งค่า</span>";g.addEventListener("click",()=>{if(RMOPEN)rmClose();else rmOpen();});h.appendChild(g);}
+ g.hidden=!mIsOwner();if(g.hidden&&RMOPEN)rmClose();
+ g.style.background=RMOPEN?"#4c7dff":"#fff";g.style.color=RMOPEN?"#fff":"#1d2330";g.style.borderColor=RMOPEN?"#4c7dff":"#d8dde8";}
 function rmLoad(){if(!window.db)return Promise.resolve();
- return db.collection("settings").doc("config").get().then(s=>{const d=s.exists?s.data():null;RM=(d&&d.otaRoomMap&&typeof d.otaRoomMap==="object")?d.otaRoomMap:null;bkSetMap(RM||BK_DEFAULT);}).catch(()=>{});}
+ return db.collection("settings").doc("config").get().then(s=>{const d=s.exists?s.data():null;RM=(d&&d.otaRoomMap&&typeof d.otaRoomMap==="object")?d.otaRoomMap:null;CFG={otaCompare:(d&&d.otaCompare)||null,otaShowAgoda:!!(d&&d.otaShowAgoda)};bkSetMap(RM||BK_DEFAULT);}).catch(()=>{});}
 function rmPanel(){let p=R.getElementById("rmp");if(!p){p=document.createElement("div");p.id="rmp";p.className="rmp";p.hidden=true;const w=R.querySelector(".w");w.style.position="relative";w.insertBefore(p,w.firstChild);}return p;}
 function rmRender(){const p=rmPanel();
+ if(RMVIEW==="menu"){
+  p.innerHTML='<div class="rmh"><b>ตั้งค่าหน้านี้</b><button data-rmx="1" aria-label="ปิด">×</button></div>'
+   +'<button class="rmi" data-rmgo="rooms"><span>ชื่อห้องของ Booking</span><span class="rmc">›</span></button>'
+   +'<button class="rmi" data-rmview="cmp"><span>เทียบกับ HotelPro<small class="rms">'+(CMP_ON()?"เริ่มแล้ว · ตั้งแต่ "+mDate(CFG.otaCompare.from):"ยังไม่เริ่ม")+'</small></span><span class="rmc">›</span></button>'
+   +'<button class="rmi" data-rmview="agoda"><span>แสดง Agoda<small class="rms">'+(CFG.otaShowAgoda?"แสดงอยู่":"ซ่อนอยู่ (ยังไม่ใช้)")+'</small></span><span class="rmc" style="font-size:13px;font-weight:600;color:'+(CFG.otaShowAgoda?"#1B5E2A":"#8a8882")+'">'+(CFG.otaShowAgoda?"เปิด":"ปิด")+'</span></button>'
+   +'<button class="rmi" data-rmview="help"><span>อ่านหน้านี้ยังไง</span><span class="rmc">›</span></button>';return;}
+ const back='<div class="rmh"><span class="rmbk"><button data-rmback="1" aria-label="ย้อนกลับ">‹</button><b>';
+ if(RMVIEW==="cmp"){const c=CFG.otaCompare||{},td=new Date(Date.now()+7*3600e3).toISOString().slice(0,10);
+  p.innerHTML=back+'เทียบกับ HotelPro</b></span><button data-rmx="1" aria-label="ปิด">×</button></div>'
+   +'<p class="ms" style="margin:0 0 8px">เปิดเมื่อพนักงานลงการจองทุกใบใน HotelPro จริงแล้ว · ก่อนวันเริ่ม หน้านี้ตรวจแค่ Booking กับ Trip ตรงกันไหม</p>'
+   +'<label class="rmsw"><input type="checkbox" id="cfgon"'+(c.on?" checked":"")+'> เริ่มเทียบกับ HotelPro</label>'
+   +'<label class="rmsw">ตั้งแต่วันที่ <input type="date" id="cfgfrom" value="'+esc(c.from||td)+'"></label>'
+   +(RMERR?'<p class="mw">'+esc(RMERR)+'</p>':"")+'<div class="ma"><button class="pr" data-cfgsave="1">'+(RMBUSY?"กำลังบันทึก…":"บันทึก")+'</button></div>';return;}
+ if(RMVIEW==="help"){p.innerHTML=back+'อ่านหน้านี้ยังไง</b></span><button data-rmx="1" aria-label="ปิด">×</button></div><div class="rmhelp">'+"<div class=\"ky\" style=\"margin:0 0 10px\"><span><i class=\"qB\"></i>Booking</span><span><i class=\"qT\"></i>Trip</span><span><i class=\"qA\"></i>Agoda</span><span><i class=\"qO\"></i>วอล์คอิน/โทร</span><span><i class=\"qR\"></i>ซ่อม</span><span><i class=\"qE\"></i>ว่าง</span><span style=\"margin-left:auto\">แถว: ดีลัก · เดี่ยว · คู่</span></div><div class=\"note\" style=\"margin-top:0\">ว่างจริง = ห้องทั้งหมด − ห้องที่ใช้ใน HotelPro (ทุกช่องทาง) − ห้องซ่อมที่ปิดขาย · แต่ละแอปควรเปิดขายเท่ากับว่างจริง<br>\nแดง = แอปเปิดเกินห้องว่างจริง หรือมีการจองในแอปที่ยังไม่ลง HotelPro · เหลือง = แอปปิดเกินทั้งที่ยังว่าง (เตือนเฉพาะ 14 วันข้างหน้า) หรือข้อมูลไม่ตรงกัน<br>\nงานที่ต้องทำ = แขกที่เพิ่งยกเลิกใน Booking/Trip (หลังรอบอัปเดตก่อน) ที่ยังต้องคืนห้อง หรือใบยกเลิกที่ HotelPro ยังกันห้องไว้ · ทำครบแล้วการ์ดหายเองในรอบถัดไป · ใบที่มีอีเมลด้วย รวมเป็นการ์ดเดียวใน ต้องทำตอนนี้<br>\nเทียบกับ HotelPro เฉพาะช่วงที่ลงการจองครบแล้ว (เจ้าของตั้งวันเริ่มที่ ตั้งค่า › เทียบกับ HotelPro · ก่อนวันเริ่ม ตรวจแค่ Booking กับ Trip เปิดขายเท่ากันไหม) · ข้อมูลอ่านแบบอ่านอย่างเดียว ไม่ได้แก้อะไรในแอปใด</div>"+'</div>';return;}
  const rows=RMDRAFT.map((r,i)=>'<div class="rmr"><input class="rmn" data-i="'+i+'" type="text" value="'+esc(r.n)+'" placeholder="ชื่อห้องตามที่ขึ้นใน Booking"><select class="rmt" data-i="'+i+'">'+RMTYPES.map(t=>'<option'+(t===r.t?" selected":"")+'>'+t+'</option>').join("")+'</select><button class="rmd" data-rmdel="'+i+'" aria-label="ลบ">×</button></div>').join("");
- p.innerHTML='<div class="rmh"><b>ชื่อห้องของ Booking</b><button data-rmx="1" aria-label="ปิด">×</button></div><p class="ms" style="margin:0 0 8px">ใช้เทียบตอนนำเข้าใบจองจาก PDF · พิมพ์ให้ตรงกับชื่อใน Booking (เว้นวรรคต่างกันได้)</p>'+rows
+ p.innerHTML='<div class="rmh"><span class="rmbk"><button data-rmback="1" aria-label="ย้อนกลับ">‹</button><b>ชื่อห้องของ Booking</b></span><button data-rmx="1" aria-label="ปิด">×</button></div><p class="ms" style="margin:0 0 8px">ใช้เทียบตอนนำเข้าใบจองจาก PDF · พิมพ์ให้ตรงกับชื่อใน Booking (เว้นวรรคต่างกันได้)</p>'+rows
   +(RMERR?'<p class="mw">'+esc(RMERR)+'</p>':"")+'<div class="ma"><button data-rmadd="1">+ เพิ่มชื่อห้อง</button><button class="pr" data-rmsave="1">'+(RMBUSY?"กำลังบันทึก…":"บันทึก")+'</button></div>';}
-function rmOpen(){if(!mIsOwner())return;RMOPEN=true;RMERR="";
- const cur=RM||BK_DEFAULT;RMDRAFT=Object.keys(cur).map(n=>({n,t:cur[n]}));rmRender();const p=rmPanel();p.hidden=false;
- const b=R.querySelector("[data-mrm]"),w=R.querySelector(".w");if(b&&w){const br=b.getBoundingClientRect(),wr=w.getBoundingClientRect();p.style.top=Math.round(br.bottom-wr.top+6)+"px";}
- rmLoad().then(()=>{if(RMOPEN&&!RMBUSY){const c=RM||BK_DEFAULT;RMDRAFT=Object.keys(c).map(n=>({n,t:c[n]}));rmRender();}});}
-function rmClose(){RMOPEN=false;const p=R&&R.getElementById("rmp");if(p)p.hidden=true;}
+function rmView(v){if(!mIsOwner())return;
+ if(v==="agoda"){if(RMBUSY)return;const nv=!CFG.otaShowAgoda;RMBUSY=true;
+  db.collection("settings").doc("config").set({otaShowAgoda:nv},{merge:true}).then(()=>{CFG.otaShowAgoda=nv;RMBUSY=false;rmRender();refresh();try{notify(nv?"แสดง Agoda แล้ว":"ซ่อน Agoda แล้ว","success");}catch(e){}})
+   .catch(e=>{RMBUSY=false;try{notify("บันทึกไม่ได้ ("+String(e&&e.code||e).slice(0,40)+")","error");}catch(x){}});return;}
+ RMVIEW=v;RMERR="";rmRender();}
+function cfgSave(){if(!mIsOwner()||RMBUSY)return;const on=!!(R.getElementById("cfgon")||{}).checked,from=((R.getElementById("cfgfrom")||{}).value||"").trim();
+ if(on&&!/^\d{4}-\d{2}-\d{2}$/.test(from)){RMERR="เลือกวันเริ่มเทียบก่อน";rmRender();return;}
+ const v={on,from:from||null};RMBUSY=true;RMERR="";rmRender();
+ db.collection("settings").doc("config").set({otaCompare:v},{merge:true}).then(()=>{CFG.otaCompare=v;RMBUSY=false;RMVIEW="menu";rmRender();refresh();try{notify(on?"เริ่มเทียบกับ HotelPro ตั้งแต่ "+mDate(from):"หยุดเทียบกับ HotelPro","success");}catch(e){}})
+  .catch(e=>{RMBUSY=false;RMERR="บันทึกไม่ได้ ("+String(e&&e.code||e).slice(0,60)+")";rmRender();});}
+function cvbPaint(){const el=R&&R.getElementById("cvb");if(!el)return;const on=CMP_ON(),fm=R.querySelector('.fi[data-f="m"]'),fl=R.querySelector(".fl");
+ if(fm)fm.hidden=!on;if(fl)fl.style.gridTemplateColumns="repeat("+(on?4:3)+",minmax(0,1fr))";
+ let h="";if(!on)h+='<div class="cvb">ยังไม่เทียบกับ HotelPro (ช่วงพัฒนา) · ตอนนี้ตรวจแค่ Booking กับ Trip เปิดขายเท่ากันไหม'+(mIsOwner()?' · ตั้งวันเริ่มได้ที่ ตั้งค่า':'')+'</div>';
+ const at=D0&&D0.updated&&Date.parse(D0.updated.at),hr=at?(Date.now()-at)/36e5:99;
+ if(hr>26)h+='<div class="cvb" style="background:#F6E3E3;color:#7A1F1F">รอบอ่านหน้าแอดมินหยุดไป '+Math.floor(hr)+' ชม. · ตัวเลขอาจเก่า · เปิดดูในแอปขายเองก่อน และตรวจว่าคอมเปิดอยู่</div>';
+ else if(hr>11)h+='<div class="cvb">รอบอ่านหน้าแอดมินข้ามไป 1 รอบ (ล่าสุด '+Math.floor(hr)+' ชม.ที่แล้ว) · ตัวเลขอาจไม่ล่าสุด</div>';
+ el.innerHTML=h;}
+function rmOpen(){if(!mIsOwner())return;RMOPEN=true;RMERR="";RMVIEW="menu";rmRender();const p=rmPanel();p.hidden=false;gearSync();rmPlace();}
+function rmPlace(){const p=R&&R.getElementById("rmp"),g=document.getElementById("ota-gear"),w=R&&R.querySelector(".w");if(!p||!g||!w)return;
+ if(window.innerWidth<700){p.style.right="0px";return;}const gr=g.getBoundingClientRect(),wr=w.getBoundingClientRect();
+ const r=Math.round(wr.right-gr.right);p.style.right=Math.max(r,-(window.innerWidth-wr.right-12))+"px";}
+function rmRooms(){if(!mIsOwner())return;RMVIEW="rooms";RMERR="";const cur=RM||BK_DEFAULT;RMDRAFT=Object.keys(cur).map(n=>({n,t:cur[n]}));rmRender();
+ rmLoad().then(()=>{if(RMOPEN&&RMVIEW==="rooms"&&!RMBUSY){const c=RM||BK_DEFAULT;RMDRAFT=Object.keys(c).map(n=>({n,t:c[n]}));rmRender();}});}
+function rmClose(){RMOPEN=false;const p=R&&R.getElementById("rmp");if(p)p.hidden=true;gearSync();}
 function rmSave(){if(!mIsOwner()||RMBUSY)return;
  const seen={},map={};let err="";
  RMDRAFT.forEach(r=>{const n=String(r.n||"").replace(/\s+/g," ").trim();if(!n){err=err||"มีแถวที่ยังไม่ได้พิมพ์ชื่อห้อง · พิมพ์หรือกด × ลบแถวนั้น";return;}
@@ -55472,7 +55553,7 @@ function mailPull(){if(!window.db||!window.currentUser)return Promise.resolve();
   .then(([s,q])=>{M0=s.exists?s.data():null;MAIL_ERR=null;if(q){const t={};q.forEach(x=>{const v=x.data();if(v&&v.k)t[v.k]=v;});TK=t;}})
   .catch(e=>{MAIL_ERR=String(e&&e.code||e);M0=null;}).then(()=>{mailPaint();otaBadge();try{todo();det();}catch(e){}});}
 function mailTick(){
- if(!R||window.curPage!=="ota"||document.hidden)return;
+ if(!R||window.curPage!=="ota"||document.hidden)return;gearSync();
  mailStat();
  const s=mStatInfo(Date.now()),now=Date.now();
  if(s&&s.state!=="skew"&&s.state!=="down"&&s.remain<=-15000&&now-LASTPULL>=60000)mailPull();
@@ -55486,15 +55567,16 @@ function openHp(code,room){
  const b=xs.find(x=>x.status!=="cancelled"&&(!room||x.roomNumber===room))||xs.find(x=>x.status!=="cancelled")||xs[0];
  if(b)openBookingDetail(b.id);else notify("ไม่พบใบจอง "+c+" ใน HotelPro","warning");}
 function build(){if(R)return true;HOST=document.getElementById("ota-host");if(!HOST)return false;
- R=HOST.attachShadow({mode:"open"});R.innerHTML="<style>"+"\n:host{--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a65;--mu2:#8a8880;--ln:#e4e2db;--ln2:#eeece6;\n--B:#003B95;--BL:#B9CBEA;--T:#287DFA;--TL:#BFD8FE;--A:#4B4F5C;--AL:#C9CBD2;--O:#B98A4E;--OL:#EADBC4;--H:#2F5D50;\n--ok:#178A2E;--bad:#9B1C1C;--warn:#B7791F;--sel:#1d1d1b;color-scheme:light}\n*{box-sizing:border-box}\n:host{display:block;background:var(--bg);color:var(--tx);font-family:\"IBM Plex Sans Thai\",system-ui,sans-serif;-webkit-text-size-adjust:100%}\n.w{max-width:560px;margin:0 auto;padding-block:14px 48px;padding-inline:14px}\n.hc{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 14px 4px}\nh1{font-size:19px;font-weight:600;margin:0}.sub{font-size:13px;color:var(--mu);margin:2px 0 8px}\n.sub button{font:inherit;color:var(--tx);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}\n.fl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ln2)}\n.fi{padding:9px 2px 7px;text-align:center;cursor:pointer;border-radius:8px;margin:4px 0}\n.fi.on{background:var(--bg)}\n.fn{font-size:21px;font-weight:600}.fl2{font-size:11.5px;color:var(--mu2);line-height:1.3}\n.rd{color:var(--bad)}.yw{color:var(--warn)}.gn{color:var(--ok)}\n.ky{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--mu2);margin:12px 2px 4px}\n.ky i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.qB{background:var(--BL)}.qT{background:var(--TL)}.qA{background:var(--AL)}.qO{background:var(--OL)}.qE{border:1px solid #d3d1c9;background:#fff}\n.qR{background:repeating-linear-gradient(45deg,#e2cdb4 0 3px,#f6ece0 3px 6px)}\n.qX{border:2px solid var(--bad);background:#FCEBEB}\n.mo{font-size:15px;font-weight:600;margin:14px 0 6px}\n.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}\n.wd{font-size:11px;color:var(--mu);text-align:center}\n.d{position:relative;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:5px 4px 6px;cursor:pointer}\n.d.e{visibility:hidden}.d.dim{opacity:.22}.d.on{border:1.5px solid var(--sel)}.d.pst{background:#faf9f6}\n.dhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;min-height:16px}\n.n2{font-size:13px;font-weight:500;color:#55534d}.n2.tdy{background:var(--sel);color:#fff;border-radius:999px;padding:0 6px;font-size:12px}\n.dhd svg{width:12px;height:12px}\n.rr{display:flex;gap:1.5px;margin-top:2px;align-items:center}\n.rr .q{width:4.5px;height:4.5px;border-radius:1.2px;border-width:.5px}\n.rr .qX{border-width:1px}\n.cdot{position:absolute;top:4px;left:50%;width:6px;height:6px;border-radius:50%;background:#2E7D3B}\n#det{margin-top:16px}\n.dh{font-size:17px;font-weight:600;margin:0 0 8px}\n.c{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 15px;margin:0 0 10px}\n.top{display:flex;justify-content:space-between;align-items:center}\n.top b{font-size:18px;font-weight:600}.av{font-size:13px;color:var(--mu)}.av em{font-style:normal;font-size:20px;font-weight:600;margin:0 2px}\n.sqs{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 6px}\n.sqs .q{width:24px;height:24px;border-radius:5px}\n.key{display:flex;flex-wrap:wrap;gap:3px 11px;font-size:11px;color:var(--mu2);margin-bottom:8px}\n.key i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.hd,.rw{display:grid;grid-template-columns:84px .7fr 1.2fr 92px;align-items:center}\n.hd{font-size:11px;color:var(--mu2);padding:0 0 4px;text-align:center}\n.rw{padding:8px 0;border-top:1px solid var(--ln2)}\n.ap{display:inline-block;width:76px;padding:3px 0;border-radius:999px;font-size:12px;font-weight:600;text-align:center;color:#fff}\n.apB{background:var(--B)}.apT{background:var(--T)}.apA{background:var(--A)}.apH{background:var(--H)}\n.num{font-size:19px;font-weight:500;text-align:center}\n.st{display:flex;flex-direction:column;align-items:center;font-size:14px;font-weight:500;line-height:1.3;text-align:center}\n.st small{font-size:11.5px;font-weight:400}\n.st.ok{color:var(--ok)}.st.bad{color:var(--bad)}.st.yw{color:var(--warn)}.st.dim{color:var(--mu2);font-weight:400;font-size:12.5px}\n.gs{margin:2px 0 6px 8px;border-radius:12px;padding:2px 13px;background:#fafaf8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}\n.gc{display:flex;justify-content:space-between;gap:8px;padding:8px 0;font-size:13.5px}.gc+.gc{border-top:1px solid rgba(0,0,0,.05)}\n.gc>div:first-child{min-width:0;overflow-wrap:anywhere}\n.gc .sm{font-size:11.5px;color:#9a988f}.gc .rt{text-align:right;flex:none}\n.pill{font-size:11px;padding:1px 8px;border-radius:99px;white-space:nowrap;display:inline-block}\n.p-ok{background:#E3F4E6;color:#1B5E2A}.p-bad{background:#F6E3E3;color:#7A1F1F}.p-y{background:#FBF0D9;color:#6B4708}\n.msg{margin-top:6px;font-size:13px;display:flex;gap:7px;align-items:flex-start;color:#8A1F1F;line-height:1.5}\n.msg.y{color:#7a4e07}.msg.g{color:var(--ok)}\n.ic{width:16px;height:16px;flex:none;margin-top:2px}\n.ban{margin:0 0 10px;padding:8px 10px;border-radius:8px;background:#efeee9;color:#5F5E5A;font-size:13px}\n.mm{padding:11px 0;border-top:1px solid var(--ln2)}\n.mm .r1{display:flex;justify-content:space-between;gap:6px;align-items:center}\n.mm .nm{font-weight:600;font-size:14px;overflow-wrap:anywhere}\n.mm .r2{font-size:12.5px;color:var(--mu)}.mm .r3{font-size:12.5px;color:#8A1F1F;margin-top:2px}.mm .r3.y{color:#7a4e07}\n.grp{font-size:12px;font-weight:600;color:var(--mu);margin:12px 0 2px}\n.uo[hidden]{display:none}\n.uo{position:fixed;inset:0;z-index:50;background:rgba(24,23,20,.5);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}\n.um{background:#fff;border-radius:22px;padding:20px 18px 16px;width:100%;max-width:400px;margin:auto}\n.ueb{font-size:12px;color:#8a8882;text-align:center}\n.ubig{text-align:center;font-size:34px;font-weight:600;margin:6px 0 0;font-variant-numeric:tabular-nums}\n.uwh{text-align:center;font-size:14px;color:#55534d;margin:2px 0 10px}.uwh b{color:var(--tx)}\n.upl{display:block;width:fit-content;margin:0 auto 12px;font-size:13px;font-weight:500;padding:5px 13px;border-radius:99px}\n.ul{border-radius:14px;background:#f7f6f3;padding:2px 14px}\n.uli{display:flex;align-items:center;gap:12px;padding:10px 0}.uli+.uli{border-top:1px solid #ebe9e4}\n.ulg{width:30px;height:30px;border-radius:8px;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}\n.uli .ut{flex:1;font-size:14.5px;font-weight:500;min-width:0}.uli .us{display:block;font-size:12px;color:#8a8882;font-weight:400}\n.uli .utm{font-size:14.5px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}\n.usm{font-size:13px;color:#55534d;margin:14px 2px}\n.urw{padding:10px 0;border-top:1px solid #eeede8;font-size:13px}\n.ubt{width:100%;height:50px;border-radius:15px;border:none;background:#1d1c1a;color:#fff;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:6px}\n.note{font-size:12px;color:var(--mu);margin-top:14px;line-height:1.65}\n#err{display:none}\n.td{margin:10px 0 4px}\n.tdh{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 8px}\n.tdh b{font-size:16px;font-weight:600}.tdh b span{color:var(--bad)}.tdh small{font-size:11.5px;color:var(--mu2)}\n.tk{background:var(--card);border:1px solid var(--ln);border-left:4px solid var(--bad);padding:12px 14px;margin-bottom:8px}\n.tk1{display:flex;justify-content:space-between;align-items:center;gap:8px}.tk1 b{font-size:15px;font-weight:600}\n.tk2{font-size:13px;color:#55534d;margin-top:2px;overflow-wrap:anywhere}\n.tkl{font-size:12px;color:var(--mu2);margin:10px 0 2px}\n.st2{display:flex;gap:10px;align-items:center;padding:9px 0}.st2+.st2{border-top:1px solid #f0eee8}\n.st2 .no{width:21px;height:21px;border:1.5px solid var(--bad);border-radius:50%;flex:none;font-size:11px;color:var(--bad);display:flex;align-items:center;justify-content:center}\n.st2 .ok{width:21px;height:21px;background:var(--ok);border-radius:50%;flex:none;color:#fff;display:flex;align-items:center;justify-content:center}\n.st2 .ok svg{width:13px;height:13px}\n.st2 .tx{flex:1;font-size:14px;min-width:0}.st2 .tx small{display:block;font-size:12px;color:var(--mu2)}\n.st2.dn .tx{color:var(--ok)}\n.lk{font:inherit;font-size:12.5px;border:1px solid currentColor;border-radius:8px;padding:5px 10px;white-space:nowrap;text-decoration:none;flex:none}\n.lk.tx2{border:0;padding:0;text-decoration:underline}\n.lkH{color:var(--H)}.lkB{color:var(--B)}.lkT{color:#1a5fc4}\n.tkf{font-size:11.5px;color:var(--mu2);margin-top:6px}\n.tkok{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--ok);display:flex;justify-content:space-between;gap:8px;align-items:baseline}\n.tkok small{font-size:11.5px;color:var(--mu2)}\n.lk.sm{font-size:11.5px;padding:3px 9px;margin-top:5px;display:inline-block;font-weight:500}\n.msg .lk{margin-left:6px;font-size:12px;padding:1px 8px}\n.tkb{font:inherit;cursor:pointer;background:none;padding:0}\n.st2 button.no{background:#fff}\n.st2.tk-on .no{border-color:var(--ok);background:var(--ok);color:#fff}\n.st2.tk-on .tx{color:var(--mu2)}.st2.tk-on .tx .m{text-decoration:line-through}\n.st2.tk-old .no{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn{display:table;font-size:11px;margin-top:5px;padding:1px 8px;border-radius:99px;text-decoration:none}\n.tkn.on{background:#E3F4E6;color:#1B5E2A}.tkn.old{background:#FBF0D9;color:#6B4708}\n.chk{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mu);margin-top:5px;border:1px solid var(--ln);border-radius:8px;padding:3px 9px;background:#fff}\n.chk i{width:13px;height:13px;border:1.5px solid #b4b2a9;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:10px;color:#fff}\n.chk.on{color:var(--mu2)}.chk.on i{background:#b4b2a9}.chk.old{color:var(--warn);border-color:#ecd6a8}.chk.old i{border-color:var(--warn)}\n.ac{display:flex;flex-direction:column;align-items:center;gap:5px}\n.ac .ab{display:flex;gap:6px}\n.st .lb{color:var(--tx)}\n.msg.tk-on span{text-decoration:line-through;text-decoration-thickness:1px}.msg.tk-on{opacity:.6}\n.st.tk-on .lb,.st.tk-on small{text-decoration:line-through;text-decoration-thickness:1px}.st.tk-on .lb,.st.tk-on small{opacity:.65}.st.dim .lb{color:inherit}\n.ib.ck{color:#cfcdc6}\n.sqs .q{font-style:normal;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;line-height:1}\n.sqs .qB{background:var(--B)}.sqs .qT{background:var(--T)}.sqs .qA{background:var(--A)}.sqs .qO{background:var(--O)}\n.sqs .qR{background:repeating-linear-gradient(45deg,#c99c6a 0 4px,#ddb98f 4px 8px);color:#5a3a14}\n.sqs .qX{color:var(--bad)}\n.gl a.cH{color:var(--H)}.gl a.cB{color:var(--B)}.gl a.cT{color:#1a5fc4}.gl a.cA{color:var(--A)}\n.ib{width:30px;height:30px;border-radius:50%;border:1px solid var(--ln);background:#fff;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;text-decoration:none;color:var(--mu2);transition:background .15s,border-color .15s}\n.ib svg{width:15px;height:15px}\n.ib:hover{border-color:#c9c7bf}\n.ib.go.gB{color:var(--B)}.ib.go.gT{color:#1a5fc4}\n.ib.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}\n.ib.ck.old{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn2{display:inline-block;font-size:10.5px;font-weight:400;margin-top:0;padding:1px 8px;border-radius:99px;white-space:nowrap}.tkn2.on{background:#E3F4E6;color:#1B5E2A}.tkn2.old{background:#FBF0D9;color:#6B4708}\n.gl{display:flex;gap:10px;margin-top:3px;font-size:11.5px}.gl a{color:var(--mu);text-decoration:underline}\n\n.mhb{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end}.mh .rmb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border:1px solid var(--ln);border-radius:8px;background:#fff;min-height:36px;padding:0 10px;font-size:13px;font-weight:500}\n.rmp{position:absolute;left:0;right:0;max-width:560px;z-index:30;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}.rmp[hidden]{display:none}\n.rmh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.rmh button,.rmd{font:inherit;font-size:18px;line-height:1;background:none;border:0;cursor:pointer;color:var(--mu);min-width:36px;min-height:36px;text-decoration:none!important;padding:0}\n.rmr{display:grid;grid-template-columns:minmax(0,1fr) 84px 36px;gap:6px;align-items:center;margin-bottom:6px}.rmr input,.rmr select{font:inherit;font-size:13px;min-height:38px;border:1px solid var(--ln);border-radius:8px;padding:0 8px;background:#fff;color:var(--tx);min-width:0}\n.mp{margin-top:10px;border-top:1px solid var(--ln);padding-top:10px}.mp table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px}.mp td{padding:4px 0;vertical-align:top}.mp td:first-child{color:var(--mu);width:42%;padding-right:8px}\n.mh{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 8px}\n.mh b{font-size:15px;font-weight:600}.mh button{font:inherit;font-size:13px;color:var(--tx);background:none;border:0;padding:6px 0 6px 10px;text-decoration:underline;cursor:pointer}\n.ms{font-size:13px;color:var(--mu);margin:0 2px 8px;line-height:1.5}\n.mbar{height:4px;background:var(--ln2);border-radius:2px;margin:0 2px 10px}.mbar i{display:block;height:4px;border-radius:2px;background:var(--B)}.mbar i.sl{background:var(--warn)}\n.md{background:#F6E3E3;border-radius:8px;padding:8px 10px;margin:0 0 8px}.md p{margin:0;font-size:12.5px;color:#7A1F1F;line-height:1.5}\n.mr{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:12px;margin-bottom:8px}\n.mr.dn{opacity:.6}\n.mt{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px}\n.mk{font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px}\n.mk.nw{background:#E3F4E6;color:#1B5E2A}.mk.cn{background:#F6E3E3;color:#7A1F1F}.mk.wt{background:#FBF0D9;color:#6B4708}.mk.gy{background:#eeece6;color:#55534d}\n.mn{font-size:14px;font-weight:600;margin:0}.ml{font-size:13px;color:var(--mu);margin:2px 0 0;line-height:1.5}\n.mm{font-size:11.5px;color:var(--mu2);margin-top:8px}\n.ma{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}\n.ma button,.ma a{font:inherit;font-size:13px;font-weight:500;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--ln);background:#fff;color:var(--tx);display:inline-flex;align-items:center;text-decoration:none;cursor:pointer}\n.ma .pr{background:var(--sel);color:#fff;border-color:var(--sel)}\n.mw{font-size:12.5px;background:#FBF0D9;color:#6B4708;border-radius:8px;padding:8px 10px;margin:0 0 8px;line-height:1.5}\n.mdn summary{font-size:13px;color:var(--mu);cursor:pointer;margin:6px 2px}\n\n:host{background:transparent}.w{padding-top:0}\n.hpa{cursor:pointer}.emp{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:22px 16px;text-align:center;color:var(--mu);line-height:1.7}\n"+"</style>"+"\n<div class=\"w\">\n<div id=\"mail\"></div>\n<div class=\"hc\"><h1>ห้องว่างรวม · HotelPro + Booking + Trip + Agoda</h1>\n<div class=\"sub\" id=\"hsub\">กำลังโหลด…</div>\n<div class=\"fl\">\n<div class=\"fi\" data-f=\"r\"><div class=\"fn rd\" id=\"s3\">0</div><div class=\"fl2\">วันต้องแก้</div></div>\n<div class=\"fi\" data-f=\"y\"><div class=\"fn yw\" id=\"s2\">0</div><div class=\"fl2\">วันต้องตรวจ</div></div>\n<div class=\"fi\" data-f=\"g\"><div class=\"fn gn\" id=\"s0\">0</div><div class=\"fl2\">วันปกติ</div></div>\n<div class=\"fi\" data-f=\"m\"><div class=\"fn rd\" id=\"sm\">0</div><div class=\"fl2\">ไม่ตรง HotelPro</div></div>\n</div></div>\n<div class=\"ky\"><span><i class=\"qB\"></i>Booking</span><span><i class=\"qT\"></i>Trip</span><span><i class=\"qA\"></i>Agoda</span><span><i class=\"qO\"></i>วอล์คอิน/โทร</span><span><i class=\"qR\"></i>ซ่อม</span><span><i class=\"qE\"></i>ว่าง</span><span style=\"margin-left:auto\">แถว: ดีลัก · เดี่ยว · คู่</span></div>\n<div class=\"c\" id=\"err\"></div>\n<div id=\"todo\" class=\"td\"></div>\n<div id=\"cal\"></div>\n<div id=\"mis\"></div>\n<div id=\"det\"></div>\n<div class=\"note\">ว่างจริง = ห้องทั้งหมด − ห้องที่ใช้ใน HotelPro (ทุกช่องทาง) − ห้องซ่อมที่ปิดขาย · แต่ละแอปควรเปิดขายเท่ากับว่างจริง<br>\nแดง = แอปเปิดเกินห้องว่างจริง หรือมีการจองในแอปที่ยังไม่ลง HotelPro · เหลือง = แอปปิดเกินทั้งที่ยังว่าง (เตือนเฉพาะ 14 วันข้างหน้า) หรือข้อมูลไม่ตรงกัน<br>\nงานที่ต้องทำ = แขกที่เพิ่งยกเลิกใน Booking/Trip (หลังรอบอัปเดตก่อน) ที่ยังต้องคืนห้อง หรือใบยกเลิกที่ HotelPro ยังกันห้องไว้ · ทำครบแล้วการ์ดหายเองในรอบถัดไป<br>\nเทียบกับ HotelPro เฉพาะช่วงที่ลงการจองครบแล้ว (บอกไว้ที่หัวกล่องงาน) · ข้อมูลอ่านแบบอ่านอย่างเดียว ไม่ได้แก้อะไรในแอปใด</div>\n</div>\n<div class=\"uo\" id=\"uo\" hidden></div>\n";
+ R=HOST.attachShadow({mode:"open"});R.innerHTML="<style>"+"\n:host{--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a65;--mu2:#8a8880;--ln:#e4e2db;--ln2:#eeece6;\n--B:#003B95;--BL:#B9CBEA;--T:#287DFA;--TL:#BFD8FE;--A:#4B4F5C;--AL:#C9CBD2;--O:#B98A4E;--OL:#EADBC4;--H:#2F5D50;\n--ok:#178A2E;--bad:#9B1C1C;--warn:#B7791F;--sel:#1d1d1b;color-scheme:light}\n*{box-sizing:border-box}\n:host{display:block;background:var(--bg);color:var(--tx);font-family:\"IBM Plex Sans Thai\",system-ui,sans-serif;-webkit-text-size-adjust:100%}\n.w{max-width:560px;margin:0 auto;padding-block:14px 48px;padding-inline:14px}\n.hc{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 14px 4px}\nh1{font-size:19px;font-weight:600;margin:0}.sub{font-size:13px;color:var(--mu);margin:2px 0 8px}\n.sub button{font:inherit;color:var(--tx);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}\n.fl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ln2)}\n.fi{padding:9px 2px 7px;text-align:center;cursor:pointer;border-radius:8px;margin:4px 0}\n.fi.on{background:var(--bg)}\n.fn{font-size:21px;font-weight:600}.fl2{font-size:11.5px;color:var(--mu2);line-height:1.3}\n.rd{color:var(--bad)}.yw{color:var(--warn)}.gn{color:var(--ok)}\n.ky{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--mu2);margin:12px 2px 4px}\n.ky i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.qB{background:var(--BL)}.qT{background:var(--TL)}.qA{background:var(--AL)}.qO{background:var(--OL)}.qE{border:1px solid #d3d1c9;background:#fff}\n.qR{background:repeating-linear-gradient(45deg,#e2cdb4 0 3px,#f6ece0 3px 6px)}\n.qX{border:2px solid var(--bad);background:#FCEBEB}\n.mo{font-size:15px;font-weight:600;margin:14px 0 6px}\n.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}\n.wd{font-size:11px;color:var(--mu);text-align:center}\n.d{position:relative;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:5px 4px 6px;cursor:pointer}\n.d.e{visibility:hidden}.d.dim{opacity:.22}.d.on{border:1.5px solid var(--sel)}.d.pst{background:#faf9f6}\n.dhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;min-height:16px}\n.n2{font-size:13px;font-weight:500;color:#55534d}.n2.tdy{background:var(--sel);color:#fff;border-radius:999px;padding:0 6px;font-size:12px}\n.dhd svg{width:12px;height:12px}\n.rr{display:flex;gap:1.5px;margin-top:2px;align-items:center}\n.rr .q{width:4.5px;height:4.5px;border-radius:1.2px;border-width:.5px}\n.rr .qX{border-width:1px}\n.cdot{position:absolute;top:4px;left:50%;width:6px;height:6px;border-radius:50%;background:#2E7D3B}\n#det{margin-top:16px}\n.dh{font-size:17px;font-weight:600;margin:0 0 8px}\n.c{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 15px;margin:0 0 10px}\n.top{display:flex;justify-content:space-between;align-items:center}\n.top b{font-size:18px;font-weight:600}.av{font-size:13px;color:var(--mu)}.av em{font-style:normal;font-size:20px;font-weight:600;margin:0 2px}\n.sqs{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 6px}\n.sqs .q{width:24px;height:24px;border-radius:5px}\n.key{display:flex;flex-wrap:wrap;gap:3px 11px;font-size:11px;color:var(--mu2);margin-bottom:8px}\n.key i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}\n.hd,.rw{display:grid;grid-template-columns:84px .7fr 1.2fr 92px;align-items:center}\n.hd{font-size:11px;color:var(--mu2);padding:0 0 4px;text-align:center}\n.rw{padding:8px 0;border-top:1px solid var(--ln2)}\n.ap{display:inline-block;width:76px;padding:3px 0;border-radius:999px;font-size:12px;font-weight:600;text-align:center;color:#fff}\n.apB{background:var(--B)}.apT{background:var(--T)}.apA{background:var(--A)}.apH{background:var(--H)}\n.num{font-size:19px;font-weight:500;text-align:center}\n.st{display:flex;flex-direction:column;align-items:center;font-size:14px;font-weight:500;line-height:1.3;text-align:center}\n.st small{font-size:11.5px;font-weight:400}\n.st.ok{color:var(--ok)}.st.bad{color:var(--bad)}.st.yw{color:var(--warn)}.st.dim{color:var(--mu2);font-weight:400;font-size:12.5px}\n.gs{margin:2px 0 6px 8px;border-radius:12px;padding:2px 13px;background:#fafaf8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}\n.gc{display:flex;justify-content:space-between;gap:8px;padding:8px 0;font-size:13.5px}.gc+.gc{border-top:1px solid rgba(0,0,0,.05)}\n.gc>div:first-child{min-width:0;overflow-wrap:anywhere}\n.gc .sm{font-size:11.5px;color:#9a988f}.gc .rt{text-align:right;flex:none}\n.pill{font-size:11px;padding:1px 8px;border-radius:99px;white-space:nowrap;display:inline-block}\n.p-ok{background:#E3F4E6;color:#1B5E2A}.p-bad{background:#F6E3E3;color:#7A1F1F}.p-y{background:#FBF0D9;color:#6B4708}\n.msg{margin-top:6px;font-size:13px;display:flex;gap:7px;align-items:flex-start;color:#8A1F1F;line-height:1.5}\n.msg.y{color:#7a4e07}.msg.g{color:var(--ok)}\n.ic{width:16px;height:16px;flex:none;margin-top:2px}\n.ban{margin:0 0 10px;padding:8px 10px;border-radius:8px;background:#efeee9;color:#5F5E5A;font-size:13px}\n.mm{padding:11px 0;border-top:1px solid var(--ln2)}\n.mm .r1{display:flex;justify-content:space-between;gap:6px;align-items:center}\n.mm .nm{font-weight:600;font-size:14px;overflow-wrap:anywhere}\n.mm .r2{font-size:12.5px;color:var(--mu)}.mm .r3{font-size:12.5px;color:#8A1F1F;margin-top:2px}.mm .r3.y{color:#7a4e07}\n.grp{font-size:12px;font-weight:600;color:var(--mu);margin:12px 0 2px}\n.uo[hidden]{display:none}\n.uo{position:fixed;inset:0;z-index:50;background:rgba(24,23,20,.5);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}\n.um{background:#fff;border-radius:22px;padding:20px 18px 16px;width:100%;max-width:400px;margin:auto}\n.ueb{font-size:12px;color:#8a8882;text-align:center}\n.ubig{text-align:center;font-size:34px;font-weight:600;margin:6px 0 0;font-variant-numeric:tabular-nums}\n.uwh{text-align:center;font-size:14px;color:#55534d;margin:2px 0 10px}.uwh b{color:var(--tx)}\n.upl{display:block;width:fit-content;margin:0 auto 12px;font-size:13px;font-weight:500;padding:5px 13px;border-radius:99px}\n.ul{border-radius:14px;background:#f7f6f3;padding:2px 14px}\n.uli{display:flex;align-items:center;gap:12px;padding:10px 0}.uli+.uli{border-top:1px solid #ebe9e4}\n.ulg{width:30px;height:30px;border-radius:8px;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}\n.uli .ut{flex:1;font-size:14.5px;font-weight:500;min-width:0}.uli .us{display:block;font-size:12px;color:#8a8882;font-weight:400}\n.uli .utm{font-size:14.5px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}\n.usm{font-size:13px;color:#55534d;margin:14px 2px}\n.urw{padding:10px 0;border-top:1px solid #eeede8;font-size:13px}\n.ubt{width:100%;height:50px;border-radius:15px;border:none;background:#1d1c1a;color:#fff;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:6px}\n.note{font-size:12px;color:var(--mu);margin-top:14px;line-height:1.65}\n#err{display:none}\n.td{margin:10px 0 4px}\n.tdh{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 8px}\n.tdh b{font-size:16px;font-weight:600}.tdh b span{color:var(--bad)}.tdh small{font-size:11.5px;color:var(--mu2)}\n.tk{background:var(--card);border:1px solid var(--ln);border-left:4px solid var(--bad);padding:12px 14px;margin-bottom:8px}\n.tk1{display:flex;justify-content:space-between;align-items:center;gap:8px}.tk1 b{font-size:15px;font-weight:600}\n.tk2{font-size:13px;color:#55534d;margin-top:2px;overflow-wrap:anywhere}\n.tkl{font-size:12px;color:var(--mu2);margin:10px 0 2px}\n.st2{display:flex;gap:10px;align-items:center;padding:9px 0}.st2+.st2{border-top:1px solid #f0eee8}\n.st2 .no{width:21px;height:21px;border:1.5px solid var(--bad);border-radius:50%;flex:none;font-size:11px;color:var(--bad);display:flex;align-items:center;justify-content:center}\n.st2 .ok{width:21px;height:21px;background:var(--ok);border-radius:50%;flex:none;color:#fff;display:flex;align-items:center;justify-content:center}\n.st2 .ok svg{width:13px;height:13px}\n.st2 .tx{flex:1;font-size:14px;min-width:0}.st2 .tx small{display:block;font-size:12px;color:var(--mu2)}\n.st2.dn .tx{color:var(--ok)}\n.lk{font:inherit;font-size:12.5px;border:1px solid currentColor;border-radius:8px;padding:5px 10px;white-space:nowrap;text-decoration:none;flex:none}\n.lk.tx2{border:0;padding:0;text-decoration:underline}\n.lkH{color:var(--H)}.lkB{color:var(--B)}.lkT{color:#1a5fc4}\n.tkf{font-size:11.5px;color:var(--mu2);margin-top:6px}\n.tkok{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--ok);display:flex;justify-content:space-between;gap:8px;align-items:baseline}\n.tkok small{font-size:11.5px;color:var(--mu2)}\n.lk.sm{font-size:11.5px;padding:3px 9px;margin-top:5px;display:inline-block;font-weight:500}\n.msg .lk{margin-left:6px;font-size:12px;padding:1px 8px}\n.tkb{font:inherit;cursor:pointer;background:none;padding:0}\n.st2 button.no{background:#fff}\n.st2.tk-on .no{border-color:var(--ok);background:var(--ok);color:#fff}\n.st2.tk-on .tx{color:var(--mu2)}.st2.tk-on .tx .m{text-decoration:line-through}\n.st2.tk-old .no{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn{display:table;font-size:11px;margin-top:5px;padding:1px 8px;border-radius:99px;text-decoration:none}\n.tkn.on{background:#E3F4E6;color:#1B5E2A}.tkn.old{background:#FBF0D9;color:#6B4708}\n.chk{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mu);margin-top:5px;border:1px solid var(--ln);border-radius:8px;padding:3px 9px;background:#fff}\n.chk i{width:13px;height:13px;border:1.5px solid #b4b2a9;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:10px;color:#fff}\n.chk.on{color:var(--mu2)}.chk.on i{background:#b4b2a9}.chk.old{color:var(--warn);border-color:#ecd6a8}.chk.old i{border-color:var(--warn)}\n.ac{display:flex;flex-direction:column;align-items:center;gap:5px}\n.ac .ab{display:flex;gap:6px}\n.st .lb{color:var(--tx)}\n.msg.tk-on span{text-decoration:line-through;text-decoration-thickness:1px}.msg.tk-on{opacity:.6}\n.st.tk-on .lb,.st.tk-on small{text-decoration:line-through;text-decoration-thickness:1px}.st.tk-on .lb,.st.tk-on small{opacity:.65}.st.dim .lb{color:inherit}\n.ib.ck{color:#cfcdc6}\n.sqs .q{font-style:normal;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;line-height:1}\n.sqs .qB{background:var(--B)}.sqs .qT{background:var(--T)}.sqs .qA{background:var(--A)}.sqs .qO{background:var(--O)}\n.sqs .qR{background:repeating-linear-gradient(45deg,#c99c6a 0 4px,#ddb98f 4px 8px);color:#5a3a14}\n.sqs .qX{color:var(--bad)}\n.gl a.cH{color:var(--H)}.gl a.cB{color:var(--B)}.gl a.cT{color:#1a5fc4}.gl a.cA{color:var(--A)}\n.ib{width:30px;height:30px;border-radius:50%;border:1px solid var(--ln);background:#fff;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;text-decoration:none;color:var(--mu2);transition:background .15s,border-color .15s}\n.ib svg{width:15px;height:15px}\n.ib:hover{border-color:#c9c7bf}\n.ib.go.gB{color:var(--B)}.ib.go.gT{color:#1a5fc4}\n.ib.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}\n.ib.ck.old{border-color:var(--warn);color:var(--warn);background:#FBF0D9}\n.tkn2{display:inline-block;font-size:10.5px;font-weight:400;margin-top:0;padding:1px 8px;border-radius:99px;white-space:nowrap}.tkn2.on{background:#E3F4E6;color:#1B5E2A}.tkn2.old{background:#FBF0D9;color:#6B4708}\n.gl{display:flex;gap:10px;margin-top:3px;font-size:11.5px}.gl a{color:var(--mu);text-decoration:underline}\n\n.mhb{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end}.mh .rmb{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border:1px solid var(--ln);border-radius:8px;background:#fff;min-height:36px;padding:0 10px;font-size:13px;font-weight:500}\n.rmp{position:absolute;top:-10px;right:0;width:min(360px,100%);z-index:30;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}.rmp[hidden]{display:none}\n.rmh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.rmh button,.rmd{font:inherit;font-size:18px;line-height:1;background:none;border:0;cursor:pointer;color:var(--mu);min-width:36px;min-height:36px;text-decoration:none!important;padding:0}\n.rmr{display:grid;grid-template-columns:minmax(0,1fr) 84px 36px;gap:6px;align-items:center;margin-bottom:6px}.rmr input,.rmr select{font:inherit;font-size:13px;min-height:38px;border:1px solid var(--ln);border-radius:8px;padding:0 8px;background:#fff;color:var(--tx);min-width:0}\n.rmi{display:flex;width:100%;justify-content:space-between;align-items:center;font:inherit;font-size:14px;min-height:46px;padding:0 12px;border:0;border-radius:8px;background:#f3f5f9;color:var(--tx);cursor:pointer;text-align:left}.rmi:hover{background:#e8ecf4}.rmc{color:var(--mu);font-size:20px}.rmbk{display:flex;align-items:center;gap:2px}.rmbk b{font-size:14px}\n.mp{margin-top:10px;border-top:1px solid var(--ln);padding-top:10px}.mp table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px}.mp td{padding:4px 0;vertical-align:top}.mp td:first-child{color:var(--mu);width:42%;padding-right:8px}\n.mh{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 8px}\n.mh b{font-size:15px;font-weight:600}.mh button{font:inherit;font-size:13px;color:var(--tx);background:none;border:0;padding:6px 0 6px 10px;text-decoration:underline;cursor:pointer}\n.ms{font-size:13px;color:var(--mu);margin:0 2px 8px;line-height:1.5}\n.mbar{height:4px;background:var(--ln2);border-radius:2px;margin:0 2px 10px}.mbar i{display:block;height:4px;border-radius:2px;background:var(--B)}.mbar i.sl{background:var(--warn)}\n.md{background:#F6E3E3;border-radius:8px;padding:8px 10px;margin:0 0 8px}.md p{margin:0;font-size:12.5px;color:#7A1F1F;line-height:1.5}\n.mr{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:12px;margin-bottom:8px}\n.mr.dn{opacity:.6}\n.mt{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px}\n.mk{font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px}\n.mk.nw{background:#E3F4E6;color:#1B5E2A}.mk.cn{background:#F6E3E3;color:#7A1F1F}.mk.wt{background:#FBF0D9;color:#6B4708}.mk.gy{background:#eeece6;color:#55534d}\n.mn{font-size:14px;font-weight:600;margin:0}.ml{font-size:13px;color:var(--mu);margin:2px 0 0;line-height:1.5}\n.mm{font-size:11.5px;color:var(--mu2);margin-top:8px}\n.ma{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}\n.ma button,.ma a{font:inherit;font-size:13px;font-weight:500;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--ln);background:#fff;color:var(--tx);display:inline-flex;align-items:center;text-decoration:none;cursor:pointer}\n.ma .pr{background:var(--sel);color:#fff;border-color:var(--sel)}\n.mw{font-size:12.5px;background:#FBF0D9;color:#6B4708;border-radius:8px;padding:8px 10px;margin:0 0 8px;line-height:1.5}\n.mdn summary{font-size:13px;color:var(--mu);cursor:pointer;margin:6px 2px}\n\n:host{background:transparent}.w{padding-top:0}\n.hpa{cursor:pointer}.emp{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:22px 16px;text-align:center;color:var(--mu);line-height:1.7}\n\n.mch{display:flex;gap:6px;margin:8px 0 4px;flex-wrap:wrap}.mch button{font:inherit;font-size:13px;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--ln);background:#fff;color:var(--tx,#1d2330);cursor:pointer}.mch button.on{background:#1d2330;color:#fff;border-color:#1d2330}\n.mstp{margin:6px 0 2px 18px;padding:0;font-size:13px;line-height:1.6}.mstp small{color:var(--mu)}\n.rmi small.rms{display:block;font-size:12px;color:var(--mu);font-weight:400;margin-top:1px}.rmi>span:first-child{text-align:left}\n.hc{margin-top:22px}.hc .h2t{font-size:16px;font-weight:700;margin:0}\n.cvb{background:#FBF0D9;color:#6B4708;border-radius:10px;padding:9px 11px;font-size:13px;line-height:1.5;margin:4px 0 8px}\n.more{display:block;width:100%;margin:8px 0 0;font:inherit;font-size:13.5px;color:var(--B);background:none;border:1px dashed var(--ln);border-radius:10px;min-height:42px;cursor:pointer}\ndetails.tc>summary{list-style:none;cursor:pointer}details.tc>summary::-webkit-details-marker{display:none}details.tc>summary .top::after{content:\"▾\";margin-left:8px;color:var(--mu2);font-size:12px}details.tc[open]>summary .top::after{content:\"▴\"}.tcs{font-size:12.5px;font-weight:500;margin-left:auto;margin-right:6px}.tcs.g{color:var(--ok)}.tcs.y{color:var(--warn)}.tcs.r{color:var(--bad)}.tcs.n{color:var(--mu)}\n.st3{font-size:13px;color:var(--mu);margin:0 2px 6px;display:flex;align-items:center;gap:7px;line-height:1.45}.st3 i{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}\n.rmhelp .ky{font-size:12px}.rmhelp .note{font-size:12.5px}\n.rmsw{display:flex;align-items:center;gap:10px;font-size:14px;margin:6px 0 10px}.rmsw input[type=date]{font:inherit;font-size:14px;min-height:38px;border:1px solid var(--ln);border-radius:8px;padding:0 8px}\n"+"</style>"+"\n<div class=\"w\">\n<div id=\"mail\"></div>\n<div id=\"todo\" class=\"td\"></div>\n<div class=\"hc\"><h1 class=\"h2t\">ตรวจห้องว่าง</h1>\n<div class=\"sub\" id=\"hsub\">กำลังโหลด…</div><div id=\"cvb\"></div>\n<div class=\"fl\">\n<div class=\"fi\" data-f=\"r\"><div class=\"fn rd\" id=\"s3\">0</div><div class=\"fl2\">วันต้องแก้</div></div>\n<div class=\"fi\" data-f=\"y\"><div class=\"fn yw\" id=\"s2\">0</div><div class=\"fl2\">วันต้องตรวจ</div></div>\n<div class=\"fi\" data-f=\"g\"><div class=\"fn gn\" id=\"s0\">0</div><div class=\"fl2\">วันปกติ</div></div>\n<div class=\"fi\" data-f=\"m\"><div class=\"fn rd\" id=\"sm\">0</div><div class=\"fl2\">ไม่ตรง HotelPro</div></div>\n</div></div>\n\n<div class=\"c\" id=\"err\"></div>\n<div id=\"cal\"></div>\n<div id=\"mis\"></div>\n<div id=\"det\"></div>\n\n</div>\n<div class=\"uo\" id=\"uo\" hidden></div>\n";
  R.getElementById("cal").addEventListener("click",e=>{const t=e.target.closest(".d[data-d]");if(!t)return;sel=t.dataset.d;cal();det();R.getElementById("det").scrollIntoView({behavior:"smooth",block:"start"});});
  R.addEventListener("input",e=>{const t=e.target;if(t&&t.classList&&t.classList.contains("rmn")){const r=RMDRAFT[+t.dataset.i];if(r)r.n=t.value;}});
  R.addEventListener("change",e=>{const t=e.target;if(t&&t.classList&&t.classList.contains("rmt")){const r=RMDRAFT[+t.dataset.i];if(r)r.t=t.value;}});
- document.addEventListener("click",e=>{if(!RMOPEN)return;const pth=e.composedPath?e.composedPath():[];const p=R.getElementById("rmp");if(pth.some(x=>x===p||(x.dataset&&x.dataset.mrm)))return;rmClose();});
+ document.addEventListener("click",e=>{if(!RMOPEN)return;const pth=e.composedPath?e.composedPath():[];const p=R.getElementById("rmp");if(pth.some(x=>x===p||(x.id==="ota-gear")))return;rmClose();});
  document.addEventListener("keydown",e=>{if(RMOPEN&&e.key==="Escape")rmClose();});
  R.addEventListener("change",e=>{if(e.target&&e.target.id==="mpdf"){const f=e.target.files&&e.target.files[0];if(f)mPdfRead(f);}});
  R.addEventListener("click",e=>{const mk=e.target.closest("[data-mk]");if(mk){e.preventDefault();mTick(mk.dataset.mk,mk.dataset.mr);return;}
-  if(e.target.closest("[data-mrm]")){e.preventDefault();if(RMOPEN)rmClose();else rmOpen();return;}
+  if(e.target.closest("[data-rmgo]")){e.preventDefault();rmRooms();return;}
+  if(e.target.closest("[data-rmback]")){e.preventDefault();RMVIEW="menu";RMERR="";rmRender();return;}
   if(e.target.closest("[data-rmx]")){e.preventDefault();rmClose();return;}
   if(e.target.closest("[data-rmadd]")){e.preventDefault();RMDRAFT.push({n:"",t:RMTYPES[0]});RMERR="";rmRender();const ins=R.querySelectorAll(".rmn");if(ins.length)ins[ins.length-1].focus();return;}
   const rd=e.target.closest("[data-rmdel]");if(rd){e.preventDefault();RMDRAFT.splice(+rd.dataset.rmdel,1);RMERR="";rmRender();return;}
@@ -55505,19 +55587,24 @@ function build(){if(R)return true;HOST=document.getElementById("ota-host");if(!H
   const mn=e.target.closest("[data-mnew]");if(mn){e.preventDefault();mOpenNew(mn.dataset.mnew);return;}
   const mo=e.target.closest("[data-mopen]");if(mo){e.preventDefault();openHp(mo.dataset.mopen);return;}
   if(e.target.closest("[data-mref]")){e.preventDefault();mailPull();return;}
+  const mf=e.target.closest("[data-mflt]");if(mf){e.preventDefault();MFLT=mf.dataset.mflt;MALL=false;mailPaint();return;}
+  if(e.target.closest("[data-mall]")){e.preventDefault();MALL=!MALL;mailPaint();return;}
+  if(e.target.closest("[data-cmore]")){e.preventDefault();CMORE=!CMORE;cal();return;}
+  const sv=e.target.closest("[data-rmview]");if(sv){e.preventDefault();rmView(sv.dataset.rmview);return;}
+  if(e.target.closest("[data-cfgsave]")){e.preventDefault();cfgSave();return;}
   const b=e.target.closest("[data-tk]");if(b){e.preventDefault();tkToggle(b.dataset.tk);return;}
   const a=e.target.closest('a[href^="hp:"]');if(a){e.preventDefault();const v=a.getAttribute("href").slice(3),p=v.split("|");openHp(p[0],p[1]);}});
  R.querySelectorAll(".fi").forEach(t=>t.addEventListener("click",()=>{FLT=FLT===t.dataset.f?"":t.dataset.f;R.querySelectorAll(".fi").forEach(x=>x.classList.toggle("on",x.dataset.f===FLT));render();}));
- mailTimer(true);return true;}
+ gearSync();mailTimer(true);return true;}
 function load(force){if(LOADING)return LOADING;if(LOADED&&!force)return Promise.resolve();
  if(!window.db||!window.currentUser)return Promise.resolve();
- LOADING=Promise.all([db.collection("otaSync").doc("latest").get(),db.collection("otaTicks").where("t",">=",Date.now()-21*864e5).get(),db.collection("otaSync").doc("mail").get().catch(e=>{MAIL_ERR=String(e&&e.code||e);return null;})])
+ LOADING=Promise.all([db.collection("otaSync").doc("latest").get(),db.collection("otaTicks").where("t",">=",Date.now()-21*864e5).get(),db.collection("otaSync").doc("mail").get().catch(e=>{MAIL_ERR=String(e&&e.code||e);return null;}),rmLoad()])
   .then(([s,q,m])=>{D0=s.exists?s.data():null;if(m){M0=m.exists?m.data():null;MAIL_ERR=null;}else M0=null;TK={};q.forEach(x=>{const v=x.data();if(v&&v.k)TK[v.k]=v;});LOADED=true;})
   .catch(e=>{console.warn("ota load",e);if(!LOADED)D0=null;LOADED=true;window.__otaErr=String(e&&e.code||e);})
   .finally(()=>{LOADING=null;refresh();});
  return LOADING;}
 function otaBadge(){const el=document.getElementById("badge-ota");if(!el)return;
- const n=(D0?TASKS.filter(t=>t.steps.some(s=>tkState("t|"+t.key+"|"+s.tx+"|"+(s.sub||""))!=="on")).length:0)+mailNeed();
+ const n=(D0?todoTasks().filter(t=>t.steps.some(s=>tkState("t|"+t.key+"|"+s.tx+"|"+(s.sub||""))!=="on")).length:0)+mailNeed();
  el.textContent=n;el.title="งานที่ต้องทำ "+n+" งาน";el.style.display=n?"inline":"none";}
 function empty(msg){if(!build())return;R.getElementById("todo").innerHTML="";R.getElementById("cal").innerHTML="";R.getElementById("det").innerHTML="";R.getElementById("mis").innerHTML="";
  R.getElementById("hsub").innerHTML='<span class="emp" style="display:block">'+msg+'</span>';}
@@ -55525,7 +55612,7 @@ function refresh(){try{mailPaint();}catch(e){}if(!D0){otaBadge();if(R&&window.cu
  compute();otaBadge();if(R&&curPage==="ota")paint();}
 window.rOta=function(){build();load(true);refresh();};
 window.otaTick=function(){if(!LOADED&&!LOADING)load(false);else if(D0)refresh();};
-window.__ota={mailRows,rmOpen,rmSave,getRM:()=>RM,bkParse,mPdfRead,mPdfPick,mOpenNew,getPV:()=>PV,mailStat,mailTick,mailPull,mStatInfo,mailNeed,get M(){return M0},tkId,get D(){return D},get TK(){return TK},get TASKS(){return OTA_TASKS},openHp,load,refresh};
+window.__ota={mailRows,rmOpen,rmRooms,rmSave,gearSync,getRM:()=>RM,bkParse,mPdfRead,mPdfPick,mOpenNew,getPV:()=>PV,mailStat,mailTick,mailPull,mStatInfo,mailNeed,get M(){return M0},tkId,get D(){return D},get TK(){return TK},get TASKS(){return OTA_TASKS},openHp,load,refresh};
 })();
 
 </script>
